@@ -1,63 +1,137 @@
-import { createGlobalStyle, css } from "styled-components";
-import reset from "styled-reset";
+import { css, DefaultTheme } from "styled-components";
 
-export const flexCenter = css`
-  display: flex;constflexCentercss`displayconstflexCentercss`display
-  align-items: center;align-items
-  justify-content: center;
-`;
+const colors = {
+  yellow_700: "#CC8200",
+  yellow_600: "#EB9500",
+  yellow: "#FFAD1E",
+  yellow_400: "#FFC052",
+  yellow_300: "#FFD285",
+  yellow_200: "#FFE5B8",
+  yellow_100: "#FFECCC",
 
-export const GlobalStyle = createGlobalStyle`
-${reset}
+  mint: "#35D0BA",
+  mint_400: "#7EE3D5",
+  mint_300: "#B2EDE3",
+  mint_200: "#DDF6F6",
+  mint_100: "#EEF9F9",
 
-a{
-  text-decoration: none;
-}
+  gray_900: "#1B1D1F",
+  gray_800: "#24282D",
+  gray_700: "#303539",
+  gray_600: "#454C53",
+  gray_500: "#6C7885",
+  gray_400: "#9EA4AA",
+  gray_200: "#C9CDD2",
+  gray_100: "#E8EBED",
+  gray_50: "#F7F8F9",
 
-* {
-  box-sizing: border-box;
-}
+  white: "#FFF",
+};
 
-:root {
-  --vh: 100%;
-}
+const fonts = {
+  Title_3: css`
+    font-family: Pretendard;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 3.64rem;
+  `,
 
-html, body{
-  overflow-x :  hidden;
-}
+  Title_2: css`
+    font-family: Pretendard;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.8rem;
+  `,
 
-#root, body, html {
-  max-width: 39rem;
+  Title_1: css`
+    font-family: Pretendard;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.8rem;
+  `,
 
-  margin: 0 auto;
-  padding:0;
-  font-size: 62.5%;
-  -ms-overflow-style: none; /* 인터넷 익스플로러  스크롤바 숨김 */
-  scrollbar-width: none; /* 파이어폭스 스크롤바 숨김 */
+  SubTitle: css`
+    font-family: Pretendard;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 2.4rem;
+  `,
 
-  /* 버튼 클릭 시 색 제거 */
-  /* -webkit-tap-highlight-color: rgba(0,0,0,0); */
-}
+  Body_4: css`
+    font-family: Pretendard;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 2.4rem;
+  `,
 
-#root::-webkit-scrollbar {
-  display: none; /* 크롬, 사파리, 오페라, 엣지 스크롤바 숨김 */
-}
+  Body_3: css`
+    font-family: Pretendard;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.4rem;
+  `,
 
-button {
-  border: none;
-  background: none;
-  font: inherit;
-  cursor: pointer;
-}
+  Body_2: css`
+    font-family: Pretendard;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.82rem;
+  `,
 
-html {
-  @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-style: normal;
-    font-weight: normal;
-  }
-}
-`;
+  Body_1: css`
+    font-family: Pretendard;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.6rem;
+  `,
 
-export default GlobalStyle;
+  /*맹꽁이 님과 387일 째 꿀 모으는 날에 해당하는 글씨체인듯*/
+  Body_0: css`
+    font-family: Pretendard;
+    font-size: 2.8rem;
+    font-weight: 600;
+    line-height: 3.64rem;
+  `,
+
+  Caption_2: css`
+    font-family: Pretendard;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 2rem;
+  `,
+
+  Caption_1: css`
+    font-family: Pretendard;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+  `,
+
+  Caption_0: css`
+    font-family: Pretendard;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3rem;
+  `,
+
+  Ginto_16: css`
+    font-family: Pretendard;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.24rem;
+  `,
+
+  Ginto_18: css`
+    font-family: Pretendard;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 2.2rem;
+  `,
+};
+
+const theme: Pick<DefaultTheme, "colors" | "fonts"> = {
+  colors,
+  fonts,
+};
+
+export default theme;
