@@ -1,7 +1,7 @@
 ---
 name: issue
 about: 이슈 템플릿
-title: ''
+title: 'design: 로그인뷰'
 labels: ''
 assignees: ''
 
