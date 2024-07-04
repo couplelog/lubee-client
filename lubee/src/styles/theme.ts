@@ -8,6 +8,7 @@ const colors = {
   yellow_300: "#FFD285",
   yellow_200: "#FFE5B8",
   yellow_100: "#FFECCC",
+  yellow_50: "#FFF5E4",
 
   mint: "#35D0BA",
   mint_400: "#7EE3D5",
@@ -26,6 +27,7 @@ const colors = {
   gray_50: "#F7F8F9",
 
   white: "#FFF",
+  red: "#FA000A",
 };
 
 const fonts = {
@@ -129,9 +131,15 @@ const fonts = {
   `,
 };
 
-const theme: Pick<DefaultTheme, "colors" | "fonts"> = {
+const effects = {
+  dimmed_40: `
+  background: rgba(0, 0, 0, 0.40)`,
+};
+
+const theme: Pick<DefaultTheme, "colors" | "fonts" | "effects"> = {
   colors,
   fonts,
+  effects,
 };
 
 export default theme;
