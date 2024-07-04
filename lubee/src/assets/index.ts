@@ -6,8 +6,8 @@ import YellowHeartIc from "./icon/yellowHeartIc.svg?react";
 import MintHeartIc from "./icon/mintHeartIc.svg?react";
 import YellowBangIc from "./icon/yellowBangIc.svg?react";
 import MintBangIc from "./icon/mintBangIc.svg?react";
-import YellowThumIc from "./icon/yellowThumbIc.svg?react";
-import MintThumIc from "./icon/mintThumIc.svg?react";
+import YellowThumbIc from "./icon/yellowThumbIc.svg?react";
+import MintThumbIc from "./icon/mintThumbIc.svg?react";
 import YellowSmileIc from "./icon/yellowSmileIc.svg?react";
 import MintSmileIc from "./icon/mintSmileIc.svg?react";
 import YellowHoneyIc from "./icon/yellowHoneyIc.svg?react";
@@ -24,8 +24,8 @@ export {
   MintHeartIc,
   YellowBangIc,
   MintBangIc,
-  YellowThumIc,
-  MintThumIc,
+  YellowThumbIc,
+  MintThumbIc,
   YellowSmileIc,
   MintSmileIc,
   YellowHoneyIc,

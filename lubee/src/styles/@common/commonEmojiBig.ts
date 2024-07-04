@@ -4,60 +4,60 @@ import {
   YellowBangIc,
   YellowHoneyIc,
   YellowSmileIc,
-  YellowThumIc,
+  YellowThumbIc,
   MintHeartIc,
   MintBangIc,
   MintHoneyIc,
   MintSmileIc,
-  MintThumIc,
+  MintThumbIc,
 } from "@assets/index";
 
-export const YellowHeartIcon = styled(YellowHeartIc)`
+export const YellowHeartBigIcon = styled(YellowHeartIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const YellowBangIcon = styled(YellowBangIc)`
+export const YellowBangBigIcon = styled(YellowBangIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const YellowHoneyIcon = styled(YellowHoneyIc)`
+export const YellowHoneyBigIcon = styled(YellowHoneyIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const YellowSmileIcon = styled(YellowSmileIc)`
+export const YellowSmileBigIcon = styled(YellowSmileIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const YellowThumIcon = styled(YellowThumIc)`
+export const YellowThumbBigIcon = styled(YellowThumbIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const MintHeartIcon = styled(MintHeartIc)`
+export const MintHeartBigIcon = styled(MintHeartIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const MintBangIcon = styled(MintBangIc)`
+export const MintBangBigIcon = styled(MintBangIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const MintHoneyIcon = styled(MintHoneyIc)`
+export const MintHoneyBigIcon = styled(MintHoneyIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const MintSmileIcon = styled(MintSmileIc)`
+export const MintSmileBigIcon = styled(MintSmileIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
 
-export const MintThumIcon = styled(MintThumIc)`
+export const MintThumbBigIcon = styled(MintThumbIc)`
   width: 3.48rem;
   height: 3.48rem;
 `;
