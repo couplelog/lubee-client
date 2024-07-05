@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
 const LogoIcon = styled(LogoIc)`
@@ -34,6 +35,8 @@ const SymbolLoginIcon = styled(SymbolLoginIc)`
 `;
 
 const OnboardingBtn = styled(BtnOnboarding)`
+  position: absolute;
+  top: 62.5rem;
   background-color: #fee500;
   color: ${({ theme }) => theme.colors.gray_900};
   cursor: pointer;
