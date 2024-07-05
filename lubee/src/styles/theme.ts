@@ -8,6 +8,7 @@ const colors = {
   yellow_300: "#FFD285",
   yellow_200: "#FFE5B8",
   yellow_100: "#FFECCC",
+  yellow_50: "#FFF5E4",
 
   mint: "#35D0BA",
   mint_400: "#7EE3D5",

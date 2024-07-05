@@ -44,7 +44,7 @@ const LogoIcon = styled(LogoGrayIc)`
   margin-top: 1.6rem;
 `;
 
-const CompanyText = styled.div`
+const CompanyText = styled.p`
   display: flex;
   margin-top: 36.792rem;
   margin-bottom: 1.4rem;
