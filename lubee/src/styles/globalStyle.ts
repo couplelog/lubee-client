@@ -18,12 +18,9 @@ a{
   box-sizing: border-box;
 }
 
-:root {
-  --vh: 100%;
-}
-
 html, body{
   overflow-x :  hidden;
+  background-color: ${({ theme }) => theme.colors.gray_50};
 }
 
 #root, body, html {
