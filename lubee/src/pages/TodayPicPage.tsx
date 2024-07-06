@@ -10,7 +10,7 @@ import DeletePicModal from "@components/fullPicToday/DeletePicModal";
 import EmojiDetailModal from "@components/fullPicToday/EmojiDetailModal";
 import TodayPic from "@components/fullPicToday/TodayPic";
 
-export default function FullPicPage() {
+export default function TodayPicPage() {
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
