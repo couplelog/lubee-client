@@ -5,7 +5,7 @@ import DeletePicModal from "@components/fullPicToday/DeletePicModal";
 import EmojiDetailModal from "@components/fullPicToday/EmojiDetailModal";
 import MonthPic from "@components/fullPicMonth/MonthPic";
 
-export default function MonthTestPage() {
+export default function MonthPicPage() {
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
