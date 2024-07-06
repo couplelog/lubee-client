@@ -8,35 +8,27 @@ export default function Header(props: HeaderProps) {
   const { handleTrashBtn } = props;
 
   return (
-    <Wrapper>
-      <DateBar>
-        <BackIcon />
-        <Date>6월 19일 수요일</Date>
-        <BtnWrapper
-          type="button"
-          onClick={() => {
-            handleTrashBtn(true);
-          }}>
-          <TrashIcon />
-        </BtnWrapper>
-      </DateBar>
-      <Time>오후 2:17</Time>
-    </Wrapper>
+    <DateBar>
+      <BackIcon />
+      <Date>6월 19일 수요일</Date>
+      <BtnWrapper
+        type="button"
+        onClick={() => {
+          handleTrashBtn(true);
+        }}>
+        <TrashIcon />
+      </BtnWrapper>
+    </DateBar>
   );
 }
-
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 2rem 0;
-`;
 
 const DateBar = styled.div`
   display: flex;
   gap: 4.2rem;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+  padding: 2rem 2rem 0;
 `;
 
 const BackIcon = styled(BackIc)`
@@ -53,12 +45,6 @@ const Date = styled.p`
 const TrashIcon = styled(TrashIc)`
   width: 2.4rem;
   height: 2.4rem;
-`;
-
-const Time = styled.p`
-  ${({ theme }) => theme.fonts.Body_3}
-
-  color: ${({ theme }) => theme.colors.gray_500};
 `;
 
 const BtnWrapper = styled.button`
