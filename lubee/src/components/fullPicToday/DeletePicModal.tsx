@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 interface DeletePicModalProps {
-  openTrash: (open: boolean) => void;
+  handleTrashBtn: (open: boolean) => void;
 }
 
 export default function DeletePicModal(props: DeletePicModalProps) {
-  const { openTrash } = props;
+  const { handleTrashBtn } = props;
 
   return (
     <Background>
@@ -19,7 +19,7 @@ export default function DeletePicModal(props: DeletePicModalProps) {
           <CloseBtn
             type="button"
             onClick={() => {
-              openTrash(false);
+              handleTrashBtn(false);
             }}>
             닫기
           </CloseBtn>

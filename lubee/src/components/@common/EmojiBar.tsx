@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
 import {
-  YellowHeartIcon,
-  YellowHoneyIcon,
-  YellowSmileIcon,
-  YellowBangIcon,
-  YellowThumIcon,
-} from "@styles/@common/commonEmoji";
+  YellowHeartBigIcon,
+  YellowHoneyBigIcon,
+  YellowSmileBigIcon,
+  YellowBangBigIcon,
+  YellowThumbBigIcon,
+} from "@styles/@common/commonEmojiBig";
 import styled from "styled-components";
 
-export default function EmojiBar() {
+interface EmojiBarProps {
+  setSelectedEmojiText: (emoji: string) => void;
+}
+
+export default function EmojiBar(props: EmojiBarProps) {
+  const { setSelectedEmojiText } = props;
   const [emoji, setEmoji] = useState<string>(() => {
     return localStorage.getItem("emoji") || "";
   });
 
   useEffect(() => {
     localStorage.setItem("emoji", emoji);
-  }, [emoji]);
+    setSelectedEmojiText(emoji);
+  }, [emoji, setSelectedEmojiText]);
 
   function toggleEmoji(newEmoji: string) {
     setEmoji((prevEmoji) => (prevEmoji === newEmoji ? "" : newEmoji));
@@ -40,19 +46,19 @@ export default function EmojiBar() {
   return (
     <Container>
       <Heart type="button" onClick={handleHeart} $emoji={emoji}>
-        <YellowHeartIcon />
+        <YellowHeartBigIcon />
       </Heart>
       <Honey type="button" onClick={handleHoney} $emoji={emoji}>
-        <YellowHoneyIcon />
+        <YellowHoneyBigIcon />
       </Honey>
       <Thumb type="button" onClick={handleThumb} $emoji={emoji}>
-        <YellowThumIcon />
+        <YellowThumbBigIcon />
       </Thumb>
       <Bang type="button" onClick={handleBang} $emoji={emoji}>
-        <YellowBangIcon />
+        <YellowBangBigIcon />
       </Bang>
       <Smile type="button" onClick={handleSmile} $emoji={emoji}>
-        <YellowSmileIcon />
+        <YellowSmileBigIcon />
       </Smile>
     </Container>
   );

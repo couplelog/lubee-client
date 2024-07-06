@@ -60,5 +60,5 @@ const PicBox = styled.div`
 `;
 
 const Pic = styled.img`
-  ${FullPicStyle}
+  ${FullPicStyle};
 `;

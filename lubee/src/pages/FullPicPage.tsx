@@ -1,31 +1,33 @@
 import styled from "styled-components";
-import Header from "@components/fullPic/Header";
-import Contents from "@components/fullPic/Contents";
-import fullPic from "@assets/image/fullPic.png";
 import EmojiBar from "@components/@common/EmojiBar";
-import { MintHeartIc, YellowHeartIc } from "@assets/index";
 import { useState, useRef, useEffect } from "react";
-import EmojiDetailModal from "@components/fullPic/EmojiDetailModal";
-import DeletePicModal from "@components/fullPic/DeletePicModal";
+import { MintHeartSmallIcon } from "@styles/@common/commonEmojiSmall";
+import { smallEmojisData } from "@core/smallEmojisData";
+import { EmojisDataTypes } from "types/EmojisDataTypes";
+import fullPic from "@assets/image/fullPic.png";
+import Header from "@components/fullPicToday/Header";
+import DeletePicModal from "@components/fullPicToday/DeletePicModal";
+import EmojiDetailModal from "@components/fullPicToday/EmojiDetailModal";
+import Contents from "@components/fullPicToday/Contents";
 
 export default function FullPicPage() {
-  const [show, setShow] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
-  const selectedEmojiText = localStorage.getItem("emoji");
+  const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
+  const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
+  const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
 
-  function openTrash(open: boolean) {
-    setOpen(open);
-  }
-  const modalRef = useRef<HTMLDivElement>(null); // Correctly type the ref
+  const selectedEmojiData = smallEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
+  const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
 
-  function showDetails(show: boolean) {
-    setShow(show);
+  function handleTrashBtn(open: boolean) {
+    setOpenDeletePicModal(open);
   }
 
+  /*모달 애니메이션*/
+  const modalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const listener = (e: MouseEvent) => {
       if (!modalRef.current || modalRef.current.contains(e.target as Node)) return;
-      setShow(false);
+      setOpenEmojiDetail(false);
     };
     document.addEventListener("mousedown", listener);
     return () => {
@@ -35,21 +37,21 @@ export default function FullPicPage() {
 
   return (
     <Wrapper>
-      <Header openTrash={openTrash} />
+      <Header handleTrashBtn={handleTrashBtn} />
       <Contents name={"맹꽁이"} picSrc={fullPic} />
-      <SelectedEmoji
+      <EmojiTag
         type="button"
         onClick={() => {
-          showDetails(true);
+          setOpenEmojiDetail(true);
         }}>
-        <YellowHeartIcon />
-        <MintHeartIcon />
-      </SelectedEmoji>
+        {EmojiIcon && <EmojiIcon />}
+        <MintHeartSmallIcon />
+      </EmojiTag>
       <Footer>
-        <EmojiBar />
+        <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
       </Footer>
-      {open && <DeletePicModal openTrash={openTrash} />}
-      {show && <EmojiDetailModal ref={modalRef} />}
+      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} />}
+      {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}
     </Wrapper>
   );
 }
@@ -62,7 +64,7 @@ const Wrapper = styled.section`
   height: 100vh;
 `;
 
-const SelectedEmoji = styled.button`
+const EmojiTag = styled.button`
   display: flex;
   gap: 0.4rem;
   position: absolute;
@@ -71,16 +73,6 @@ const SelectedEmoji = styled.button`
   padding: 0.6rem 1.2rem;
   border-radius: 31px;
   background-color: ${({ theme }) => theme.colors.white};
-`;
-
-const YellowHeartIcon = styled(YellowHeartIc)`
-  width: 2.4rem;
-  height: 2.4rem;
-`;
-
-const MintHeartIcon = styled(MintHeartIc)`
-  width: 2.4rem;
-  height: 2.4rem;
 `;
 
 const Footer = styled.div`

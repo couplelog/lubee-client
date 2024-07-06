@@ -1,8 +1,18 @@
 import { MintHeartIc, ProfileIc, ShortBorderIc, YellowHeartIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
+import { bigEmojisData } from "@core/bigEmojisData";
+import { EmojisDataTypes } from "types/EmojisDataTypes";
 
-const EmojiDetailModal = forwardRef<HTMLDivElement>((props, ref) => {
+interface EmojiDetailModalProps {
+  selectedEmojiText: string;
+}
+
+const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((props, ref) => {
+  const { selectedEmojiText } = props;
+  const selectedEmojiData = bigEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
+  const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
+
   return (
     <Background>
       <Container ref={ref}>
@@ -11,17 +21,19 @@ const EmojiDetailModal = forwardRef<HTMLDivElement>((props, ref) => {
           <Text>공감</Text>
         </Header>
         <EmojiBox>
-          <Gf>
-            <Profile>
-              <ProfileIcon />
-              <Name>불꽃피카츄</Name>
-            </Profile>
-            <GfEmoji />
-          </Gf>
+          {EmojiIcon && (
+            <Gf>
+              <Profile>
+                <ProfileIcon />
+                <Name>불꽃피카츄</Name>
+              </Profile>
+              <EmojiIcon />
+            </Gf>
+          )}
           <Bf>
             <Profile>
               <ProfileIcon />
-              <Name>카츄</Name>
+              <Name>맹꽁이</Name>
             </Profile>
             <BfEmoji />
           </Bf>

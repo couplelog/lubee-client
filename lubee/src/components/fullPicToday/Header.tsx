@@ -2,10 +2,10 @@ import { BackIc, TrashIc } from "@assets/index";
 import styled from "styled-components";
 
 interface HeaderProps {
-  openTrash: (open: boolean) => void;
+  handleTrashBtn: (open: boolean) => void;
 }
 export default function Header(props: HeaderProps) {
-  const { openTrash } = props;
+  const { handleTrashBtn } = props;
 
   return (
     <Wrapper>
@@ -15,7 +15,7 @@ export default function Header(props: HeaderProps) {
         <BtnWrapper
           type="button"
           onClick={() => {
-            openTrash(true);
+            handleTrashBtn(true);
           }}>
           <TrashIcon />
         </BtnWrapper>
