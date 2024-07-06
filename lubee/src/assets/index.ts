@@ -14,6 +14,9 @@ import YellowHoneyIc from "./icon/yellowHoneyIc.svg?react";
 import MintHoneyIc from "./icon/mintHoneyIc.svg?react";
 import ProfileIc from "./icon/profileIc.svg?react";
 import ShortBorderIc from "./icon/shortborderIc.svg?react";
+import ShareBtnIc from "./icon/shareBtnIc.svg?react";
+import XIc from "./icon/xIc.svg?react";
+import SearchIc from "./icon/searchIc.svg?react";
 
 export {
   LogoIc,
@@ -32,4 +35,7 @@ export {
   MintHoneyIc,
   ProfileIc,
   ShortBorderIc,
+  ShareBtnIc,
+  XIc,
+  SearchIc,
 };
