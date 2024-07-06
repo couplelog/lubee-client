@@ -1,16 +1,22 @@
-/*사진 전체보기 장소*/
 import styled from "styled-components";
 import { LocationPointIc } from "@assets/index";
 
 interface LocationProps {
   location: string;
+  setOpenLocationModal?: (open: boolean) => void;
 }
 
 export default function Location(props: LocationProps) {
-  const { location } = props;
+  const { location, setOpenLocationModal } = props;
 
   return (
-    <Container>
+    <Container
+      type="button"
+      onClick={() => {
+        if (setOpenLocationModal) {
+          setOpenLocationModal(true);
+        }
+      }}>
       <LocationPointIcon />
       <LocationText>{location}</LocationText>
     </Container>
