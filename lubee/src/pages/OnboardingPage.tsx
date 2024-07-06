@@ -1,50 +1,46 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { XIc, LubeeCodeIc, CopyIc } from "@assets/index";
-import { flexCenter } from "styles/globalStyle";
+import { LubeeCodeIc, CopyIc } from "@assets/index";
 import { BtnOnboarding } from "@styles/BtnStyle";
+import Header from "@components/onboarding/Header";
+import TitleBox from "@components/onboarding/TitleBox";
+import NumberBox from "@components/onboarding/NumberBox";
 
 export default function OnboardingPage() {
+  const navigate = useNavigate();
+  function handleXBtn() {
+    navigate("/Login");
+  }
+
   return (
     <Wrapper>
-      <XIcon />
-      <InformText>
-        연인과 연결 후<br />
-        러비를 시작해보세요
-      </InformText>
+      <Header handleXBtn={handleXBtn} showXIcon />
+      <TitleBox titleText={`연인과 연결 후\n러비를 시작해보세요`} />
       <LubeeCodeIcon />
-      <CodeTitleText>나의 러비코드</CodeTitleText>
-      <CodeCopyBtn>
-        12345 67890
-        <CopyIcon />
-      </CodeCopyBtn>
-      <InviteBtn>초대장 보내기</InviteBtn>
-      <CodeInputBtn>연인의 러비코드 입력하기</CodeInputBtn>
+      <MyCodeContainer>
+        <MyCodeText>나의 러비코드</MyCodeText>
+        <BtnWrapper>
+          <NumberBox>
+            12345 67890
+            <CopyIcon />
+          </NumberBox>
+        </BtnWrapper>
+      </MyCodeContainer>
+      <BtnBox>
+        <InviteBtn>초대장 보내기</InviteBtn>
+        <CodeInputBtn>연인의 러비코드 입력하기</CodeInputBtn>
+      </BtnBox>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  ${flexCenter}
-
+  display: flex;
   flex-direction: column;
+  align-items: center;
   position: relative;
   width: 100%;
   height: 100vh;
-`;
-
-const XIcon = styled(XIc)`
-  width: 2.4rem;
-  height: 2.4rem;
-`;
-
-const InformText = styled.p`
-  text-align: center;
-  ${({ theme }) => theme.fonts.Title_2};
-`;
-
-const CodeTitleText = styled.p`
-  text-align: center;
-  ${({ theme }) => theme.fonts.Title_1};
 `;
 
 const LubeeCodeIcon = styled(LubeeCodeIc)`
@@ -52,22 +48,34 @@ const LubeeCodeIcon = styled(LubeeCodeIc)`
   height: 12.7rem;
 `;
 
-const CodeCopyBtn = styled.button`
-  ${flexCenter}
-
-  padding: 5px 10px;
-  border-radius: 5px;
-
-  ${({ theme }) => theme.fonts.Body_4};
-
-  background-color: ${({ theme }) => theme.colors.yellow_50};
+const MyCodeText = styled.p`
   color: ${({ theme }) => theme.colors.yellow_600};
+  text-align: center;
+  ${({ theme }) => theme.fonts.Title_1};
+`;
+
+const BtnWrapper = styled.button`
   cursor: pointer;
+`;
+
+const MyCodeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+  margin-top: 6.8rem;
 `;
 
 const CopyIcon = styled(CopyIc)`
   width: 1.6rem;
   height: 1.6rem;
+`;
+
+const BtnBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 14.5rem 0 1.4rem;
 `;
 
 const InviteBtn = styled(BtnOnboarding)`
@@ -77,7 +85,6 @@ const InviteBtn = styled(BtnOnboarding)`
 `;
 
 const CodeInputBtn = styled(BtnOnboarding)`
-  margin-bottom: 1.4rem;
   background-color: ${({ theme }) => theme.colors.yellow_50};
   color: ${({ theme }) => theme.colors.yellow_600};
   cursor: pointer;

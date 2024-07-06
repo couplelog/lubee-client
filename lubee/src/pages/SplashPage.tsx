@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LogoGrayIc, SymbolIc } from "@assets/index";
-import { flexCenter } from "styles/globalStyle";
 
 export default function SplashPage() {
   const navigate = useNavigate();
@@ -17,40 +16,50 @@ export default function SplashPage() {
 
   return (
     <Wrapper>
-      <SymbolIcon />
-      <LogoIcon />
-      <CompanyText>(C) COUPLE-LOGUE</CompanyText>
+      <LogoContainer>
+        <SymbolIcon />
+        <LogoIcon />
+      </LogoContainer>
+      <Footer>
+        <CompanyText>(C) COUPLE-LOGUE</CompanyText>
+      </Footer>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  ${flexCenter}
-
+  display: flex;
   flex-direction: column;
+  align-items: center;
   position: relative;
   width: 100%;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.yellow};
 `;
 
-const SymbolIcon = styled(SymbolIc)`
+const LogoContainer = styled.section`
   display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  align-items: center;
+  margin: 27.8rem 0 36.792rem;
+`;
+
+const SymbolIcon = styled(SymbolIc)`
   width: 4.6rem;
   height: 4.6rem;
-  margin-top: 27.8rem;
 `;
 
 const LogoIcon = styled(LogoGrayIc)`
-  display: flex;
   width: 15rem;
   height: 3.9rem;
-  margin-top: 1.6rem;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  padding-bottom: 1.4rem;
 `;
 
 const CompanyText = styled.p`
-  display: flex;
-  margin-top: 36.792rem;
-  margin-bottom: 1.4rem;
   ${({ theme }) => theme.fonts.SignBtnText};
 `;
