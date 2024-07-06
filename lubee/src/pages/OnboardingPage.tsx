@@ -1,15 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useState } from "react";
 import { LubeeCodeIc, CopyIc } from "@assets/index";
 import { BtnOnboarding } from "@styles/BtnStyle";
 import Header from "@components/onboarding/Header";
 import TitleBox from "@components/onboarding/TitleBox";
 import NumberBox from "@components/onboarding/NumberBox";
+import CopyCodeModal from "@components/onboarding/CopyCodeModal";
 
 export default function OnboardingPage() {
   const navigate = useNavigate();
+  const [openCopyCodeModal, setOpenCopyCodeModal] = useState<boolean>(false);
+
   function handleXBtn() {
     navigate("/Login");
+  }
+
+  function handleInviteClick() {
+    setOpenCopyCodeModal(true);
+  }
+
+  function handleCloseBtn() {
+    setOpenCopyCodeModal(false);
   }
 
   return (
@@ -27,9 +39,10 @@ export default function OnboardingPage() {
         </BtnWrapper>
       </MyCodeContainer>
       <BtnBox>
-        <InviteBtn>초대장 보내기</InviteBtn>
+        <InviteBtn onClick={handleInviteClick}>초대장 보내기</InviteBtn>
         <CodeInputBtn>연인의 러비코드 입력하기</CodeInputBtn>
       </BtnBox>
+      {openCopyCodeModal && <CopyCodeModal handleCloseBtn={handleCloseBtn} />}
     </Wrapper>
   );
 }
