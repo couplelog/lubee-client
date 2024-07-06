@@ -8,7 +8,7 @@ import fullPic from "@assets/image/fullPic.png";
 import Header from "@components/fullPicToday/Header";
 import DeletePicModal from "@components/fullPicToday/DeletePicModal";
 import EmojiDetailModal from "@components/fullPicToday/EmojiDetailModal";
-import Contents from "@components/fullPicToday/Contents";
+import TodayPic from "@components/fullPicToday/TodayPic";
 
 export default function FullPicPage() {
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
@@ -38,7 +38,7 @@ export default function FullPicPage() {
   return (
     <Wrapper>
       <Header handleTrashBtn={handleTrashBtn} />
-      <Contents name={"맹꽁이"} picSrc={fullPic} />
+      <TodayPic name={"맹꽁이"} picSrc={fullPic} />
       <EmojiTag
         type="button"
         onClick={() => {
