@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LogoGrayIc, SymbolIc } from "@assets/index";
+import { flexCenter } from "styles/globalStyle";
 
 export default function SplashPage() {
   const navigate = useNavigate();
@@ -24,9 +25,12 @@ export default function SplashPage() {
 }
 
 const Wrapper = styled.div`
-  display: flex;
+  ${flexCenter}
+
   flex-direction: column;
-  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100vh;
   background-color: ${({ theme }) => theme.colors.yellow};
 `;
 

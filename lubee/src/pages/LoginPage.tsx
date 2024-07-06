@@ -1,23 +1,26 @@
 import styled from "styled-components";
 import { LogoIc, SymbolLoginIc } from "@assets/index";
 import { BtnOnboarding } from "@styles/BtnStyle";
+import { flexCenter } from "styles/globalStyle";
 
 export default function LoginPage() {
   return (
     <Wrapper>
       <LogoIcon />
       <SymbolLoginIcon />
-      <OnboardingBtn>카카오 계정으로 로그인하기</OnboardingBtn>
+      <LoginBtn>카카오 계정으로 로그인하기</LoginBtn>
       <CompanyText>(C) COUPLE-LOGUE</CompanyText>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  display: flex;
+  ${flexCenter}
+
   flex-direction: column;
-  align-items: center;
   position: relative;
+  width: 100%;
+  height: 100vh;
 `;
 
 const LogoIcon = styled(LogoIc)`
@@ -34,7 +37,7 @@ const SymbolLoginIcon = styled(SymbolLoginIc)`
   margin-top: 1.1rem;
 `;
 
-const OnboardingBtn = styled(BtnOnboarding)`
+const LoginBtn = styled(BtnOnboarding)`
   position: absolute;
   top: 62.5rem;
   background-color: #fee500;
