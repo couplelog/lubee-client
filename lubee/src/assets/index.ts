@@ -1,4 +1,4 @@
-import LogoIc from "./icon/logo.svg?react";
+import LogoIc from "./icon/logoIc.svg?react";
 import BackIc from "./icon/backIc.svg?react";
 import LocationPointIc from "./icon/locationPointIc.svg?react";
 import TrashIc from "./icon/trashIc.svg?react";
@@ -17,11 +17,11 @@ import ShortBorderIc from "./icon/shortborderIc.svg?react";
 import ShareBtnIc from "./icon/shareBtnIc.svg?react";
 import XIc from "./icon/xIc.svg?react";
 import SearchIc from "./icon/searchIc.svg?react";
-import LogoGrayIc from "./icon/logoGray.svg?react";
-import SymbolIc from "./icon/symbol.svg?react";
-import SymbolLoginIc from "./icon/symbolLogin.svg?react";
-import LubeeCodeIc from "./icon/lubeeCode.svg?react";
-import CopyIc from "./icon/copy.svg?react";
+import LogoGrayIc from "./icon/logoGrayIc.svg?react";
+import SymbolIc from "./icon/symbolIc.svg?react";
+import SymbolLoginIc from "./icon/symbolLoginIc.svg?react";
+import LubeeCodeIc from "./icon/lubeeCodeIc.svg?react";
+import CopyIc from "./icon/copyIc.svg?react";
 
 export {
   LogoIc,
