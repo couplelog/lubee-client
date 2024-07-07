@@ -36,6 +36,7 @@ const fonts = {
     font-size: 2.8rem;
     font-weight: 700;
     line-height: 3.64rem;
+    letter-spacing: -0.5px;
   `,
 
   Title_2: css`
@@ -50,6 +51,7 @@ const fonts = {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.8rem;
+    letter-spacing: -0.1px;
   `,
 
   SubTitle: css`
@@ -57,6 +59,7 @@ const fonts = {
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 2.4rem;
+    letter-spacing: -0.1px;
   `,
 
   Body_4: css`
@@ -64,6 +67,7 @@ const fonts = {
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 2.4rem;
+    letter-spacing: -0.3px;
   `,
 
   Body_3: css`
@@ -71,6 +75,7 @@ const fonts = {
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 2.4rem;
+    letter-spacing: -0.3px;
   `,
 
   Body_2: css`
@@ -78,6 +83,7 @@ const fonts = {
     font-size: 1.4rem;
     font-weight: 600;
     line-height: 1.82rem;
+    letter-spacing: -0.1px;
   `,
 
   Body_1: css`
@@ -85,6 +91,7 @@ const fonts = {
     font-size: 1.2rem;
     font-weight: 600;
     line-height: 1.6rem;
+    letter-spacing: -0.1px;
   `,
 
   /*맹꽁이 님과 387일 째 꿀 모으는 날에 해당하는 글씨체인듯*/
@@ -93,6 +100,7 @@ const fonts = {
     font-size: 2.8rem;
     font-weight: 600;
     line-height: 3.64rem;
+    letter-spacing: -0.5px;
   `,
 
   Caption_2: css`
@@ -100,6 +108,7 @@ const fonts = {
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 2rem;
+    letter-spacing: -0.2px;
   `,
 
   Caption_1: css`
@@ -107,6 +116,7 @@ const fonts = {
     font-size: 1.1rem;
     font-weight: 500;
     line-height: 1.6rem;
+    letter-spacing: -0.2px;
   `,
 
   Caption_0: css`
@@ -114,6 +124,7 @@ const fonts = {
     font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.3rem;
+    letter-spacing: -0.1px;
   `,
 
   Ginto_16: css`
