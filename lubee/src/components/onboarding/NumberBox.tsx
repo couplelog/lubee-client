@@ -14,7 +14,7 @@ export default function NumberBox(props: NumberBoxProps) {
 const Box = styled.div`
   ${flexCenter}
 
-  padding: 5px 10px;
+  padding: 0.5rem 1rem;
   border-radius: 5px;
 
   ${({ theme }) => theme.fonts.Body_4};
