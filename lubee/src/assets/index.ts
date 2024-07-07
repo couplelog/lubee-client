@@ -17,6 +17,11 @@ import ShortBorderIc from "./icon/shortborderIc.svg?react";
 import ShareBtnIc from "./icon/shareBtnIc.svg?react";
 import XIc from "./icon/xIc.svg?react";
 import SearchIc from "./icon/searchIc.svg?react";
+import LogoGrayIc from "./icon/logoGray.svg?react";
+import SymbolIc from "./icon/symbol.svg?react";
+import SymbolLoginIc from "./icon/symbolLogin.svg?react";
+import LubeeCodeIc from "./icon/lubeeCode.svg?react";
+import CopyIc from "./icon/copy.svg?react";
 
 export {
   LogoIc,
@@ -38,4 +43,9 @@ export {
   ShareBtnIc,
   XIc,
   SearchIc,
+  LogoGrayIc,
+  SymbolIc,
+  SymbolLoginIc,
+  LubeeCodeIc,
+  CopyIc,
 };
