@@ -10,8 +10,10 @@ export default function TitleBox(props: TitleBoxProps) {
 
   return (
     <Wrapper>
-      <Title>{titleText}</Title>
-      {subtitleText && <SubTitle>{subtitleText}</SubTitle>}
+      <Text>
+        <h2>{titleText}</h2>
+        {subtitleText && <p>{subtitleText}</p>}
+      </Text>
     </Wrapper>
   );
 }
@@ -23,16 +25,23 @@ const Wrapper = styled.section`
   margin: 4rem 0 6rem;
 `;
 
-const Title = styled.h1`
-  color: ${({ theme }) => theme.colors.gray_800};
+const Text = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
   text-align: center;
-  ${({ theme }) => theme.fonts.Title_2};
 
-  white-space: pre-line;
-`;
+  & > h2 {
+    ${({ theme }) => theme.fonts.Title_2};
 
-const SubTitle = styled.p`
-  color: ${({ theme }) => theme.colors.gray_400};
-  text-align: center;
-  ${({ theme }) => theme.fonts.Caption_2};
+    color: ${({ theme }) => theme.colors.gray_800};
+    white-space: pre-line;
+  }
+
+  & > p {
+    ${({ theme }) => theme.fonts.Caption_2};
+
+    color: ${({ theme }) => theme.colors.gray_400};
+  }
 `;
