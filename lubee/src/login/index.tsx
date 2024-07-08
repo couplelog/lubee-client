@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { LogoIc, SymbolLoginIc } from "@assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
+import CompanyText from "@common/components/CompanyText";
 
 export default function index() {
   return (
@@ -8,9 +9,7 @@ export default function index() {
       <LogoIcon />
       <SymbolLoginIcon />
       <LoginBtn>카카오 계정으로 로그인하기</LoginBtn>
-      <Footer>
-        <CompanyText>(C) COUPLE-LOGUE</CompanyText>
-      </Footer>
+      <CompanyText />
     </Wrapper>
   );
 }
@@ -44,13 +43,4 @@ const LoginBtn = styled.button`
   background-color: #fee500;
   color: ${({ theme }) => theme.colors.gray_900};
   cursor: pointer;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  margin: 1rem 0 1.4rem;
-`;
-
-const CompanyText = styled.p`
-  ${({ theme }) => theme.fonts.Caption_1};
 `;

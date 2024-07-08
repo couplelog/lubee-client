@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Profile1Ic } from "@assets/index";
 import { BtnWrapper } from "@styles/globalStyle";
@@ -8,12 +8,15 @@ import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
 import NumberBox from "../components/NumberBox";
 import OnboardingBtn from "../components/OnboardingBtn";
+import Profiles from "../components/Profiles";
 
 export default function index() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [nickname, setNickname] = useState("");
 
   const isOnboardingBtnDisabled = nickname === "";
+  const selectedProfile = location.state?.selectedProfile;
 
   function handleBackBtn() {
     navigate("/Onboarding");
@@ -38,7 +41,7 @@ export default function index() {
       <ContentsContainer>
         <TitleBox titleText="프로필과 닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
         <BtnWrapper onClick={handleProfileBtn}>
-          <ProfileIcon />
+          <ProfileIcon as={selectedProfile ? Profiles[selectedProfile].default : undefined} />
         </BtnWrapper>
         <NumberBox inputValue={nickname} setInputValue={setNickname} $disabled={true} placeholder="닉네임 입력" />
       </ContentsContainer>
