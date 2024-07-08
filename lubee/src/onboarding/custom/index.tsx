@@ -40,3 +40,15 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
 `;
+
+const ProfileGrid = styled.section`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 3.6rem;
+  justify-items: center;
+`;
+
+const ProfileIcon = styled.img`
+  width: 14.4rem;
+  height: 14.4rem;
+`;
