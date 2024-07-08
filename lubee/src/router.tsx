@@ -10,6 +10,11 @@ import Upload from "upload";
 import Home from "home";
 import Today from "home/today";
 import Month from "home/month";
+import Code from "onboarding/code";
+import Profile from "onboarding/profile";
+import Custom from "onboarding/custom";
+import Birth from "onboarding/birth";
+import Anniversary from "onboarding/anniversary";
 
 export const Router = createBrowserRouter([
   {
@@ -20,7 +25,17 @@ export const Router = createBrowserRouter([
       { index: true, element: <Splash /> },
       { path: "/splash", element: <Splash /> },
       { path: "/login", element: <Login /> },
-      { path: "/onboarding", element: <Onboarding /> },
+      {
+        path: "/onboarding",
+        element: <Onboarding />,
+        children: [
+          { path: "/onboarding/inputCode", element: <Code /> },
+          { path: "/onboarding/profile", element: <Profile /> },
+          { path: "/onboarding/custom", element: <Custom /> },
+          { path: "/onboarding/birth", element: <Birth /> },
+          { path: "/onboarding/anniversary", element: <Anniversary /> },
+        ],
+      },
       {
         path: "/home",
         element: <Home />,
