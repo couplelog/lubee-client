@@ -30,7 +30,6 @@ const Wrapper = styled.section`
   gap: 8rem;
   position: absolute;
   top: 6rem;
-  margin: 1.1rem 0 3rem;
 `;
 
 const ProgressBar1Icon = styled(ProgressBar1Ic)`

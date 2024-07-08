@@ -22,8 +22,12 @@ export default function OnboardingProfilePage() {
     navigate("/Login");
   }
 
+  function handleProfileBtn() {
+    navigate("/OnboardingProfileCustom");
+  }
+
   function handleOnboardingBtn() {
-    navigate("/OnboardingProfileBirth");
+    navigate("/OnboardingProfileCustom");
   }
 
   return (
@@ -32,10 +36,12 @@ export default function OnboardingProfilePage() {
       <ProgressBar step={1} />
       <ContentsContainer>
         <TitleBox titleText="프로필과 닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
-        <ProfileIcon />
+        <BtnWrapper onClick={handleProfileBtn}>
+          <ProfileIcon />
+        </BtnWrapper>
         <NumberBox inputValue={nickname} setInputValue={setNickname} $disabled={true} placeholder="닉네임 입력" />
       </ContentsContainer>
-      <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="연결하기" $disabled={isOnboardingBtnDisabled} />
+      <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="다음" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>
   );
 }
@@ -54,6 +60,10 @@ const ContentsContainer = styled.section`
   flex-direction: column;
   gap: 2.8rem;
   align-items: center;
+`;
+
+const BtnWrapper = styled.button`
+  cursor: pointer;
 `;
 
 const ProfileIcon = styled(Profile1Ic)`
