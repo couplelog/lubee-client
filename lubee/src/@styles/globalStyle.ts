@@ -1,10 +1,17 @@
-import { createGlobalStyle, css } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
 import reset from "styled-reset";
 
 export const flexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const BtnWrapper = styled.button`
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 `;
 
 export const GlobalStyle = createGlobalStyle`

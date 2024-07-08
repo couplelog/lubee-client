@@ -27,7 +27,14 @@ export default function index() {
   return (
     <Wrapper>
       <Header handleBackBtn={handleBackBtn} showBackIcon showTitle />
-      <ProgressBar step={2} />
+      <ProfileGrid>
+        <ProfileIcon as={Profile1Ic} />
+        <ProfileIcon as={Profile2Ic} />
+        <ProfileIcon as={Profile3Ic} />
+        <ProfileIcon as={Profile4Ic} />
+        <ProfileIcon as={Profile5Ic} />
+        <ProfileIcon as={Profile6Ic} />
+      </ProfileGrid>
     </Wrapper>
   );
 }
@@ -48,7 +55,7 @@ const ProfileGrid = styled.section`
   justify-items: center;
 `;
 
-const ProfileIcon = styled.img`
+const ProfileIcon = styled.svg`
   width: 14.4rem;
   height: 14.4rem;
 `;

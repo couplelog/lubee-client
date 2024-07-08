@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Profile1Ic } from "@assets/index";
+import { BtnWrapper } from "@styles/globalStyle";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
@@ -60,10 +61,6 @@ const ContentsContainer = styled.section`
   flex-direction: column;
   gap: 2.8rem;
   align-items: center;
-`;
-
-const BtnWrapper = styled.button`
-  cursor: pointer;
 `;
 
 const ProfileIcon = styled(Profile1Ic)`

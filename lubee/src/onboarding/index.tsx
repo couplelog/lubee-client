@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 import { LubeeCodeIc, CopyIc } from "@assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
+import { BtnWrapper } from "@styles/globalStyle";
 import Header from "./components/Header";
 import TitleBox from "./components/TitleBox";
 import NumberBox from "./components/NumberBox";
@@ -71,10 +71,6 @@ const MyCodeText = styled.p`
   color: ${({ theme }) => theme.colors.yellow_600};
   text-align: center;
   ${({ theme }) => theme.fonts.Title_1};
-`;
-
-const BtnWrapper = styled.button`
-  cursor: pointer;
 `;
 
 const MyCodeContainer = styled.div`
