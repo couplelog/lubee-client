@@ -34,6 +34,9 @@ import ProfileStroke3Ic from "./icon/profileStroke3Ic.svg?react";
 import ProfileStroke4Ic from "./icon/profileStroke4Ic.svg?react";
 import ProfileStroke5Ic from "./icon/profileStroke5Ic.svg?react";
 import ProfileStroke6Ic from "./icon/profileStroke6Ic.svg?react";
+import ProgressBar1Ic from "./icon/progressBar1Ic.svg?react";
+import ProgressBar2Ic from "./icon/progressBar2Ic.svg?react";
+import ProgressBar3Ic from "./icon/progressBar3Ic.svg?react";
 
 export {
   LogoIc,
@@ -72,4 +75,7 @@ export {
   ProfileStroke4Ic,
   ProfileStroke5Ic,
   ProfileStroke6Ic,
+  ProgressBar1Ic,
+  ProgressBar2Ic,
+  ProgressBar3Ic,
 };
