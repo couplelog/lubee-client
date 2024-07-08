@@ -9,28 +9,6 @@ interface NumberBoxProps {
   placeholder?: string;
 }
 
-export default function NumberBox(props: NumberBoxProps) {
-  const { children, $disabled, inputValue, setInputValue, placeholder } = props;
-
-  return (
-    // $disabled가 false일 때는 children이 표시되고, $disabled가 true일 때는 Input 요소가 표시
-    // Onboarding 페이지에서 NumberBox 재사용하기 위함
-    <Box $disabled={$disabled}>
-      {$disabled ? (
-        <Input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder={placeholder}
-          // disabled={$disabled} // $disabled에 따라 disabled 속성을 설정하지 않음
-        />
-      ) : (
-        children
-      )}
-    </Box>
-  );
-}
-
 const Box = styled.div<{ $disabled: boolean }>`
   ${flexCenter}
 
@@ -46,23 +24,42 @@ const Box = styled.div<{ $disabled: boolean }>`
     $disabled &&
     `
     cursor: not-allowed;
-    opacity: 0.6;
   `}
-`;
 
-const Input = styled.input`
-  height: 2.4rem;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: ${({ theme }) => theme.colors.yellow_600}; /* 입력된 텍스트 색상 */
+  input {
+    height: 2.4rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: ${({ theme }) => theme.colors.yellow_600}; /* 입력된 텍스트 색상 */
+    ${({ theme }) => theme.fonts.Body_4};
 
-  ${({ theme }) => theme.fonts.Body_4};
+    text-align: center;
+    outline: none;
 
-  text-align: center;
-  outline: none;
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.yellow_300}; /* placeholder 텍스트 색상 */
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.yellow_300}; /* placeholder 텍스트 색상 */
+    }
   }
 `;
+
+export default function NumberBox(props: NumberBoxProps) {
+  const { children, $disabled, inputValue, setInputValue, placeholder } = props;
+
+  return (
+    // $disabled가 false일 때는 children이 표시되고, $disabled가 true일 때는 Input 요소가 표시
+    // Onboarding 페이지에서 NumberBox 재사용하기 위함
+    <Box $disabled={$disabled}>
+      {$disabled ? (
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue?.(e.target.value)}
+          placeholder={placeholder}
+        />
+      ) : (
+        children
+      )}
+    </Box>
+  );
+}

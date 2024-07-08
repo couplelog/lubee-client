@@ -9,10 +9,8 @@ import OnboardingBtn from "@components/onboarding/OnboardingBtn";
 export default function OnboardingCodePage() {
   const navigate = useNavigate();
   const [code, setCode] = useState("");
-  const [codeCheck, setCodeCheck] = useState("");
-  const CodeMatch = code !== "" && code === codeCheck;
 
-  const isOnboardingBtnDisabled = !CodeMatch || code === "";
+  const isOnboardingBtnDisabled = code === "";
 
   function handleBackBtn() {
     navigate("/Onboarding");
