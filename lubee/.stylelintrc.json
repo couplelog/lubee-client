@@ -13,8 +13,8 @@
       "/^border/": ["px"],
       "font-size": ["rem", "%"]
     },
-    "unit-allowed-list": ["%", "deg", "px", "rem", "ms", "vh", "vw", "s"],
-
+    "unit-allowed-list": ["%", "deg", "px", "rem", "ms", "vh", "vw", "s", "fr"],
+    "selector-class-pattern": null,
     "order/properties-order": [
       {
         "groupName": "Layout",
