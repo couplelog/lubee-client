@@ -1,33 +1,37 @@
 import { createBrowserRouter } from "react-router-dom";
-import LoadingPage from "@pages/LoadingPage";
-import InterceptorsPage from "@pages/InterceptorsPage";
-import SplashPage from "@pages/SplashPage";
-import LoginPage from "@pages/LoginPage";
-import OnboardingPage from "@pages/OnboardingPage";
+import Interceptor from "interceptor";
+import Loading from "loading";
+import Splash from "splash";
+import Login from "login";
+import Onboarding from "onboarding";
+import Congrats from "congrats";
+import Mypage from "mypage";
+import Upload from "upload";
+import Home from "home";
+import Today from "home/today";
+import Month from "home/month";
 
 export const Router = createBrowserRouter([
   {
     path: "/",
-    element: <InterceptorsPage />,
-    errorElement: <LoadingPage />,
+    element: <Interceptor />,
+    errorElement: <Loading />,
     children: [
-      { index: true, element: <SplashPage /> },
-      { path: "/Splash", element: <SplashPage /> },
-      { path: "/Login", element: <LoginPage /> },
-      { path: "/Onboarding", element: <OnboardingPage /> },
+      { index: true, element: <Splash /> },
+      { path: "/splash", element: <Splash /> },
+      { path: "/login", element: <Login /> },
+      { path: "/onboarding", element: <Onboarding /> },
+      {
+        path: "/home",
+        element: <Home />,
+        children: [
+          { path: "/home/today", element: <Today /> },
+          { path: "/home/month", element: <Month /> },
+        ],
+      },
+      { path: "/upload", element: <Upload /> },
+      { path: "/congrats", element: <Congrats /> },
+      { path: "/mypage", element: <Mypage /> },
     ],
   },
 ]);
-
-// children: [
-//   {; index: true,; element: <SignIn /> },
-//   {; path: "/signin",; element: <SignIn /> },
-//   {
-//;     path: "/vote",
-//;     element: <VoteLayout />,
-//;     children: [
-//       {; path: "/vote/main",; element: <VoteMain /> },
-//       {; path: "/vote/select/part",; element: <SelectPart /> },
-//     ],
-//   },
-// ],
