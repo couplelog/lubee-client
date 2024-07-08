@@ -36,7 +36,7 @@ export default function OnboardingPage() {
       <MyCodeContainer>
         <MyCodeText>나의 러비코드</MyCodeText>
         <BtnWrapper>
-          <NumberBox>
+          <NumberBox $disabled={false}>
             12345 67890
             <CopyIcon />
           </NumberBox>

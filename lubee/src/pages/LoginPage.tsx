@@ -50,5 +50,5 @@ const Footer = styled.div`
 `;
 
 const CompanyText = styled.p`
-  ${({ theme }) => theme.fonts.SignBtnText};
+  ${({ theme }) => theme.fonts.Caption_1};
 `;

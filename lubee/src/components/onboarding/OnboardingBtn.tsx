@@ -1,21 +1,22 @@
 import styled from "styled-components";
 import { BtnOnboarding } from "@styles/BtnStyle";
-import { useNavigate } from "react-router-dom";
 
 interface OnboardingBtnProps {
+  handleOnboardingBtn?: () => void;
   text: string;
   $disabled: boolean;
 }
 
 export default function OnboardingBtn(props: OnboardingBtnProps) {
-  const { text, $disabled } = props;
-  const navigate = useNavigate();
+  const { handleOnboardingBtn, text, $disabled } = props;
 
   return (
     <Button
       $disabled={$disabled}
       onClick={() => {
-        $disabled ? undefined : navigate("/signup");
+        if (!$disabled && handleOnboardingBtn) {
+          handleOnboardingBtn();
+        }
       }}>
       <p>{text}</p>
     </Button>
