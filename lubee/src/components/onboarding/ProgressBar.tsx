@@ -28,6 +28,8 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 8rem;
+  position: absolute;
+  top: 6rem;
   margin: 1.1rem 0 3rem;
 `;
 
