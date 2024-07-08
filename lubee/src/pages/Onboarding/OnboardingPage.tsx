@@ -16,12 +16,16 @@ export default function OnboardingPage() {
     navigate("/Login");
   }
 
-  function handleInviteClick() {
+  function handleInviteBtn() {
     setOpenCopyCodeModal(true);
   }
 
   function handleCloseBtn() {
     setOpenCopyCodeModal(false);
+  }
+
+  function handleInputBtn() {
+    navigate("/OnboardingCode");
   }
 
   return (
@@ -39,8 +43,8 @@ export default function OnboardingPage() {
         </BtnWrapper>
       </MyCodeContainer>
       <BtnBox>
-        <InviteBtn onClick={handleInviteClick}>초대장 보내기</InviteBtn>
-        <CodeInputBtn>연인의 러비코드 입력하기</CodeInputBtn>
+        <InviteBtn onClick={handleInviteBtn}>초대장 보내기</InviteBtn>
+        <CodeInputBtn onClick={handleInputBtn}>연인의 러비코드 입력하기</CodeInputBtn>
       </BtnBox>
       {openCopyCodeModal && <CopyCodeModal handleCloseBtn={handleCloseBtn} />}
     </Wrapper>

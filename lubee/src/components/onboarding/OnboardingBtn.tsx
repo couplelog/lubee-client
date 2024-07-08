@@ -23,6 +23,8 @@ export default function OnboardingBtn(props: OnboardingBtnProps) {
 }
 
 const Button = styled(BtnOnboarding)<{ $disabled: boolean }>`
+  position: absolute;
+  bottom: 1.4rem;
   background-color: ${({ $disabled, theme }) => ($disabled ? theme.colors.gray_200 : theme.colors.gray_800)};
   color: ${({ theme }) => theme.colors.gray_50};
   cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
