@@ -64,6 +64,7 @@ const Wrapper = styled.div`
 const LubeeCodeIcon = styled(LubeeCodeIc)`
   width: 20.5rem;
   height: 12.7rem;
+  margin-top: 6rem;
 `;
 
 const MyCodeText = styled.p`

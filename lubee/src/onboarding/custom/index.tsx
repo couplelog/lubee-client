@@ -2,6 +2,20 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
+import {
+  Profile1Ic,
+  Profile2Ic,
+  Profile3Ic,
+  Profile4Ic,
+  Profile5Ic,
+  Profile6Ic,
+  ProfileStroke1Ic,
+  ProfileStroke2Ic,
+  ProfileStroke3Ic,
+  ProfileStroke4Ic,
+  ProfileStroke5Ic,
+  ProfileStroke6Ic,
+} from "@assets/index";
 
 export default function index() {
   const navigate = useNavigate();
