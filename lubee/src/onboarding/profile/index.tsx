@@ -23,7 +23,7 @@ export default function index() {
   }
 
   function handleXBtn() {
-    navigate("/Login");
+    navigate("/login");
   }
 
   function handleProfileBtn() {

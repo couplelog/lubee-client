@@ -16,6 +16,7 @@ import Profile from "onboarding/profile";
 import Custom from "onboarding/custom";
 import Birth from "onboarding/birth";
 import Anniversary from "onboarding/anniversary";
+import Complete from "onboarding/complete";
 
 export const Router = createBrowserRouter([
   {
@@ -35,6 +36,8 @@ export const Router = createBrowserRouter([
           { path: "/onboarding/profile", element: <Profile /> },
           { path: "/onboarding/custom", element: <Custom /> },
           { path: "/onboarding/birth", element: <Birth /> },
+          { path: "/onboarding/anniversary", element: <Anniversary /> },
+          { path: "/onboarding/complete", element: <Complete /> },
         ],
       },
       {
