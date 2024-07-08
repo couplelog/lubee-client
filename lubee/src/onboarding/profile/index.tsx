@@ -6,7 +6,7 @@ import { BtnWrapper } from "@styles/globalStyle";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
-import NumberBox from "../components/NumberBox";
+import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 import Profiles from "../components/Profiles";
 
@@ -43,7 +43,7 @@ export default function index() {
         <BtnWrapper onClick={handleProfileBtn}>
           <ProfileIcon as={selectedProfile ? Profiles[selectedProfile].default : undefined} />
         </BtnWrapper>
-        <NumberBox inputValue={nickname} setInputValue={setNickname} $disabled={true} placeholder="닉네임 입력" />
+        <YellowBox inputValue={nickname} setInputValue={setNickname} $disabled={true} placeholder="닉네임 입력" />
       </ContentsContainer>
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="다음" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import TitleBox from "../components/TitleBox";
-import NumberBox from "../components/NumberBox";
+import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 
 export default function index() {
@@ -25,7 +25,7 @@ export default function index() {
       <Header handleBackBtn={handleBackBtn} showBackIcon />
       <ContentsContainer>
         <TitleBox titleText="연인의 러비코드를 입력하세요" />
-        <NumberBox inputValue={code} setInputValue={setCode} $disabled={true} placeholder="코드 입력" />
+        <YellowBox inputValue={code} setInputValue={setCode} $disabled={true} placeholder="코드 입력" />
       </ContentsContainer>
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="연결하기" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>

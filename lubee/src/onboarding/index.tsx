@@ -6,7 +6,7 @@ import { btnOnboardingStyle } from "@styles/btnStyle";
 import { BtnWrapper } from "@styles/globalStyle";
 import Header from "./components/Header";
 import TitleBox from "./components/TitleBox";
-import NumberBox from "./components/NumberBox";
+import YellowBox from "./components/YellowBox";
 import CopyCodeModal from "./components/CopyCodeModal";
 
 export default function index() {
@@ -37,10 +37,10 @@ export default function index() {
       <MyCodeContainer>
         <MyCodeText>나의 러비코드</MyCodeText>
         <BtnWrapper>
-          <NumberBox $disabled={false}>
+          <YellowBox $disabled={false}>
             12345 67890
             <CopyIcon />
-          </NumberBox>
+          </YellowBox>
         </BtnWrapper>
       </MyCodeContainer>
       <BtnBox>

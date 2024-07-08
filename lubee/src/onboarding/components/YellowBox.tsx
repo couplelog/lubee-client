@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { flexCenter } from "@styles/globalStyle";
 
-interface NumberBoxProps {
+interface YellowBoxProps {
   children?: React.ReactNode;
   $disabled: boolean;
   inputValue?: string;
@@ -43,7 +43,7 @@ const Box = styled.div<{ $disabled: boolean }>`
   }
 `;
 
-export default function NumberBox(props: NumberBoxProps) {
+export default function YellowBox(props: YellowBoxProps) {
   const { children, $disabled, inputValue, setInputValue, placeholder } = props;
 
   return (
