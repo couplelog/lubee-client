@@ -56,7 +56,7 @@ const Wrapper = styled.div`
 const BtnWrapper = styled.button<{ $position: "left" | "right" }>`
   position: absolute;
   cursor: pointer;
-  ${({ $position }) => $position}: 2rem;
+  ${({ $position }) => $position}: 0;
 `;
 
 const BackIcon = styled(BackIc)`

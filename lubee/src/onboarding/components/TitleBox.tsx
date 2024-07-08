@@ -22,7 +22,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 8rem;
-  margin: 4rem 0 0;
+  margin-top: 6rem;
 `;
 
 const Text = styled.div`

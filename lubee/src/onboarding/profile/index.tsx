@@ -19,7 +19,7 @@ export default function index() {
   const selectedProfile = location.state?.selectedProfile;
 
   function handleBackBtn() {
-    navigate("/Onboarding");
+    navigate("/onboarding");
   }
 
   function handleXBtn() {

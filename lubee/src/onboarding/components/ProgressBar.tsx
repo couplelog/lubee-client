@@ -23,9 +23,6 @@ export default function ProgressBar({ step }: ProgressBarProps) {
 }
 
 const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
   position: absolute;
   top: 6rem;
 `;
