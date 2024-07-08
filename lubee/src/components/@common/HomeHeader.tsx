@@ -39,6 +39,7 @@ const Container = styled.div`
   gap: 1.6rem;
   justify-content: center;
   align-items: center;
+  top: 0;
   width: 100%;
   padding: 1.3rem 0 2.3rem;
 `;
