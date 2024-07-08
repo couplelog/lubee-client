@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
@@ -24,6 +25,10 @@ export default function index() {
     setOpenCopyCodeModal(false);
   }
 
+  function handleOnboardingBtn() {
+    navigate("/onboarding/code");
+  }
+
   return (
     <Wrapper>
       <Header handleXBtn={handleXBtn} showXIcon />
@@ -40,7 +45,7 @@ export default function index() {
       </MyCodeContainer>
       <BtnBox>
         <InviteBtn onClick={handleInviteClick}>초대장 보내기</InviteBtn>
-        <CodeInputBtn>연인의 러비코드 입력하기</CodeInputBtn>
+        <CodeInputBtn onClick={handleOnboardingBtn}>연인의 러비코드 입력하기</CodeInputBtn>
       </BtnBox>
       {openCopyCodeModal && <CopyCodeModal handleCloseBtn={handleCloseBtn} />}
     </Wrapper>

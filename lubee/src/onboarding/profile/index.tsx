@@ -23,11 +23,11 @@ export default function index() {
   }
 
   function handleProfileBtn() {
-    navigate("/OnboardingProfileCustom");
+    navigate("/onboarding/custom");
   }
 
   function handleOnboardingBtn() {
-    navigate("/OnboardingProfileCustom");
+    navigate("/onboarding/birth");
   }
 
   return (

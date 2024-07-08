@@ -13,11 +13,11 @@ export default function index() {
   const isOnboardingBtnDisabled = code === "";
 
   function handleBackBtn() {
-    navigate("/Onboarding");
+    navigate("/onboarding");
   }
 
   function handleOnboardingBtn() {
-    navigate("/OnboardingProfile");
+    navigate("/onboarding/profile");
   }
 
   return (

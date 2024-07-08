@@ -7,7 +7,7 @@ export default function index() {
   const navigate = useNavigate();
 
   function handleBackBtn() {
-    navigate("/Onboarding");
+    navigate("/onboarding");
   }
 
   return (
