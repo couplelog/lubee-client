@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
-import DatePickerScroll from "../components/DatePickerScroll";
+import DatePickerScroll from "../components/rolldate/DatePickerScroll";
 
 export default function index() {
   const navigate = useNavigate();

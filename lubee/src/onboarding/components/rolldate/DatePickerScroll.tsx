@@ -19,10 +19,10 @@ interface RolldateOptions {
     min: string;
     sec: string;
   };
-  init: () => void;
-  moveEnd: (scroll: any) => void;
-  confirm: (date: string) => void;
-  cancel: () => void;
+  init?: () => void;
+  moveEnd?: (scroll: any) => void;
+  confirm?: (date: string) => void;
+  cancel?: () => void;
   value: string;
 }
 
@@ -55,20 +55,6 @@ const DatePickerScroll: React.FC = () => {
           hour: "",
           min: "",
           sec: "",
-        },
-        init: function () {
-          console.log("On init");
-        },
-        moveEnd: function (scroll) {
-          console.log(scroll);
-          console.log("scroll end");
-        },
-        confirm: function (date) {
-          console.log(date);
-          console.log("confirm");
-        },
-        cancel: function () {
-          console.log("cancel");
         },
         value: "2023-07-09", // 기본 날짜 설정
       });
