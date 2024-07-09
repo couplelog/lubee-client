@@ -9,6 +9,29 @@ interface YellowBoxProps {
   placeholder?: string;
 }
 
+export default function YellowBox(props: YellowBoxProps) {
+  const { children, $disabled, inputValue, setInputValue, placeholder } = props;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value.length <= 8) {
+      setInputValue?.(value);
+    }
+  };
+
+  return (
+    // $disabled가 false일 때는 children이 표시되고, $disabled가 true일 때는 Input 요소가 표시
+    // Onboarding 페이지에서 NumberBox 재사용하기 위함
+    <Box $disabled={$disabled}>
+      {$disabled ? (
+        <input type="text" value={inputValue} onChange={handleChange} placeholder={placeholder} />
+      ) : (
+        children
+      )}
+    </Box>
+  );
+}
+
 const Box = styled.div<{ $disabled: boolean }>`
   ${flexCenter}
 
@@ -42,26 +65,3 @@ const Box = styled.div<{ $disabled: boolean }>`
     }
   }
 `;
-
-export default function YellowBox(props: YellowBoxProps) {
-  const { children, $disabled, inputValue, setInputValue, placeholder } = props;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value.length <= 8) {
-      setInputValue?.(value);
-    }
-  };
-
-  return (
-    // $disabled가 false일 때는 children이 표시되고, $disabled가 true일 때는 Input 요소가 표시
-    // Onboarding 페이지에서 NumberBox 재사용하기 위함
-    <Box $disabled={$disabled}>
-      {$disabled ? (
-        <input type="text" value={inputValue} onChange={handleChange} placeholder={placeholder} />
-      ) : (
-        children
-      )}
-    </Box>
-  );
-}
