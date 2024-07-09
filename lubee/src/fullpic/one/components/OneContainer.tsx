@@ -3,12 +3,12 @@ import { ProfileIc } from "@assets/index";
 import FullPicContainer from "@common/components/FullPicContainer";
 import fullPic from "@assets/image/fullPic.png";
 
-interface TodayPicContainerProps {
+interface OneContainerProps {
   name: string;
   picSrc: string;
 }
 
-export default function TodayPicContainer(props: TodayPicContainerProps) {
+export default function OneContainer(props: OneContainerProps) {
   const { name, picSrc } = props;
   return (
     <Wrapper>

@@ -1,18 +1,11 @@
 import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
-import Header from "./components/Header";
-import DeletePicModal from "fullpic/components/DeletePicModal";
 import EmojiDetailModal from "fullpic/components/EmojiDetailModal";
-import MonthPicContainer from "./components/MonthPicContainer";
+import DateContainer from "./components/DateContainer";
 
-export default function MonthPicPage() {
+export default function index() {
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
-  const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
-
-  function handleTrashBtn(open: boolean) {
-    setOpenDeletePicModal(open);
-  }
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -29,13 +22,11 @@ export default function MonthPicPage() {
 
   return (
     <Wrapper>
-      <Header handleTrashBtn={handleTrashBtn} />
-      <MonthPicContainer
+      <DateContainer
         setOpenEmojiDetail={setOpenEmojiDetail}
         setSelectedEmojiText={setSelectedEmojiText}
         selectedEmojiText={selectedEmojiText}
       />
-      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}
     </Wrapper>
   );
@@ -46,5 +37,4 @@ const Wrapper = styled.section`
   flex-direction: column;
   position: relative;
   width: 100%;
-  height: 100vh;
 `;

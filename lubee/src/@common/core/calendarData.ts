@@ -1,8 +1,8 @@
-import { calInfo } from "home/month";
+import { CalInfoTypes } from "home/month/types/CalInfoTypes";
 
 const Day = ["일", "월", "화", "수", "목", "금", "토"];
 
-const CAL: calInfo[] = [
+const CAL: CalInfoTypes[] = [
   {
     year: 2023,
     month: 12,

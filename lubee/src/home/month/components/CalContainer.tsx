@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { calInfo } from "@pages/CalendarTestPage";
+import { CalInfoTypes } from "../types/CalInfoTypes";
 import { HoneyMonthIc } from "@assets/index";
-import { Day } from "@core/constant";
+import { Day } from "@common/core/calendarData";
 
-const CalContainer = ({ info }: { info: calInfo }) => {
+const CalContainer = ({ info }: { info: CalInfoTypes }) => {
   const LIST = new Array(42).fill(0);
   const { year, month, start, length, holiday, data } = info;
   const formatMonth = (month: number): string => {
