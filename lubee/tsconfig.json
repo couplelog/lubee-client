@@ -31,7 +31,6 @@
       "@core/*": ["core/*"],
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
-      "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@type/*": ["type/*"]
     }
