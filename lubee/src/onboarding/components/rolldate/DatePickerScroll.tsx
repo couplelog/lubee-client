@@ -54,11 +54,11 @@ const DatePickerScroll: React.FC = () => {
         minStep: 1,
         beginYear: 1950,
         endYear: 2024,
-        trigger: "tap",
+        trigger: "click",
         lang: {
-          title: "Select Date", // 선택기 제목
-          cancel: "Cancel", // 취소 버튼 텍스트
-          confirm: "Confirm", // 확인 버튼 텍스트
+          title: "", // 선택기 제목
+          cancel: "", // 취소 버튼 텍스트
+          confirm: "", // 확인 버튼 텍스트
         },
         value: `${currentDate.year}-${currentDate.month}-${currentDate.day}`,
         confirm: (date: string) => {
