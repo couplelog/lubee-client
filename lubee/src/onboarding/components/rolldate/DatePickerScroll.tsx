@@ -12,17 +12,7 @@ interface RolldateOptions {
     title: string;
     cancel: string;
     confirm: string;
-    year: string;
-    month: string;
-    day: string;
-    hour: string;
-    min: string;
-    sec: string;
   };
-  init?: () => void;
-  moveEnd?: (scroll: any) => void;
-  confirm?: (date: string) => void;
-  cancel?: () => void;
   value: string;
 }
 
@@ -42,19 +32,13 @@ const DatePickerScroll: React.FC = () => {
         el: "#example",
         format: "YYYY-MM-DD", // 연도, 월, 일 선택할 수 있도록 설정
         minStep: 1,
-        beginYear: 2000,
-        endYear: 2100,
+        beginYear: 1950,
+        endYear: 2024,
         trigger: "tap",
         lang: {
           title: "날짜 선택", // 선택기 제목
           cancel: "취소", // 취소 버튼 텍스트
           confirm: "확인", // 확인 버튼 텍스트
-          year: "년", // 연도 텍스트
-          month: "월", // 월 텍스트
-          day: "일", // 일 텍스트
-          hour: "",
-          min: "",
-          sec: "",
         },
         value: "2023-07-09", // 기본 날짜 설정
       });
