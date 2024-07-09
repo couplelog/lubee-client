@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
+import DatePickerScroll from "../components/DatePickerScroll";
 
 export default function index() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ export default function index() {
       <Header handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
       <ProgressBar step={2} />
       <TitleBox titleText="본인의 생년월일을 입력해주세요" subtitleText="달력에 나와 연인의 생일이 표시돼요" />
+      <DatePickerScroll />
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="다음" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>
   );
