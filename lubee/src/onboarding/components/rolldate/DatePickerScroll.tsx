@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import YellowBox from "../YellowBox";
 import { flexCenter } from "@styles/globalStyle";
 
 // Rolldate 인터페이스 정의
@@ -30,6 +29,19 @@ declare global {
 const DatePickerScroll: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState({ year: "", month: "", day: "" });
 
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear().toString();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+    return { year, month, day };
+  };
+
+  const handleClick = () => {
+    // 강제로 hidden input 클릭 이벤트 발생
+    document.getElementById("hiddenDatePicker")?.click();
+  };
+
   useEffect(() => {
     // Rolldate 초기화
     const Rolldate = window.Rolldate;
@@ -46,7 +58,7 @@ const DatePickerScroll: React.FC = () => {
           cancel: "Cancel", // 취소 버튼 텍스트
           confirm: "Confirm", // 확인 버튼 텍스트
         },
-        value: "2024-07-09", // 기본 날짜 설정
+        value: "{getCurrentDate().year}-{getCurrentDate().month}-{getCurrentDate().day}", // 기본 날짜 설정
         confirm: (date: string) => {
           const [year, month, day] = date.split("-");
           setSelectedDate({ year, month, day });
@@ -55,19 +67,14 @@ const DatePickerScroll: React.FC = () => {
     } else {
       console.error("Rolldate is not loaded");
     }
-  }, []);
-
-  const handleClick = () => {
-    // 강제로 hidden input 클릭 이벤트 발생
-    document.getElementById("hiddenDatePicker")?.click();
-  };
+  }, [selectedDate]);
 
   return (
     <Wrapper onClick={handleClick}>
       <HiddenInput type="text" id="hiddenDatePicker" readOnly />
-      <StyledDate>{selectedDate.year || "year"}</StyledDate>
-      <StyledDate>{selectedDate.month || "month"}</StyledDate>
-      <StyledDate>{selectedDate.day || "day"}</StyledDate>
+      <DateBox $isPlaceholder={!selectedDate.year}>{selectedDate.year || getCurrentDate().year}</DateBox>
+      <DateBox $isPlaceholder={!selectedDate.month}>{selectedDate.month || getCurrentDate().month}</DateBox>
+      <DateBox $isPlaceholder={!selectedDate.day}>{selectedDate.day || getCurrentDate().day}</DateBox>
     </Wrapper>
   );
 };
@@ -78,14 +85,14 @@ const Wrapper = styled.section`
   display: flex;
   gap: 1.2rem;
   margin-top: 6rem;
-  cursor: pointer; /* 클릭 가능하게 표시 */
+  cursor: pointer;
 `;
 
 const HiddenInput = styled.input`
   display: none;
 `;
 
-const StyledDate = styled.div`
+const DateBox = styled.div<{ $isPlaceholder: boolean }>`
   ${flexCenter}
 
   padding: 0.5rem 1rem;
@@ -95,10 +102,8 @@ const StyledDate = styled.div`
   ${({ theme }) => theme.fonts.Body_4};
 
   background-color: ${({ theme }) => theme.colors.yellow_50};
-  color: ${({ theme }) => theme.colors.yellow_600};
-  cursor: pointer;
+  color: ${({ theme, $isPlaceholder }) =>
+    $isPlaceholder ? theme.colors.yellow_300 : theme.colors.yellow_600}; /* 날짜 선택 안했을 때 placeholder 색상 */
 
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.yellow_300};
-  }
+  cursor: pointer;
 `;
