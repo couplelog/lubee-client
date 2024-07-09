@@ -46,6 +46,8 @@ const DatePickerScroll: React.FC = () => {
     // Rolldate 초기화
     const Rolldate = window.Rolldate;
     if (Rolldate) {
+      const currentDate = getCurrentDate();
+
       new Rolldate({
         el: "#hiddenDatePicker",
         format: "YYYY-MM-DD", // 연도, 월, 일 선택할 수 있도록 설정
@@ -58,7 +60,7 @@ const DatePickerScroll: React.FC = () => {
           cancel: "Cancel", // 취소 버튼 텍스트
           confirm: "Confirm", // 확인 버튼 텍스트
         },
-        value: "{getCurrentDate().year}-{getCurrentDate().month}-{getCurrentDate().day}", // 기본 날짜 설정
+        value: `${currentDate.year}-${currentDate.month}-${currentDate.day}`,
         confirm: (date: string) => {
           const [year, month, day] = date.split("-");
           setSelectedDate({ year, month, day });
@@ -72,6 +74,7 @@ const DatePickerScroll: React.FC = () => {
   return (
     <Wrapper onClick={handleClick}>
       <HiddenInput type="text" id="hiddenDatePicker" readOnly />
+      {/* 날짜 선택 안했을 경우 Placeholder로 텍스트 색상 조정 및 오늘 날짜 출력 */}
       <DateBox $isPlaceholder={!selectedDate.year}>{selectedDate.year || getCurrentDate().year}</DateBox>
       <DateBox $isPlaceholder={!selectedDate.month}>{selectedDate.month || getCurrentDate().month}</DateBox>
       <DateBox $isPlaceholder={!selectedDate.day}>{selectedDate.day || getCurrentDate().day}</DateBox>
