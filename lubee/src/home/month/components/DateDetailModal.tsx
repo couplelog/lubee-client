@@ -1,9 +1,10 @@
 import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import Comment from "./Comment";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
+import JSZip from "jszip";
 
 interface DateDetailModalProps {
   date: string;
@@ -13,7 +14,7 @@ interface DateDetailModalProps {
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
   const { date, iconSrc, imagesData } = props;
-  /*업로드한 사진 개수가 5개보다 적으면 blankImg를 띄움*/
+
   const displayImages =
     imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
 
@@ -30,9 +31,15 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={iconSrc} />
           </CommentsBox>
           <PicBox>
-            {displayImages.map((imgSrc, index) => (
-              <img key={index} src={imgSrc} />
-            ))}
+            {displayImages.map((imgSrc, index) =>
+              imgSrc === blankImg ? (
+                <BlankImgBtn type="button" key={index}>
+                  <img src={imgSrc} />
+                </BlankImgBtn>
+              ) : (
+                <img key={index} src={imgSrc} />
+              ),
+            )}
           </PicBox>
         </Contents>
       </Container>
@@ -53,8 +60,6 @@ const Container = styled.section`
   flex-direction: column;
   position: absolute;
   bottom: 0;
-
-  /* padding: 0 0 5.8rem; */
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
@@ -88,6 +93,12 @@ const PicBox = styled.section`
   grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
   overflow: scroll;
-  max-height: 36rem;
+  max-height: 35rem;
   scrollbar-width: none;
+`;
+
+const BlankImgBtn = styled.button`
+  padding: 0;
+  border: none;
+  background: none;
 `;
