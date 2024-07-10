@@ -10,3 +10,8 @@
 | Package Manager      | ![Yarn](https://img.shields.io/badge/yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white)                                                                                                                   |
 | Version Control      | ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)  |
 | Deploy               | ![Deploy](https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+
+
+### 폴더구조
+![라우팅](https://github.com/couplelog/lubee-client/assets/120544840/7a389b30-b133-48c5-b1a9-c6d5af9b4363)
+
