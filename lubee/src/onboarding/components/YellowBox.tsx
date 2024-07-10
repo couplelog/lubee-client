@@ -1,3 +1,4 @@
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { flexCenter } from "@styles/globalStyle";
 
@@ -11,6 +12,20 @@ interface YellowBoxProps {
 
 export default function YellowBox(props: YellowBoxProps) {
   const { children, $disabled, inputValue, setInputValue, placeholder } = props;
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputwidth, setInputwidth] = useState("auto");
+
+  useEffect(() => {
+    if (inputRef.current && placeholder) {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      if (context) {
+        context.font = getComputedStyle(inputRef.current).font;
+        const textWidth = context.measureText(placeholder).width;
+        setInputwidth(`${textWidth}px`);
+      }
+    }
+  }, [placeholder]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -20,11 +35,16 @@ export default function YellowBox(props: YellowBoxProps) {
   }
 
   return (
-    // $disabled가 false일 때는 children이 표시되고, $disabled가 true일 때는 Input 요소가 표시
-    // Onboarding 페이지에서 NumberBox 재사용하기 위함
     <Box $disabled={$disabled}>
       {$disabled ? (
-        <input type="text" value={inputValue} onChange={handleChange} placeholder={placeholder} />
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleChange}
+          placeholder={placeholder}
+          ref={inputRef}
+          style={{ width: inputwidth }}
+        />
       ) : (
         children
       )}
@@ -33,6 +53,7 @@ export default function YellowBox(props: YellowBoxProps) {
 }
 
 const Box = styled.div<{ $disabled: boolean }>`
+  width: auto;
   ${flexCenter}
 
   padding: 0.5rem 1rem;
