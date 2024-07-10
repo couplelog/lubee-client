@@ -7,8 +7,15 @@ import { EmojisDataTypes } from "@common/types/EmojisDataTypes";
 import fullPic from "@assets/image/fullPic.png";
 import EmojiDetailModal from "fullpic/components/EmojiDetailModal";
 import OneContainer from "./components/OneContainer";
+import DeletePicModal from "fullpic/components/DeletePicModal";
+import FullpicHeader from "fullpic/components/FullpicHeader";
 
 export default function index() {
+  const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
+
+  function handleTrashBtn(open: boolean) {
+    setOpenDeletePicModal(open);
+  }
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
 
@@ -30,6 +37,7 @@ export default function index() {
 
   return (
     <Wrapper>
+      <FullpicHeader handleTrashBtn={handleTrashBtn} />
       <OneContainer name={"맹꽁이"} picSrc={fullPic} />
       <EmojiTag
         type="button"
@@ -53,6 +61,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   position: relative;
   width: 100%;
+  height: 100vh;
 `;
 
 const EmojiTag = styled.button`

@@ -39,7 +39,7 @@ export const Router = createBrowserRouter([
         path: "/fullpic",
         element: <Fullpic />,
         children: [
-          { path: "/fullpic/date", element: <Date /> },
+          { path: "/fullpic/:date", element: <Date /> },
           { path: "/fullpic/:date/:index", element: <One /> },
         ],
       },

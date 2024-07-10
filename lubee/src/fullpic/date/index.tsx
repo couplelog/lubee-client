@@ -2,8 +2,15 @@ import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import EmojiDetailModal from "fullpic/components/EmojiDetailModal";
 import DateContainer from "./components/DateContainer";
+import DeletePicModal from "fullpic/components/DeletePicModal";
+import FullpicHeader from "fullpic/components/FullpicHeader";
 
 export default function index() {
+  const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
+
+  function handleTrashBtn(open: boolean) {
+    setOpenDeletePicModal(open);
+  }
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
 
@@ -22,11 +29,13 @@ export default function index() {
 
   return (
     <Wrapper>
+      <FullpicHeader handleTrashBtn={handleTrashBtn} />
       <DateContainer
         setOpenEmojiDetail={setOpenEmojiDetail}
         setSelectedEmojiText={setSelectedEmojiText}
         selectedEmojiText={selectedEmojiText}
       />
+      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}
     </Wrapper>
   );
