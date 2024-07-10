@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LogoGrayIc, SymbolIc } from "@assets/index";
+import CompanyText from "@common/components/CompanyText";
 
 export default function index() {
   const navigate = useNavigate();
@@ -20,9 +21,7 @@ export default function index() {
         <SymbolIcon />
         <LogoIcon />
       </LogoContainer>
-      <Footer>
-        <CompanyText>(C) COUPLE-LOGUE</CompanyText>
-      </Footer>
+      <CompanyText />
     </Wrapper>
   );
 }
@@ -53,13 +52,4 @@ const SymbolIcon = styled(SymbolIc)`
 const LogoIcon = styled(LogoGrayIc)`
   width: 15rem;
   height: 3.9rem;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  padding-bottom: 1.4rem;
-`;
-
-const CompanyText = styled.p`
-  ${({ theme }) => theme.fonts.Caption_1};
 `;

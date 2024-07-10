@@ -21,7 +21,8 @@ export default function Header(props: HeaderProps) {
             if (handleBackBtn) {
               handleBackBtn();
             }
-          }}>
+          }}
+          $position="left">
           <BackIcon />
         </BtnWrapper>
       )}
@@ -33,7 +34,8 @@ export default function Header(props: HeaderProps) {
             if (handleXBtn) {
               handleXBtn();
             }
-          }}>
+          }}
+          $position="right">
           <XIcon />
         </BtnWrapper>
       )}
@@ -43,15 +45,18 @@ export default function Header(props: HeaderProps) {
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  position: relative;
   width: 100%;
   margin-top: 0.5rem;
   padding: 2rem;
 `;
 
-const BtnWrapper = styled.button`
+const BtnWrapper = styled.button<{ $position: "left" | "right" }>`
+  position: absolute;
   cursor: pointer;
+  ${({ $position }) => $position}: 0;
 `;
 
 const BackIcon = styled(BackIc)`

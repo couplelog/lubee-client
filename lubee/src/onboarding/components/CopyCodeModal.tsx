@@ -11,8 +11,8 @@ export default function CopyCodeModal(props: CopyCodeModalProps) {
     <Background>
       <Container>
         <Text>
-          <h2>나의 러비코드가 복사되었어요</h2>
-          <p>연인에게 공유해주세요</p>
+          <TitleText>나의 러비코드가 복사되었어요</TitleText>
+          <SubtitleText>연인에게 공유해주세요</SubtitleText>
         </Text>
         <CloseBtn
           type="button"
@@ -52,18 +52,18 @@ const Text = styled.div`
   flex-direction: column;
   gap: 0.8rem;
   align-items: center;
+`;
 
-  & > h2 {
-    ${({ theme }) => theme.fonts.Body_4};
+const TitleText = styled.h2`
+  ${({ theme }) => theme.fonts.Body_4};
 
-    color: ${({ theme }) => theme.colors.gray_800};
-  }
+  color: ${({ theme }) => theme.colors.gray_800};
+`;
 
-  & > p {
-    ${({ theme }) => theme.fonts.SubTitle};
+const SubtitleText = styled.p`
+  ${({ theme }) => theme.fonts.SubTitle};
 
-    color: ${({ theme }) => theme.colors.gray_600};
-  }
+  color: ${({ theme }) => theme.colors.gray_600};
 `;
 
 const CloseBtn = styled.button`
