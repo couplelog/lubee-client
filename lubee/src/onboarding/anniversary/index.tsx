@@ -26,7 +26,7 @@ export default function index() {
   };
 
   function handleOnboardingBtn() {
-    navigate("/onboarding/anniversary");
+    navigate("/onboarding/complete");
   }
 
   return (
