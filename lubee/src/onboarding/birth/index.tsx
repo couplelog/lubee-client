@@ -21,6 +21,10 @@ export default function index() {
     navigate("/login");
   }
 
+  const handleDateChange = (date: string) => {
+    setBirthday(date);
+  };
+
   function handleOnboardingBtn() {
     navigate("/onboarding/anniversary");
   }
@@ -30,7 +34,7 @@ export default function index() {
       <Header handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
       <ProgressBar step={2} />
       <TitleBox titleText="본인의 생년월일을 입력해주세요" subtitleText="달력에 나와 연인의 생일이 표시돼요" />
-      <DatePickerScroll />
+      <DatePickerScroll onDateChange={handleDateChange} />
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="다음" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>
   );

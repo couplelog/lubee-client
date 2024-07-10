@@ -21,6 +21,10 @@ export default function index() {
     navigate("/login");
   }
 
+  const handleDateChange = (date: string) => {
+    setAnniv(date);
+  };
+
   function handleOnboardingBtn() {
     navigate("/onboarding/anniversary");
   }
@@ -30,7 +34,7 @@ export default function index() {
       <Header handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
       <ProgressBar step={3} />
       <TitleBox titleText="연인과 처음 만난 날을 입력해주세요" subtitleText="나와 연인의 기념일을 알 수 있어요" />
-      <DatePickerScroll />
+      <DatePickerScroll onDateChange={handleDateChange} />
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="완료" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>
   );

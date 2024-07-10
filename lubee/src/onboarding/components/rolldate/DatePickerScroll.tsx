@@ -26,7 +26,11 @@ declare global {
   }
 }
 
-const DatePickerScroll: React.FC = () => {
+interface DatePickerScrollProps {
+  onDateChange: (date: string) => void;
+}
+
+const DatePickerScroll: React.FC<DatePickerScrollProps> = ({ onDateChange }) => {
   const [selectedDate, setSelectedDate] = useState({ year: "", month: "", day: "" });
 
   const getCurrentDate = () => {
@@ -64,6 +68,7 @@ const DatePickerScroll: React.FC = () => {
         confirm: (date: string) => {
           const [year, month, day] = date.split("-");
           setSelectedDate({ year, month, day });
+          onDateChange(date);
         },
       });
     } else {
