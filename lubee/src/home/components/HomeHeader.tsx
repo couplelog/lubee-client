@@ -13,12 +13,12 @@ export default function HomeHeader() {
   }, [currentPage]);
 
   function moveToHomeToday() {
-    navigate("/today");
+    navigate("/home/today");
     setCurrentPage("today");
   }
 
   function moveToHomeMonth() {
-    navigate("/month");
+    navigate("/home/month");
     setCurrentPage("month");
   }
 

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ExploreDeactivateIc, HomeActivateIc, MyDeactivateIc } from "@assets/index";
+import { ExploreDeactivateIc, HomeDeactivateIc, MyActivateIc } from "@assets/index";
 
-export default function HomeFooter() {
+export default function MypageFooter() {
   const navigate = useNavigate();
   const [footerPage, setFooterPage] = useState<string>(() => {
-    return localStorage.getItem("home-footer") || "today";
+    return localStorage.getItem("mypage-footer") || "today";
   });
 
   useEffect(() => {
@@ -14,11 +14,12 @@ export default function HomeFooter() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("home-footer", footerPage);
+    localStorage.setItem("mypage-footer", footerPage);
   }, []);
 
   function moveToMypage() {
     navigate("/mypage");
+    setFooterPage("mypage");
   }
 
   function moveToHome() {
@@ -37,16 +38,16 @@ export default function HomeFooter() {
   return (
     <Container>
       <BtnWrapper type="button" onClick={moveToHome}>
-        <HomeActiveIcon />
-        <ActivateText>홈</ActivateText>
+        <HomeDeactivateIcon />
+        <DeactivateText>홈</DeactivateText>
       </BtnWrapper>
       <BtnWrapper type="button">
         <ExploreDeactivateIcon />
         <DeactivateText>탐색</DeactivateText>
       </BtnWrapper>
       <BtnWrapper type="button" onClick={moveToMypage}>
-        <MyDeactivateIcon />
-        <DeactivateText>마이</DeactivateText>
+        <MyActivateIcon />
+        <ActivateText>마이</ActivateText>
       </BtnWrapper>
     </Container>
   );
@@ -63,6 +64,14 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
+const BtnWrapper = styled.button`
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  justify-content: center;
+  align-items: center;
+`;
+
 const DeactivateText = styled.p`
   ${({ theme }) => theme.fonts.Caption_0};
 
@@ -75,25 +84,17 @@ const ActivateText = styled.p`
   color: ${({ theme }) => theme.colors.gray_600};
 `;
 
-const BtnWrapper = styled.button`
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  justify-content: center;
-  align-items: center;
-`;
-
-const MyDeactivateIcon = styled(MyDeactivateIc)`
-  width: 3rem;
-  height: 3rem;
-`;
-
-const HomeActiveIcon = styled(HomeActivateIc)`
-  width: 3rem;
-  height: 3rem;
-`;
-
 const ExploreDeactivateIcon = styled(ExploreDeactivateIc)`
+  width: 3rem;
+  height: 3rem;
+`;
+
+const HomeDeactivateIcon = styled(HomeDeactivateIc)`
+  width: 3rem;
+  height: 3rem;
+`;
+
+const MyActivateIcon = styled(MyActivateIc)`
   width: 3rem;
   height: 3rem;
 `;
