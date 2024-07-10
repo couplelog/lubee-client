@@ -10,6 +10,20 @@ const CalContainer = ({ info }: { info: CalInfoTypes }) => {
     return month < 10 ? `0${month}` : `${month}`;
   };
 
+  /*fullpic - Month 페이지로 이동하는 함수
+  const [date, setDate] = useState("");
+  const navigate = useNavigate();
+
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+  };
+
+  const handleGoToDate = () => {
+    if (date) {
+      navigate(`/fullpic/${date}`);
+    }
+  };*/
+
   // data.map((el) => (LIST[el.date + start - 1] = el.price));
   // data.sort((a, b) => a.price - b.price);
 

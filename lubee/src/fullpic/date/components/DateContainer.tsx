@@ -19,6 +19,10 @@ export default function DateContainer(props: DateContainerProps) {
   const selectedEmojiData = smallEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
   const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
 
+  // date 가져오기
+  // const { date } = useParams<{ date: string }>();
+  // const filteredData = fullPicData.filter((data) => data.date === date);
+
   return (
     <Wrapper>
       {fullPicData &&
