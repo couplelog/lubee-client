@@ -1,6 +1,7 @@
 import CalContainer from "./components/CalContainer";
 import styled from "styled-components";
 import { CAL } from "@common/core/calendarData";
+import { ProfileIc } from "@assets/index";
 
 const index = () => {
   // start : 금요일부터 1일이 시작되는 달
@@ -11,7 +12,7 @@ const index = () => {
   return (
     <CalWrapper>
       {CAL.map((cal, idx) => {
-        return <CalContainer key={idx} info={cal} />;
+        return <CalContainer key={idx} info={cal} iconSrc={ProfileIc} />;
       })}
     </CalWrapper>
   );

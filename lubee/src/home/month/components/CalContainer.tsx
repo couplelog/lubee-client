@@ -2,13 +2,28 @@ import styled from "styled-components";
 import { CalInfoTypes } from "../types/CalInfoTypes";
 import { HoneyMonthIc } from "@assets/index";
 import { Day } from "@common/core/calendarData";
+import DateDetailModal from "./DateDetailModal";
+import { useEffect, useRef, useState } from "react";
+import { imagesData } from "@common/core/imagesData";
+interface CalContainerProps {
+  info: CalInfoTypes;
+  iconSrc: string;
+}
 
-const CalContainer = ({ info }: { info: CalInfoTypes }) => {
-  const LIST = new Array(42).fill(0);
-  const { year, month, start, length, holiday, data } = info;
-  const formatMonth = (month: number): string => {
-    return month < 10 ? `0${month}` : `${month}`;
-  };
+const CalContainer = ({ info, iconSrc }: CalContainerProps) => {
+  /*모달 애니메이션*/
+  const [openDateDetailModal, setOpenDateDetailModal] = useState<boolean>(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const listener = (e: MouseEvent) => {
+      if (!modalRef.current || modalRef.current.contains(e.target as Node)) return;
+      setOpenDateDetailModal(false);
+    };
+    document.addEventListener("mousedown", listener);
+    return () => {
+      document.removeEventListener("mousedown", listener);
+    };
+  }, [modalRef]);
 
   /*fullpic - Month 페이지로 이동하는 함수
   const [date, setDate] = useState("");
@@ -27,8 +42,22 @@ const CalContainer = ({ info }: { info: CalInfoTypes }) => {
   // data.map((el) => (LIST[el.date + start - 1] = el.price));
   // data.sort((a, b) => a.price - b.price);
 
-  // List 배열에 업로드한 날짜는 1로 찍기
+  // List 배열에 사진을 업로드한 날짜는 1로 찍기
+  const LIST = new Array(42).fill(0);
+  const { year, month, start, length, holiday, data } = info;
+  const formatMonth = (month: number): string => {
+    return month < 10 ? `0${month}` : `${month}`;
+  };
+
   data.forEach((el) => (LIST[el.date + start - 1] = 1));
+
+  // date
+  const [selectedDate, setSelectedDate] = useState<number | null>(null);
+
+  function handleDateDetailModal(date: number) {
+    setSelectedDate(date);
+    setOpenDateDetailModal(true);
+  }
 
   return (
     <Calendar>
@@ -44,13 +73,21 @@ const CalContainer = ({ info }: { info: CalInfoTypes }) => {
           <Weekday key={day}>{day}</Weekday>
         ))}
         {LIST.map((val, idx) => (
-          <Item key={idx} $isUploaded={val === 1}>
+          <Item key={idx} $isUploaded={val === 1} onClick={() => handleDateDetailModal(idx - start + 1)}>
             <Date $isHoliday={holiday.includes(idx - start + 1)}>
               {idx - start < 0 || idx - start + 1 > length ? "" : idx - start + 1}
             </Date>
           </Item>
         ))}
       </Grid>
+      {openDateDetailModal && (
+        <DateDetailModal
+          ref={modalRef}
+          date={`${month}월 ${selectedDate}일`}
+          iconSrc={iconSrc}
+          imagesData={imagesData}
+        />
+      )}
     </Calendar>
   );
 };
@@ -99,7 +136,7 @@ const Grid = styled.ul`
   grid-template-rows: repeat(6, 1fr);
 `;
 
-const Item = styled.li<{ $isUploaded: boolean }>`
+const Item = styled.button<{ $isUploaded: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
