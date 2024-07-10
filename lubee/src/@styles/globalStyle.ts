@@ -61,6 +61,13 @@ html {
     font-style: normal;
     font-weight: normal;
   }
+
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Medium.ttf');
+    font-style: normal;
+    font-weight: 400;
+  }
 }
 `;
 
