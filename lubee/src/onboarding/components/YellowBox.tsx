@@ -12,12 +12,12 @@ interface YellowBoxProps {
 export default function YellowBox(props: YellowBoxProps) {
   const { children, $disabled, inputValue, setInputValue, placeholder } = props;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     if (value.length <= 8) {
       setInputValue?.(value);
     }
-  };
+  }
 
   return (
     // $disabled가 false일 때는 children이 표시되고, $disabled가 true일 때는 Input 요소가 표시

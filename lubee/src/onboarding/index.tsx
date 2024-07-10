@@ -25,6 +25,23 @@ export default function index() {
     setOpenCopyCodeModal(false);
   }
 
+  async function handleShare() {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "연인으로부터 러비 초대장이 도착했어요! 링크를 눌러 초대장을 받아주세요.",
+          text: "연인의 러비코드: 1234 5678",
+          url: "https://example.com", // 실제 공유할 URL로 변경
+        });
+        console.log("공유 성공");
+      } catch (error) {
+        console.error("공유 실패:", error);
+      }
+    } else {
+      alert("이 브라우저는 Web Share API를 지원하지 않습니다.");
+    }
+  }
+
   function handleOnboardingBtn() {
     navigate("/onboarding/code");
   }
@@ -36,7 +53,7 @@ export default function index() {
       <LubeeCodeIcon />
       <MyCodeContainer>
         <MyCodeText>나의 러비코드</MyCodeText>
-        <BtnWrapper>
+        <BtnWrapper onClick={handleInviteClick}>
           <YellowBox $disabled={false}>
             12345 67890
             <CopyIcon />
@@ -44,7 +61,7 @@ export default function index() {
         </BtnWrapper>
       </MyCodeContainer>
       <BtnBox>
-        <InviteBtn onClick={handleInviteClick}>초대장 보내기</InviteBtn>
+        <InviteBtn onClick={handleShare}>초대장 보내기</InviteBtn>
         <CodeInputBtn onClick={handleOnboardingBtn}>연인의 러비코드 입력하기</CodeInputBtn>
       </BtnBox>
       {openCopyCodeModal && <CopyCodeModal handleCloseBtn={handleCloseBtn} />}

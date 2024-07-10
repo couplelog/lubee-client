@@ -10,7 +10,7 @@ import Home from "home";
 import Today from "home/today";
 import Month from "home/month";
 import Onboarding from "onboarding";
-import OnboardingLayout from "@common/components/layout/OnboardingLayout";
+import OnboardingLayout from "layout/OnboardingLayout";
 import Code from "onboarding/code";
 import Profile from "onboarding/profile";
 import Custom from "onboarding/custom";

@@ -8,7 +8,7 @@ export default function index() {
   const navigate = useNavigate();
 
   function handleOnboardingBtn() {
-    navigate("/onboarding/profile");
+    navigate("/home");
   }
 
   return (

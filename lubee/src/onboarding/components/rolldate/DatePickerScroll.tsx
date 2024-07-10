@@ -33,18 +33,18 @@ interface DatePickerScrollProps {
 const DatePickerScroll: React.FC<DatePickerScrollProps> = ({ onDateChange }) => {
   const [selectedDate, setSelectedDate] = useState({ year: "", month: "", day: "" });
 
-  const getCurrentDate = () => {
+  function getCurrentDate() {
     const today = new Date();
     const year = today.getFullYear().toString();
     const month = (today.getMonth() + 1).toString().padStart(2, "0");
     const day = today.getDate().toString().padStart(2, "0");
     return { year, month, day };
-  };
+  }
 
-  const handleClick = () => {
+  function handleClick() {
     // 강제로 hidden input 클릭 이벤트 발생
     document.getElementById("hiddenDatePicker")?.click();
-  };
+  }
 
   useEffect(() => {
     // Rolldate 초기화

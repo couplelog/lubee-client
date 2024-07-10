@@ -21,9 +21,9 @@ export default function index() {
     navigate("/login");
   }
 
-  const handleDateChange = (date: string) => {
+  function handleDateChange(date: string) {
     setBirthday(date);
-  };
+  }
 
   function handleOnboardingBtn() {
     navigate("/onboarding/anniversary");

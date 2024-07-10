@@ -10,10 +10,8 @@ export default function TitleBox(props: TitleBoxProps) {
 
   return (
     <Wrapper>
-      <Text>
-        <h2>{titleText}</h2>
-        <p>{subtitleText}</p>
-      </Text>
+      <TitleText>{titleText}</TitleText>
+      <SubtitleText>{subtitleText}</SubtitleText>
     </Wrapper>
   );
 }
@@ -21,27 +19,21 @@ export default function TitleBox(props: TitleBoxProps) {
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 8rem;
-  position: absolute;
-  top: 38.1rem;
-`;
-
-const Text = styled.div`
-  display: flex;
-  flex-direction: column;
   gap: 0.391rem;
   align-items: center;
+  position: absolute;
+  top: 38.1rem;
   text-align: center;
+`;
 
-  & > h2 {
-    ${({ theme }) => theme.fonts.Title_3};
+const TitleText = styled.h2`
+  ${({ theme }) => theme.fonts.Title_3};
 
-    color: ${({ theme }) => theme.colors.gray_800};
-  }
+  color: ${({ theme }) => theme.colors.gray_800};
+`;
 
-  & > p {
-    ${({ theme }) => theme.fonts.Body_3};
+const SubtitleText = styled.p`
+  ${({ theme }) => theme.fonts.Body_3};
 
-    color: ${({ theme }) => theme.colors.gray_600};
-  }
+  color: ${({ theme }) => theme.colors.gray_600};
 `;
