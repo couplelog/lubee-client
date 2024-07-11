@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { useState } from "react";
 import { LubeeCodeIc, CopyIc } from "@assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
+import { BtnWrapper } from "@styles/globalStyle";
 import Header from "./components/Header";
 import TitleBox from "./components/TitleBox";
-import NumberBox from "./components/NumberBox";
+import YellowBox from "./components/YellowBox";
 import CopyCodeModal from "./components/CopyCodeModal";
 
 export default function index() {
@@ -24,6 +25,27 @@ export default function index() {
     setOpenCopyCodeModal(false);
   }
 
+  async function handleShare() {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "연인으로부터 러비 초대장이 도착했어요! 링크를 눌러 초대장을 받아주세요.",
+          text: "연인의 러비코드: 1234 5678",
+          url: "https://example.com", // 실제 공유할 URL로 변경
+        });
+        console.log("공유 성공");
+      } catch (error) {
+        console.error("공유 실패:", error);
+      }
+    } else {
+      alert("이 브라우저는 Web Share API를 지원하지 않습니다.");
+    }
+  }
+
+  function handleOnboardingBtn() {
+    navigate("/onboarding/code");
+  }
+
   return (
     <Wrapper>
       <Header handleXBtn={handleXBtn} showXIcon />
@@ -31,16 +53,16 @@ export default function index() {
       <LubeeCodeIcon />
       <MyCodeContainer>
         <MyCodeText>나의 러비코드</MyCodeText>
-        <BtnWrapper>
-          <NumberBox>
+        <BtnWrapper onClick={handleInviteClick}>
+          <YellowBox $disabled={false}>
             12345 67890
             <CopyIcon />
-          </NumberBox>
+          </YellowBox>
         </BtnWrapper>
       </MyCodeContainer>
       <BtnBox>
-        <InviteBtn onClick={handleInviteClick}>초대장 보내기</InviteBtn>
-        <CodeInputBtn>연인의 러비코드 입력하기</CodeInputBtn>
+        <InviteBtn onClick={handleShare}>초대장 보내기</InviteBtn>
+        <CodeInputBtn onClick={handleOnboardingBtn}>연인의 러비코드 입력하기</CodeInputBtn>
       </BtnBox>
       {openCopyCodeModal && <CopyCodeModal handleCloseBtn={handleCloseBtn} />}
     </Wrapper>
@@ -59,16 +81,13 @@ const Wrapper = styled.div`
 const LubeeCodeIcon = styled(LubeeCodeIc)`
   width: 20.5rem;
   height: 12.7rem;
+  margin-top: 6rem;
 `;
 
 const MyCodeText = styled.p`
   color: ${({ theme }) => theme.colors.yellow_600};
   text-align: center;
   ${({ theme }) => theme.fonts.Title_1};
-`;
-
-const BtnWrapper = styled.button`
-  cursor: pointer;
 `;
 
 const MyCodeContainer = styled.div`
