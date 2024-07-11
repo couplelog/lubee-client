@@ -15,7 +15,7 @@ export default function HoneyIconContainer() {
 
 const Container = styled.section`
   display: flex;
-  align-items: flex-start;
+  padding-top: 5.6rem;
 `;
 
 const HoneyIcon = styled(HoneyIc)`

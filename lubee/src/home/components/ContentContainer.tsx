@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Comment from "../month/components/Comment";
+import CommentInputBox from "./CommentInputBox";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
 
@@ -16,10 +16,10 @@ export default function ContentContainer(props: ContentContainerProps) {
 
   return (
     <Container>
-      <CommentsBox>
-        <Comment iconSrc={iconSrc} />
-        <Comment iconSrc={iconSrc} />
-      </CommentsBox>
+      <CommentsContainer>
+        <CommentInputBox iconSrc={iconSrc} />
+        <CommentInputBox iconSrc={iconSrc} />
+      </CommentsContainer>
       <PicBox>
         {displayImages.map((imgSrc, index) =>
           imgSrc === blankImg ? (
@@ -38,12 +38,10 @@ export default function ContentContainer(props: ContentContainerProps) {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  bottom: 0;
-  background-color: ${({ theme }) => theme.colors.white};
+  gap: 1.6rem;s
 `;
 
-const CommentsBox = styled.span`
+const CommentsContainer = styled.span`
   display: flex;
   gap: 1.6rem;
 `;

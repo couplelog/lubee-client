@@ -4,8 +4,9 @@ import Title from "./components/Title";
 import HoneyIconContainer from "./components/HoneyIconContainer";
 import ProfileBox from "./components/ProfileBox";
 import ContentContainer from "../components/ContentContainer";
+import { BtnWrapper } from "@styles/globalStyle";
 import { imagesData } from "@common/core/imagesData";
-import { ProfileIc } from "@assets/index";
+import { ProfileIc, PlusIc } from "@assets/index";
 
 export default function index() {
   return (
@@ -13,10 +14,15 @@ export default function index() {
       <Container>
         <DateBox />
         <Title />
-        <HoneyIconContainer />
-        <ProfileBox />
+        <SubContainer>
+          <HoneyIconContainer />
+          <ProfileBox />
+        </SubContainer>
       </Container>
       <ContentContainer iconSrc={ProfileIc} imagesData={imagesData} />
+      <BtnWrapper>
+        <PlusIcon />
+      </BtnWrapper>
     </Wrapper>
   );
 }
@@ -27,17 +33,36 @@ const Wrapper = styled.section`
   align-items: center;
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  gap: 1.6rem;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
 const Container = styled.section`
-  width: auto;
-  height: 18.4rem;
-  display: inline-flex;
+  display: flex;
   padding: 2rem;
   flex-direction: column;
   align-items: flex-start;
   gap: -0.8rem;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const SubContainer = styled.section`
+  display: flex;
+  gap: 4rem;
+`;
+
+const PlusIcon = styled(PlusIc)`
+  position: absolute;
+  right: 1.8rem;
+  bottom: 2rem;
+  width: 6.4rem;
+  height: 6.4rem;
 `;
