@@ -1,10 +1,17 @@
-import { createGlobalStyle, css } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
 import reset from "styled-reset";
 
 export const flexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const BtnWrapper = styled.button`
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -53,6 +60,13 @@ html {
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-style: normal;
     font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Medium.ttf');
+    font-style: normal;
+    font-weight: 400;
   }
 }
 `;

@@ -1,4 +1,3 @@
-//import { Suspense } from "react";
 import { Router } from "router";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
