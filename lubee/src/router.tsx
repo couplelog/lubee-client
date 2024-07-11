@@ -54,7 +54,6 @@ export const Router = createBrowserRouter([
       { path: "/upload", element: <Upload /> },
       { path: "/congrats", element: <Congrats /> },
       { path: "/mypage", element: <Mypage /> },
-      { path: "/onboarding/anniversary", element: <Anniversary /> },
       {
         path: "/fullpic",
         element: <Fullpic />,
