@@ -45,6 +45,7 @@ import ProgressBar2Ic from "./icon/progressBar2Ic.svg?react";
 import ProgressBar3Ic from "./icon/progressBar3Ic.svg?react";
 import CongratIc from "./icon/congratIc.svg?react";
 import CompleteIc from "./icon/completeIc.svg?react";
+import OtherProfileIc from "./icon/otherProfileIc.svg?react";
 
 export {
   LogoIc,
@@ -94,4 +95,5 @@ export {
   ProgressBar3Ic,
   CongratIc,
   CompleteIc,
+  OtherProfileIc,
 };

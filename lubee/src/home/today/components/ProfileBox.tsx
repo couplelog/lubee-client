@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { OtherProfileIc } from "@assets/index";
 import ProfileIcons from "@common/components/ProfileIcons";
 
 export default function HomePage() {
@@ -13,7 +14,16 @@ export default function HomePage() {
     }
   }, []);
 
-  return <Wrapper>{selectedProfile !== null && <ProfileIcon as={ProfileIcons[selectedProfile].default} />}</Wrapper>;
+  return (
+    <Wrapper>
+      {selectedProfile !== null && (
+        <ProfileContainer>
+          <ProfileIcon as={ProfileIcons[selectedProfile].default} />
+          <OtherProfileIcon />
+        </ProfileContainer>
+      )}
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.section`
@@ -25,7 +35,22 @@ const Wrapper = styled.section`
   height: 100vh;
 `;
 
+const ProfileContainer = styled.div`
+  position: relative;
+  width: 149px;
+  height: 80px;
+`;
+
 const ProfileIcon = styled.svg`
+  position: absolute;
   width: 8rem;
   height: 8rem;
+`;
+
+const OtherProfileIcon = styled(OtherProfileIc)`
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  z-index: 1;
+  right: 0rem;
 `;
