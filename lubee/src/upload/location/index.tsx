@@ -2,12 +2,43 @@ import styled from "styled-components";
 import { BackIc } from "@assets/index";
 import { SearchIc } from "@assets/index";
 import { locationData } from "@common/core/locationData";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function index() {
+interface LocationProps {
+  setLocation: (location: string) => void;
+  moveToUploadPic: () => void;
+}
+
+export default function index(props: LocationProps) {
+  const { setLocation, moveToUploadPic } = props;
+  const navigate = useNavigate();
+  useEffect(() => {
+    localStorage.getItem("currentPage");
+  }, []);
+
+  function handleSelectLocation(locationName?: string) {
+    if (locationName) {
+      setLocation(locationName);
+      moveToUploadPic();
+    }
+  }
+
+  function moveToHome() {
+    // 헤더에서 전에 어떤 페이지였는지 불러오기
+    const prevPage = localStorage.getItem("currentPage");
+
+    if (prevPage === "today") {
+      navigate("/home/today");
+    } else {
+      navigate("/home/month");
+    }
+  }
+
   return (
     <Container>
       <Header>
-        <BtnWrapper type="button">
+        <BtnWrapper type="button" onClick={moveToHome}>
           <BackIcon />
         </BtnWrapper>
         <Text>위치 설정</Text>
@@ -23,7 +54,7 @@ export default function index() {
           locationData.map((data) => {
             const { name, distance, info } = data;
             return (
-              <LocationBox key={name} type="button">
+              <LocationBox key={name} type="button" onClick={() => handleSelectLocation(name)}>
                 <Name>{name}</Name>
                 <Details>
                   <Distance>{`${distance}m,`}</Distance>

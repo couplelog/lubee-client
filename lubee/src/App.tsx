@@ -4,16 +4,19 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "@styles/globalStyle";
 import theme from "@styles/theme";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={Router} />
-        <GlobalStyle />
-      </ThemeProvider>
+      <RecoilRoot>
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={Router} />
+          <GlobalStyle />
+        </ThemeProvider>
+      </RecoilRoot>
     </QueryClientProvider>
   );
 }

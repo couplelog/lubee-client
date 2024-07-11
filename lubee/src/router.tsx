@@ -20,7 +20,6 @@ import Error from "error";
 import Fullpic from "fullpic";
 import Date from "fullpic/date";
 import One from "fullpic/one";
-import Setlocation from "setlocation";
 
 export const Router = createBrowserRouter([
   {
@@ -63,7 +62,6 @@ export const Router = createBrowserRouter([
           { path: "/fullpic/:date/:index", element: <One /> },
         ],
       },
-      { path: "/set-location", element: <Setlocation /> },
     ],
   },
 ]);
