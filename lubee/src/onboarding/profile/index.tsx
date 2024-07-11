@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Profile1Ic } from "@assets/index";
@@ -15,18 +15,25 @@ export default function index() {
   const location = useLocation();
   const [nickname, setNickname] = useState("");
   const [selectedProfile, setSelectedProfile] = useState(location.state?.selectedProfile);
+  const isOnboardingBtnDisabled = nickname === "";
+  const yellowBoxRef = useRef<{ focus: () => void }>(null);
 
   useEffect(() => {
-    // location.state가 없을 경우 기본 프로필로 Profile1Ic를 설정
+    // 페이지가 로드되고 나서 입력 필드에 포커스를 설정
+    if (yellowBoxRef.current) {
+      yellowBoxRef.current.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    // location.state가 없을 경우 기본 프로필로 Profile1Ic로
     if (selectedProfile === undefined) {
       setSelectedProfile(null);
     }
   }, [location.state]);
 
-  const isOnboardingBtnDisabled = nickname === "";
-
   function handleBackBtn() {
-    navigate("/onboarding");
+    navigate("/onboarding/custom");
   }
 
   function handleXBtn() {
@@ -44,9 +51,9 @@ export default function index() {
   return (
     <Wrapper>
       <Header handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
-      <ProgressBar step={1} />
+      <ProgressBar step={2} />
       <ContentsContainer>
-        <TitleBox titleText="프로필과 닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
+        <TitleBox titleText="닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
         <BtnWrapper onClick={handleProfileBtn}>
           {selectedProfile !== null && Profiles[selectedProfile] ? (
             <ProfileIcon as={Profiles[selectedProfile].default} />
@@ -55,7 +62,13 @@ export default function index() {
           )}
         </BtnWrapper>
 
-        <YellowBox inputValue={nickname} setInputValue={setNickname} $disabled={true} placeholder="닉네임 입력" />
+        <YellowBox
+          inputValue={nickname}
+          setInputValue={setNickname}
+          $disabled={true}
+          placeholder="닉네임 입력"
+          ref={yellowBoxRef}
+        />
       </ContentsContainer>
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="다음" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>

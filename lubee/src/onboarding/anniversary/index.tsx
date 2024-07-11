@@ -31,7 +31,7 @@ export default function index() {
   return (
     <Wrapper>
       <Header handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
-      <ProgressBar step={3} />
+      <ProgressBar step={4} />
       <TitleBox titleText="연인과 처음 만난 날을 입력해주세요" subtitleText="나와 연인의 기념일을 알 수 있어요" />
       <DatePickerScroll onDateChange={handleDateChange} />
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="완료" $disabled={isOnboardingBtnDisabled} />

@@ -17,7 +17,7 @@ export default function index() {
   }
 
   function handleOnboardingBtn() {
-    navigate("/onboarding/profile");
+    navigate("/onboarding/custom");
   }
 
   return (

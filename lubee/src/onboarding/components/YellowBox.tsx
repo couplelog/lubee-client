@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useEffect, useState, forwardRef, useImperativeHandle, useRef } from "react";
 import styled from "styled-components";
 import { flexCenter } from "@styles/globalStyle";
 
@@ -10,11 +10,12 @@ interface YellowBoxProps {
   placeholder?: string;
 }
 
-export default function YellowBox(props: YellowBoxProps) {
+const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
   const { children, $disabled, inputValue, setInputValue, placeholder } = props;
   const inputRef = useRef<HTMLInputElement>(null);
-  const [inputwidth, setInputwidth] = useState("auto");
+  const [inputWidth, setInputWidth] = useState("auto");
 
+  // placeholder의 길이에 따라 input의 너비를 설정하는 useEffect
   useEffect(() => {
     if (inputRef.current && placeholder) {
       const canvas = document.createElement("canvas");
@@ -22,10 +23,18 @@ export default function YellowBox(props: YellowBoxProps) {
       if (context) {
         context.font = getComputedStyle(inputRef.current).font;
         const textWidth = context.measureText(placeholder).width;
-        setInputwidth(`${textWidth}px`);
+        setInputWidth(`${textWidth}px`);
       }
     }
   }, [placeholder]);
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    },
+  }));
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -43,14 +52,14 @@ export default function YellowBox(props: YellowBoxProps) {
           onChange={handleChange}
           placeholder={placeholder}
           ref={inputRef}
-          style={{ width: inputwidth }}
+          style={{ width: inputWidth }}
         />
       ) : (
         children
       )}
     </Box>
   );
-}
+});
 
 const Box = styled.div<{ $disabled: boolean }>`
   width: auto;
@@ -85,3 +94,5 @@ const Box = styled.div<{ $disabled: boolean }>`
     }
   }
 `;
+
+export default YellowBox;
