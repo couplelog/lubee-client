@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function LocationTag() {
+export default function DateBox() {
   function getCurrentDate() {
     const today = new Date();
     const year = today.getFullYear().toString();

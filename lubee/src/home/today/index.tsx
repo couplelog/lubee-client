@@ -1,16 +1,32 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import DateBox from "./components/DateBox";
 import Title from "./components/Title";
+import HoneyIconContainer from "./components/HoneyIconContainer";
 import ProfileBox from "./components/ProfileBox";
+import Comment from "../month/components/Comment";
+import ProfileIcons from "@common/components/ProfileIcons";
 
 export default function index() {
+  const [selectedProfile, setSelectedProfile] = useState<number | null>(null);
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 로컬 스토리지에서 선택된 프로필을 가져옵니다.
+    const savedProfile = localStorage.getItem("selectedProfile");
+    if (savedProfile !== null) {
+      setSelectedProfile(Number(savedProfile));
+    }
+  }, []);
+
   return (
     <Wrapper>
       <Container>
         <DateBox />
         <Title />
+        <HoneyIconContainer />
         <ProfileBox />
       </Container>
+      {selectedProfile !== null && <Comment iconSrc={ProfileIcons[selectedProfile].default}></Comment>}
     </Wrapper>
   );
 }

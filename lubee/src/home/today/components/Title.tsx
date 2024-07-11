@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function LocationTag() {
+export default function Title() {
   return (
     <Container>
       <DateText>

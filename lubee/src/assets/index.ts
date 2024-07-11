@@ -46,6 +46,11 @@ import ProgressBar3Ic from "./icon/progressBar3Ic.svg?react";
 import CongratIc from "./icon/congratIc.svg?react";
 import CompleteIc from "./icon/completeIc.svg?react";
 import OtherProfileIc from "./icon/otherProfileIc.svg?react";
+import HoneyIc from "./icon/honeyIc.svg?react";
+import PlusIc from "./icon/plusIc.svg?react";
+import CheckIc from "./icon/checkIc.svg?react";
+import CheckYellowIc from "./icon/checkYellowIc.svg?react";
+import PencilIc from "./icon/pencilIc.svg?react";
 
 export {
   LogoIc,
@@ -96,4 +101,9 @@ export {
   CongratIc,
   CompleteIc,
   OtherProfileIc,
+  HoneyIc,
+  PlusIc,
+  CheckIc,
+  CheckYellowIc,
+  PencilIc,
 };

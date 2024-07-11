@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { OtherProfileIc } from "@assets/index";
 import ProfileIcons from "@common/components/ProfileIcons";
 
-export default function HomePage() {
+export default function ProfileBox() {
   const [selectedProfile, setSelectedProfile] = useState<number | null>(null);
 
   useEffect(() => {
