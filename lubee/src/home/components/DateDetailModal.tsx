@@ -30,8 +30,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={iconSrc} />
           </CommentsBox>
           <PicBox>
-            {displayPics.map((imgSrc, index) =>
-              imgSrc === blankImg ? <BlankImgBtn index={index} /> : <Image key={index} src={imgSrc} />,
+            {displayPics.map((imgSrc, date) =>
+              imgSrc === blankImg ? <BlankImgBtn date={date} /> : <Image key={date} src={imgSrc} />,
             )}
           </PicBox>
         </Contents>

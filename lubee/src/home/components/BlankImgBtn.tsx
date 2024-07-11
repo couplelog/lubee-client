@@ -4,18 +4,20 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface BlankImgBtnProps {
-  index: number;
+  date: number;
 }
 
 export default function BlankImgBtn(props: BlankImgBtnProps) {
-  const { index } = props;
-  const navigate = useNavigate();
+  const { date } = props;
   const [isFile, setIsFile] = useState<File[] | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
+  //const setUploadLocation = useSetRecoilState(uploadLocationState);
+  const navigate = useNavigate();
   /* 사진 업로드 */
   function saveFile(imageFile: File[]) {
     setIsFile(imageFile);
+    // setUploadLocation(true);
+    navigate("/upload");
   }
   function handleAddPicBtn() {
     fileInputRef.current && fileInputRef.current.click();
@@ -28,7 +30,7 @@ export default function BlankImgBtn(props: BlankImgBtnProps) {
   }
 
   return (
-    <Container type="button" key={index} onClick={handleAddPicBtn}>
+    <Container type="button" key={date} onClick={handleAddPicBtn}>
       <img src={blankImg} />
       <FileInput
         type="file"

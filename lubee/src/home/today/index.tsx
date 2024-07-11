@@ -10,8 +10,8 @@ export default function index() {
 
   return (
     <PicBox>
-      {displayPics.map((imgSrc, index) =>
-        imgSrc === blankImg ? <BlankImgBtn index={index} /> : <Image key={index} src={imgSrc} />,
+      {displayPics.map((imgSrc, date) =>
+        imgSrc === blankImg ? <BlankImgBtn date={date} /> : <Image key={date} src={imgSrc} />,
       )}
     </PicBox>
   );
@@ -26,7 +26,10 @@ const PicBox = styled.section`
 `;
 
 const Image = styled.img`
+  width: 16.7rem;
+  height: 16.7rem;
   padding: 0;
   border: none;
+  border-radius: 20px;
   background: none;
 `;
