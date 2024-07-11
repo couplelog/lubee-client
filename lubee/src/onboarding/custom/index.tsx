@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
-import Profiles from "../components/ProfileIcon";
+import ProfileIcons from "@common/components/ProfileIcons";
 
 export default function index() {
   const navigate = useNavigate();
@@ -14,13 +14,14 @@ export default function index() {
 
   function handleProfileClick(profileIndex: any) {
     setSelectedProfile(profileIndex);
+    localStorage.setItem("selectedProfile", profileIndex.toString()); // 로컬 스토리지에 저장
   }
 
   return (
     <Wrapper>
       <Header handleBackBtn={handleBackBtn} showBackIcon showTitle />
       <ProfileGrid>
-        {Profiles.map((profile, index) => (
+        {ProfileIcons.map((profile, index) => (
           <BtnWrapper key={index} onClick={() => handleProfileClick(index)}>
             <ProfileIcon as={selectedProfile === index ? profile.selected : profile.default} />
           </BtnWrapper>

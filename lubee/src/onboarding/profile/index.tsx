@@ -8,7 +8,7 @@ import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
-import Profiles from "../components/ProfileIcon";
+import Profiles from "../../@common/components/ProfileIcons";
 
 export default function index() {
   const navigate = useNavigate();

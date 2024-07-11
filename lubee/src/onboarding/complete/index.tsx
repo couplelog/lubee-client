@@ -8,7 +8,7 @@ export default function index() {
   const navigate = useNavigate();
 
   function handleOnboardingBtn() {
-    navigate("/home");
+    navigate("/home/today");
   }
 
   return (
