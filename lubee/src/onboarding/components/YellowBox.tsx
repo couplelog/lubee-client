@@ -70,16 +70,15 @@ const Box = styled.div<{ $disabled: boolean }>`
     cursor: not-allowed;
   `}
 
-  input {
+  & > input {
     height: 2.4rem;
     padding: 0;
     border: none;
     background: transparent;
     color: ${({ theme }) => theme.colors.yellow_600}; /* 입력된 텍스트 색상 */
-    ${({ theme }) => theme.fonts.Body_4};
-
     text-align: center;
     outline: none;
+    ${({ theme }) => theme.fonts.Body_4};
 
     &::placeholder {
       color: ${({ theme }) => theme.colors.yellow_300}; /* placeholder 텍스트 색상 */
