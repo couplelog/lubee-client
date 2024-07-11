@@ -4,7 +4,6 @@ import { forwardRef, useState } from "react";
 import Comment from "./Comment";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
-import JSZip from "jszip";
 
 interface DateDetailModalProps {
   date: string;
