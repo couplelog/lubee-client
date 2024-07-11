@@ -150,6 +150,14 @@ const fonts = {
     font-weight: 500;
     line-height: 2.2rem;
   `,
+
+  Ginto_20: css`
+    font-family: "ABC Ginto Nord Condensed Unlicensed Trial", sans-serif;
+    font-style: normal;
+    font-size: 2.8rem;
+    font-weight: 500;
+    line-height: 3.64rem;
+  `,
 };
 
 const effects = {

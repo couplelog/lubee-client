@@ -2,19 +2,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
-import Profiles from "../components/Profiles";
+import Profiles from "../components/ProfileIcon";
 
 export default function index() {
   const navigate = useNavigate();
   const [selectedProfile, setSelectedProfile] = useState(null);
 
   function handleBackBtn() {
-    navigate("/onboarding/profile");
+    navigate("/onboarding/profile", { state: { selectedProfile } });
   }
 
   function handleProfileClick(profileIndex: any) {
     setSelectedProfile(profileIndex);
-    navigate("/onboarding/profile", { state: { selectedProfile: profileIndex } });
   }
 
   return (

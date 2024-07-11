@@ -8,7 +8,7 @@ import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
-import Profiles from "../components/Profiles";
+import Profiles from "../components/ProfileIcon";
 
 export default function index() {
   const navigate = useNavigate();
@@ -41,7 +41,11 @@ export default function index() {
       <ContentsContainer>
         <TitleBox titleText="프로필과 닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
         <BtnWrapper onClick={handleProfileBtn}>
-          <ProfileIcon as={selectedProfile ? Profiles[selectedProfile].default : undefined} />
+          {selectedProfile !== undefined ? (
+            <ProfileIcon as={Profiles[selectedProfile].default} />
+          ) : (
+            <ProfileIcon as={Profile1Ic} />
+          )}
         </BtnWrapper>
         <YellowBox inputValue={nickname} setInputValue={setNickname} $disabled={true} placeholder="닉네임 입력" />
       </ContentsContainer>
@@ -66,7 +70,7 @@ const ContentsContainer = styled.section`
   align-items: center;
 `;
 
-const ProfileIcon = styled(Profile1Ic)`
+const ProfileIcon = styled.svg`
   width: 16rem;
   height: 16rem;
 `;
