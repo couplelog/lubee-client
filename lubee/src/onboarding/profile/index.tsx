@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Profile1Ic } from "@assets/index";
@@ -14,9 +14,16 @@ export default function index() {
   const navigate = useNavigate();
   const location = useLocation();
   const [nickname, setNickname] = useState("");
+  const [selectedProfile, setSelectedProfile] = useState(location.state?.selectedProfile);
+
+  useEffect(() => {
+    // location.state가 없을 경우 기본 프로필로 Profile1Ic를 설정
+    if (selectedProfile === undefined) {
+      setSelectedProfile(null);
+    }
+  }, [location.state]);
 
   const isOnboardingBtnDisabled = nickname === "";
-  const selectedProfile = location.state?.selectedProfile;
 
   function handleBackBtn() {
     navigate("/onboarding");
@@ -41,12 +48,13 @@ export default function index() {
       <ContentsContainer>
         <TitleBox titleText="프로필과 닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
         <BtnWrapper onClick={handleProfileBtn}>
-          {selectedProfile !== undefined ? (
+          {selectedProfile !== null && Profiles[selectedProfile] ? (
             <ProfileIcon as={Profiles[selectedProfile].default} />
           ) : (
             <ProfileIcon as={Profile1Ic} />
           )}
         </BtnWrapper>
+
         <YellowBox inputValue={nickname} setInputValue={setNickname} $disabled={true} placeholder="닉네임 입력" />
       </ContentsContainer>
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="다음" $disabled={isOnboardingBtnDisabled} />
