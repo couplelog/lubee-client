@@ -127,15 +127,25 @@ const fonts = {
     letter-spacing: -0.1px;
   `,
 
-  Ginto_16: css`
+  Day: css`
     font-family: Pretendard;
+    font-style: normal;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2rem; /* 100% */
+  `,
+
+  Ginto_16: css`
+    font-family: "ABC Ginto Nord Condensed Unlicensed Trial", sans-serif;
+    font-style: normal;
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 2.24rem;
   `,
 
   Ginto_18: css`
-    font-family: Pretendard;
+    font-family: "ABC Ginto Nord Condensed Unlicensed Trial", sans-serif;
+    font-style: normal;
     font-size: 1.8rem;
     font-weight: 500;
     line-height: 2.2rem;

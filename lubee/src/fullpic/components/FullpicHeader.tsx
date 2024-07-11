@@ -1,10 +1,10 @@
 import { BackIc, TrashIc } from "@assets/index";
 import styled from "styled-components";
 
-interface HeaderProps {
+interface FullpicHeaderProps {
   handleTrashBtn: (open: boolean) => void;
 }
-export default function Header(props: HeaderProps) {
+export default function FullpicHeader(props: FullpicHeaderProps) {
   const { handleTrashBtn } = props;
 
   return (

@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Interceptor from "interceptor";
-import Loading from "loading";
 import Splash from "splash";
 import Login from "login";
 import Congrats from "congrats";
@@ -17,12 +16,16 @@ import Custom from "onboarding/custom";
 import Birth from "onboarding/birth";
 import Anniversary from "onboarding/anniversary";
 import Complete from "onboarding/complete";
+import Error from "error";
+import Fullpic from "fullpic";
+import Date from "fullpic/date";
+import One from "fullpic/one";
 
 export const Router = createBrowserRouter([
   {
     path: "/",
     element: <Interceptor />,
-    errorElement: <Loading />,
+    errorElement: <Error />,
     children: [
       { index: true, element: <Splash /> },
       { path: "/splash", element: <Splash /> },
@@ -51,7 +54,14 @@ export const Router = createBrowserRouter([
       { path: "/upload", element: <Upload /> },
       { path: "/congrats", element: <Congrats /> },
       { path: "/mypage", element: <Mypage /> },
-      { path: "/onboarding/anniversary", element: <Anniversary /> },
+      {
+        path: "/fullpic",
+        element: <Fullpic />,
+        children: [
+          { path: "/fullpic/:date", element: <Date /> },
+          { path: "/fullpic/:date/:index", element: <One /> },
+        ],
+      },
     ],
   },
 ]);

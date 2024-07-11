@@ -5,22 +5,22 @@ import { MintHeartSmallIcon } from "@common/components/SmallEmojiIcons";
 import { smallEmojisData } from "@common/core/smallEmojisData";
 import { EmojisDataTypes } from "@common/types/EmojisDataTypes";
 import fullPic from "@assets/image/fullPic.png";
-import Header from "./components/Header";
-import DeletePicModal from "fullpic/components/DeletePicModal";
 import EmojiDetailModal from "fullpic/components/EmojiDetailModal";
-import TodayPic from "fullpic/components/TodayPicContainer";
+import OneContainer from "./components/OneContainer";
+import DeletePicModal from "fullpic/components/DeletePicModal";
+import FullpicHeader from "fullpic/components/FullpicHeader";
 
-export default function TodayPicPage() {
-  const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
+export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
-  const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
-
-  const selectedEmojiData = smallEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
-  const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
 
   function handleTrashBtn(open: boolean) {
     setOpenDeletePicModal(open);
   }
+  const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
+  const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
+
+  const selectedEmojiData = smallEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
+  const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -37,8 +37,8 @@ export default function TodayPicPage() {
 
   return (
     <Wrapper>
-      <Header handleTrashBtn={handleTrashBtn} />
-      <TodayPic name={"맹꽁이"} picSrc={fullPic} />
+      <FullpicHeader handleTrashBtn={handleTrashBtn} />
+      <OneContainer name={"맹꽁이"} picSrc={fullPic} />
       <EmojiTag
         type="button"
         onClick={() => {

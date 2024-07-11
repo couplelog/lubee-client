@@ -1,4 +1,4 @@
-import { MintHeartIc, ProfileIc, ShortBorderIc, YellowHeartIc } from "@assets/index";
+import { MintHeartIc, ProfileIc, ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import { bigEmojisData } from "@common/core/bigEmojisData";
@@ -110,11 +110,6 @@ const Name = styled.div`
   ${({ theme }) => theme.fonts.Body_2};
 
   color: ${({ theme }) => theme.colors.gray_800};
-`;
-
-const GfEmoji = styled(YellowHeartIc)`
-  width: 3.2rem;
-  height: 3.2rem;
 `;
 
 const BfEmoji = styled(MintHeartIc)`

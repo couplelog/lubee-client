@@ -53,6 +53,7 @@ declare module "styled-components" {
 
       Ginto_16: SerializedStyles;
       Ginto_18: SerializedStyles;
+      Day: SerializedStyles;
     };
   }
 }

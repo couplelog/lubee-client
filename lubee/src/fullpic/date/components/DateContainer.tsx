@@ -7,17 +7,21 @@ import { EmojisDataTypes } from "@common/types/EmojisDataTypes";
 import { MintHeartSmallIcon } from "@common/components/SmallEmojiIcons";
 import FullPicContainer from "@common/components/FullPicContainer";
 
-interface MonthPicContainerProps {
+interface DateContainerProps {
   setOpenEmojiDetail: (open: boolean) => void;
   selectedEmojiText: string;
   setSelectedEmojiText: (text: string) => void;
 }
 
-export default function MonthPicContainer(props: MonthPicContainerProps) {
+export default function DateContainer(props: DateContainerProps) {
   const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText } = props;
 
   const selectedEmojiData = smallEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
   const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
+
+  // date 가져오기
+  // const { date } = useParams<{ date: string }>();
+  // const filteredData = fullPicData.filter((data) => data.date === date);
 
   return (
     <Wrapper>

@@ -1,12 +1,5 @@
-import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 
 export default function index() {
-  return <Container></Container>;
+  return <Outlet />;
 }
-const Container = styled.section`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: 100vh;
-`;
