@@ -43,8 +43,15 @@ import ProfileStroke6Ic from "./icon/profileStroke6Ic.svg?react";
 import ProgressBar1Ic from "./icon/progressBar1Ic.svg?react";
 import ProgressBar2Ic from "./icon/progressBar2Ic.svg?react";
 import ProgressBar3Ic from "./icon/progressBar3Ic.svg?react";
+import ProgressBar4Ic from "./icon/progressBar4Ic.svg?react";
 import CongratIc from "./icon/congratIc.svg?react";
 import CompleteIc from "./icon/completeIc.svg?react";
+import OtherProfileIc from "./icon/otherProfileIc.svg?react";
+import HoneyIc from "./icon/honeyIc.svg?react";
+import PlusIc from "./icon/plusIc.svg?react";
+import CheckIc from "./icon/checkIc.svg?react";
+import CheckYellowIc from "./icon/checkYellowIc.svg?react";
+import PencilIc from "./icon/pencilIc.svg?react";
 import MintProfile1Ic from "./icon/mintProfile1Ic.svg?react";
 import MintProfile2Ic from "./icon/mintProfile2Ic.svg?react";
 import MintProfile3Ic from "./icon/mintProfile3Ic.svg?react";
@@ -98,8 +105,15 @@ export {
   ProgressBar1Ic,
   ProgressBar2Ic,
   ProgressBar3Ic,
+  ProgressBar4Ic,
   CongratIc,
   CompleteIc,
+  OtherProfileIc,
+  HoneyIc,
+  PlusIc,
+  CheckIc,
+  CheckYellowIc,
+  PencilIc,
   MintProfile1Ic,
   MintProfile2Ic,
   MintProfile3Ic,

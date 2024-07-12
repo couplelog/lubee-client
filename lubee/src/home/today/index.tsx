@@ -1,35 +1,68 @@
 import styled from "styled-components";
+import DateBox from "./components/DateBox";
+import Title from "./components/Title";
+import HoneyIconContainer from "./components/HoneyIconContainer";
+import ProfileBox from "./components/ProfileBox";
+import ContentContainer from "./components/ContentContainer";
+import { BtnWrapper } from "@styles/btnStyle";
 import { imagesData } from "@common/core/imagesData";
-import blankImg from "@assets/image/blankImg.png";
-import BlankImgBtn from "home/components/BlankImgBtn";
+import { PlusIc } from "@assets/index";
 
 export default function index() {
-  /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
-  const displayPics =
-    imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
-
   return (
-    <PicBox>
-      {displayPics.map((imgSrc, date) =>
-        imgSrc === blankImg ? <BlankImgBtn date={date} /> : <Image key={date} src={imgSrc} />,
-      )}
-    </PicBox>
+    <Wrapper>
+      <Container>
+        <DateBox />
+        <Title day={387} />
+        <SubContainer>
+          <HoneyIconContainer />
+          <ProfileBox />
+        </SubContainer>
+      </Container>
+      <ContentContainer imagesData={imagesData} />
+      <BtnWrapper type="button">
+        <PlusIcon />
+      </BtnWrapper>
+    </Wrapper>
   );
 }
 
-const PicBox = styled.section`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
   gap: 1.6rem;
-  overflow: scroll;
-  scrollbar-width: none;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
-const Image = styled.img`
-  width: 16.7rem;
-  height: 16.7rem;
-  padding: 0;
-  border: none;
+const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
   border-radius: 20px;
-  background: none;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const SubContainer = styled.section`
+  display: flex;
+  gap: 4rem;
+  margin-top: -0.8rem;
+`;
+
+const PlusIcon = styled(PlusIc)`
+  position: fixed;
+  right: 1.8rem;
+  bottom: 7.5rem;
+  width: 6.4rem;
+  height: 6.4rem;
 `;

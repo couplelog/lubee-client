@@ -1,23 +1,27 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import TitleBox from "../components/TitleBox";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 
-export default function index() {
-  const navigate = useNavigate();
+interface CodeProps {
+  moveToOnboardingConnect: () => void;
+  moveToOnboardingCustom: () => void;
+}
+
+export default function index(props: CodeProps) {
+  const { moveToOnboardingConnect, moveToOnboardingCustom } = props;
   const [code, setCode] = useState("");
 
   const isOnboardingBtnDisabled = code === "";
 
   function handleBackBtn() {
-    navigate("/onboarding");
+    moveToOnboardingConnect();
   }
 
   function handleOnboardingBtn() {
-    navigate("/onboarding/profile");
+    moveToOnboardingCustom();
   }
 
   return (

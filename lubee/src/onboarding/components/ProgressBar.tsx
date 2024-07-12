@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ProgressBar1Ic, ProgressBar2Ic, ProgressBar3Ic } from "@assets/index";
+import { ProgressBar1Ic, ProgressBar2Ic, ProgressBar3Ic, ProgressBar4Ic } from "@assets/index";
 
 interface ProgressBarProps {
   step: number;
@@ -14,6 +14,8 @@ export default function ProgressBar({ step }: ProgressBarProps) {
         return <ProgressBar2Icon />;
       case 3:
         return <ProgressBar3Icon />;
+      case 4:
+        return <ProgressBar4Icon />;
       default:
         return null;
     }
@@ -38,6 +40,11 @@ const ProgressBar2Icon = styled(ProgressBar2Ic)`
 `;
 
 const ProgressBar3Icon = styled(ProgressBar3Ic)`
+  width: 5.9rem;
+  height: 1.9rem;
+`;
+
+const ProgressBar4Icon = styled(ProgressBar4Ic)`
   width: 5.9rem;
   height: 1.9rem;
 `;
