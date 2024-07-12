@@ -7,26 +7,36 @@ import TitleBox from "../components/TitleBox";
 import ProfileIcons from "@common/components/ProfileIcons";
 import OnboardingBtn from "../components/OnboardingBtn";
 
-export default function index() {
+interface CustomProps {
+  moveToOnboardingCode: () => void;
+  moveToOnboardingProfile: () => void;
+}
+
+export default function index(props: CustomProps) {
+  const { moveToOnboardingCode, moveToOnboardingProfile } = props;
   const navigate = useNavigate();
   const [selectedProfile, setSelectedProfile] = useState(null);
   const isOnboardingBtnDisabled = selectedProfile === null;
 
   function handleBackBtn() {
-    navigate("/onboarding/code");
+    moveToOnboardingCode();
   }
 
   function handleXBtn() {
-    navigate("/onboarding/login");
+    navigate("/login");
   }
 
   function handleProfileClick(profileIndex: any) {
     setSelectedProfile(profileIndex);
-    localStorage.setItem("selectedProfile", profileIndex.toString()); // 로컬 스토리지에 저장
   }
 
   function handleOnboardingBtn() {
-    navigate("/onboarding/profile", { state: { selectedProfile } });
+    moveToOnboardingProfile();
+    {
+      state: {
+        selectedProfile;
+      }
+    }
   }
 
   return (

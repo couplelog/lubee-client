@@ -7,14 +7,20 @@ import TitleBox from "../components/TitleBox";
 import DatePickerScroll from "../components/rolldate/DatePickerScroll";
 import OnboardingBtn from "../components/OnboardingBtn";
 
-export default function index() {
+interface AnnivProps {
+  moveToOnboardingBirth: () => void;
+  moveToOnboardingComplete: () => void;
+}
+
+export default function index(props: AnnivProps) {
+  const { moveToOnboardingBirth, moveToOnboardingComplete } = props;
   const navigate = useNavigate();
   const [anniv, setAnniv] = useState("");
 
   const isOnboardingBtnDisabled = anniv === "";
 
   function handleBackBtn() {
-    navigate("/onboarding/birth");
+    moveToOnboardingBirth();
   }
 
   function handleXBtn() {
@@ -25,7 +31,7 @@ export default function index() {
     setAnniv(date);
   }
   function handleOnboardingBtn() {
-    navigate("/onboarding/complete");
+    moveToOnboardingComplete();
   }
 
   return (

@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { styled, css } from "styled-components";
 
 /*로그인 페이지, 온보딩 페이지 버튼 스타일*/
 export const btnOnboardingStyle = css`
@@ -8,4 +8,11 @@ export const btnOnboardingStyle = css`
   border-radius: 10px;
 
   ${({ theme }) => theme.fonts.Title_1};
+`;
+
+export const BtnWrapper = styled.button`
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 `;

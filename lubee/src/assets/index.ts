@@ -43,6 +43,7 @@ import ProfileStroke6Ic from "./icon/profileStroke6Ic.svg?react";
 import ProgressBar1Ic from "./icon/progressBar1Ic.svg?react";
 import ProgressBar2Ic from "./icon/progressBar2Ic.svg?react";
 import ProgressBar3Ic from "./icon/progressBar3Ic.svg?react";
+import ProgressBar4Ic from "./icon/progressBar4Ic.svg?react";
 import CongratIc from "./icon/congratIc.svg?react";
 import CompleteIc from "./icon/completeIc.svg?react";
 import OtherProfileIc from "./icon/otherProfileIc.svg?react";
@@ -98,6 +99,7 @@ export {
   ProgressBar1Ic,
   ProgressBar2Ic,
   ProgressBar3Ic,
+  ProgressBar4Ic,
   CongratIc,
   CompleteIc,
   OtherProfileIc,

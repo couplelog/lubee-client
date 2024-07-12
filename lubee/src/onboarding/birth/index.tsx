@@ -7,14 +7,20 @@ import TitleBox from "../components/TitleBox";
 import DatePickerScroll from "../components/rolldate/DatePickerScroll";
 import OnboardingBtn from "../components/OnboardingBtn";
 
-export default function index() {
+interface BirthProps {
+  moveToOnboardingProfile: () => void;
+  moveToOnboardingAnniv: () => void;
+}
+
+export default function index(props: BirthProps) {
+  const { moveToOnboardingProfile, moveToOnboardingAnniv } = props;
   const navigate = useNavigate();
   const [birthday, setBirthday] = useState("");
 
   const isOnboardingBtnDisabled = birthday === "";
 
   function handleBackBtn() {
-    navigate("/onboarding/profile");
+    moveToOnboardingProfile();
   }
 
   function handleXBtn() {
@@ -26,7 +32,7 @@ export default function index() {
   }
 
   function handleOnboardingBtn() {
-    navigate("/onboarding/anniversary");
+    moveToOnboardingAnniv();
   }
 
   return (

@@ -9,13 +9,6 @@ import Home from "home";
 import Today from "home/today";
 import Month from "home/month";
 import Onboarding from "onboarding";
-import OnboardingLayout from "layout/OnboardingLayout";
-import Code from "onboarding/code";
-import Profile from "onboarding/profile";
-import Custom from "onboarding/custom";
-import Birth from "onboarding/birth";
-import Anniversary from "onboarding/anniversary";
-import Complete from "onboarding/complete";
 import Error from "error";
 import Fullpic from "fullpic";
 import Date from "fullpic/date";
@@ -30,19 +23,7 @@ export const Router = createBrowserRouter([
       { index: true, element: <Splash /> },
       { path: "/splash", element: <Splash /> },
       { path: "/login", element: <Login /> },
-      {
-        path: "/onboarding",
-        element: <OnboardingLayout />,
-        children: [
-          { path: "/onboarding", element: <Onboarding /> },
-          { path: "/onboarding/code", element: <Code /> },
-          { path: "/onboarding/profile", element: <Profile /> },
-          { path: "/onboarding/custom", element: <Custom /> },
-          { path: "/onboarding/birth", element: <Birth /> },
-          { path: "/onboarding/anniversary", element: <Anniversary /> },
-          { path: "/onboarding/complete", element: <Complete /> },
-        ],
-      },
+      { path: "/onboarding", element: <Onboarding /> },
       {
         path: "/home",
         element: <Home />,

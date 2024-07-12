@@ -13,7 +13,7 @@ interface YellowBoxProps {
 const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
   const { children, $disabled, inputValue, setInputValue, placeholder } = props;
   const inputRef = useRef<HTMLInputElement>(null);
-  const [inputWidth, setInputWidth] = useState("auto");
+  const [inputwidth, setInputwidth] = useState("auto");
 
   // placeholder의 길이에 따라 input의 너비를 설정하는 useEffect
   useEffect(() => {
@@ -23,7 +23,7 @@ const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
       if (context) {
         context.font = getComputedStyle(inputRef.current).font;
         const textWidth = context.measureText(placeholder).width;
-        setInputWidth(`${textWidth}px`);
+        setInputwidth(`${textWidth}px`);
       }
     }
   }, [placeholder]);
@@ -52,7 +52,7 @@ const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
           onChange={handleChange}
           placeholder={placeholder}
           ref={inputRef}
-          style={{ width: inputWidth }}
+          style={{ width: inputwidth }}
         />
       ) : (
         children

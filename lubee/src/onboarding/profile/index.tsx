@@ -1,20 +1,22 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Profile1Ic } from "@assets/index";
-import { BtnWrapper } from "@styles/globalStyle";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
-import Profiles from "../../@common/components/ProfileIcons";
 
-export default function index() {
+interface ProfileProps {
+  moveToOnboardingCustom: () => void;
+  moveToOnboardingBirth: () => void;
+}
+
+export default function index(props: ProfileProps) {
+  const { moveToOnboardingCustom, moveToOnboardingBirth } = props;
   const navigate = useNavigate();
-  const location = useLocation();
   const [nickname, setNickname] = useState("");
-  const [selectedProfile, setSelectedProfile] = useState(location.state?.selectedProfile);
   const isOnboardingBtnDisabled = nickname === "";
   const yellowBoxRef = useRef<{ focus: () => void }>(null);
 
@@ -25,27 +27,16 @@ export default function index() {
     }
   }, []);
 
-  useEffect(() => {
-    // location.state가 없을 경우 기본 프로필로 Profile1Ic로
-    if (selectedProfile === undefined) {
-      setSelectedProfile(null);
-    }
-  }, [location.state]);
-
   function handleBackBtn() {
-    navigate("/onboarding/custom");
+    moveToOnboardingCustom();
   }
 
   function handleXBtn() {
     navigate("/login");
   }
 
-  function handleProfileBtn() {
-    navigate("/onboarding/custom");
-  }
-
   function handleOnboardingBtn() {
-    navigate("/onboarding/birth");
+    moveToOnboardingBirth();
   }
 
   return (
@@ -54,14 +45,7 @@ export default function index() {
       <ProgressBar step={2} />
       <ContentsContainer>
         <TitleBox titleText="닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
-        <BtnWrapper onClick={handleProfileBtn}>
-          {selectedProfile !== null && Profiles[selectedProfile] ? (
-            <ProfileIcon as={Profiles[selectedProfile].default} />
-          ) : (
-            <ProfileIcon as={Profile1Ic} />
-          )}
-        </BtnWrapper>
-
+        <ProfileIcon />
         <YellowBox
           inputValue={nickname}
           setInputValue={setNickname}
@@ -91,7 +75,7 @@ const ContentsContainer = styled.section`
   align-items: center;
 `;
 
-const ProfileIcon = styled.svg`
+const ProfileIcon = styled(Profile1Ic)`
   width: 16rem;
   height: 16rem;
 `;

@@ -30,8 +30,8 @@ const ProfileIcon = styled(Profile1Ic)`
 
 const OtherProfileIcon = styled(OtherProfileIc)`
   position: absolute;
+  right: 0;
+  z-index: 1;
   width: 8rem;
   height: 8rem;
-  z-index: 1;
-  right: 0rem;
 `;
