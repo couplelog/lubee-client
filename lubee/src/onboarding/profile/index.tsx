@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Profile1Ic } from "@assets/index";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
+import getIconSrc from "@common/utils/getIconSrc";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 
@@ -19,6 +19,7 @@ export default function index(props: ProfileProps) {
   const [nickname, setNickname] = useState("");
   const isOnboardingBtnDisabled = nickname === "";
   const yellowBoxRef = useRef<{ focus: () => void }>(null);
+  const myProfile = getIconSrc("me", "profile1");
 
   useEffect(() => {
     // 페이지가 로드되고 나서 입력 필드에 포커스를 설정
@@ -45,7 +46,7 @@ export default function index(props: ProfileProps) {
       <ProgressBar step={2} />
       <ContentsContainer>
         <TitleBox titleText="닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
-        <ProfileIcon />
+        <ProfileIcon as={myProfile} />
         <YellowBox
           inputValue={nickname}
           setInputValue={setNickname}
@@ -75,7 +76,7 @@ const ContentsContainer = styled.section`
   align-items: center;
 `;
 
-const ProfileIcon = styled(Profile1Ic)`
+const ProfileIcon = styled.svg`
   width: 16rem;
   height: 16rem;
 `;
