@@ -22,6 +22,10 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const myProfile = getIconSrc("me", "profile1");
   const partnerProfile = getIconSrc("partner", "profile2");
 
+  const myComment =
+    "오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.";
+  const partnerComment = "comment";
+
   return (
     <Background>
       <Container ref={ref}>
@@ -31,8 +35,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
         </Header>
         <Contents>
           <CommentsBox>
-            <Comment iconSrc={myProfile} />
-            <Comment iconSrc={partnerProfile} />
+            <Comment iconSrc={myProfile} comment={myComment} />
+            <Comment iconSrc={partnerProfile} comment={partnerComment} />
           </CommentsBox>
           <PicBox>
             {displayPics.map((imgSrc, date) =>

@@ -3,10 +3,11 @@ import { useState } from "react";
 
 interface CommentProps {
   iconSrc: string;
+  comment: string;
 }
 
 export default function Comment(props: CommentProps) {
-  const { iconSrc } = props;
+  const { iconSrc, comment } = props;
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = () => {
@@ -16,9 +17,7 @@ export default function Comment(props: CommentProps) {
   return (
     <Container onClick={toggleExpand}>
       <ProfileIcon as={iconSrc} />
-      <Text $isExpanded={isExpanded}>
-        오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.
-      </Text>
+      <Text $isExpanded={isExpanded}>{comment}</Text>
     </Container>
   );
 }
@@ -35,7 +34,8 @@ const Container = styled.div`
 const Text = styled.p<{ $isExpanded: boolean }>`
   display: -webkit-box;
   overflow: hidden;
-  text-overflow: ellipsis;
+
+  /* text-overflow: ellipsis; */
   -webkit-line-clamp: ${(props) => (props.$isExpanded ? "unset" : "3")};
   -webkit-box-orient: vertical;
   width: 10.9rem;
