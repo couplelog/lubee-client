@@ -1,10 +1,10 @@
 import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
-import { forwardRef, useState } from "react";
-import Comment from "./Comment";
+import { forwardRef } from "react";
+import Comment from "../month/components/Comment";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
-import JSZip from "jszip";
+import BlankImgBtn from "home/components/BlankImgBtn";
 
 interface DateDetailModalProps {
   date: string;
@@ -14,8 +14,7 @@ interface DateDetailModalProps {
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
   const { date, iconSrc, imagesData } = props;
-
-  const displayImages =
+  const displayPics =
     imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
 
   return (
@@ -31,14 +30,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={iconSrc} />
           </CommentsBox>
           <PicBox>
-            {displayImages.map((imgSrc, index) =>
-              imgSrc === blankImg ? (
-                <BlankImgBtn type="button" key={index}>
-                  <img src={imgSrc} />
-                </BlankImgBtn>
-              ) : (
-                <img key={index} src={imgSrc} />
-              ),
+            {displayPics.map((imgSrc, date) =>
+              imgSrc === blankImg ? <BlankImgBtn date={date} /> : <Image key={date} src={imgSrc} />,
             )}
           </PicBox>
         </Contents>
@@ -97,7 +90,7 @@ const PicBox = styled.section`
   scrollbar-width: none;
 `;
 
-const BlankImgBtn = styled.button`
+const Image = styled.img`
   padding: 0;
   border: none;
   background: none;
