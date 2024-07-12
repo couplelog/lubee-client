@@ -19,7 +19,7 @@ export default function index() {
           <ProfileBox />
         </SubContainer>
       </Container>
-      <ContentContainer iconSrc={ProfileIc} imagesData={imagesData} />
+      <ContentContainer imagesData={imagesData} />
       <BtnWrapper type="button">
         <PlusIcon />
       </BtnWrapper>

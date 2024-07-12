@@ -2,15 +2,15 @@ import { ProfileIc } from "@assets/index";
 import styled from "styled-components";
 
 interface CommentInputBoxProps {
-  iconSrc: string;
+  profileIconSrc: string;
 }
 
 export default function CommentInputBox(props: CommentInputBoxProps) {
-  const { iconSrc } = props;
+  const { profileIconSrc } = props;
 
   return (
     <Container>
-      <ProfileIcon />
+      <ProfileIcon as={profileIconSrc} />
       <Text>오늘의 데이트는 어떠셨나요?</Text>
     </Container>
   );

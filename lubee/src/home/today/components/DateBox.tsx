@@ -27,5 +27,6 @@ const Container = styled.button`
 
 const DateText = styled.p`
   ${({ theme }) => theme.fonts.Ginto_16};
+
   color: ${({ theme }) => theme.colors.gray_600};
 `;

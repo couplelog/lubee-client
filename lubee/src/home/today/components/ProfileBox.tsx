@@ -1,12 +1,15 @@
 import styled from "styled-components";
-import { Profile1Ic, OtherProfileIc } from "@assets/index";
+import getIconSrc from "@common/utils/getIconSrc";
 
 export default function ProfileBox() {
+  const myProfile = getIconSrc("me", "profile1");
+  const partnerProfile = getIconSrc("partner", "profile1");
+
   return (
     <Wrapper>
       <ProfileContainer>
-        <ProfileIcon />
-        <OtherProfileIcon />
+        <ProfileIcon as={myProfile} />
+        <OtherProfileIcon as={partnerProfile} />
       </ProfileContainer>
     </Wrapper>
   );
@@ -22,13 +25,13 @@ const ProfileContainer = styled.div`
   height: 80px;
 `;
 
-const ProfileIcon = styled(Profile1Ic)`
+const ProfileIcon = styled.svg`
   position: absolute;
   width: 8rem;
   height: 8rem;
 `;
 
-const OtherProfileIcon = styled(OtherProfileIc)`
+const OtherProfileIcon = styled.svg`
   position: absolute;
   right: 0;
   z-index: 1;

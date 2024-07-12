@@ -3,14 +3,16 @@ import CommentInputBox from "./CommentInputBox";
 import BlankImgBtn from "../../components/BlankImgBtn";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
+import getIconSrc from "@common/utils/getIconSrc";
 
 interface ContentContainerProps {
-  iconSrc: string;
   imagesData: ImagesDataTypes[];
 }
 
 export default function ContentContainer(props: ContentContainerProps) {
-  const { iconSrc, imagesData } = props;
+  const { imagesData } = props;
+  const myProfile = getIconSrc("me", "profile1");
+  const partnerProfile = getIconSrc("partner", "profile1");
 
   const displayPics =
     imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
@@ -18,8 +20,8 @@ export default function ContentContainer(props: ContentContainerProps) {
   return (
     <Container>
       <CommentsContainer>
-        <CommentInputBox iconSrc={iconSrc} />
-        <CommentInputBox iconSrc={iconSrc} />
+        <CommentInputBox profileIconSrc={myProfile} />
+        <CommentInputBox profileIconSrc={partnerProfile} />
       </CommentsContainer>
       <PicBox>
         {displayPics.map((imgSrc, index) =>
