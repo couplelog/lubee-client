@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CommentInputBox from "./CommentInputBox";
+import BlankImgBtn from "../../components/BlankImgBtn";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
 
@@ -11,7 +12,7 @@ interface ContentContainerProps {
 export default function ContentContainer(props: ContentContainerProps) {
   const { iconSrc, imagesData } = props;
 
-  const displayImages =
+  const displayPics =
     imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
 
   return (
@@ -21,14 +22,8 @@ export default function ContentContainer(props: ContentContainerProps) {
         <CommentInputBox iconSrc={iconSrc} />
       </CommentsContainer>
       <PicBox>
-        {displayImages.map((imgSrc, index) =>
-          imgSrc === blankImg ? (
-            <BlankImgBtn type="button" key={index}>
-              <img src={imgSrc} />
-            </BlankImgBtn>
-          ) : (
-            <img key={index} src={imgSrc} />
-          ),
+        {displayPics.map((imgSrc, index) =>
+          imgSrc === blankImg ? <BlankImgBtn key={index} /> : <img key={index} src={imgSrc} />,
         )}
       </PicBox>
     </Container>
@@ -38,7 +33,7 @@ export default function ContentContainer(props: ContentContainerProps) {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;s
+  gap: 1.6rem;
 `;
 
 const CommentsContainer = styled.span`
@@ -53,10 +48,4 @@ const PicBox = styled.section`
   overflow: scroll;
   max-height: 35rem;
   scrollbar-width: none;
-`;
-
-const BlankImgBtn = styled.button`
-  padding: 0;
-  border: none;
-  background: none;
 `;
