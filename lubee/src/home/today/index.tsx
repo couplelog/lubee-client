@@ -47,7 +47,6 @@ const Wrapper = styled.section`
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  gap: -0.8rem;
   align-items: flex-start;
   padding: 2rem;
   border-radius: 20px;
@@ -57,6 +56,7 @@ const Container = styled.section`
 const SubContainer = styled.section`
   display: flex;
   gap: 4rem;
+  margin-top: -0.8rem;
 `;
 
 const PlusIcon = styled(PlusIc)`
