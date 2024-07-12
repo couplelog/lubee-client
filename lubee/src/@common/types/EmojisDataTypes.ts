@@ -4,5 +4,6 @@ export interface EmojisDataTypes {
 }
 
 export interface ImagesDataTypes {
+  date: number;
   imgSrc: string;
 }
