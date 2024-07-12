@@ -7,3 +7,8 @@ export interface ImagesDataTypes {
   date: number;
   imgSrc: string;
 }
+
+export interface ProfileIconDataTypes {
+  account: string;
+  profileIcon: EmojisDataTypes[];
+}

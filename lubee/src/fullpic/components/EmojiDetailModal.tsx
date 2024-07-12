@@ -1,8 +1,9 @@
-import { MintHeartIc, ProfileIc, ShortBorderIc } from "@assets/index";
+import { MintHeartIc, ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import { bigEmojisData } from "@common/core/bigEmojisData";
 import { EmojisDataTypes } from "@common/types/EmojisDataTypes";
+import getIconSrc from "@common/utils/getIconSrc";
 
 interface EmojiDetailModalProps {
   selectedEmojiText: string;
@@ -13,6 +14,10 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
   const selectedEmojiData = bigEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
   const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
 
+  /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
+  const myProfile = getIconSrc("me", "profile1");
+  const partnerProfile = getIconSrc("partner", "profile2");
+
   return (
     <Background>
       <Container ref={ref}>
@@ -22,21 +27,21 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
         </Header>
         <EmojiBox>
           {EmojiIcon && (
-            <Gf>
+            <MyEmoji>
               <Profile>
-                <ProfileIcon />
+                <ProfileIcon as={myProfile} />
                 <Name>불꽃피카츄</Name>
               </Profile>
               <EmojiIcon />
-            </Gf>
+            </MyEmoji>
           )}
-          <Bf>
+          <PartnerEmoji>
             <Profile>
-              <ProfileIcon />
+              <ProfileIcon as={partnerProfile} />
               <Name>맹꽁이</Name>
             </Profile>
             <BfEmoji />
-          </Bf>
+          </PartnerEmoji>
         </EmojiBox>
       </Container>
     </Background>
@@ -80,14 +85,14 @@ const EmojiBox = styled.section`
   width: 100%;
 `;
 
-const Gf = styled.div`
+const MyEmoji = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.4rem 2rem;
 `;
 
-const Bf = styled.div`
+const PartnerEmoji = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,7 +104,7 @@ const Profile = styled.div`
   gap: 1.2rem;
 `;
 
-const ProfileIcon = styled(ProfileIc)`
+const ProfileIcon = styled.svg`
   width: 5rem;
   height: 5rem;
 `;

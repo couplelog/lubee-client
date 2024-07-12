@@ -52,6 +52,12 @@ import PlusIc from "./icon/plusIc.svg?react";
 import CheckIc from "./icon/checkIc.svg?react";
 import CheckYellowIc from "./icon/checkYellowIc.svg?react";
 import PencilIc from "./icon/pencilIc.svg?react";
+import MintProfile1Ic from "./icon/mintProfile1Ic.svg?react";
+import MintProfile2Ic from "./icon/mintProfile2Ic.svg?react";
+import MintProfile3Ic from "./icon/mintProfile3Ic.svg?react";
+import MintProfile4Ic from "./icon/mintProfile4Ic.svg?react";
+import MintProfile5Ic from "./icon/mintProfile5Ic.svg?react";
+import MintProfile6Ic from "./icon/mintProfile6Ic.svg?react";
 
 export {
   LogoIc,
@@ -108,4 +114,10 @@ export {
   CheckIc,
   CheckYellowIc,
   PencilIc,
+  MintProfile1Ic,
+  MintProfile2Ic,
+  MintProfile3Ic,
+  MintProfile4Ic,
+  MintProfile5Ic,
+  MintProfile6Ic,
 };

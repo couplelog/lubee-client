@@ -1,10 +1,11 @@
 import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
-import Comment from "../month/components/Comment";
+import Comment from "./Comment";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
 import BlankImgBtn from "home/components/BlankImgBtn";
+import getIconSrc from "@common/utils/getIconSrc";
 
 interface DateDetailModalProps {
   date: string;
@@ -13,9 +14,17 @@ interface DateDetailModalProps {
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { date, iconSrc, imagesData } = props;
+  const { date, imagesData } = props;
   const displayPics =
     imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
+
+  /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
+  const myProfile = getIconSrc("me", "profile1");
+  const partnerProfile = getIconSrc("partner", "profile2");
+
+  const myComment =
+    "오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.";
+  const partnerComment = "comment";
 
   return (
     <Background>
@@ -26,8 +35,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
         </Header>
         <Contents>
           <CommentsBox>
-            <Comment iconSrc={iconSrc} />
-            <Comment iconSrc={iconSrc} />
+            <Comment iconSrc={myProfile} comment={myComment} />
+            <Comment iconSrc={partnerProfile} comment={partnerComment} />
           </CommentsBox>
           <PicBox>
             {displayPics.map((imgSrc, date) =>
@@ -86,7 +95,7 @@ const PicBox = styled.section`
   grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
   overflow: scroll;
-  max-height: 35rem;
+  max-height: 38rem;
   scrollbar-width: none;
 `;
 
