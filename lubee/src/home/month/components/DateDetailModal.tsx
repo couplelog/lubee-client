@@ -1,7 +1,7 @@
 import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
-import Comment from "../month/components/Comment";
+import Comment from "./Comment";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
 import BlankImgBtn from "home/components/BlankImgBtn";

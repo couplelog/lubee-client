@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { CalInfoTypes } from "../types/CalInfoTypes";
 import { HoneyMonthIc } from "@assets/index";
 import { Day } from "@common/core/calendarData";
-import DateDetailModal from "home/components/DateDetailModal";
+import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
 import { imagesData } from "@common/core/imagesData";
 interface CalContainerProps {
