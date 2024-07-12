@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { BtnWrapper } from "@styles/btnStyle";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
@@ -46,7 +47,7 @@ export default function index(props: CustomProps) {
       <TitleBox titleText="프로필 캐릭터를 지정해주세요" subtitleText="러비에서만 보여지는 프로필이에요" />
       <ProfileGrid>
         {ProfileIcons.map((profile, index) => (
-          <BtnWrapper key={index} onClick={() => handleProfileClick(index)}>
+          <BtnWrapper type="button" key={index} onClick={() => handleProfileClick(index)}>
             <ProfileIcon as={selectedProfile === index ? profile.selected : profile.default} />
           </BtnWrapper>
         ))}
@@ -70,14 +71,6 @@ const ProfileGrid = styled.section`
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem 3.6rem;
   justify-items: center;
-  margin-top: 2.8rem;
-`;
-
-const BtnWrapper = styled.button`
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
 `;
 
 const ProfileIcon = styled.svg`

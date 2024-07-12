@@ -1,6 +1,7 @@
 import { SearchIc, XIc } from "@assets/index";
 import { locationData } from "@common/core/locationData";
 import styled from "styled-components";
+import { BtnWrapper } from "@styles/btnStyle";
 
 interface SelectLocationModalProps {
   setOpenLocationModal: (open: boolean) => void;
@@ -120,13 +121,6 @@ const SearchButton = styled.button`
 const SearchIcon = styled(SearchIc)`
   width: 2.4rem;
   height: 2.4rem;
-`;
-
-const BtnWrapper = styled.button`
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
 `;
 
 const Locations = styled.div`
