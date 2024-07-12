@@ -2,10 +2,9 @@ import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import Comment from "./Comment";
-import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
-import BlankImgBtn from "home/components/BlankImgBtn";
 import getIconSrc from "@common/utils/getIconSrc";
+import HomePicBox from "home/components/HomePicBox";
 
 interface DateDetailModalProps {
   date: string;
@@ -14,9 +13,7 @@ interface DateDetailModalProps {
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { date, imagesData } = props;
-  const displayPics =
-    imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
+  const { date } = props;
 
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getIconSrc("me", "profile1");
@@ -38,11 +35,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={myProfile} comment={myComment} />
             <Comment iconSrc={partnerProfile} comment={partnerComment} />
           </CommentsBox>
-          <PicBox>
-            {displayPics.map((imgSrc, date) =>
-              imgSrc === blankImg ? <BlankImgBtn date={date} /> : <Image key={date} src={imgSrc} />,
-            )}
-          </PicBox>
+          <HomePicBox />
         </Contents>
       </Container>
     </Background>
@@ -88,19 +81,4 @@ const Contents = styled.div`
 const CommentsBox = styled.span`
   display: flex;
   gap: 1.6rem;
-`;
-
-const PicBox = styled.section`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.6rem;
-  overflow: scroll;
-  max-height: 38rem;
-  scrollbar-width: none;
-`;
-
-const Image = styled.img`
-  padding: 0;
-  border: none;
-  background: none;
 `;
