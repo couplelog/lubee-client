@@ -5,7 +5,7 @@ import { BtnWrapper } from "@styles/btnStyle";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
-import ProfileIcons from "@common/components/ProfileIcons";
+import ProfileIcons from "@common/core/ProfileCustomIconsData";
 import OnboardingBtn from "../components/OnboardingBtn";
 
 interface CustomProps {
