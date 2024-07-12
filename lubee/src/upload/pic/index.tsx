@@ -4,7 +4,7 @@ import fullPic from "@assets/image/fullPic.png";
 import FullPicContainer from "@common/components/FullPicContainer";
 import { useState } from "react";
 import SelectLocationModal from "upload/components/SelectLocationModal";
-
+import { BtnWrapper } from "@styles/btnStyle";
 interface UploadProps {
   // picSrc: string;
   location: string;
@@ -57,13 +57,6 @@ const Header = styled.div`
 const BackIcon = styled(BackIc)`
   width: 2.4rem;
   height: 2.4rem;
-`;
-
-const BtnWrapper = styled.button`
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
 `;
 
 const Footer = styled.div`

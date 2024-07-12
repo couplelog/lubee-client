@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Profile1Ic } from "@assets/index";
-import { BtnWrapper } from "@styles/globalStyle";
+import { BtnWrapper } from "@styles/btnStyle";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ExploreDeactivateIc, HomeDeactivateIc, MyActivateIc } from "@assets/index";
+import { BtnWrapper } from "@styles/btnStyle";
 
 export default function MypageFooter() {
   const navigate = useNavigate();
@@ -62,14 +63,6 @@ const Container = styled.div`
   width: 100%;
   padding: 1.1rem 9.4rem 0;
   background-color: ${({ theme }) => theme.colors.white};
-`;
-
-const BtnWrapper = styled.button`
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  justify-content: center;
-  align-items: center;
 `;
 
 const DeactivateText = styled.p`

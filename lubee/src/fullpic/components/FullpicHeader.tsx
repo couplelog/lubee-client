@@ -1,4 +1,5 @@
 import { BackIc, TrashIc } from "@assets/index";
+import { BtnWrapper } from "@styles/btnStyle";
 import styled from "styled-components";
 
 interface FullpicHeaderProps {
@@ -45,11 +46,4 @@ const Date = styled.p`
 const TrashIcon = styled(TrashIc)`
   width: 2.4rem;
   height: 2.4rem;
-`;
-
-const BtnWrapper = styled.button`
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
 `;

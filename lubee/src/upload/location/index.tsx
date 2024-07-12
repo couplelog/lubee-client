@@ -4,6 +4,7 @@ import { SearchIc } from "@assets/index";
 import { locationData } from "@common/core/locationData";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { BtnWrapper } from "@styles/btnStyle";
 
 interface LocationProps {
   setLocation: (location: string) => void;
@@ -87,13 +88,6 @@ const Header = styled.div`
 const BackIcon = styled(BackIc)`
   width: 2.4rem;
   height: 2.4rem;
-`;
-
-const BtnWrapper = styled.button`
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
 `;
 
 const Text = styled.div`
