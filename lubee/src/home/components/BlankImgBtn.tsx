@@ -8,12 +8,13 @@ interface BlankImgBtnProps {
 }
 
 export default function BlankImgBtn(props: BlankImgBtnProps) {
+  //const setUploadLocation = useSetRecoilState(uploadLocationState);
   const { date } = props;
   const [isFile, setIsFile] = useState<File[] | null>(null);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  //const setUploadLocation = useSetRecoilState(uploadLocationState);
-  const navigate = useNavigate();
+
   /* 사진 업로드 */
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
   function saveFile(imageFile: File[]) {
     setIsFile(imageFile);
     // setUploadLocation(true);
