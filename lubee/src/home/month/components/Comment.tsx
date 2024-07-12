@@ -1,4 +1,3 @@
-import { ProfileIc } from "@assets/index";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -16,9 +15,9 @@ export default function Comment(props: CommentProps) {
 
   return (
     <Container onClick={toggleExpand}>
-      <ProfileIcon />
-      <Text isExpanded={isExpanded}>
-        오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.
+      <ProfileIcon as={iconSrc} />
+      <Text $isExpanded={isExpanded}>
+        오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.
       </Text>
     </Container>
   );
@@ -33,18 +32,18 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const Text = styled.p<{ isExpanded: boolean }>`
+const Text = styled.p<{ $isExpanded: boolean }>`
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: ${(props) => (props.isExpanded ? "unset" : "3")};
+  -webkit-line-clamp: ${(props) => (props.$isExpanded ? "unset" : "3")};
   -webkit-box-orient: vertical;
   width: 10.9rem;
   color: ${({ theme }) => theme.colors.gray_700};
   ${({ theme }) => theme.fonts.Caption_2};
 `;
 
-const ProfileIcon = styled(ProfileIc)`
+const ProfileIcon = styled.svg`
   width: 3rem;
   height: 3rem;
 `;
