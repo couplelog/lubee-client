@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { LubeeCodeIc, CopyIc } from "@assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
-import { BtnWrapper } from "@styles/globalStyle";
+import { BtnWrapper } from "@styles/btnStyle";
 import Header from "./components/Header";
 import TitleBox from "./components/TitleBox";
 import YellowBox from "./components/YellowBox";
@@ -53,7 +53,7 @@ export default function index() {
       <LubeeCodeIcon />
       <MyCodeContainer>
         <MyCodeText>나의 러비코드</MyCodeText>
-        <BtnWrapper onClick={handleInviteClick}>
+        <BtnWrapper type="button" onClick={handleInviteClick}>
           <YellowBox $disabled={false}>
             12345 67890
             <CopyIcon />

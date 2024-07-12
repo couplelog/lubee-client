@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Profiles from "../components/Profiles";
+import { BtnWrapper } from "@styles/btnStyle";
 
 export default function index() {
   const navigate = useNavigate();
@@ -45,13 +46,6 @@ const ProfileGrid = styled.section`
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem 3.6rem;
   justify-items: center;
-`;
-
-const BtnWrapper = styled.button`
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
 `;
 
 const ProfileIcon = styled.svg`
