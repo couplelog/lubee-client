@@ -30,11 +30,11 @@ export default function index() {
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
+  gap: 1.6rem;
   align-items: center;
   position: relative;
   width: 100%;
   height: 100%;
-  gap: 1.6rem;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -46,10 +46,10 @@ const Wrapper = styled.section`
 
 const Container = styled.section`
   display: flex;
-  padding: 2rem;
   flex-direction: column;
-  align-items: flex-start;
   gap: -0.8rem;
+  align-items: flex-start;
+  padding: 2rem;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
@@ -60,9 +60,9 @@ const SubContainer = styled.section`
 `;
 
 const PlusIcon = styled(PlusIc)`
-  position: absolute;
+  position: fixed;
   right: 1.8rem;
-  bottom: 2rem;
+  bottom: 7.5rem;
   width: 6.4rem;
   height: 6.4rem;
 `;

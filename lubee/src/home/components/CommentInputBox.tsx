@@ -6,6 +6,8 @@ interface CommentInputBoxProps {
 }
 
 export default function CommentInputBox(props: CommentInputBoxProps) {
+  const { iconSrc } = props;
+
   return (
     <Container>
       <ProfileIcon />
