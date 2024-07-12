@@ -1,9 +1,5 @@
 import styled from "styled-components";
-
-interface TitleBoxProps {
-  titleText: string;
-  subtitleText?: string;
-}
+import { TitleBoxProps } from "@common/types/EmojisDataTypes";
 
 export default function TitleBox(props: TitleBoxProps) {
   const { titleText, subtitleText } = props;

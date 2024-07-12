@@ -5,7 +5,7 @@ import { BtnWrapper } from "@styles/btnStyle";
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
 import TitleBox from "../components/TitleBox";
-import ProfileIcons from "@common/core/ProfileCustomIconsData";
+import ProfileCustomIconsData from "@common/core/ProfileCustomIconsData";
 import OnboardingBtn from "../components/OnboardingBtn";
 
 interface CustomProps {
@@ -46,7 +46,7 @@ export default function index(props: CustomProps) {
       <ProgressBar step={1} />
       <TitleBox titleText="프로필 캐릭터를 지정해주세요" subtitleText="러비에서만 보여지는 프로필이에요" />
       <ProfileGrid>
-        {ProfileIcons.map((profile, index) => (
+        {ProfileCustomIconsData.map((profile, index) => (
           <BtnWrapper type="button" key={index} onClick={() => handleProfileClick(index)}>
             <ProfileIcon as={selectedProfile === index ? profile.selected : profile.default} />
           </BtnWrapper>

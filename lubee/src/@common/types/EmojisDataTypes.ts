@@ -12,3 +12,8 @@ export interface ProfileIconDataTypes {
   account: string;
   profileIcon: EmojisDataTypes[];
 }
+
+export interface TitleBoxProps {
+  titleText: string;
+  subtitleText?: string;
+}
