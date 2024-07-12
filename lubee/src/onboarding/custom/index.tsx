@@ -71,6 +71,7 @@ const ProfileGrid = styled.section`
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem 3.6rem;
   justify-items: center;
+  margin-top: 2.8rem;
 `;
 
 const ProfileIcon = styled.svg`
