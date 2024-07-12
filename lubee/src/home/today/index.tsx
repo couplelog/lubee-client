@@ -6,14 +6,14 @@ import ProfileBox from "./components/ProfileBox";
 import ContentContainer from "./components/ContentContainer";
 import { BtnWrapper } from "@styles/btnStyle";
 import { imagesData } from "@common/core/imagesData";
-import { ProfileIc, PlusIc } from "@assets/index";
+import { PlusIc } from "@assets/index";
 
 export default function index() {
   return (
     <Wrapper>
       <Container>
         <DateBox />
-        <Title />
+        <Title day={387} />
         <SubContainer>
           <HoneyIconContainer />
           <ProfileBox />
