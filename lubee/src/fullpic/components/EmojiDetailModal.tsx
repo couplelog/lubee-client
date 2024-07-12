@@ -1,4 +1,4 @@
-import { MintHeartIc, ProfileIc, ShortBorderIc } from "@assets/index";
+import { MintHeartIc, ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import { bigEmojisData } from "@common/core/bigEmojisData";
