@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { imagesData } from "@common/core/imagesData";
 import BlankImgBtn from "home/components/BlankImgBtn";
 import blankImg from "@assets/image/blankImg.png";
 import getIconSrc from "@common/utils/getIconSrc";
@@ -7,6 +6,7 @@ import LocationTag from "@common/components/LocationTag";
 import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import { useNavigate } from "react-router-dom";
+import { fullPicData } from "@common/core/fullPicData";
 
 interface HomePicBoxProps {
   url: string;
@@ -18,7 +18,7 @@ export default function HomePicBox(props: HomePicBoxProps) {
 
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =
-    imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
+    fullPicData.length < 5 ? [...fullPicData.map((img) => img.picSrc), blankImg] : fullPicData.map((img) => img.picSrc);
 
   /*프로필 아이콘*/
   const myProfile = getIconSrc("me", "profile1");

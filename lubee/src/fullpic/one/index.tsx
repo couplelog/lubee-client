@@ -38,7 +38,7 @@ export default function index() {
   return (
     <Wrapper>
       <FullpicHeader handleTrashBtn={handleTrashBtn} />
-      <OneContainer name={"맹꽁이"} picSrc={fullPic} />
+      <OneContainer name={"맹꽁이"} picSrc={fullPic} account="partner" />
       <EmojiTagContainer>
         <EmojiTag font="fullPic" setOpenEmojiDetail={setOpenEmojiDetail}>
           <EmojiIcon as={myEmoji} />

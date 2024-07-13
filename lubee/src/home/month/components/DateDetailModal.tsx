@@ -2,15 +2,13 @@ import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import Comment from "./Comment";
-import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
+import { FullPicDataTypes } from "@common/types/EmojisDataTypes";
 import getIconSrc from "@common/utils/getIconSrc";
 import HomePicBox from "home/components/HomePicBox";
-import { useNavigate } from "react-router-dom";
 
 interface DateDetailModalProps {
   date: string;
-  iconSrc: string;
-  imagesData: ImagesDataTypes[];
+  fullPicData: FullPicDataTypes[];
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {

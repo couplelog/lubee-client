@@ -12,7 +12,7 @@ const index = () => {
   return (
     <CalWrapper>
       {CAL.map((cal, idx) => {
-        return <CalContainer key={idx} info={cal} iconSrc={ProfileIc} />;
+        return <CalContainer key={idx} info={cal} />;
       })}
     </CalWrapper>
   );

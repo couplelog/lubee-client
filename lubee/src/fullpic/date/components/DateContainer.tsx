@@ -5,6 +5,7 @@ import EmojiBar from "@common/components/EmojiBar";
 import FullPicContainer from "@common/components/FullPicContainer";
 import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
+import getIconSrc from "@common/utils/getIconSrc";
 interface DateContainerProps {
   setOpenEmojiDetail: (open: boolean) => void;
   selectedEmojiText: string;
@@ -26,12 +27,14 @@ export default function DateContainer(props: DateContainerProps) {
     <Wrapper>
       {fullPicData &&
         fullPicData.map((data) => {
-          const { time, picSrc, location, name } = data;
+          const { time, picSrc, location, name, account } = data;
+          /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
+          const profile = getIconSrc(account, "profile2");
           return (
             <ContentsBox key={time}>
               <Time>{time}</Time>
               <Profile>
-                <ProfileIcon />
+                <ProfileIcon as={profile} />
                 <Name>{name}</Name>
               </Profile>
               <FullPicContainer picSrc={picSrc} location={location} />
@@ -85,7 +88,7 @@ const Name = styled.p`
   color: ${({ theme }) => theme.colors.gray_900};
 `;
 
-const ProfileIcon = styled(ProfileIc)`
+const ProfileIcon = styled.svg`
   width: 3rem;
   height: 3rem;
 `;
