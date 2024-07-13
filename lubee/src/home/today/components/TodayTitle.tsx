@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-interface HomeTitleProps {
+interface TodayTitleProps {
   day: number;
 }
 
-export default function Title(props: HomeTitleProps) {
+export default function TodayTitle(props: TodayTitleProps) {
   const { day } = props;
 
   return (
