@@ -13,6 +13,11 @@ export interface ProfileIconDataTypes {
   profileIcon: EmojisDataTypes[];
 }
 
+export interface TitleBoxProps {
+  titleText: string;
+  subtitleText?: string;
+}
+
 export interface FinalEmojisDataTypes {
   account: string;
   emojiData: EmojisDataTypes[];

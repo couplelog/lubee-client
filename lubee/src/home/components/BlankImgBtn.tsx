@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface BlankImgBtnProps {
-  date: number;
+  date?: number;
 }
 
 export default function BlankImgBtn(props: BlankImgBtnProps) {
