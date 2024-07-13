@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { EditXIc } from "@assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
