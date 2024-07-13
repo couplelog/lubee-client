@@ -38,10 +38,15 @@ export default function CommentInputModal(props: CommentInputModalProps) {
   };
 
   useEffect(() => {
-    setText(commentText);
+    // isDefaultText일 때는 placeholder가 출력되게끔 Text 비우기
+    if (isDefaultText) {
+      setText("");
+    } else {
+      setText(commentText);
+    }
     setTextLength(commentText.length);
-    setIsEditing(commentText === "오늘의 데이트는 어떠셨나요?");
-  }, [commentText]);
+    setIsEditing(isDefaultText);
+  }, [commentText, isDefaultText]);
 
   return (
     <Background>
