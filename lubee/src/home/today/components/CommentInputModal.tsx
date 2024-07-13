@@ -17,7 +17,7 @@ export default function CommentInputModal(props: CommentInputModalProps) {
           <ProfileIcon as={profileIconSrc} />
           <CheckIcon />
         </HeaderContainer>
-        <TextBox />
+        <TextBox placeholder="최소 10글자 이상 작성해주세요" />
         <LengthText>100/100</LengthText>
       </Container>
     </Background>
@@ -65,14 +65,21 @@ const CheckYellowIcon = styled(CheckYellowIc)`
   height: 2.4rem;
 `;
 
-const TextBox = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-self: stretch;
+const TextBox = styled.textarea`
+  ${({ theme }) => theme.fonts.SubTitle};
+
+  overflow: hidden;
   width: 100%;
   height: 12.8rem;
   padding: 0 1.2rem;
+  border: none;
+  resize: none;
+  color: ${({ theme }) => theme.colors.gray_700};
+  outline: none; /* 입력 시 생기는 테두리 제거 */
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.gray_200}; /* 원하는 색상으로 변경 */
+  }
 `;
 
 const LengthText = styled.p`
