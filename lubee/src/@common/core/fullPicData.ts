@@ -26,7 +26,7 @@ export const fullPicData: FullPicDataTypes[] = [
   {
     time: "오후 11:17",
     picSrc: fullPic,
-    location: "아이엠 그라운드",
+    location: "어디까지 길어지나테스트",
     name: "로지",
     account: "me",
   },

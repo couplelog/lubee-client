@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ProfileIc } from "@assets/index";
 import { fullPicData } from "@common/core/fullPicData";
 import EmojiBar from "@common/components/EmojiBar";
 import FullPicContainer from "@common/components/FullPicContainer";
