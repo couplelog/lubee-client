@@ -58,7 +58,6 @@ const TextBox = styled.textarea`
 
   overflow: hidden;
   width: 100%;
-  height: 12.8rem;
   padding: 0 1.2rem;
   border: none;
   resize: none;
