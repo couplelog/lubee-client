@@ -1,13 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
-import CommentInputModal from "./CommentInputModal";
+import MyCommentModal from "./MyCommentModal";
+import PartnerCommentModal from "./PartnerCommentModal";
 
-interface CommentInputBoxProps {
+interface CommentBoxProps {
   profileIconSrc: string;
+  isMyComment: boolean;
 }
 
-export default function CommentInputBox(props: CommentInputBoxProps) {
-  const { profileIconSrc } = props;
+export default function CommentBox(props: CommentBoxProps) {
+  const { profileIconSrc, isMyComment } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>("오늘의 데이트는 어떠셨나요?");
 
@@ -25,14 +27,21 @@ export default function CommentInputBox(props: CommentInputBoxProps) {
         <ProfileIcon as={profileIconSrc} />
         <Text $isDefault={commentText === "오늘의 데이트는 어떠셨나요?"}>{commentText}</Text>
       </Container>
-      {openCommentInputModal && (
-        <CommentInputModal
-          handleCloseBtn={handleCloseBtn}
-          profileIconSrc={profileIconSrc}
-          commentText={commentText}
-          setCommentText={setCommentText}
-        />
-      )}
+      {openCommentInputModal &&
+        (isMyComment ? (
+          <MyCommentModal
+            handleCloseBtn={handleCloseBtn}
+            profileIconSrc={profileIconSrc}
+            commentText={commentText}
+            setCommentText={setCommentText}
+          />
+        ) : (
+          <PartnerCommentModal
+            handleCloseBtn={handleCloseBtn}
+            profileIconSrc={profileIconSrc}
+            commentText={commentText}
+          />
+        ))}
     </>
   );
 }

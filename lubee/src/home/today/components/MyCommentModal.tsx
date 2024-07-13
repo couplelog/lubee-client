@@ -2,15 +2,9 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { CheckIc, CheckYellowIc, PencilIc, EditXIc } from "@assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
+import { CommentModalProps } from "@common/types/EmojisDataTypes";
 
-interface CommentInputModalProps {
-  handleCloseBtn: () => void;
-  profileIconSrc: string;
-  commentText: string;
-  setCommentText: (text: string) => void;
-}
-
-export default function CommentInputModal(props: CommentInputModalProps) {
+export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
   const [text, setText] = useState("");
   const [textLength, setTextLength] = useState(0);
@@ -46,7 +40,11 @@ export default function CommentInputModal(props: CommentInputModalProps) {
 
   const handleSaveText = () => {
     if (textLength >= 10) {
-      setCommentText(text);
+      if (setCommentText) {
+        setCommentText(text);
+      } else {
+        console.warn("setCommentText is undefined");
+      }
       handleCloseBtn();
       setIsEditing(false);
     }
@@ -99,7 +97,6 @@ export default function CommentInputModal(props: CommentInputModalProps) {
 const Background = styled.div`
   position: absolute;
   z-index: 2;
-  height: 100vh;
   inset: 0;
   ${({ theme }) => theme.effects.dimmed_40};
 `;

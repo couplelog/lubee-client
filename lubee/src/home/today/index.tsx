@@ -34,7 +34,6 @@ const Wrapper = styled.section`
   align-items: center;
   position: relative;
   width: 100%;
-  height: 100vh;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

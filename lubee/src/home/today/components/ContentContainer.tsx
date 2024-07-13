@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CommentInputBox from "./CommentInputBox";
+import CommentBox from "./CommentBox";
 import BlankImgBtn from "../../components/BlankImgBtn";
 import blankImg from "@assets/image/blankImg.png";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
@@ -20,8 +20,8 @@ export default function ContentContainer(props: ContentContainerProps) {
   return (
     <Container>
       <CommentsContainer>
-        <CommentInputBox profileIconSrc={myProfile} />
-        <CommentInputBox profileIconSrc={partnerProfile} />
+        <CommentBox profileIconSrc={myProfile} isMyComment={true} />
+        <CommentBox profileIconSrc={partnerProfile} isMyComment={false} />
       </CommentsContainer>
       <PicBox>
         {displayPics.map((imgSrc, index) =>
