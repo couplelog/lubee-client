@@ -19,7 +19,6 @@ export default function CommentBox(props: CommentBoxProps) {
 
   const myDefaultText = "오늘의 데이트는 어떠셨나요?";
   const partnerDefaultText = "연인은 아직 작성하지 않았어요.";
-  const partnerPlaceholderText = "나의 한마디를 입력하면 볼 수 있어요!";
   const myCommentText = myComment || myDefaultText;
   const partnerCommentText = partnerComment || partnerDefaultText;
 
@@ -29,18 +28,17 @@ export default function CommentBox(props: CommentBoxProps) {
     } else {
       if (myCommentText === myDefaultText && partnerCommentText === partnerDefaultText) {
         setCommentText(partnerDefaultText);
-      } else if (myCommentText !== myDefaultText && partnerCommentText === partnerDefaultText) {
+      } else if (myCommentText !== myDefaultText) {
         setCommentText(partnerDefaultText);
-      } else if (myCommentText !== myDefaultText && partnerCommentText !== partnerDefaultText) {
-        setCommentText(partnerCommentText);
       } else if (myCommentText === myDefaultText && partnerCommentText !== partnerDefaultText) {
-        setCommentText(partnerPlaceholderText);
+        setCommentText("나의 한마디를 입력하면 볼 수 있어요!");
       }
     }
   }, [isMyComment, myCommentText, partnerCommentText]);
 
   function handleCommentInputModal() {
-    const isDefaultText = commentText === partnerDefaultText || commentText === partnerPlaceholderText;
+    // 연인 미작성, 나 미작성일 때 PartnerCommentModal 안 열리게끔
+    const isDefaultText = commentText === partnerDefaultText || commentText === "나의 한마디를 입력하면 볼 수 있어요!";
 
     if (!isDefaultText) {
       setOpenCommentInputModal(true);
@@ -58,7 +56,7 @@ export default function CommentBox(props: CommentBoxProps) {
         <Text
           $isDefault={
             commentText === myDefaultText ||
-            commentText === partnerPlaceholderText ||
+            commentText === "나의 한마디를 입력하면 볼 수 있어요!" ||
             commentText === partnerDefaultText
           }>
           {commentText}
