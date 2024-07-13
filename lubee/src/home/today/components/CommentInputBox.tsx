@@ -1,5 +1,7 @@
-import { ProfileIc } from "@assets/index";
+import { useState } from "react";
 import styled from "styled-components";
+import { ProfileIc } from "@assets/index";
+import CommentInputModal from "./CommentInputModal";
 
 interface CommentInputBoxProps {
   profileIconSrc: string;
@@ -7,12 +9,34 @@ interface CommentInputBoxProps {
 
 export default function CommentInputBox(props: CommentInputBoxProps) {
   const { profileIconSrc } = props;
+  const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
+
+  function handleCommentInputModal() {
+    setOpenCommentInputModal(true);
+  }
+
+  function handleCloseBtn() {
+    setOpenCommentInputModal(false);
+  }
+
+  function handleModifyBtn() {
+    setOpenCommentInputModal(true);
+  }
 
   return (
-    <Container>
-      <ProfileIcon as={profileIconSrc} />
-      <Text>오늘의 데이트는 어떠셨나요?</Text>
-    </Container>
+    <>
+      <Container onClick={() => handleCommentInputModal()}>
+        <ProfileIcon as={profileIconSrc} />
+        <Text>오늘의 데이트는 어떠셨나요?</Text>
+      </Container>
+      {openCommentInputModal && (
+        <CommentInputModal
+          handleCloseBtn={handleCloseBtn}
+          handleModifyBtn={handleModifyBtn}
+          profileIconSrc={profileIconSrc}
+        />
+      )}
+    </>
   );
 }
 
@@ -23,6 +47,7 @@ const Container = styled.div`
   padding: 1.2rem;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.white};
+  cursor: pointer;
 `;
 
 const Text = styled.p`

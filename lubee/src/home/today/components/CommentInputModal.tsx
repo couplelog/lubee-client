@@ -1,0 +1,93 @@
+import styled from "styled-components";
+import { CheckIc, CheckYellowIc, PencilIc, XIc } from "@assets/index";
+
+interface CommentInputModalProps {
+  handleCloseBtn: () => void;
+  handleModifyBtn: () => void;
+  profileIconSrc: string;
+}
+
+export default function CommentInputModal(props: CommentInputModalProps) {
+  const { handleCloseBtn, handleModifyBtn, profileIconSrc } = props;
+
+  return (
+    <Background>
+      <Container>
+        <HeaderContainer>
+          <ProfileIcon as={profileIconSrc} />
+          <CheckIcon />
+        </HeaderContainer>
+        <TextBox />
+        <LengthText>100/100</LengthText>
+      </Container>
+    </Background>
+  );
+}
+
+const Background = styled.div`
+  position: absolute;
+  inset: 0;
+  ${({ theme }) => theme.effects.dimmed_40};
+`;
+
+const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: 24rem;
+  left: 5.6rem;
+  width: 27.8rem;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const HeaderContainer = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  padding: 1.2rem;
+`;
+
+const ProfileIcon = styled.svg`
+  width: 3rem;
+  height: 3rem;
+`;
+
+const CheckIcon = styled(CheckIc)`
+  width: 2.4rem;
+  height: 2.4rem;
+`;
+
+const CheckYellowIcon = styled(CheckYellowIc)`
+  width: 2.4rem;
+  height: 2.4rem;
+`;
+
+const TextBox = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  width: 100%;
+  height: 12.8rem;
+  padding: 0 1.2rem;
+`;
+
+const LengthText = styled.p`
+  ${({ theme }) => theme.fonts.Body_1};
+
+  padding: 0 1.2rem 1.2rem 0;
+  color: ${({ theme }) => theme.colors.gray_200};
+`;
+
+const PencilIcon = styled(PencilIc)`
+  width: 2.6779rem;
+  height: 2.4rem;
+`;
+
+const XIcon = styled(XIc)`
+  width: 2.4rem;
+  height: 2.4rem;
+`;
