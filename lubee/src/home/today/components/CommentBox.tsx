@@ -85,7 +85,6 @@ export default function CommentBox(props: CommentBoxProps) {
 const Container = styled.div`
   display: flex;
   gap: 0.4rem;
-  height: 6.4rem;
   padding: 1.2rem;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.white};

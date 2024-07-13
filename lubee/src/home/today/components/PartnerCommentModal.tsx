@@ -25,6 +25,7 @@ const Background = styled.div`
   position: absolute;
   z-index: 2;
   inset: 0;
+  height: 100vh;
   ${({ theme }) => theme.effects.dimmed_40};
 `;
 
