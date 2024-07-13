@@ -5,7 +5,6 @@ import HoneyIconContainer from "./components/HoneyIconContainer";
 import ProfileBox from "./components/ProfileBox";
 import ContentContainer from "./components/ContentContainer";
 import { BtnWrapper } from "@styles/btnStyle";
-import { imagesData } from "@common/core/imagesData";
 import { PlusIc } from "@assets/index";
 
 export default function index() {
@@ -19,7 +18,7 @@ export default function index() {
           <ProfileBox />
         </SubContainer>
       </Container>
-      <ContentContainer imagesData={imagesData} />
+      <ContentContainer />
       <BtnWrapper type="button">
         <PlusIcon />
       </BtnWrapper>

@@ -5,6 +5,7 @@ import FullPicContainer from "@common/components/FullPicContainer";
 import { useState } from "react";
 import SelectLocationModal from "upload/components/SelectLocationModal";
 import { BtnWrapper } from "@styles/btnStyle";
+import { useNavigate } from "react-router-dom";
 interface UploadProps {
   // picSrc: string;
   location: string;
@@ -14,6 +15,7 @@ interface UploadProps {
 
 export default function index(props: UploadProps) {
   const { location, setLocation, moveToUploadLocation } = props;
+  const navigate = useNavigate();
   const [openLocationModal, setOpenLocationModal] = useState<boolean>(false);
 
   return (
@@ -29,7 +31,7 @@ export default function index(props: UploadProps) {
       </Header>
       <FullPicContainer picSrc={fullPic} location={location} setOpenLocationModal={setOpenLocationModal} />
       <Footer>
-        <BtnWrapper type="button">
+        <BtnWrapper type="button" onClick={() => navigate("/home/today")}>
           <ShareBtnIcon />
         </BtnWrapper>
       </Footer>
