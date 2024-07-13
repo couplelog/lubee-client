@@ -57,9 +57,9 @@ import MintProfile4Ic from "./icon/mintProfile4Ic.svg?react";
 import MintProfile5Ic from "./icon/mintProfile5Ic.svg?react";
 import MintProfile6Ic from "./icon/mintProfile6Ic.svg?react";
 import EditXIc from "./icon/editXIc.svg?react";
-import FirstCongratsIc from "./icon/firstCongratsIc.svg";
-import FirstHoneyIc from "./icon/firstHoneyIc.svg";
-import FifthHoneyIc from "./icon/fifthHoneyIc.svg";
+import CongratsIc from "./icon/congratsIc.svg?react";
+import FirstHoneyIc from "./icon/firstHoneyIc.svg?react";
+import FifthHoneyIc from "./icon/fifthHoneyIc.svg?react";
 
 export {
   LogoIc,
@@ -121,7 +121,7 @@ export {
   MintProfile5Ic,
   MintProfile6Ic,
   EditXIc,
-  FirstCongratsIc,
+  CongratsIc,
   FirstHoneyIc,
   FifthHoneyIc,
 };

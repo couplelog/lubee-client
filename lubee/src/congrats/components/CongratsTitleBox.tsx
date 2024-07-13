@@ -32,4 +32,5 @@ const SubtitleText = styled.p`
   ${({ theme }) => theme.fonts.Body_3};
 
   color: ${({ theme }) => theme.colors.gray_600};
+  white-space: pre-line;
 `;
