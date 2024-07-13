@@ -23,7 +23,7 @@ export default function CommentInputBox(props: CommentInputBoxProps) {
     <>
       <Container onClick={() => handleCommentInputModal()}>
         <ProfileIcon as={profileIconSrc} />
-        <Text isDefault={commentText === "오늘의 데이트는 어떠셨나요?"}>{commentText}</Text>
+        <Text $isDefault={commentText === "오늘의 데이트는 어떠셨나요?"}>{commentText}</Text>
       </Container>
       {openCommentInputModal && (
         <CommentInputModal
@@ -47,14 +47,14 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const Text = styled.p<{ isDefault: boolean }>`
+const Text = styled.p<{ $isDefault: boolean }>`
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   width: 10.9rem;
-  color: ${({ theme, isDefault }) => (isDefault ? theme.colors.gray_400 : theme.colors.gray_700)};
+  color: ${({ theme, $isDefault }) => ($isDefault ? theme.colors.gray_400 : theme.colors.gray_700)};
 
   ${({ theme }) => theme.fonts.Caption_2};
 `;

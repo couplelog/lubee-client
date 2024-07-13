@@ -98,6 +98,8 @@ export default function CommentInputModal(props: CommentInputModalProps) {
 
 const Background = styled.div`
   position: absolute;
+  z-index: 2;
+  height: 100vh;
   inset: 0;
   ${({ theme }) => theme.effects.dimmed_40};
 `;
