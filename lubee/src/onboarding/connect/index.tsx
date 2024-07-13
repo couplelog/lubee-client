@@ -4,8 +4,8 @@ import { useState } from "react";
 import { LubeeCodeIc, CopyIc } from "@assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
 import { BtnWrapper } from "@styles/btnStyle";
-import Header from "../components/Header";
-import TitleBox from "../components/TitleBox";
+import OnboardingHeader from "../components/OnboardingHeader";
+import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import YellowBox from "../components/YellowBox";
 import CopyCodeModal from "../components/CopyCodeModal";
 
@@ -53,8 +53,8 @@ export default function index(props: ConnectProps) {
 
   return (
     <Wrapper>
-      <Header handleXBtn={handleXBtn} showXIcon />
-      <TitleBox titleText={`연인과 연결 후\n러비를 시작해보세요`} />
+      <OnboardingHeader handleXBtn={handleXBtn} showXIcon />
+      <OnboardingTitleBox titleText={`연인과 연결 후\n러비를 시작해보세요`} />
       <LubeeCodeIcon />
       <MyCodeContainer>
         <MyCodeText>나의 러비코드</MyCodeText>

@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../components/Header";
+import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
-import TitleBox from "../components/TitleBox";
+import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import getIconSrc from "@common/utils/getIconSrc";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
@@ -42,10 +42,10 @@ export default function index(props: ProfileProps) {
 
   return (
     <Wrapper>
-      <Header handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
+      <OnboardingHeader handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
       <ProgressBar step={2} />
       <ContentsContainer>
-        <TitleBox titleText="닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
+        <OnboardingTitleBox titleText="닉네임을 지정해주세요" subtitleText="러비에서 쓰일 애칭이에요" />
         <ProfileIcon as={myProfile} />
         <YellowBox
           inputValue={nickname}

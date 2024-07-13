@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import TitleBox from "../components/TitleBox";
+import OnboardingHeader from "../components/OnboardingHeader";
+import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 
@@ -26,9 +26,9 @@ export default function index(props: CodeProps) {
 
   return (
     <Wrapper>
-      <Header handleBackBtn={handleBackBtn} showBackIcon />
+      <OnboardingHeader handleBackBtn={handleBackBtn} showBackIcon />
       <ContentsContainer>
-        <TitleBox titleText="연인의 러비코드를 입력하세요" />
+        <OnboardingTitleBox titleText="연인의 러비코드를 입력하세요" />
         <YellowBox inputValue={code} setInputValue={setCode} $disabled={true} placeholder="코드 입력" />
       </ContentsContainer>
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="연결하기" $disabled={isOnboardingBtnDisabled} />
