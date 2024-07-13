@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ProfileIc } from "@assets/index";
 import CommentInputModal from "./CommentInputModal";
 
 interface CommentInputBoxProps {
@@ -10,6 +9,7 @@ interface CommentInputBoxProps {
 export default function CommentInputBox(props: CommentInputBoxProps) {
   const { profileIconSrc } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
+  const [commentText, setCommentText] = useState<string>("오늘의 데이트는 어떠셨나요?");
 
   function handleCommentInputModal() {
     setOpenCommentInputModal(true);
@@ -27,13 +27,14 @@ export default function CommentInputBox(props: CommentInputBoxProps) {
     <>
       <Container onClick={() => handleCommentInputModal()}>
         <ProfileIcon as={profileIconSrc} />
-        <Text>오늘의 데이트는 어떠셨나요?</Text>
+        <Text isDefault={commentText === "오늘의 데이트는 어떠셨나요?"}>{commentText}</Text>
       </Container>
       {openCommentInputModal && (
         <CommentInputModal
           handleCloseBtn={handleCloseBtn}
           handleModifyBtn={handleModifyBtn}
           profileIconSrc={profileIconSrc}
+          setCommentText={setCommentText}
         />
       )}
     </>
@@ -50,19 +51,19 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const Text = styled.p`
-  /* display: -webkit-box;
+const Text = styled.p<{ isDefault: boolean }>`
+  display: -webkit-box;
   overflow: hidden;
-  width: 10.9rem;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; */
+  -webkit-box-orient: vertical;
   width: 10.9rem;
-  color: ${({ theme }) => theme.colors.gray_400};
+  color: ${({ theme, isDefault }) => (isDefault ? theme.colors.gray_400 : theme.colors.gray_700)};
+
   ${({ theme }) => theme.fonts.Caption_2};
 `;
 
-const ProfileIcon = styled(ProfileIc)`
+const ProfileIcon = styled.svg`
   width: 3rem;
   height: 3rem;
 `;

@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { CheckIc, CheckYellowIc, PencilIc, XIc } from "@assets/index";
+import { BtnWrapper } from "@styles/btnStyle";
 
 interface CommentInputModalProps {
   handleCloseBtn: () => void;
   handleModifyBtn: () => void;
   profileIconSrc: string;
+  setCommentText: (text: string) => void;
 }
 
 export default function CommentInputModal(props: CommentInputModalProps) {
-  const { handleCloseBtn, handleModifyBtn, profileIconSrc } = props;
+  const { handleCloseBtn, handleModifyBtn, profileIconSrc, setCommentText } = props;
   const [text, setText] = useState("");
   const [textLength, setTextLength] = useState(0);
 
@@ -21,12 +23,25 @@ export default function CommentInputModal(props: CommentInputModalProps) {
     }
   };
 
+  const handleSaveText = () => {
+    if (textLength >= 10) {
+      setCommentText(text);
+      handleCloseBtn();
+    }
+  };
+
   return (
     <Background>
       <Container>
         <HeaderContainer>
           <ProfileIcon as={profileIconSrc} />
-          <CheckIcon />
+          {textLength >= 10 ? (
+            <BtnWrapper type="button" onClick={handleSaveText}>
+              <CheckYellowIcon />
+            </BtnWrapper>
+          ) : (
+            <CheckIcon />
+          )}
         </HeaderContainer>
         <TextBox placeholder="최소 10글자 이상 작성해주세요" value={text} onChange={handleTextChange} />
         <LengthText>{textLength}/100</LengthText>
