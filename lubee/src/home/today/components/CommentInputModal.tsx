@@ -17,6 +17,25 @@ export default function CommentInputModal(props: CommentInputModalProps) {
   const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?";
   const [isEditing, setIsEditing] = useState(isDefaultText);
 
+  // isDefaultText일 때는 placeholder를 출력하기 위함
+  useEffect(() => {
+    if (isDefaultText) {
+      setText("");
+      setTextLength(0);
+    } else {
+      setText(commentText);
+      setTextLength(commentText.length);
+    }
+    setIsEditing(isDefaultText);
+  }, [commentText]);
+
+  // placeholder의 글자수는 0으로 출력
+  useEffect(() => {
+    if (isDefaultText) {
+      setTextLength(0);
+    }
+  }, [isDefaultText]);
+
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.target.value;
     if (newText.length <= 100) {
@@ -36,17 +55,6 @@ export default function CommentInputModal(props: CommentInputModalProps) {
   const handleEditClick = () => {
     setIsEditing(true);
   };
-
-  useEffect(() => {
-    // isDefaultText일 때는 placeholder가 출력되게끔 Text 비우기
-    if (isDefaultText) {
-      setText("");
-    } else {
-      setText(commentText);
-    }
-    setTextLength(commentText.length);
-    setIsEditing(isDefaultText);
-  }, [commentText, isDefaultText]);
 
   return (
     <Background>
