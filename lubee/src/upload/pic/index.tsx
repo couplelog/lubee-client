@@ -18,6 +18,19 @@ export default function index(props: UploadProps) {
   const navigate = useNavigate();
   const [openLocationModal, setOpenLocationModal] = useState<boolean>(false);
 
+  function moveToHome() {
+    // 헤더에서 전에 어떤 페이지였는지 불러오기
+    const prevPage = localStorage.getItem("currentPage");
+
+    if (prevPage === "today") {
+      navigate("/home/today");
+      console.log(prevPage);
+    } else {
+      navigate("/home/month");
+      console.log(prevPage);
+    }
+  }
+
   return (
     <Wrapper>
       <Header>
@@ -31,7 +44,7 @@ export default function index(props: UploadProps) {
       </Header>
       <FullPicContainer picSrc={fullPic} location={location} setOpenLocationModal={setOpenLocationModal} />
       <Footer>
-        <BtnWrapper type="button" onClick={() => navigate("/home/today")}>
+        <BtnWrapper type="button" onClick={moveToHome}>
           <ShareBtnIcon />
         </BtnWrapper>
       </Footer>
