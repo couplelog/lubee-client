@@ -38,6 +38,7 @@ export default function CommentBox(props: CommentBoxProps) {
 
   function handleCommentInputModal() {
     // 연인 미작성, 나 미작성일 때 PartnerCommentModal 안 열리게끔
+    // 아직 MyCommentModal에서 작성해도 "나의 한마디를 입력하면 볼 수 있어요!" 뜨는데 서버 연결로 바뀔 예정 . .
     const isDefaultText = commentText === partnerDefaultText || commentText === "나의 한마디를 입력하면 볼 수 있어요!";
 
     if (!isDefaultText) {
