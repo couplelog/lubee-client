@@ -6,8 +6,16 @@ import getIconSrc from "@common/utils/getIconSrc";
 import LocationTag from "@common/components/LocationTag";
 import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
+import { useNavigate } from "react-router-dom";
 
-export default function HomePicBox() {
+interface HomePicBoxProps {
+  url: string;
+}
+
+export default function HomePicBox(props: HomePicBoxProps) {
+  const navigate = useNavigate();
+  const { url } = props;
+
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =
     imagesData.length < 5 ? [...imagesData.map((img) => img.imgSrc), blankImg] : imagesData.map((img) => img.imgSrc);
@@ -26,7 +34,12 @@ export default function HomePicBox() {
         imgSrc === blankImg ? (
           <BlankImgBtn date={date} />
         ) : (
-          <ImgContainer key={date}>
+          <ImgContainer
+            key={date}
+            type="button"
+            onClick={() => {
+              navigate(`/fullpic${url}`);
+            }}>
             <Image src={imgSrc} />
             <ProfileIcon as={myProfile} />
             <TagContainer>
@@ -52,7 +65,7 @@ const Container = styled.section`
   scrollbar-width: none;
 `;
 
-const ImgContainer = styled.div`
+const ImgContainer = styled.button`
   position: relative;
   padding: 0;
   border: none;

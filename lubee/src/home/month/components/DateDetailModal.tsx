@@ -5,6 +5,7 @@ import Comment from "./Comment";
 import { ImagesDataTypes } from "@common/types/EmojisDataTypes";
 import getIconSrc from "@common/utils/getIconSrc";
 import HomePicBox from "home/components/HomePicBox";
+import { useNavigate } from "react-router-dom";
 
 interface DateDetailModalProps {
   date: string;
@@ -35,7 +36,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={myProfile} comment={myComment} />
             <Comment iconSrc={partnerProfile} comment={partnerComment} />
           </CommentsBox>
-          <HomePicBox />
+          <HomePicBox url="/date" />
         </Contents>
       </Container>
     </Background>
