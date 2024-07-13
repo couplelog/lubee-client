@@ -11,7 +11,7 @@ export default function ContentContainer() {
     <Container>
       <CommentsContainer>
         <CommentBox profileIconSrc={myProfile} isMyComment={true} />
-        <CommentBox profileIconSrc={partnerProfile} isMyComment={false} />
+        <CommentBox profileIconSrc={partnerProfile} isMyComment={false} partnerComment={"ㅇㅇㅇ"} />
       </CommentsContainer>
       <HomePicBox url="/date/index" />
     </Container>

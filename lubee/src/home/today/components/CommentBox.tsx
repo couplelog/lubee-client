@@ -19,6 +19,7 @@ export default function CommentBox(props: CommentBoxProps) {
 
   const myDefaultText = "오늘의 데이트는 어떠셨나요?";
   const partnerDefaultText = "연인은 아직 작성하지 않았어요.";
+  const partnerPlaceholderText = "나의 한마디를 입력하면 볼 수 있어요!";
   const myCommentText = myComment || myDefaultText;
   const partnerCommentText = partnerComment || partnerDefaultText;
 
@@ -33,13 +34,17 @@ export default function CommentBox(props: CommentBoxProps) {
       } else if (myCommentText !== myDefaultText && partnerCommentText !== partnerDefaultText) {
         setCommentText(partnerCommentText);
       } else if (myCommentText === myDefaultText && partnerCommentText !== partnerDefaultText) {
-        setCommentText("나의 한마디를 입력하면 볼 수 있어요!");
+        setCommentText(partnerPlaceholderText);
       }
     }
   }, [isMyComment, myCommentText, partnerCommentText]);
 
   function handleCommentInputModal() {
-    setOpenCommentInputModal(true);
+    const isDefaultText = commentText === partnerDefaultText || commentText === partnerPlaceholderText;
+
+    if (!isDefaultText) {
+      setOpenCommentInputModal(true);
+    }
   }
 
   function handleCloseBtn() {
@@ -48,9 +53,16 @@ export default function CommentBox(props: CommentBoxProps) {
 
   return (
     <>
-      <Container onClick={() => handleCommentInputModal()}>
+      <Container onClick={handleCommentInputModal}>
         <ProfileIcon as={profileIconSrc} />
-        <Text $isDefault={commentText === "오늘의 데이트는 어떠셨나요?"}>{commentText}</Text>
+        <Text
+          $isDefault={
+            commentText === myDefaultText ||
+            commentText === partnerPlaceholderText ||
+            commentText === partnerDefaultText
+          }>
+          {commentText}
+        </Text>
       </Container>
       {openCommentInputModal &&
         (isMyComment ? (
