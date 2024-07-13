@@ -1,4 +1,3 @@
-import { ProfileIc } from "@assets/index";
 import styled from "styled-components";
 
 interface CommentInputBoxProps {
@@ -37,7 +36,7 @@ const Text = styled.p`
   ${({ theme }) => theme.fonts.Caption_2};
 `;
 
-const ProfileIcon = styled(ProfileIc)`
+const ProfileIcon = styled.svg`
   width: 3rem;
   height: 3rem;
 `;

@@ -1,41 +1,33 @@
 import fullPic from "@assets/image/fullPic.png";
+import { FullPicDataTypes } from "@common/types/EmojisDataTypes";
 
-interface FullPicDataProps {
-  time: string;
-  picSrc: string;
-  location: string;
-  name: string;
-}
-
-export const fullPicData: FullPicDataProps[] = [
+export const fullPicData: FullPicDataTypes[] = [
   {
     time: "오후 2:17",
     picSrc: fullPic,
     location: "청년다방",
     name: "맹꽁이",
+    account: "partner",
   },
   {
     time: "오후 3:17",
     picSrc: fullPic,
     location: "고기",
     name: "로지",
+    account: "me",
   },
   {
     time: "오후 4:17",
     picSrc: fullPic,
     location: "회",
     name: "맹꽁이",
+    account: "partner",
   },
   {
     time: "오후 11:17",
     picSrc: fullPic,
-    location: "아이엠 그라운드",
+    location: "어디까지 길어지나테스트",
     name: "로지",
-  },
-  {
-    time: "오후 12:17",
-    picSrc: fullPic,
-    location: "어디까지 길어지나 테스트",
-    name: "맹꽁이",
+    account: "me",
   },
 ];
