@@ -19,10 +19,6 @@ export default function CommentInputBox(props: CommentInputBoxProps) {
     setOpenCommentInputModal(false);
   }
 
-  function handleModifyBtn() {
-    setOpenCommentInputModal(true);
-  }
-
   return (
     <>
       <Container onClick={() => handleCommentInputModal()}>
@@ -32,8 +28,8 @@ export default function CommentInputBox(props: CommentInputBoxProps) {
       {openCommentInputModal && (
         <CommentInputModal
           handleCloseBtn={handleCloseBtn}
-          handleModifyBtn={handleModifyBtn}
           profileIconSrc={profileIconSrc}
+          commentText={commentText}
           setCommentText={setCommentText}
         />
       )}

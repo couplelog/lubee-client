@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { CheckIc, CheckYellowIc, PencilIc, XIc } from "@assets/index";
+import { CheckIc, CheckYellowIc, PencilIc, EditXIc } from "@assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
 
 interface CommentInputModalProps {
   handleCloseBtn: () => void;
-  handleModifyBtn: () => void;
   profileIconSrc: string;
+  commentText: string;
   setCommentText: (text: string) => void;
 }
 
 export default function CommentInputModal(props: CommentInputModalProps) {
-  const { handleCloseBtn, handleModifyBtn, profileIconSrc, setCommentText } = props;
+  const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
   const [text, setText] = useState("");
   const [textLength, setTextLength] = useState(0);
+  const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?";
+  const [isEditing, setIsEditing] = useState(isDefaultText);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.target.value;
@@ -27,23 +29,54 @@ export default function CommentInputModal(props: CommentInputModalProps) {
     if (textLength >= 10) {
       setCommentText(text);
       handleCloseBtn();
+      setIsEditing(false);
     }
   };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  useEffect(() => {
+    setText(commentText);
+    setTextLength(commentText.length);
+    setIsEditing(commentText === "오늘의 데이트는 어떠셨나요?");
+  }, [commentText]);
 
   return (
     <Background>
       <Container>
         <HeaderContainer>
           <ProfileIcon as={profileIconSrc} />
-          {textLength >= 10 ? (
-            <BtnWrapper type="button" onClick={handleSaveText}>
-              <CheckYellowIcon />
-            </BtnWrapper>
+          {isEditing ? (
+            textLength >= 10 ? (
+              <BtnWrapper type="button" onClick={handleSaveText}>
+                <CheckYellowIcon />
+              </BtnWrapper>
+            ) : (
+              <CheckIcon />
+            )
           ) : (
-            <CheckIcon />
+            <>
+              {!isDefaultText && (
+                <EditIconsContainer>
+                  <BtnWrapper type="button" onClick={handleEditClick}>
+                    <PencilIcon />
+                  </BtnWrapper>
+                  <BtnWrapper type="button" onClick={handleCloseBtn}>
+                    <XIcon />
+                  </BtnWrapper>
+                </EditIconsContainer>
+              )}
+            </>
           )}
         </HeaderContainer>
-        <TextBox placeholder="최소 10글자 이상 작성해주세요" value={text} onChange={handleTextChange} />
+        <TextBox
+          placeholder={isDefaultText ? "최소 10글자 이상 작성해주세요" : ""}
+          value={isDefaultText && !isEditing ? "" : text}
+          onChange={handleTextChange}
+          disabled={!isEditing}
+        />
         <LengthText>{textLength}/100</LengthText>
       </Container>
     </Background>
@@ -101,10 +134,10 @@ const TextBox = styled.textarea`
   border: none;
   resize: none;
   color: ${({ theme }) => theme.colors.gray_700};
-  outline: none; /* 입력 시 생기는 테두리 제거 */
+  outline: none;
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.gray_200}; /* 원하는 색상으로 변경 */
+    color: ${({ theme }) => theme.colors.gray_200};
   }
 `;
 
@@ -115,12 +148,16 @@ const LengthText = styled.p`
   color: ${({ theme }) => theme.colors.gray_200};
 `;
 
+const EditIconsContainer = styled.section`
+  display: flex;
+`;
+
 const PencilIcon = styled(PencilIc)`
   width: 2.6779rem;
   height: 2.4rem;
 `;
 
-const XIcon = styled(XIc)`
+const XIcon = styled(EditXIc)`
   width: 2.4rem;
   height: 2.4rem;
 `;

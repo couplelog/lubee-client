@@ -58,6 +58,7 @@ import MintProfile3Ic from "./icon/mintProfile3Ic.svg?react";
 import MintProfile4Ic from "./icon/mintProfile4Ic.svg?react";
 import MintProfile5Ic from "./icon/mintProfile5Ic.svg?react";
 import MintProfile6Ic from "./icon/mintProfile6Ic.svg?react";
+import EditXIc from "./icon/editXIc.svg?react";
 
 export {
   LogoIc,
@@ -120,4 +121,5 @@ export {
   MintProfile4Ic,
   MintProfile5Ic,
   MintProfile6Ic,
+  EditXIc,
 };
