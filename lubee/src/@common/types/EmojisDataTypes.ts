@@ -3,9 +3,12 @@ export interface EmojisDataTypes {
   iconSrc: string;
 }
 
-export interface ImagesDataTypes {
-  date: number;
-  imgSrc: string;
+export interface FullPicDataTypes {
+  time: string;
+  picSrc: string;
+  location: string;
+  name: string;
+  account: string;
 }
 
 export interface ProfileIconDataTypes {
@@ -23,4 +26,9 @@ export interface CommentModalProps {
   profileIconSrc: string;
   commentText: string;
   setCommentText?: (text: string) => void;
+}
+
+export interface FinalEmojisDataTypes {
+  account: string;
+  emojiData: EmojisDataTypes[];
 }

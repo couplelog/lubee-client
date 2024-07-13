@@ -1,20 +1,23 @@
 import styled from "styled-components";
-import { ProfileIc } from "@assets/index";
 import FullPicContainer from "@common/components/FullPicContainer";
 import fullPic from "@assets/image/fullPic.png";
+import getIconSrc from "@common/utils/getIconSrc";
 
 interface OneContainerProps {
   name: string;
   picSrc: string;
+  account: string;
 }
 
 export default function OneContainer(props: OneContainerProps) {
-  const { name, picSrc } = props;
+  const { name, picSrc, account } = props;
+
+  const profile = getIconSrc(account, "profile1");
   return (
     <Wrapper>
       <Time>오후 2:17</Time>
       <Profile>
-        <ProfileIcon />
+        <ProfileIcon as={profile} />
         <Name>{name}</Name>
       </Profile>
       <FullPicContainer picSrc={fullPic} location={"느루 연남점"} />
@@ -50,7 +53,7 @@ const Name = styled.p`
   color: ${({ theme }) => theme.colors.gray_900};
 `;
 
-const ProfileIcon = styled(ProfileIc)`
+const ProfileIcon = styled.svg`
   width: 3rem;
   height: 3rem;
 `;

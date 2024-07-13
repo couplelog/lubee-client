@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import EmojiBar from "@common/components/EmojiBar";
 import { useState, useRef, useEffect } from "react";
-import { MintHeartSmallIcon } from "@common/components/SmallEmojiIcons";
-import { smallEmojisData } from "@common/core/smallEmojisData";
-import { EmojisDataTypes } from "@common/types/EmojisDataTypes";
 import fullPic from "@assets/image/fullPic.png";
 import EmojiDetailModal from "fullpic/components/EmojiDetailModal";
 import OneContainer from "./components/OneContainer";
 import DeletePicModal from "fullpic/components/DeletePicModal";
 import FullpicHeader from "fullpic/components/FullpicHeader";
+import getEmojiSrc from "@common/utils/getEmojiSrc";
+import EmojiTag from "@common/components/EmojiTag";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
@@ -19,8 +18,9 @@ export default function index() {
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
 
-  const selectedEmojiData = smallEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
-  const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
+  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
+  const myEmoji = getEmojiSrc("me", selectedEmojiText);
+  const partnerEmoji = getEmojiSrc("partner", "thumb");
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -38,15 +38,13 @@ export default function index() {
   return (
     <Wrapper>
       <FullpicHeader handleTrashBtn={handleTrashBtn} />
-      <OneContainer name={"맹꽁이"} picSrc={fullPic} />
-      <EmojiTag
-        type="button"
-        onClick={() => {
-          setOpenEmojiDetail(true);
-        }}>
-        {EmojiIcon && <EmojiIcon />}
-        <MintHeartSmallIcon />
-      </EmojiTag>
+      <OneContainer name={"맹꽁이"} picSrc={fullPic} account="partner" />
+      <EmojiTagContainer>
+        <EmojiTag font="fullPic" setOpenEmojiDetail={setOpenEmojiDetail}>
+          <EmojiIcon as={myEmoji} />
+          <EmojiIcon as={partnerEmoji} />
+        </EmojiTag>
+      </EmojiTagContainer>
       <Footer>
         <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
       </Footer>
@@ -64,15 +62,13 @@ const Wrapper = styled.section`
   height: 100vh;
 `;
 
-const EmojiTag = styled.button`
-  display: flex;
-  gap: 0.4rem;
+const EmojiTagContainer = styled.button`
   position: absolute;
   top: 45rem;
   left: 4rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 31px;
-  background-color: ${({ theme }) => theme.colors.white};
+  padding: 0;
+  border: none;
+  background: none;
 `;
 
 const Footer = styled.div`
@@ -80,4 +76,9 @@ const Footer = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 15.38rem 1.42rem 2.1rem;
+`;
+
+const EmojiIcon = styled.svg`
+  width: 2.4rem;
+  height: 2.4rem;
 `;

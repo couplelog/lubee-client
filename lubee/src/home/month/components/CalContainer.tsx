@@ -4,13 +4,12 @@ import { HoneyMonthIc } from "@assets/index";
 import { Day } from "@common/core/calendarData";
 import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
-import { imagesData } from "@common/core/imagesData";
+import { fullPicData } from "@common/core/fullPicData";
 interface CalContainerProps {
   info: CalInfoTypes;
-  iconSrc: string;
 }
 
-const CalContainer = ({ info, iconSrc }: CalContainerProps) => {
+const CalContainer = ({ info }: CalContainerProps) => {
   /*모달 애니메이션*/
   const [openDateDetailModal, setOpenDateDetailModal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -81,12 +80,7 @@ const CalContainer = ({ info, iconSrc }: CalContainerProps) => {
         ))}
       </Grid>
       {openDateDetailModal && (
-        <DateDetailModal
-          ref={modalRef}
-          date={`${month}월 ${selectedDate}일`}
-          iconSrc={iconSrc}
-          imagesData={imagesData}
-        />
+        <DateDetailModal ref={modalRef} date={`${month}월 ${selectedDate}일`} fullPicData={fullPicData} />
       )}
     </Calendar>
   );

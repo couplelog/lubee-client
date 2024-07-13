@@ -12,7 +12,6 @@ import YellowSmileIc from "./icon/yellowSmileIc.svg?react";
 import MintSmileIc from "./icon/mintSmileIc.svg?react";
 import YellowHoneyIc from "./icon/yellowHoneyIc.svg?react";
 import MintHoneyIc from "./icon/mintHoneyIc.svg?react";
-import ProfileIc from "./icon/profileIc.svg?react";
 import ShortBorderIc from "./icon/shortborderIc.svg?react";
 import ShareBtnIc from "./icon/shareBtnIc.svg?react";
 import XIc from "./icon/xIc.svg?react";
@@ -46,7 +45,6 @@ import ProgressBar3Ic from "./icon/progressBar3Ic.svg?react";
 import ProgressBar4Ic from "./icon/progressBar4Ic.svg?react";
 import CongratIc from "./icon/congratIc.svg?react";
 import CompleteIc from "./icon/completeIc.svg?react";
-import OtherProfileIc from "./icon/otherProfileIc.svg?react";
 import HoneyIc from "./icon/honeyIc.svg?react";
 import PlusIc from "./icon/plusIc.svg?react";
 import CheckIc from "./icon/checkIc.svg?react";
@@ -75,7 +73,6 @@ export {
   MintSmileIc,
   YellowHoneyIc,
   MintHoneyIc,
-  ProfileIc,
   ShortBorderIc,
   ShareBtnIc,
   XIc,
@@ -109,7 +106,6 @@ export {
   ProgressBar4Ic,
   CongratIc,
   CompleteIc,
-  OtherProfileIc,
   HoneyIc,
   PlusIc,
   CheckIc,

@@ -1,8 +1,7 @@
-import { MintHeartIc, ShortBorderIc } from "@assets/index";
+import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
-import { bigEmojisData } from "@common/core/bigEmojisData";
-import { EmojisDataTypes } from "@common/types/EmojisDataTypes";
+import getEmojiSrc from "@common/utils/getEmojiSrc";
 import getIconSrc from "@common/utils/getIconSrc";
 
 interface EmojiDetailModalProps {
@@ -11,12 +10,14 @@ interface EmojiDetailModalProps {
 
 const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((props, ref) => {
   const { selectedEmojiText } = props;
-  const selectedEmojiData = bigEmojisData.find((emoji: EmojisDataTypes) => emoji.emoji === selectedEmojiText);
-  const EmojiIcon = selectedEmojiData ? selectedEmojiData.iconSrc : null;
 
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getIconSrc("me", "profile1");
   const partnerProfile = getIconSrc("partner", "profile2");
+
+  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
+  const myEmoji = getEmojiSrc("me", selectedEmojiText);
+  const partnerEmoji = getEmojiSrc("partner", selectedEmojiText);
 
   return (
     <Background>
@@ -26,13 +27,13 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
           <Text>공감</Text>
         </Header>
         <EmojiBox>
-          {EmojiIcon && (
+          {selectedEmojiText && (
             <MyEmoji>
               <Profile>
                 <ProfileIcon as={myProfile} />
                 <Name>불꽃피카츄</Name>
               </Profile>
-              <EmojiIcon />
+              <EmojiIcon as={myEmoji} />
             </MyEmoji>
           )}
           <PartnerEmoji>
@@ -40,7 +41,7 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
               <ProfileIcon as={partnerProfile} />
               <Name>맹꽁이</Name>
             </Profile>
-            <BfEmoji />
+            <EmojiIcon as={partnerEmoji} />
           </PartnerEmoji>
         </EmojiBox>
       </Container>
@@ -117,7 +118,7 @@ const Name = styled.div`
   color: ${({ theme }) => theme.colors.gray_800};
 `;
 
-const BfEmoji = styled(MintHeartIc)`
+const EmojiIcon = styled.svg`
   width: 3.2rem;
   height: 3.2rem;
 `;

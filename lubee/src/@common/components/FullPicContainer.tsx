@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { fullPicStyle } from "@styles/picStyle";
-import Location from "./LocationTag";
+import LocationTag from "./LocationTag";
 
 interface FullPicProps {
   picSrc: string;
@@ -16,7 +16,7 @@ export default function FullPicContainer(props: FullPicProps) {
   return (
     <PicBox>
       <Pic src={picSrc}></Pic>
-      <Location location={location} setOpenLocationModal={setOpenLocationModal} />
+      <LocationTag location={location} setOpenLocationModal={setOpenLocationModal} font="fullPic" />
     </PicBox>
   );
 }
