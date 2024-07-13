@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { CheckIc, CheckYellowIc, PencilIc, XIc } from "@assets/index";
 
@@ -9,6 +10,16 @@ interface CommentInputModalProps {
 
 export default function CommentInputModal(props: CommentInputModalProps) {
   const { handleCloseBtn, handleModifyBtn, profileIconSrc } = props;
+  const [text, setText] = useState("");
+  const [textLength, setTextLength] = useState(0);
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = e.target.value;
+    if (newText.length <= 100) {
+      setText(newText);
+      setTextLength(newText.length);
+    }
+  };
 
   return (
     <Background>
@@ -17,8 +28,8 @@ export default function CommentInputModal(props: CommentInputModalProps) {
           <ProfileIcon as={profileIconSrc} />
           <CheckIcon />
         </HeaderContainer>
-        <TextBox placeholder="최소 10글자 이상 작성해주세요" />
-        <LengthText>100/100</LengthText>
+        <TextBox placeholder="최소 10글자 이상 작성해주세요" value={text} onChange={handleTextChange} />
+        <LengthText>{textLength}/100</LengthText>
       </Container>
     </Background>
   );
