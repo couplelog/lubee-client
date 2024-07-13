@@ -4,6 +4,8 @@ import BlankImgBtn from "home/components/BlankImgBtn";
 import blankImg from "@assets/image/blankImg.png";
 import getIconSrc from "@common/utils/getIconSrc";
 import LocationTag from "@common/components/LocationTag";
+import EmojiTag from "@common/components/EmojiTag";
+import getEmojiSrc from "@common/utils/getEmojiSrc";
 
 export default function HomePicBox() {
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
@@ -13,6 +15,10 @@ export default function HomePicBox() {
   /*프로필 아이콘*/
   const myProfile = getIconSrc("me", "profile1");
   const partnerProfile = getIconSrc("partner", "profile2");
+
+  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
+  const myEmoji = getEmojiSrc("me", "heart");
+  const partnerEmoji = getEmojiSrc("partner", "thumb");
 
   return (
     <Container>
@@ -24,7 +30,11 @@ export default function HomePicBox() {
             <Image src={imgSrc} />
             <ProfileIcon as={myProfile} />
             <TagContainer>
-              <LocationTag location="어디까지 길어지나" font="smallPic" />
+              <LocationTag location="청수당공명" font="smallPic" />
+              <EmojiTag font="smallPic">
+                <EmojiIcon as={myEmoji} />
+                <EmojiIcon as={partnerEmoji} />
+              </EmojiTag>
             </TagContainer>
           </ImgContainer>
         ),
@@ -33,9 +43,6 @@ export default function HomePicBox() {
   );
 }
 
-{
-  /* <ImageWrapper key={date} src={imgSrc} /> */
-}
 const Container = styled.section`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -69,10 +76,17 @@ const ProfileIcon = styled.svg`
 `;
 
 const TagContainer = styled.div`
+  display: flex;
+  gap: 0.4rem;
   position: absolute;
   bottom: 1.2rem;
   left: 1.21rem;
   padding: 0;
   border: none;
   background: none;
+`;
+
+const EmojiIcon = styled.svg`
+  width: 1.6rem;
+  height: 1.6rem;
 `;
