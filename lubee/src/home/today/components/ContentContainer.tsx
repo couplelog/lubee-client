@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import CommentBox from "./CommentBox";
-import getIconSrc from "@common/utils/getIconSrc";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import HomePicBox from "home/components/HomePicBox";
 
 export default function ContentContainer() {
-  const myProfile = getIconSrc("me", "profile1");
-  const partnerProfile = getIconSrc("partner", "profile1");
+  const myProfile = getProfileIconSrc("me", "profile1");
+  const partnerProfile = getProfileIconSrc("partner", "profile1");
 
   return (
     <Container>

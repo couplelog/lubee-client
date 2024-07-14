@@ -2,7 +2,7 @@ import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
-import getIconSrc from "@common/utils/getIconSrc";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 
 interface EmojiDetailModalProps {
   selectedEmojiText: string;
@@ -12,8 +12,8 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
   const { selectedEmojiText } = props;
 
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
-  const myProfile = getIconSrc("me", "profile1");
-  const partnerProfile = getIconSrc("partner", "profile2");
+  const myProfile = getProfileIconSrc("me", "profile1");
+  const partnerProfile = getProfileIconSrc("partner", "profile2");
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
   const myEmoji = getEmojiSrc("me", selectedEmojiText);

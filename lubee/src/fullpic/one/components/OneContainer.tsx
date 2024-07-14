@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import FullPicContainer from "@common/components/FullPicContainer";
 import fullPic from "@assets/image/fullPic.png";
-import getIconSrc from "@common/utils/getIconSrc";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 
 interface OneContainerProps {
   name: string;
@@ -12,7 +12,7 @@ interface OneContainerProps {
 export default function OneContainer(props: OneContainerProps) {
   const { name, picSrc, account } = props;
 
-  const profile = getIconSrc(account, "profile1");
+  const profile = getProfileIconSrc(account, "profile1");
   return (
     <Wrapper>
       <Time>오후 2:17</Time>

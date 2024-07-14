@@ -1,4 +1,3 @@
-import { ProfileIconDataTypes } from "@common/types/EmojisDataTypes";
 import { Profile1Ic, Profile2Ic, Profile3Ic, Profile4Ic, Profile5Ic, Profile6Ic } from "@assets/index";
 import {
   MintProfile1Ic,
@@ -8,6 +7,7 @@ import {
   MintProfile5Ic,
   MintProfile6Ic,
 } from "@assets/index";
+import { ProfileIconDataTypes } from "@common/types/CommonTypes";
 
 export const profileIconsData: ProfileIconDataTypes[] = [
   {

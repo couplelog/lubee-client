@@ -1,5 +1,5 @@
 import fullPic from "@assets/image/fullPic.png";
-import { FullPicDataTypes } from "@common/types/EmojisDataTypes";
+import { FullPicDataTypes } from "@common/types/CommonTypes";
 
 export const fullPicData: FullPicDataTypes[] = [
   {

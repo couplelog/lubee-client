@@ -1,5 +1,5 @@
+import { TitleBoxProps } from "@common/types/CommonTypes";
 import styled from "styled-components";
-import { TitleBoxProps } from "@common/types/EmojisDataTypes";
 
 export default function OnboardingTitleBox(props: TitleBoxProps) {
   const { titleText, subtitleText } = props;

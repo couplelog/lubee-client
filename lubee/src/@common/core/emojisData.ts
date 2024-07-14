@@ -1,4 +1,3 @@
-import { FinalEmojisDataTypes } from "@common/types/EmojisDataTypes";
 import {
   YellowHeartIc,
   YellowBangIc,
@@ -11,8 +10,9 @@ import {
   MintSmileIc,
   MintThumbIc,
 } from "@assets/index";
+import { EmojisDataTypes } from "@common/types/CommonTypes";
 
-export const emojisData: FinalEmojisDataTypes[] = [
+export const emojisData: EmojisDataTypes[] = [
   {
     account: "me",
     emojiData: [

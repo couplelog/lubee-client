@@ -1,4 +1,4 @@
-export interface EmojisDataTypes {
+export interface EmojiTypes {
   emoji: string;
   iconSrc: string;
 }
@@ -13,7 +13,7 @@ export interface FullPicDataTypes {
 
 export interface ProfileIconDataTypes {
   account: string;
-  profileIcon: EmojisDataTypes[];
+  profileIcon: EmojiTypes[];
 }
 
 export interface TitleBoxProps {
@@ -21,7 +21,7 @@ export interface TitleBoxProps {
   subtitleText?: string;
 }
 
-export interface FinalEmojisDataTypes {
+export interface EmojisDataTypes {
   account: string;
-  emojiData: EmojisDataTypes[];
+  emojiData: EmojiTypes[];
 }

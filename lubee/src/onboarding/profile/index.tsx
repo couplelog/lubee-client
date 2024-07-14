@@ -4,7 +4,7 @@ import styled from "styled-components";
 import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
-import getIconSrc from "@common/utils/getIconSrc";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 
@@ -19,7 +19,7 @@ export default function index(props: ProfileProps) {
   const [nickname, setNickname] = useState("");
   const isOnboardingBtnDisabled = nickname === "";
   const yellowBoxRef = useRef<{ focus: () => void }>(null);
-  const myProfile = getIconSrc("me", "profile1");
+  const myProfile = getProfileIconSrc("me", "profile1");
 
   useEffect(() => {
     // 페이지가 로드되고 나서 입력 필드에 포커스를 설정
