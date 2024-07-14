@@ -26,5 +26,5 @@ const CalWrapper = styled.section`
   overflow: scroll;
   scrollbar-width: none;
   width: 100%;
-  padding: 0 1.8rem;
+  padding: 0 1.8rem 2rem;
 `;
