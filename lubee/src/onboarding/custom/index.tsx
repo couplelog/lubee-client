@@ -6,7 +6,8 @@ import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
-import { profileCustomIconsData } from "@common/core/profileCustomIconsData";
+import { profileCustomIconsData } from "@common/core/ProfileCustomIconsData";
+
 interface CustomProps {
   moveToOnboardingCode: () => void;
   moveToOnboardingProfile: () => void;

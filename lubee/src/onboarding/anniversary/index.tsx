@@ -9,11 +9,10 @@ import OnboardingBtn from "../components/OnboardingBtn";
 
 interface AnnivProps {
   moveToOnboardingBirth: () => void;
-  moveToOnboardingComplete: () => void;
 }
 
 export default function index(props: AnnivProps) {
-  const { moveToOnboardingBirth, moveToOnboardingComplete } = props;
+  const { moveToOnboardingBirth } = props;
   const navigate = useNavigate();
   const [anniv, setAnniv] = useState("");
 
@@ -31,7 +30,7 @@ export default function index(props: AnnivProps) {
     setAnniv(date);
   }
   function handleOnboardingBtn() {
-    moveToOnboardingComplete();
+    navigate("/congrats/join");
   }
 
   return (
