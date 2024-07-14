@@ -8,10 +8,10 @@ import { fullPicData } from "@common/core/fullPicData";
 
 interface CalContainerProps {
   info: CalInfoTypes;
-  showCalendar: boolean;
+  showCalendar?: boolean;
 }
 
-const CalContainer = ({ info, showCalendar }: CalContainerProps) => {
+const CalContainer = ({ info, showCalendar = false }: CalContainerProps) => {
   /*모달 애니메이션*/
   const [openDateDetailModal, setOpenDateDetailModal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
