@@ -1,15 +1,17 @@
 import styled from "styled-components";
 import { CalInfoTypes } from "../types/CalInfoTypes";
-import { HoneyMonthIc } from "@assets/index";
+import { BackSmallIc, ForwardIc, HoneyMonthIc } from "@assets/index";
 import { Day } from "@common/core/calendarData";
 import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
 import { fullPicData } from "@common/core/fullPicData";
+import { BtnWrapper } from "@styles/btnStyle";
 interface CalContainerProps {
   info: CalInfoTypes;
+  showCalendar?: boolean;
 }
 
-const CalContainer = ({ info }: CalContainerProps) => {
+const CalContainer = ({ info, showCalendar }: CalContainerProps) => {
   /*모달 애니메이션*/
   const [openDateDetailModal, setOpenDateDetailModal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -66,6 +68,16 @@ const CalContainer = ({ info }: CalContainerProps) => {
           <HoneyMonthIcon />
           <HoneyCount>35</HoneyCount>
         </HeaderHoney>
+        {showCalendar && (
+          <BackForthBtn>
+            <BtnWrapper>
+              <BackSmallIcon />
+            </BtnWrapper>
+            <BtnWrapper>
+              <ForwardIcon />
+            </BtnWrapper>
+          </BackForthBtn>
+        )}
       </Header>
       <Grid>
         {Day.map((day) => (
@@ -168,3 +180,20 @@ const Weekday = styled.li`
 // & > li:nth-child(7n + 1) {
 //   color: ${({ theme }) => theme.colors.red};
 // }
+
+const BackForthBtn = styled.div`
+  display: flex;
+  gap: 1.71rem;
+  position: absolute;
+  right: 3.5rem;
+`;
+
+const BackSmallIcon = styled(BackSmallIc)`
+  width: 1.4716rem;
+  height: 1.4716rem;
+`;
+
+const ForwardIcon = styled(ForwardIc)`
+  width: 1.4716rem;
+  height: 1.4716rem;
+`;
