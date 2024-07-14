@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import BlankImgBtn from "home/components/BlankImgBtn";
 import blankImg from "@assets/image/blankImg.png";
-import getIconSrc from "@common/utils/getIconSrc";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import LocationTag from "@common/components/LocationTag";
 import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
@@ -21,8 +21,8 @@ export default function HomePicBox(props: HomePicBoxProps) {
     fullPicData.length < 5 ? [...fullPicData.map((img) => img.picSrc), blankImg] : fullPicData.map((img) => img.picSrc);
 
   /*프로필 아이콘*/
-  const myProfile = getIconSrc("me", "profile1");
-  const partnerProfile = getIconSrc("partner", "profile2");
+  const myProfile = getProfileIconSrc("me", "profile1");
+  const partnerProfile = getProfileIconSrc("partner", "profile2");
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
   const myEmoji = getEmojiSrc("me", "heart");

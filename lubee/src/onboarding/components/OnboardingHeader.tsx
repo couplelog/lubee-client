@@ -1,7 +1,7 @@
 import { BackIc, XIc } from "@assets/index";
 import styled from "styled-components";
 
-interface HeaderProps {
+interface OnboardingHeaderProps {
   handleBackBtn?: () => void;
   handleXBtn?: () => void;
   showBackIcon?: boolean;
@@ -9,7 +9,7 @@ interface HeaderProps {
   showTitle?: boolean;
 }
 
-export default function Header(props: HeaderProps) {
+export default function OnboardingHeader(props: OnboardingHeaderProps) {
   const { handleBackBtn, handleXBtn, showBackIcon, showXIcon, showTitle } = props;
 
   return (

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../components/Header";
+import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
-import TitleBox from "../components/TitleBox";
+import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import DatePickerScroll from "../components/rolldate/DatePickerScroll";
 import OnboardingBtn from "../components/OnboardingBtn";
 
@@ -37,9 +37,12 @@ export default function index(props: BirthProps) {
 
   return (
     <Wrapper>
-      <Header handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
+      <OnboardingHeader handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
       <ProgressBar step={3} />
-      <TitleBox titleText="본인의 생년월일을 입력해주세요" subtitleText="달력에 나와 연인의 생일이 표시돼요" />
+      <OnboardingTitleBox
+        titleText="본인의 생년월일을 입력해주세요"
+        subtitleText="달력에 나와 연인의 생일이 표시돼요"
+      />
       <DatePickerScroll onDateChange={handleDateChange} />
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="다음" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DateBox from "./components/DateBox";
-import Title from "./components/Title";
+import TodayTitle from "./components/TodayTitle";
 import HoneyIconContainer from "./components/HoneyIconContainer";
 import ProfileBox from "./components/ProfileBox";
 import ContentContainer from "./components/ContentContainer";
@@ -12,7 +12,7 @@ export default function index() {
     <Wrapper>
       <Container>
         <DateBox />
-        <Title day={387} />
+        <TodayTitle day={387} />
         <SubContainer>
           <HoneyIconContainer />
           <ProfileBox />

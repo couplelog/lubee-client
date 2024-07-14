@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BtnWrapper } from "@styles/btnStyle";
-import Header from "../components/Header";
+import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
-import TitleBox from "../components/TitleBox";
+import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 import { profileCustomIconsData } from "@common/core/ProfileCustomIconsData";
+
 interface CustomProps {
   moveToOnboardingCode: () => void;
   moveToOnboardingProfile: () => void;
@@ -41,9 +42,9 @@ export default function index(props: CustomProps) {
 
   return (
     <Wrapper>
-      <Header handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
+      <OnboardingHeader handleBackBtn={handleBackBtn} handleXBtn={handleXBtn} showBackIcon showXIcon />
       <ProgressBar step={1} />
-      <TitleBox titleText="프로필 캐릭터를 지정해주세요" subtitleText="러비에서만 보여지는 프로필이에요" />
+      <OnboardingTitleBox titleText="프로필 캐릭터를 지정해주세요" subtitleText="러비에서만 보여지는 프로필이에요" />
       <ProfileGrid>
         {profileCustomIconsData.map((profile, index) => (
           <BtnWrapper type="button" key={index} onClick={() => handleProfileClick(index)}>

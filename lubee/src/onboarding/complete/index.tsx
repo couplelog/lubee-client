@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CongratIc, CompleteIc } from "@assets/index";
-import TitleBox from "./components/TitleBox";
+import TitleBox from "congrats/components/CongratsTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 
 export default function index() {

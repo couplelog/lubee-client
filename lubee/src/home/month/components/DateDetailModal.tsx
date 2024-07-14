@@ -2,9 +2,9 @@ import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import Comment from "./Comment";
-import { FullPicDataTypes } from "@common/types/EmojisDataTypes";
-import getIconSrc from "@common/utils/getIconSrc";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import HomePicBox from "home/components/HomePicBox";
+import { FullPicDataTypes } from "@common/types/CommonTypes";
 
 interface DateDetailModalProps {
   date: string;
@@ -15,8 +15,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const { date } = props;
 
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
-  const myProfile = getIconSrc("me", "profile1");
-  const partnerProfile = getIconSrc("partner", "profile2");
+  const myProfile = getProfileIconSrc("me", "profile1");
+  const partnerProfile = getProfileIconSrc("partner", "profile2");
 
   const myComment =
     "오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.";

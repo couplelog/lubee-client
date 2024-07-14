@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import getIconSrc from "@common/utils/getIconSrc";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 
 export default function ProfileBox() {
-  const myProfile = getIconSrc("me", "profile1");
-  const partnerProfile = getIconSrc("partner", "profile1");
+  const myProfile = getProfileIconSrc("me", "profile1");
+  const partnerProfile = getProfileIconSrc("partner", "profile1");
 
   return (
     <Wrapper>

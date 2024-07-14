@@ -13,6 +13,9 @@ import Error from "error";
 import Fullpic from "fullpic";
 import Date from "fullpic/date";
 import One from "fullpic/one";
+import First from "congrats/first";
+import Fifth from "congrats/fifth";
+import Join from "congrats/join";
 
 export const Router = createBrowserRouter([
   {
@@ -41,6 +44,15 @@ export const Router = createBrowserRouter([
         children: [
           { path: "/fullpic/:date", element: <Date /> },
           { path: "/fullpic/:date/:index", element: <One /> },
+        ],
+      },
+      {
+        path: "/congrats",
+        element: <Congrats />,
+        children: [
+          { path: "/congrats/first", element: <First /> },
+          { path: "/congrats/fifth", element: <Fifth /> },
+          { path: "/congrats/join", element: <Join /> },
         ],
       },
     ],

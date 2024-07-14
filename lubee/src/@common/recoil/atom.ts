@@ -39,8 +39,3 @@ export const onboardingAnnivState = atom<boolean>({
   key: "onboardingAnnivState",
   default: false,
 });
-
-export const onboardingCompleteState = atom<boolean>({
-  key: "onboardingCompleteState",
-  default: false,
-});

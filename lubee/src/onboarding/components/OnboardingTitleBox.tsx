@@ -1,13 +1,13 @@
+import { TitleBoxProps } from "@common/types/CommonTypes";
 import styled from "styled-components";
-import { TitleBoxProps } from "@common/types/EmojisDataTypes";
 
-export default function TitleBox(props: TitleBoxProps) {
+export default function OnboardingTitleBox(props: TitleBoxProps) {
   const { titleText, subtitleText } = props;
 
   return (
     <Wrapper>
       <TitleText>{titleText}</TitleText>
-      <SubtitleText>{subtitleText}</SubtitleText>
+      {subtitleText && <SubtitleText>{subtitleText}</SubtitleText>}
     </Wrapper>
   );
 }
@@ -15,21 +15,21 @@ export default function TitleBox(props: TitleBoxProps) {
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 0.391rem;
+  gap: 0.8rem;
   align-items: center;
-  position: absolute;
-  top: 38.1rem;
+  margin-top: 6rem;
   text-align: center;
 `;
 
 const TitleText = styled.h2`
-  ${({ theme }) => theme.fonts.Title_3};
+  ${({ theme }) => theme.fonts.Title_2};
 
   color: ${({ theme }) => theme.colors.gray_800};
+  white-space: pre-line;
 `;
 
 const SubtitleText = styled.p`
-  ${({ theme }) => theme.fonts.Body_3};
+  ${({ theme }) => theme.fonts.Caption_2};
 
-  color: ${({ theme }) => theme.colors.gray_600};
+  color: ${({ theme }) => theme.colors.gray_400};
 `;

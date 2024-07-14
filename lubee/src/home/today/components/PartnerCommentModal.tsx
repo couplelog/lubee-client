@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { EditXIc } from "@assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
-import { CommentModalProps } from "@common/types/EmojisDataTypes";
+import { CommentModalProps } from "../types/CommentModalTypes";
 
 export default function PartnerCommentInputModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText } = props;
