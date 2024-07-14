@@ -92,6 +92,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 1.6rem 1.2rem;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const Header = styled.header`
@@ -135,7 +138,7 @@ const Item = styled.button<{ $isUploaded: boolean }>`
   align-items: center;
   padding: 1rem;
   border-radius: 31px;
-  background-color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.yellow : theme.colors.gray_50)};
+  background-color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.yellow : theme.colors.white)};
   color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.gray_800 : theme.colors.gray_500)};
 `;
 
