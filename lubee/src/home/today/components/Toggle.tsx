@@ -3,7 +3,12 @@ import styled from "styled-components";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Toggle() {
+interface ToggleProps {
+  handleCalendar: () => void;
+  showCalendar: boolean;
+}
+export default function Toggle(props: ToggleProps) {
+  const { handleCalendar, showCalendar } = props;
   const [isFile, setIsFile] = useState<File[] | null>(null);
 
   /* 사진 업로드 */
@@ -26,23 +31,25 @@ export default function Toggle() {
 
   return (
     <Background>
-      <Container>
-        <Today onClick={handleAddPicBtn}>
-          <Text>오늘 기록</Text>
-          <ToggleHoneyIcon />
-          <FileInput
-            type="file"
-            ref={fileInputRef}
-            multiple={false}
-            onChange={handleFileInputChange}
-            accept="image/gif,image/jpeg,image/png,image/jpg,image/webp,image/heic"
-          />
-        </Today>
-        <Past>
-          <Text>과거 기록</Text>
-          <TogglePastIcon />
-        </Past>
-      </Container>
+      {!showCalendar && (
+        <Container>
+          <Today onClick={handleAddPicBtn}>
+            <Text>오늘 기록</Text>
+            <ToggleHoneyIcon />
+            <FileInput
+              type="file"
+              ref={fileInputRef}
+              multiple={false}
+              onChange={handleFileInputChange}
+              accept="image/gif,image/jpeg,image/png,image/jpg,image/webp,image/heic"
+            />
+          </Today>
+          <Past onClick={handleCalendar}>
+            <Text>과거 기록</Text>
+            <TogglePastIcon />
+          </Past>
+        </Container>
+      )}
     </Background>
   );
 }

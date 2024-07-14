@@ -59,7 +59,7 @@ const CalContainer = ({ info }: CalContainerProps) => {
   }
 
   return (
-    <Calendar>
+    <Container>
       <Header>
         <HeaderDate>{`${year}.${formatMonth(month)}`}</HeaderDate>
         <HeaderHoney>
@@ -82,17 +82,16 @@ const CalContainer = ({ info }: CalContainerProps) => {
       {openDateDetailModal && (
         <DateDetailModal ref={modalRef} date={`${month}월 ${selectedDate}일`} fullPicData={fullPicData} />
       )}
-    </Calendar>
+    </Container>
   );
 };
 
 export default CalContainer;
 
-const Calendar = styled.article`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 1.8rem;
 `;
 
 const Header = styled.header`

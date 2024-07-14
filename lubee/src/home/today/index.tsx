@@ -7,12 +7,19 @@ import ContentContainer from "./components/ContentContainer";
 import { PlusIc } from "@assets/index";
 import { useState } from "react";
 import Toggle from "./components/Toggle";
+import ToggleCalendar from "./components/ToggleCalendar";
 
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
+  }
+
+  function handleCalendar() {
+    setOpenToggle(false);
+    setShowCalendar((open) => !open);
   }
 
   return (
@@ -26,10 +33,13 @@ export default function index() {
         </SubContainer>
       </Container>
       <ContentContainer />
-      <BtnWrapper type="button" onClick={handlePlusBtn}>
-        <PlusIcon />
-      </BtnWrapper>
-      {openToggle && <Toggle />}
+      {!showCalendar && (
+        <BtnWrapper type="button" onClick={handlePlusBtn}>
+          <PlusIcon />
+        </BtnWrapper>
+      )}
+      {openToggle && <Toggle handleCalendar={handleCalendar} showCalendar={showCalendar} />}
+      {showCalendar && <ToggleCalendar showCalendar={showCalendar} handleCalendar={handleCalendar} />}
     </Wrapper>
   );
 }
