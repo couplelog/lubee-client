@@ -36,9 +36,9 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
         <Locations>
           {locationData &&
             locationData.map((data) => {
-              const { name, distance, info } = data;
+              const { name, distance, info, id } = data;
               return (
-                <LocationBox key={name} type="button" onClick={() => closeLocationModal(name)}>
+                <LocationBox key={id} type="button" onClick={() => closeLocationModal(name)}>
                   <Name>{name}</Name>
                   <Details>
                     <Distance>{`${distance}m,`}</Distance>
