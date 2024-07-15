@@ -94,9 +94,9 @@ const Container = styled.div`
 const Text = styled.p<{ $isDefault: boolean }>`
   display: -webkit-box;
   overflow: hidden;
-  text-overflow: ellipsis;
   width: 10.9rem;
   color: ${({ theme, $isDefault }) => ($isDefault ? theme.colors.gray_400 : theme.colors.gray_700)};
+  text-overflow: ellipsis;
   white-space: pre-wrap; /* 줄바꿈을 허용 */
   word-wrap: break-word;
   -webkit-line-clamp: 3;
