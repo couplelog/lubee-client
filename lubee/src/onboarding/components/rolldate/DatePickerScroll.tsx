@@ -1,30 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { flexCenter } from "@styles/globalStyle";
-
-// Rolldate 인터페이스 정의
-interface RolldateOptions {
-  el: string;
-  format: string;
-  minStep: number;
-  beginYear: number;
-  endYear: number;
-  trigger: string;
-  lang: {
-    title: string;
-    cancel: string;
-    confirm: string;
-  };
-  value: string;
-  confirm?: (date: string) => void;
-}
-
-// window 객체에 Rolldate를 추가
-declare global {
-  interface Window {
-    Rolldate: new (options: RolldateOptions) => void;
-  }
-}
+import Rolldate from "./rolldate.es.js"; // 이 모듈의 타입은 src/types/rolldate.d.ts 파일에 선언됨
 
 interface DatePickerScrollProps {
   onDateChange: (date: string) => void;
@@ -48,7 +25,6 @@ const DatePickerScroll: React.FC<DatePickerScrollProps> = ({ onDateChange }) => 
 
   useEffect(() => {
     // Rolldate 초기화
-    const Rolldate = window.Rolldate;
     if (Rolldate) {
       const currentDate = getCurrentDate();
 
