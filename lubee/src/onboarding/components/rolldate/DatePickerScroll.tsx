@@ -87,7 +87,7 @@ const DatePickerScroll: React.FC<DatePickerScrollProps> = ({ onDateChange }) => 
   }, [selectedDate]);
 
   return (
-    <Wrapper onClick={handleClick}>
+    <Wrapper onClick={handleClick} onTouchEnd={handleClick}>
       <HiddenInput type="text" id="hiddenDatePicker" readOnly />
       {/* 날짜 선택 안했을 경우 Placeholder로 텍스트 색상 조정 및 오늘 날짜 출력 */}
       <DateBox $isPlaceholder={!selectedDate.year}>{selectedDate.year || getCurrentDate().year}</DateBox>
@@ -102,6 +102,7 @@ export default DatePickerScroll;
 const Wrapper = styled.section`
   display: flex;
   gap: 1.2rem;
+  z-index: 1000;
   margin-top: 6rem;
   cursor: pointer;
 `;
