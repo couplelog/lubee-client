@@ -10,7 +10,7 @@ interface OneContainerProps {
 }
 
 export default function OneContainer(props: OneContainerProps) {
-  const { name, picSrc, account } = props;
+  const { name, account } = props;
 
   const profile = getProfileIconSrc(account, "profile1");
   return (
