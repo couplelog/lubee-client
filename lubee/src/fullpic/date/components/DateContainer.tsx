@@ -62,8 +62,13 @@ export default function DateContainer(props: DateContainerProps) {
 const Wrapper = styled.section`
   display: flex;
   overflow-x: auto;
-  scrollbar-width: none;
   scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
 const ContentsBox = styled.div`
@@ -111,7 +116,7 @@ const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 15.38rem 1.42rem 2.1rem;
+  padding: 10rem 1.42rem 2.1rem;
 `;
 
 const EmojiIcon = styled.svg`

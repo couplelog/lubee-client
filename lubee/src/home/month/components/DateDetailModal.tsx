@@ -59,7 +59,12 @@ const Container = styled.section<{ $showCalendar: boolean }>`
   z-index: 1000;
   max-height: 49rem;
   background-color: ${({ theme }) => theme.colors.white};
-  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
 const Header = styled.div`

@@ -2,13 +2,21 @@ import styled from "styled-components";
 import { LogoIc, SymbolLoginIc } from "@assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
 import CompanyText from "@common/components/CompanyText";
+import { useNavigate } from "react-router-dom";
 
 export default function index() {
+  const navigate = useNavigate();
+
+  function moveToOnboarding() {
+    navigate("/onboarding");
+  }
   return (
     <Wrapper>
       <LogoIcon />
       <SymbolLoginIcon />
-      <LoginBtn>카카오 계정으로 로그인하기</LoginBtn>
+      <LoginBtn type="button" onClick={moveToOnboarding}>
+        카카오 계정으로 로그인하기
+      </LoginBtn>
       <CompanyText />
     </Wrapper>
   );

@@ -66,6 +66,12 @@ const Wrapper = styled.section`
   position: relative;
   width: 100%;
   height: 100vh;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
 const EmojiTagContainer = styled.button`
@@ -81,7 +87,7 @@ const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 15.38rem 1.42rem 2.1rem;
+  padding: 10rem 1.42rem 2.1rem;
 `;
 
 const EmojiIcon = styled.svg`
