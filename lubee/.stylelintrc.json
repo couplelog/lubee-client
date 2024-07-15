@@ -4,7 +4,7 @@
   "overrides": [
     {
       "customSyntax": "@stylelint/postcss-css-in-js",
-      "files": ["**/*.tsx", "**/*.cts", "**/*.ts", "**/*.js", "**/*.jsx"],
+      "files": ["**/*.tsx", "**/*.cts", "**/*.ts", "**/*.js", "**/*.jsx", "**/*.mts"],
       "rules": {
         "font-family-no-missing-generic-family-keyword": null,
         "declaration-property-unit-allowed-list": {
