@@ -80,6 +80,7 @@ const CalContainer = ({ info }: CalContainerProps) => {
           </Item>
         ))}
       </Grid>
+
       {openDateDetailModal && (
         <DateDetailModal ref={modalRef} date={`${month}월 ${selectedDate}일`} fullPicData={fullPicData} />
       )}

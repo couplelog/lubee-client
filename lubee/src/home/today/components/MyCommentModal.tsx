@@ -148,6 +148,13 @@ const TextBox = styled.textarea`
   resize: none;
   color: ${({ theme }) => theme.colors.gray_700};
   outline: none;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.gray_200};
