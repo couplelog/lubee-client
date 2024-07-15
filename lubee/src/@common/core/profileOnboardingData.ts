@@ -1,3 +1,8 @@
+export interface ProfileOnboardingDataTypes {
+  default: string;
+  selected: string;
+}
+
 import {
   Profile1Ic,
   Profile2Ic,
@@ -13,7 +18,7 @@ import {
   ProfileStroke6Ic,
 } from "@assets/index";
 
-export const profileCustomIconsData = [
+export const profileOnboardingData: ProfileOnboardingDataTypes[] = [
   { default: Profile1Ic, selected: ProfileStroke1Ic },
   { default: Profile2Ic, selected: ProfileStroke2Ic },
   { default: Profile3Ic, selected: ProfileStroke3Ic },
