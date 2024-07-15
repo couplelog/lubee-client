@@ -26,9 +26,9 @@ export default function ToggleCalendar({ showCalendar, handleCalendar }: ToggleC
       {showCalendar && (
         <CalendarContainer>
           <Calendar>
-            <CalContainer info={CAL[currentCalendarIndex]} />
+            <CalContainer info={CAL[currentCalendarIndex]} showCalendar={showCalendar} />
           </Calendar>
-          <BackForthBtn>
+          <BackForthBtn $showCalendar={showCalendar}>
             <BtnWrapper type="button" onClick={handleBackBtn}>
               <BackSmallIcon />
             </BtnWrapper>
@@ -72,10 +72,6 @@ const Calendar = styled.div`
   display: flex;
   gap: 0.5rem;
   width: 100%;
-
-  /* max-height: 42vh; */
-
-  /* padding: 1rem; */
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.gray_50};
   overflow-x: auto;
@@ -105,7 +101,7 @@ const CancelBtn = styled.button`
   }
 `;
 
-const BackForthBtn = styled.div`
+const BackForthBtn = styled.div<{ $showCalendar: boolean }>`
   display: flex;
   gap: 1.71rem;
   position: absolute;

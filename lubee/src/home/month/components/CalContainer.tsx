@@ -8,9 +8,10 @@ import { fullPicData } from "@common/core/fullPicData";
 
 interface CalContainerProps {
   info: CalInfoTypes;
+  showCalendar?: boolean;
 }
 
-const CalContainer = ({ info }: CalContainerProps) => {
+const CalContainer = ({ info, showCalendar = false }: CalContainerProps) => {
   /*모달 애니메이션*/
   const [openDateDetailModal, setOpenDateDetailModal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -81,7 +82,12 @@ const CalContainer = ({ info }: CalContainerProps) => {
         ))}
       </Grid>
       {openDateDetailModal && (
-        <DateDetailModal ref={modalRef} date={`${month}월 ${selectedDate}일`} fullPicData={fullPicData} />
+        <DateDetailModal
+          ref={modalRef}
+          date={`${month}월 ${selectedDate}일`}
+          fullPicData={fullPicData}
+          showCalendar={showCalendar}
+        />
       )}
     </Container>
   );
