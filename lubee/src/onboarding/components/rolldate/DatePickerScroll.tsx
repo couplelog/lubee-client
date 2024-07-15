@@ -67,8 +67,18 @@ const DatePickerScroll: React.FC<DatePickerScrollProps> = ({ onDateChange }) => 
         value: `${currentDate.year}-${currentDate.month}-${currentDate.day}`,
         confirm: (date: string) => {
           const [year, month, day] = date.split("-");
-          setSelectedDate({ year, month, day });
-          onDateChange(date);
+          const selectedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+          const today = new Date();
+
+          if (selectedDate > today) {
+            // 선택한 날짜가 오늘보다 미래일 경우 오늘 날짜로 설정
+            const currentDate = getCurrentDate();
+            setSelectedDate(currentDate);
+            onDateChange(`${currentDate.year}-${currentDate.month}-${currentDate.day}`);
+          } else {
+            setSelectedDate({ year, month, day });
+            onDateChange(date);
+          }
         },
       });
     } else {
