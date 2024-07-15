@@ -18,7 +18,12 @@ export default function HomePicBox(props: HomePicBoxProps) {
 
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =
-    fullPicData.length < 5 ? [...fullPicData.map((img) => img.picSrc), blankImg] : fullPicData.map((img) => img.picSrc);
+    fullPicData.length < 5
+      ? [
+          ...fullPicData.map((img, index) => ({ picSrc: img.picSrc, id: img.id || index })),
+          { picSrc: blankImg, id: "blank" },
+        ]
+      : fullPicData.map((img, index) => ({ picSrc: img.picSrc, id: img.id || index }));
 
   /*프로필 아이콘*/
   const myProfile = getProfileIconSrc("me", "profile1");
@@ -30,17 +35,17 @@ export default function HomePicBox(props: HomePicBoxProps) {
 
   return (
     <Container>
-      {displayPics.map((imgSrc, date) =>
-        imgSrc === blankImg ? (
-          <BlankImgBtn date={date} />
+      {displayPics.map((img, index) =>
+        img.picSrc === blankImg ? (
+          <BlankImgBtn key={img.id} date={index} />
         ) : (
           <ImgContainer
-            key={date}
+            key={img.id}
             type="button"
             onClick={() => {
               navigate(`/fullpic${url}`);
             }}>
-            <Image src={imgSrc} />
+            <Image src={img.picSrc} />
             <ProfileIcon as={myProfile} />
             <TagContainer>
               <LocationTag location="청수당공명" font="smallPic" />

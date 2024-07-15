@@ -4,6 +4,7 @@ export interface EmojiTypes {
 }
 
 export interface FullPicDataTypes {
+  id: number;
   time: string;
   picSrc: string;
   location: string;
