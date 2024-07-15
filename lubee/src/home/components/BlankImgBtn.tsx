@@ -28,6 +28,7 @@ export default function BlankImgBtn(props: BlankImgBtnProps) {
       const fileList = Array.from(e.target.files);
       saveFile(fileList);
     }
+    console.log(isFile);
   }
 
   return (

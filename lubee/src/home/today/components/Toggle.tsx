@@ -27,6 +27,7 @@ export default function Toggle(props: ToggleProps) {
       const fileList = Array.from(e.target.files);
       saveFile(fileList);
     }
+    console.log(isFile);
   }
 
   return (
