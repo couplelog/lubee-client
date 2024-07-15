@@ -56,6 +56,7 @@ const Container = styled.section<{ $showCalendar: boolean }>`
   overflow: scroll;
   position: ${(props) => (props.$showCalendar ? "none" : "absolute")};
   bottom: 0;
+  z-index: 1000;
   max-height: 49rem;
   background-color: ${({ theme }) => theme.colors.white};
   scrollbar-width: none;
