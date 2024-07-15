@@ -35,7 +35,9 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={myProfile} comment={myComment} />
             <Comment iconSrc={partnerProfile} comment={partnerComment} />
           </CommentsBox>
-          <HomePicBox url="/date" />
+          <HomePicBoxWrapper>
+            <HomePicBox url="/date" />
+          </HomePicBoxWrapper>
         </Contents>
       </Container>
     </Background>
@@ -48,9 +50,6 @@ const Background = styled.div`
   position: absolute;
   inset: 0;
   ${({ theme }) => theme.effects.dimmed_40};
-
-  width: 100%;
-  height: 100%;
 `;
 
 const Container = styled.section<{ $showCalendar: boolean }>`
@@ -92,4 +91,8 @@ const Contents = styled.div`
 const CommentsBox = styled.span`
   display: flex;
   gap: 1.6rem;
+`;
+
+const HomePicBoxWrapper = styled.div`
+  display: flex;
 `;
