@@ -85,7 +85,7 @@ const Image = styled.img`
 
 const ProfileIcon = styled.svg`
   position: absolute;
-  top: 1.2rem;
+  top: 2.4rem;
   left: 1.2rem;
   width: 3rem;
   height: 3rem;
@@ -95,7 +95,7 @@ const TagContainer = styled.div`
   display: flex;
   gap: 0.4rem;
   position: absolute;
-  bottom: 1.2rem;
+  bottom: 2.4rem;
   left: 1.21rem;
   padding: 0;
   border: none;
