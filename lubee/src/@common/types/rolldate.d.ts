@@ -15,7 +15,7 @@ interface RolldateOptions {
   confirm?: (date: string) => void;
 }
 
-declare module "rolldate.es.js" {
+declare module "../../onboarding/components/rolldate/rolldate.es.js" {
   export default class Rolldate {
     constructor(options: RolldateOptions);
   }

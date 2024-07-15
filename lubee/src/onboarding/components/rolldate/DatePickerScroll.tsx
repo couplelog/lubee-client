@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { flexCenter } from "@styles/globalStyle";
-import Rolldate from "./rolldate.es.js"; // 이 모듈의 타입은 src/types/rolldate.d.ts 파일에 선언됨
+import Rolldate from "onboarding/components/rolldate/rolldate.es.js"; // 이 모듈의 타입은 @common/types/rolldate.d.ts 파일에 선언됨
 
 interface DatePickerScrollProps {
   onDateChange: (date: string) => void;
