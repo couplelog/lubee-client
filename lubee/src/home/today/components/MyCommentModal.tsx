@@ -98,7 +98,7 @@ const Background = styled.div`
   position: absolute;
   z-index: 2;
   inset: 0;
-  height: 100vh;
+  height: 100%;
   ${({ theme }) => theme.effects.dimmed_40};
 `;
 
