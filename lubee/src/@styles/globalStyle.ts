@@ -36,6 +36,14 @@ html, body{
   /* -webkit-tap-highlight-color: rgba(0,0,0,0); */
 }
 
+html, #root{
+  height: 100dvh;
+}
+
+body{
+  height: 100%;
+}
+
 #root::-webkit-scrollbar {
   display: none; /* 크롬, 사파리, 오페라, 엣지 스크롤바 숨김 */
 }
