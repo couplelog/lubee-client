@@ -9,16 +9,20 @@ import { fullPicData } from "@common/core/fullPicData";
 interface CalContainerProps {
   info: CalInfoTypes;
   showCalendar?: boolean;
+  setOpenDateDetailModal?: (open: boolean) => void;
 }
 
-const CalContainer = ({ info, showCalendar = false }: CalContainerProps) => {
+const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
   /*모달 애니메이션*/
-  const [openDateDetailModal, setOpenDateDetailModal] = useState<boolean>(false);
+  const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const listener = (e: MouseEvent) => {
       if (!modalRef.current || modalRef.current.contains(e.target as Node)) return;
-      setOpenDateDetailModal(false);
+      if (setOpenDateDetailModal) {
+        setOpenDateDetailModal(false); //부모 state 업데이트
+      }
+      setOpenDateDetailModalLocal(false); //current state 업데이트
     };
     document.addEventListener("mousedown", listener);
     return () => {
@@ -52,12 +56,14 @@ const CalContainer = ({ info, showCalendar = false }: CalContainerProps) => {
 
   data.forEach((el) => (LIST[el.date + start - 1] = 1));
 
-  // date
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
 
   function handleDateDetailModal(date: number) {
     setSelectedDate(date);
-    setOpenDateDetailModal(true);
+    if (setOpenDateDetailModal) {
+      setOpenDateDetailModal(true);
+    }
+    setOpenDateDetailModalLocal(true);
   }
 
   return (
@@ -81,7 +87,7 @@ const CalContainer = ({ info, showCalendar = false }: CalContainerProps) => {
           </Item>
         ))}
       </Grid>
-      {openDateDetailModal && (
+      {openDateDetailModalLocal && (
         <DateDetailModal
           ref={modalRef}
           date={`${month}월 ${selectedDate}일`}
@@ -94,6 +100,8 @@ const CalContainer = ({ info, showCalendar = false }: CalContainerProps) => {
 };
 
 export default CalContainer;
+
+// Rest of your styled components...
 
 const Container = styled.div`
   display: flex;

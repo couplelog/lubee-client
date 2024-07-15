@@ -12,6 +12,7 @@ interface ToggleCalendarProps {
 
 export default function ToggleCalendar({ showCalendar, handleCalendar }: ToggleCalendarProps) {
   const [currentCalendarIndex, setCurrentCalendarIndex] = useState(0);
+  const [openDateDetailModal, setOpenDateDetailModal] = useState(false);
 
   const handleBackBtn = () => {
     setCurrentCalendarIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : CAL.length - 1));
@@ -26,19 +27,26 @@ export default function ToggleCalendar({ showCalendar, handleCalendar }: ToggleC
       {showCalendar && (
         <CalendarContainer>
           <Calendar>
-            <CalContainer info={CAL[currentCalendarIndex]} showCalendar={showCalendar} />
+            <CalContainer
+              info={CAL[currentCalendarIndex]}
+              showCalendar={showCalendar}
+              setOpenDateDetailModal={setOpenDateDetailModal}
+            />
           </Calendar>
-          <BackForthBtn $showCalendar={showCalendar}>
-            <BtnWrapper type="button" onClick={handleBackBtn}>
-              <BackSmallIcon />
-            </BtnWrapper>
-            <BtnWrapper type="button" onClick={handleForwardBtn}>
-              <ForwardIcon />
-            </BtnWrapper>
-          </BackForthBtn>
           <CancelBtn type="button" onClick={handleCalendar}>
             취소
           </CancelBtn>
+          {/* 모달이 열려있을 때 < > 버튼 사라지게 */}
+          {!openDateDetailModal && (
+            <BackForthBtn $showCalendar={showCalendar}>
+              <BtnWrapper type="button" onClick={handleBackBtn}>
+                <BackSmallIcon />
+              </BtnWrapper>
+              <BtnWrapper type="button" onClick={handleForwardBtn}>
+                <ForwardIcon />
+              </BtnWrapper>
+            </BackForthBtn>
+          )}
         </CalendarContainer>
       )}
     </Background>
@@ -58,14 +66,10 @@ const CalendarContainer = styled.article`
   overflow: hidden;
   position: absolute;
   bottom: 0;
-  left: 50%;
   width: 100%;
-
-  /* max-width: 800px; */
   margin: auto;
   padding: 2rem;
   border-radius: 12px;
-  transform: translateX(-50%);
 `;
 
 const Calendar = styled.div`
@@ -105,7 +109,7 @@ const BackForthBtn = styled.div<{ $showCalendar: boolean }>`
   display: flex;
   gap: 1.71rem;
   position: absolute;
-  top: 4rem;
+  top: 3.5rem;
   right: 3.5rem;
   z-index: 1;
 `;
