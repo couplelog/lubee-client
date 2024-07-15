@@ -46,4 +46,10 @@ const Wrapper = styled.section`
   flex-direction: column;
   position: relative;
   width: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
