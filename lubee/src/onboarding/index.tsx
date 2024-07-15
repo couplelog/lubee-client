@@ -6,7 +6,6 @@ import {
   onboardingProfileState,
   onboardingBirthState,
   onboardingAnnivState,
-  onboardingCompleteState,
 } from "@common/recoil/atom";
 import Connect from "onboarding/connect";
 import Code from "onboarding/code";
@@ -14,7 +13,6 @@ import Custom from "onboarding/custom";
 import Profile from "onboarding/profile";
 import Birth from "onboarding/birth";
 import Anniv from "onboarding/anniversary";
-import Complete from "onboarding/complete";
 
 export default function index() {
   const [onboardingConnect, setOnboardingConnect] = useRecoilState(onboardingConnectState);
@@ -23,7 +21,6 @@ export default function index() {
   const [onboardingProfile, setOnboardingProfile] = useRecoilState(onboardingProfileState);
   const [onboardingBirth, setOnboardingBirth] = useRecoilState(onboardingBirthState);
   const [onboardingAnniv, setOnboardingAnniv] = useRecoilState(onboardingAnnivState);
-  const [onboardingComplete, setOnboardingComplete] = useRecoilState(onboardingCompleteState);
 
   function moveToOnboardingConnect() {
     setOnboardingConnect(true);
@@ -32,7 +29,6 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(false);
     setOnboardingAnniv(false);
-    setOnboardingComplete(false);
   }
 
   function moveToOnboardingCode() {
@@ -42,7 +38,6 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(false);
     setOnboardingAnniv(false);
-    setOnboardingComplete(false);
   }
 
   function moveToOnboardingCustom() {
@@ -52,7 +47,6 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(false);
     setOnboardingAnniv(false);
-    setOnboardingComplete(false);
   }
 
   function moveToOnboardingProfile() {
@@ -62,7 +56,6 @@ export default function index() {
     setOnboardingProfile(true);
     setOnboardingBirth(false);
     setOnboardingAnniv(false);
-    setOnboardingComplete(false);
   }
 
   function moveToOnboardingBirth() {
@@ -72,7 +65,6 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(true);
     setOnboardingAnniv(false);
-    setOnboardingComplete(false);
   }
 
   function moveToOnboardingAnniv() {
@@ -82,17 +74,6 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(false);
     setOnboardingAnniv(true);
-    setOnboardingComplete(false);
-  }
-
-  function moveToOnboardingComplete() {
-    setOnboardingConnect(false);
-    setOnboardingCode(false);
-    setOnboardingCustom(false);
-    setOnboardingProfile(false);
-    setOnboardingBirth(false);
-    setOnboardingAnniv(false);
-    setOnboardingComplete(true);
   }
 
   return (
@@ -110,10 +91,7 @@ export default function index() {
       {onboardingBirth && (
         <Birth moveToOnboardingProfile={moveToOnboardingProfile} moveToOnboardingAnniv={moveToOnboardingAnniv} />
       )}
-      {onboardingAnniv && (
-        <Anniv moveToOnboardingBirth={moveToOnboardingBirth} moveToOnboardingComplete={moveToOnboardingComplete} />
-      )}
-      {onboardingComplete && <Complete />}
+      {onboardingAnniv && <Anniv moveToOnboardingBirth={moveToOnboardingBirth} />}
     </>
   );
 }
