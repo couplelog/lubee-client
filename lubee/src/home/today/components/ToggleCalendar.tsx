@@ -22,11 +22,11 @@ export default function ToggleCalendar({ showCalendar, handleCalendar }: ToggleC
   };
 
   return (
-    <Background show={showCalendar}>
+    <Background>
       {showCalendar && (
         <CalendarContainer>
           <Calendar>
-            <CalContainer info={CAL[currentCalendarIndex]} showCalendar={showCalendar} />
+            <CalContainer info={CAL[currentCalendarIndex]} />
           </Calendar>
           <BackForthBtn>
             <BtnWrapper type="button" onClick={handleBackBtn}>
@@ -45,14 +45,9 @@ export default function ToggleCalendar({ showCalendar, handleCalendar }: ToggleC
   );
 }
 
-const Background = styled.div<{ show: boolean }>`
-  display: ${({ show }) => (show ? "block" : "none")};
+const Background = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   ${({ theme }) => theme.effects.dimmed_40};
 `;
 
@@ -70,7 +65,6 @@ const CalendarContainer = styled.article`
   margin: auto;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   transform: translateX(-50%);
 `;
 

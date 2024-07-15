@@ -8,10 +8,12 @@ import { PlusIc } from "@assets/index";
 import { useState } from "react";
 import Toggle from "./components/Toggle";
 import ToggleCalendar from "./components/ToggleCalendar";
+import { useNavigate } from "react-router-dom";
 
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);

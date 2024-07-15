@@ -9,11 +9,10 @@ import { FullPicDataTypes } from "@common/types/CommonTypes";
 interface DateDetailModalProps {
   date: string;
   fullPicData: FullPicDataTypes[];
-  showCalendar: boolean;
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { date, showCalendar } = props;
+  const { date } = props;
 
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getProfileIconSrc("me", "profile1");
@@ -25,7 +24,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
 
   return (
     <Background>
-      <Container ref={ref} $showCalendar={showCalendar}>
+      <Container ref={ref}>
         <Header>
           <ShortBorderIc />
           <Text>{date}</Text>
@@ -50,12 +49,15 @@ const Background = styled.div`
   ${({ theme }) => theme.effects.dimmed_40};
 `;
 
-const Container = styled.section<{ $showCalendar: boolean }>`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
-  position: ${(props) => (props.$showCalendar ? "none" : "absolute")};
+  overflow: scroll;
+  position: absolute;
   bottom: 0;
+  max-height: 49rem;
   background-color: ${({ theme }) => theme.colors.white};
+  scrollbar-width: none;
 `;
 
 const Header = styled.div`
