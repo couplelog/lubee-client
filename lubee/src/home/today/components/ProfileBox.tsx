@@ -34,7 +34,6 @@ const ProfileIcon = styled.svg`
 const OtherProfileIcon = styled.svg`
   position: absolute;
   right: 0;
-  z-index: 1;
   width: 8rem;
   height: 8rem;
 `;

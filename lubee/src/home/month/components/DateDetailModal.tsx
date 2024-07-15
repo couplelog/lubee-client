@@ -52,9 +52,12 @@ const Background = styled.div`
 const Container = styled.section`
   display: flex;
   flex-direction: column;
+  overflow: scroll;
   position: absolute;
   bottom: 0;
+  max-height: 49rem;
   background-color: ${({ theme }) => theme.colors.white};
+  scrollbar-width: none;
 `;
 
 const Header = styled.div`

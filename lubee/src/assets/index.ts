@@ -60,6 +60,10 @@ import EditXIc from "./icon/editXIc.svg?react";
 import CongratsIc from "./icon/congratsIc.svg?react";
 import FirstHoneyIc from "./icon/firstHoneyIc.svg?react";
 import FifthHoneyIc from "./icon/fifthHoneyIc.svg?react";
+import TogglePastIc from "./icon/togglePastIc.svg?react";
+import ToggleHoneyIc from "./icon/toggleHoneyIc.svg?react";
+import BackSmallIc from "./icon/backSmallIc.svg?react";
+import ForwardIc from "./icon/forwardIc.svg?react";
 
 export {
   LogoIc,
@@ -124,4 +128,8 @@ export {
   CongratsIc,
   FirstHoneyIc,
   FifthHoneyIc,
+  ToggleHoneyIc,
+  TogglePastIc,
+  BackSmallIc,
+  ForwardIc,
 };

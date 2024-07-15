@@ -60,9 +60,8 @@ const Container = styled.section`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
-  overflow: scroll;
-  max-height: 38rem;
-  scrollbar-width: none;
+  width: 100%;
+  height: 100%;
 `;
 
 const ImgContainer = styled.button`
