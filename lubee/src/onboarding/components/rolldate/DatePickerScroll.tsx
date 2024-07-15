@@ -84,7 +84,7 @@ const DatePickerScroll: React.FC<DatePickerScrollProps> = ({ onDateChange }) => 
     } else {
       console.error("Rolldate is not loaded");
     }
-  }, [selectedDate]);
+  }, []);
 
   return (
     <Wrapper onClick={handleClick} onTouchEnd={handleClick}>
