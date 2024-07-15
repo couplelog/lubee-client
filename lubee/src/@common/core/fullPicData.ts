@@ -3,6 +3,7 @@ import { FullPicDataTypes } from "@common/types/CommonTypes";
 
 export const fullPicData: FullPicDataTypes[] = [
   {
+    id: 1,
     time: "오후 2:17",
     picSrc: fullPic,
     location: "청년다방",
@@ -10,6 +11,7 @@ export const fullPicData: FullPicDataTypes[] = [
     account: "partner",
   },
   {
+    id: 2,
     time: "오후 3:17",
     picSrc: fullPic,
     location: "고기",

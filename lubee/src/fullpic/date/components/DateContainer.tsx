@@ -37,8 +37,14 @@ export default function DateContainer(props: DateContainerProps) {
                 <Name>{name}</Name>
               </Profile>
               <FullPicContainer picSrc={picSrc} location={location} />
-              <EmojiTagContainer>
-                <EmojiTag font="fullPic" setOpenEmojiDetail={setOpenEmojiDetail}>
+              <EmojiTagContainer
+                type="button"
+                onClick={() => {
+                  if (setOpenEmojiDetail) {
+                    setOpenEmojiDetail(true);
+                  }
+                }}>
+                <EmojiTag font="fullPic">
                   <EmojiIcon as={myEmoji} />
                   <EmojiIcon as={partnerEmoji} />
                 </EmojiTag>

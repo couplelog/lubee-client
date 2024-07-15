@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { fullPicStyle } from "@styles/picStyle";
 import LocationTag from "./LocationTag";
+import { BtnWrapper } from "@styles/btnStyle";
 
 interface FullPicProps {
   picSrc: string;
@@ -16,7 +17,15 @@ export default function FullPicContainer(props: FullPicProps) {
   return (
     <PicBox>
       <Pic src={picSrc}></Pic>
-      <LocationTag location={location} setOpenLocationModal={setOpenLocationModal} font="fullPic" />
+      <BtnWrapper
+        type="button"
+        onClick={() => {
+          if (setOpenLocationModal) {
+            setOpenLocationModal(true);
+          }
+        }}>
+        <LocationTag location={location} font="fullPic" />
+      </BtnWrapper>
     </PicBox>
   );
 }

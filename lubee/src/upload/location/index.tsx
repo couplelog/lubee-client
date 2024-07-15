@@ -53,9 +53,9 @@ export default function index(props: LocationProps) {
       <Locations>
         {locationData &&
           locationData.map((data) => {
-            const { name, distance, info } = data;
+            const { id, name, distance, info } = data;
             return (
-              <LocationBox key={name} type="button" onClick={() => handleSelectLocation(name)}>
+              <LocationBox key={id} type="button" onClick={() => handleSelectLocation(name)}>
                 <Name>{name}</Name>
                 <Details>
                   <Distance>{`${distance}m,`}</Distance>

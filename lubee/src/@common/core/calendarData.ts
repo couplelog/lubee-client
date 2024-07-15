@@ -4,14 +4,6 @@ const Day = ["일", "월", "화", "수", "목", "금", "토"];
 
 const CAL: CalInfoTypes[] = [
   {
-    year: 2023,
-    month: 12,
-    start: 5,
-    length: 31,
-    holiday: [25],
-    data: [{ date: 5 }, { date: 7 }, { date: 25 }, { date: 27 }],
-  },
-  {
     year: 2024,
     month: 1,
     start: 1,

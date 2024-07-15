@@ -34,12 +34,14 @@ const Container = styled.div`
 const Text = styled.p<{ $isExpanded: boolean }>`
   display: -webkit-box;
   overflow: hidden;
+  width: 10.9rem;
+  color: ${({ theme }) => theme.colors.gray_700};
+  white-space: pre-wrap; /* 줄바꿈을 허용 */
+  word-wrap: break-word;
 
   /* text-overflow: ellipsis; */
   -webkit-line-clamp: ${(props) => (props.$isExpanded ? "unset" : "3")};
   -webkit-box-orient: vertical;
-  width: 10.9rem;
-  color: ${({ theme }) => theme.colors.gray_700};
   ${({ theme }) => theme.fonts.Caption_2};
 `;
 
