@@ -21,8 +21,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
 
   const myComment =
     "오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.";
-  const partnerComment =
-    "오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.";
+  const partnerComment = "Comment";
 
   return (
     <Background>
