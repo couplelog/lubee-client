@@ -3,29 +3,21 @@ import { LocationPointIc } from "@assets/index";
 
 interface LocationProps {
   location: string;
-  setOpenLocationModal?: (open: boolean) => void;
   font: string;
 }
 
 export default function LocationTag(props: LocationProps) {
-  const { location, setOpenLocationModal, font } = props;
+  const { location, font } = props;
 
   return (
-    <Container
-      type="button"
-      onClick={() => {
-        if (setOpenLocationModal) {
-          setOpenLocationModal(true);
-        }
-      }}
-      $font={font}>
+    <Container $font={font}>
       <LocationPointIcon $font={font} />
       <LocationText $font={font}>{location}</LocationText>
     </Container>
   );
 }
 
-const Container = styled.button<{ $font: string }>`
+const Container = styled.div<{ $font: string }>`
   display: flex;
   gap: ${(props) => (props.$font === "fullPic" ? "0.8rem" : "0.4rem")};
   align-items: center;
