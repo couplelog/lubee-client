@@ -16,18 +16,4 @@ export const fullPicData: FullPicDataTypes[] = [
     name: "로지",
     account: "me",
   },
-  {
-    time: "오후 4:17",
-    picSrc: fullPic,
-    location: "회",
-    name: "맹꽁이",
-    account: "partner",
-  },
-  {
-    time: "오후 11:17",
-    picSrc: fullPic,
-    location: "어디까지 길어지나테스트",
-    name: "로지",
-    account: "me",
-  },
 ];

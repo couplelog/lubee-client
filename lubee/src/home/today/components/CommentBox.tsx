@@ -95,10 +95,12 @@ const Text = styled.p<{ $isDefault: boolean }>`
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   width: 10.9rem;
   color: ${({ theme, $isDefault }) => ($isDefault ? theme.colors.gray_400 : theme.colors.gray_700)};
+  white-space: pre-wrap; /* 줄바꿈을 허용 */
+  word-wrap: break-word;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 
   ${({ theme }) => theme.fonts.Caption_2};
 `;
