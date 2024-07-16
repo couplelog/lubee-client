@@ -23,7 +23,7 @@ import One from "fullpic/one";
 import First from "congrats/first";
 import Fifth from "congrats/fifth";
 import Join from "congrats/join";
-// import LoginCallback from "login/components/LoginCallback";
+import LoginCallback from "login/components/LoginCallback";
 
 const Router = createBrowserRouter([
   {
@@ -34,7 +34,7 @@ const Router = createBrowserRouter([
       { index: true, element: <Splash /> },
       { path: "/splash", element: <Splash /> },
       { path: "/login", element: <Login /> },
-      // { path: "/login/oauth2/code/kakao", element: <LoginCallback /> },
+      { path: "/api/users/kakao", element: <LoginCallback /> },
       { path: "/onboarding", element: <Onboarding /> },
       {
         path: "/home",
