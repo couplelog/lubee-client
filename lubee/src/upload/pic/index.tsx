@@ -66,7 +66,7 @@ const Wrapper = styled.section`
 const Header = styled.div`
   display: flex;
   width: 100%;
-  padding: 2rem 2rem 10.9rem;
+  padding: 2rem 2rem 8rem;
 `;
 
 const BackIcon = styled(BackIc)`

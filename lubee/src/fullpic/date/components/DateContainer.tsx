@@ -116,7 +116,7 @@ const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 10rem 1.42rem 2.1rem 0;
+  padding: 5rem 2.1rem 0;
 `;
 
 const EmojiIcon = styled.svg`

@@ -89,7 +89,7 @@ const Footer = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 0 1.42rem 2.1rem 0;
+  padding: 0 2.1rem;
 
   /* padding: 10rem 1.42rem 2.1rem 0; */
 `;
