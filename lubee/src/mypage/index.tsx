@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MypageFooter from "./components/MypageFooter";
-import { SettingIc, EditIc, PlayIc, HoneyYellowIc } from "@assets/index";
+import { SettingIc } from "@assets/index";
+import MypageProfileBox from "./components/MypageProfileBox";
 import HoneyBox from "./components/HoneyBox";
 import Banner from "./components/Banner";
 
@@ -9,6 +10,7 @@ export default function index() {
     <Wrapper>
       <SettingIcon />
       <TopContainer>
+        <MypageProfileBox />
         <HoneyBox count={25} />
         <Banner />
       </TopContainer>
