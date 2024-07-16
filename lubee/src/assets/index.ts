@@ -70,6 +70,12 @@ import HoneyYellowIc from "./icon/honeyYellowIc.svg?react";
 import PlayIc from "./icon/playIc.svg?react";
 import BannerIc from "./icon/bannerIc.svg?react";
 import NextIc from "./icon/nextIc.svg?react";
+import MintProfileStroke1Ic from "./icon/mintprofileStroke1Ic.svg?react";
+import MintProfileStroke2Ic from "./icon/mintprofileStroke2Ic.svg?react";
+import MintProfileStroke3Ic from "./icon/mintprofileStroke3Ic.svg?react";
+import MintProfileStroke4Ic from "./icon/mintprofileStroke4Ic.svg?react";
+import MintProfileStroke5Ic from "./icon/mintprofileStroke5Ic.svg?react";
+import MintProfileStroke6Ic from "./icon/mintprofileStroke6Ic.svg?react";
 
 export {
   LogoIc,
@@ -144,4 +150,10 @@ export {
   PlayIc,
   BannerIc,
   NextIc,
+  MintProfileStroke1Ic,
+  MintProfileStroke2Ic,
+  MintProfileStroke3Ic,
+  MintProfileStroke4Ic,
+  MintProfileStroke5Ic,
+  MintProfileStroke6Ic,
 };
