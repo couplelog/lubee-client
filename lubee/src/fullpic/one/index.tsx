@@ -65,8 +65,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   position: relative;
   width: 100%;
-  height: auto;
-  min-height: 100vh;
+  height: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 

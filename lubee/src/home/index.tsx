@@ -18,6 +18,5 @@ const Container = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
-  height: auto;
-  min-height: 100vh;
+  height: 100%;
 `;

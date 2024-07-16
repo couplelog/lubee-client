@@ -10,6 +10,10 @@ export const flexCenter = css`
 export const GlobalStyle = createGlobalStyle`
 ${reset}
 
+html, #root{
+  height: 100dvh;
+}
+
 a{
   text-decoration: none;
 }

@@ -73,8 +73,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: auto;
-  min-height: 100vh;
+  height: 100%;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
