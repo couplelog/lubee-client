@@ -3,7 +3,15 @@ import { XIc, EditIc } from "@assets/index";
 import { MyProfileCustomData } from "@common/core/myProfileCustomData";
 import { MintProfileCustomData } from "@common/core/mintProfileCustomData";
 
-export default function MypageProfileBox() {
+interface MypageProfileBoxProps {
+  myName: string;
+  myBirth: string;
+  partnerName: string;
+  partnerBirth: string;
+}
+
+export default function MypageProfileBox(props: MypageProfileBoxProps) {
+  const { myName, myBirth, partnerName, partnerBirth } = props;
   const myProfile = MyProfileCustomData[0].selected;
   const partnerProfile = MintProfileCustomData[0].selected;
 
@@ -12,16 +20,16 @@ export default function MypageProfileBox() {
       <ProfileContainer>
         <ProfileIcon as={myProfile} />
         <TextContainer>
-          <NameText>불꽃피카츄</NameText>
-          <BirthText>02.01.18</BirthText>
+          <NameText>{myName}</NameText>
+          <BirthText>{myBirth}</BirthText>
         </TextContainer>
       </ProfileContainer>
       <XIcon />
       <ProfileContainer>
         <ProfileIcon as={partnerProfile} />
         <TextContainer>
-          <NameText>맹꽁이</NameText>
-          <BirthText>99.03.04</BirthText>
+          <NameText>{partnerName}</NameText>
+          <BirthText>{partnerBirth}</BirthText>
         </TextContainer>
       </ProfileContainer>
     </Container>
