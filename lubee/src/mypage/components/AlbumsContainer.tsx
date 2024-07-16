@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MypageBlankImgBtn from "./MypageBlankImgBtn";
-import albumPic from "@assets/image/albumPic.png";
+import album1Img from "@assets/image/album1Img.png";
+import album2Img from "@assets/image/album2Img.png";
 
 export default function AlbumsContainer() {
   return (
@@ -12,17 +13,17 @@ export default function AlbumsContainer() {
         </TextContainer>
       </AlbumContainer>
       <AlbumContainer>
-        <Image src={albumPic} />
+        <Image src={album1Img} />
         <TextContainer>
           <TitleText>여행 모음</TitleText>
           <SubtitleText>3일 전 업데이트</SubtitleText>
         </TextContainer>
       </AlbumContainer>
       <AlbumContainer>
-        <Image src={albumPic} />
+        <Image src={album2Img} />
         <TextContainer>
-          <TitleText>여행 모음</TitleText>
-          <SubtitleText>3일 전 업데이트</SubtitleText>
+          <TitleText>달달한 하루들</TitleText>
+          <SubtitleText>6일 전 업데이트</SubtitleText>
         </TextContainer>
       </AlbumContainer>
     </Wrapper>
