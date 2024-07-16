@@ -32,7 +32,8 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.yellow};
 `;
 
