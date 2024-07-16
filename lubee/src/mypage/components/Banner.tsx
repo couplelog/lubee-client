@@ -19,9 +19,9 @@ const Container = styled.section`
   flex-direction: column;
   gap: 0.2rem;
   align-self: stretch;
+  overflow: hidden;
   position: relative;
-  height: 3.6rem;
-  padding: 1rem 0.8rem 10rem 1.6rem;
+  padding: 1rem 0.8rem 1rem 1.6rem;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.yellow_50};
 `;
@@ -52,7 +52,8 @@ const NextIcon = styled(NextIc)`
 const BannerIcon = styled(BannerIc)`
   position: absolute;
   top: -0.6rem;
-  right: 1.03rem;
+  right: 1.0301rem;
+  bottom: -5.652rem;
   width: 16.4699rem;
   height: 11.852rem;
 `;
