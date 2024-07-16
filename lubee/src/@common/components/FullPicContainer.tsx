@@ -36,7 +36,7 @@ const PicBox = styled.div`
   gap: 1.2rem;
   align-items: center;
   width: 100%;
-  padding: 1.8rem 2rem 0;
+  padding: 1.8rem 0 0;
 `;
 
 const Pic = styled.img`
