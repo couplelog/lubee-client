@@ -64,6 +64,11 @@ import TogglePastIc from "./icon/togglePastIc.svg?react";
 import ToggleHoneyIc from "./icon/toggleHoneyIc.svg?react";
 import BackSmallIc from "./icon/backSmallIc.svg?react";
 import ForwardIc from "./icon/forwardIc.svg?react";
+import SettingIc from "./icon/settingIc.svg?react";
+import EditIc from "./icon/editIc.svg?react";
+import HoneyYellowIc from "./icon/honeyYellowIc.svg?react";
+import PlayIc from "./icon/playIc.svg?react";
+import BannerIc from "./icon/bannerIc.svg?react";
 
 export {
   LogoIc,
@@ -132,4 +137,9 @@ export {
   TogglePastIc,
   BackSmallIc,
   ForwardIc,
+  SettingIc,
+  EditIc,
+  HoneyYellowIc,
+  PlayIc,
+  BannerIc,
 };
