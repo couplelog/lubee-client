@@ -5,6 +5,7 @@ import { Day } from "@common/core/calendarData";
 import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
 import { fullPicData } from "@common/core/fullPicData";
+import { formatMonth, getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 
 interface CalContainerProps {
   info: CalInfoTypes;
@@ -53,9 +54,6 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   // List 배열에 사진을 업로드한 날짜는 1로 찍기
   const LIST = new Array(42).fill(0);
   const { year, month, start, length, holiday, data } = info;
-  const formatMonth = (month: number): string => {
-    return month < 10 ? `0${month}` : `${month}`;
-  };
 
   data.forEach((el) => (LIST[el.date + start - 1] = 1));
 
@@ -73,6 +71,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
       setOpenDateDetailModalLocal(true);
     }, 400); // 잠시 홀딩된 뒤 모달 띄우기
   }
+
   return (
     <Container>
       <Header>
@@ -86,17 +85,21 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         {Day.map((day) => (
           <Weekday key={day}>{day}</Weekday>
         ))}
-        {LIST.map((val, idx) => (
-          <Item
-            key={idx}
-            $isUploaded={val === 1}
-            $isClicked={clickedItem === idx}
-            onClick={() => handleDateDetailModal(idx - start + 1, idx)}>
-            <Date $isHoliday={holiday.includes(idx - start + 1)}>
-              {idx - start < 0 || idx - start + 1 > length ? "" : idx - start + 1}
-            </Date>
-          </Item>
-        ))}
+        {LIST.map((val, idx) => {
+          const date = idx - start + 1;
+          const isToday = year === getTodayYear && month === getTodayMonth && date === getTodayDate;
+
+          return (
+            <Item
+              key={idx}
+              $isUploaded={val === 1}
+              $isClicked={clickedItem === idx}
+              $isToday={isToday}
+              onClick={() => handleDateDetailModal(date, idx)}>
+              <Date $isHoliday={holiday.includes(date)}>{idx - start < 0 || date > length ? "" : date}</Date>
+            </Item>
+          );
+        })}
       </Grid>
       {openDateDetailModalLocal && (
         <DateDetailModal
@@ -158,14 +161,20 @@ const Grid = styled.ul`
   grid-template-rows: repeat(6, 1fr);
 `;
 
-const Item = styled.button<{ $isUploaded: boolean; $isClicked: boolean }>`
+const Item = styled.button<{ $isUploaded: boolean; $isClicked: boolean; $isToday: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
   border-radius: 31px;
-  background-color: ${({ theme, $isUploaded, $isClicked }) =>
-    $isClicked ? theme.colors.gray_700 : $isUploaded ? theme.colors.yellow : theme.colors.white};
+  background-color: ${({ theme, $isUploaded, $isClicked, $isToday }) =>
+    $isClicked
+      ? theme.colors.gray_700
+      : $isToday
+        ? theme.colors.yellow_100
+        : $isUploaded
+          ? theme.colors.yellow
+          : theme.colors.white};
   color: ${({ theme, $isUploaded, $isClicked }) =>
     $isClicked ? theme.colors.white : $isUploaded ? theme.colors.gray_800 : theme.colors.gray_500};
   transition: background-color 0.3s ease;
