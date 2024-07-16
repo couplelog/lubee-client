@@ -4,7 +4,7 @@ import styled from "styled-components";
 import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
-import DatePickerScroll from "../components/rolldate/DatePickerScroll";
+// import DatePickerScroll from "../components/rolldate/DatePickerScroll";
 import OnboardingBtn from "../components/OnboardingBtn";
 
 interface BirthProps {
@@ -21,15 +21,16 @@ export default function index(props: BirthProps) {
 
   function handleBackBtn() {
     moveToOnboardingProfile();
+    console.log(setBirthday);
   }
 
   function handleXBtn() {
     navigate("/login");
   }
 
-  function handleDateChange(date: string) {
-    setBirthday(date);
-  }
+  // function handleDateChange(date: string) {
+  //   setBirthday(date);
+  // }
 
   function handleOnboardingBtn() {
     moveToOnboardingAnniv();
@@ -43,7 +44,7 @@ export default function index(props: BirthProps) {
         titleText="본인의 생년월일을 입력해주세요"
         subtitleText="달력에 나와 연인의 생일이 표시돼요"
       />
-      <DatePickerScroll onDateChange={handleDateChange} />
+      {/* <DatePickerScroll onDateChange={handleDateChange} /> */}
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="다음" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>
   );
