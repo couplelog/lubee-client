@@ -68,13 +68,28 @@ const Wrapper = styled.div`
 
 const ProfileGrid = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 2rem 3.6rem;
-  justify-items: center;
   margin-top: 2.8rem;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
 `;
 
 const ProfileIcon = styled.svg`
   width: 14.4rem;
   height: 14.4rem;
+
+  @media (height <= 800px) {
+    width: 12rem;
+    height: 12rem;
+  }
+
+  @media (height <= 600px) {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  @media (height <= 400px) {
+    width: 8rem;
+    height: 8rem;
+  }
 `;
