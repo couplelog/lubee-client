@@ -29,7 +29,7 @@ export default function index() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 36.792rem;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   width: 100%;
