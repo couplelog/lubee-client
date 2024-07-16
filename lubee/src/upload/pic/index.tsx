@@ -77,7 +77,10 @@ const BackIcon = styled(BackIc)`
 const Footer = styled.div`
   display: flex;
   justify-content: center;
-  padding: 10rem 0 0.6rem;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 `;
 
 const ShareBtnIcon = styled(ShareBtnIc)`
