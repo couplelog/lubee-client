@@ -29,6 +29,7 @@ export default function index() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 36.792rem;
   align-items: center;
   position: relative;
   width: 100%;
@@ -41,7 +42,7 @@ const LogoContainer = styled.section`
   flex-direction: column;
   gap: 1.6rem;
   align-items: center;
-  margin: 27.8rem 0 36.792rem;
+  margin-top: 27.8rem;
 `;
 
 const SymbolIcon = styled(SymbolIc)`
