@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 27.8rem 0 0;
+  padding-top: 27.8rem;
   background-color: ${({ theme }) => theme.colors.yellow};
 `;
 
@@ -42,7 +42,6 @@ const LogoContainer = styled.section`
   flex-direction: column;
   gap: 1.6rem;
   align-items: center;
-  margin-bottom: 36.792rem;
 `;
 
 const SymbolIcon = styled(SymbolIc)`

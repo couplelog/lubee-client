@@ -30,7 +30,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 10.6rem;
-  padding-bottom: 1.4rem;
 `;
 
 const LogoIcon = styled(LogoIc)`
@@ -48,7 +47,7 @@ const LoginBtn = styled.button`
   ${btnOnboardingStyle}
 
   position: absolute;
-  bottom: 12rem;
+  bottom: 8.6rem;
   background-color: #fee500;
   color: ${({ theme }) => theme.colors.gray_900};
   cursor: pointer;
