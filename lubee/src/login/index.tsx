@@ -48,7 +48,7 @@ const LoginBtn = styled.button`
   ${btnOnboardingStyle}
 
   position: absolute;
-  bottom: 8.6rem;
+  top: 62.5rem;
   background-color: #fee500;
   color: ${({ theme }) => theme.colors.gray_900};
   cursor: pointer;
