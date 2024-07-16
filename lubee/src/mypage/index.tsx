@@ -9,15 +9,17 @@ import TabBar from "./components/TabBar";
 export default function index() {
   return (
     <Wrapper>
-      <SettingIcon />
-      <TopContainer>
-        <MypageProfileBox myName="불꽃피카츄" myBirth="02.01.18" partnerName="맹꽁이" partnerBirth="99.03.04" />
-        <HoneyBox count={25} />
-        <Banner />
-      </TopContainer>
-      <BottomContainer>
-        <TabBar />
-      </BottomContainer>
+      <MypageContainer>
+        <SettingIcon />
+        <TopContainer>
+          <MypageProfileBox myName="불꽃피카츄" myBirth="02.01.18" partnerName="맹꽁이" partnerBirth="99.03.04" />
+          <HoneyBox count={25} />
+          <Banner />
+        </TopContainer>
+        <BottomContainer>
+          <TabBar />
+        </BottomContainer>
+      </MypageContainer>
       <MypageFooter />
     </Wrapper>
   );
@@ -31,6 +33,22 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const MypageContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
 const SettingIcon = styled(SettingIc)`
