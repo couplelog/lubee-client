@@ -13,6 +13,8 @@ interface CalContainerProps {
 }
 
 const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
+  const [clickedItem, setClickedItem] = useState<number | null>(null);
+
   /*모달 애니메이션*/
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -23,6 +25,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         setOpenDateDetailModal(false); //부모 state 업데이트
       }
       setOpenDateDetailModalLocal(false); //current state 업데이트
+      setClickedItem(null); // 클릭한 Item 리셋
     };
     document.addEventListener("mousedown", listener);
     return () => {
@@ -56,16 +59,20 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 
   data.forEach((el) => (LIST[el.date + start - 1] = 1));
 
+  // DateDetail 모달에서 헤더에 date 표기 위한
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
 
-  function handleDateDetailModal(date: number) {
+  function handleDateDetailModal(date: number, index: number) {
     setSelectedDate(date);
-    if (setOpenDateDetailModal) {
-      setOpenDateDetailModal(true);
-    }
-    setOpenDateDetailModalLocal(true);
-  }
+    setClickedItem(index);
 
+    setTimeout(() => {
+      if (setOpenDateDetailModal) {
+        setOpenDateDetailModal(true);
+      }
+      setOpenDateDetailModalLocal(true);
+    }, 400); // 잠시 홀딩된 뒤 모달 띄우기
+  }
   return (
     <Container>
       <Header>
@@ -80,7 +87,11 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
           <Weekday key={day}>{day}</Weekday>
         ))}
         {LIST.map((val, idx) => (
-          <Item key={idx} $isUploaded={val === 1} onClick={() => handleDateDetailModal(idx - start + 1)}>
+          <Item
+            key={idx}
+            $isUploaded={val === 1}
+            $isClicked={clickedItem === idx}
+            onClick={() => handleDateDetailModal(idx - start + 1, idx)}>
             <Date $isHoliday={holiday.includes(idx - start + 1)}>
               {idx - start < 0 || idx - start + 1 > length ? "" : idx - start + 1}
             </Date>
@@ -147,14 +158,17 @@ const Grid = styled.ul`
   grid-template-rows: repeat(6, 1fr);
 `;
 
-const Item = styled.button<{ $isUploaded: boolean }>`
+const Item = styled.button<{ $isUploaded: boolean; $isClicked: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
   border-radius: 31px;
-  background-color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.yellow : theme.colors.white)};
-  color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.gray_800 : theme.colors.gray_500)};
+  background-color: ${({ theme, $isUploaded, $isClicked }) =>
+    $isClicked ? theme.colors.gray_700 : $isUploaded ? theme.colors.yellow : theme.colors.white};
+  color: ${({ theme, $isUploaded, $isClicked }) =>
+    $isClicked ? theme.colors.white : $isUploaded ? theme.colors.gray_800 : theme.colors.gray_500};
+  transition: background-color 0.3s ease;
 `;
 
 //color: ${({ theme, $isHoliday }) => $isHoliday && theme.colors.gray_500};
