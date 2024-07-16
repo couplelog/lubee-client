@@ -69,6 +69,7 @@ import EditIc from "./icon/editIc.svg?react";
 import HoneyYellowIc from "./icon/honeyYellowIc.svg?react";
 import PlayIc from "./icon/playIc.svg?react";
 import BannerIc from "./icon/bannerIc.svg?react";
+import NextIc from "./icon/nextIc.svg?react";
 
 export {
   LogoIc,
@@ -142,4 +143,5 @@ export {
   HoneyYellowIc,
   PlayIc,
   BannerIc,
+  NextIc,
 };
