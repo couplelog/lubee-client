@@ -86,8 +86,12 @@ const EmojiTagContainer = styled.button`
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  padding: 10rem 1.42rem 2.1rem 0;
+  padding: 0 1.42rem 2.1rem 0;
+
+  /* padding: 10rem 1.42rem 2.1rem 0; */
 `;
 
 const EmojiIcon = styled.svg`
