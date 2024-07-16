@@ -16,6 +16,7 @@ import One from "fullpic/one";
 import First from "congrats/first";
 import Fifth from "congrats/fifth";
 import Join from "congrats/join";
+import Main from "mypage/main";
 
 export const Router = createBrowserRouter([
   {
@@ -54,6 +55,11 @@ export const Router = createBrowserRouter([
           { path: "/congrats/fifth", element: <Fifth /> },
           { path: "/congrats/join", element: <Join /> },
         ],
+      },
+      {
+        path: "/mypage",
+        element: <Mypage />,
+        children: [{ path: "/mypage/main", element: <Main /> }],
       },
     ],
   },
