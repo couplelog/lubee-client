@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 
 import { createBrowserRouter } from "react-router-dom";
-import Interceptor from "interceptor";
+import Settings from "settings";
 import Splash from "splash";
 import Login from "login";
 import Congrats from "congrats";
@@ -23,11 +23,12 @@ import One from "fullpic/one";
 import First from "congrats/first";
 import Fifth from "congrats/fifth";
 import Join from "congrats/join";
+// import LoginCallback from "login/components/LoginCallback";
 
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Interceptor />,
+    element: <Settings />,
     errorElement: <Error />,
     children: [
       { index: true, element: <Splash /> },
