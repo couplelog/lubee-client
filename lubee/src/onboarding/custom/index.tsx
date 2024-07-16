@@ -6,7 +6,8 @@ import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
-import { ProfileOnboardingDataTypes, profileOnboardingData } from "@common/core/profileOnboardingData";
+import { MyProfileCustomData } from "@common/core/myProfileCustomData";
+import { ProfileCustomDataTypes } from "@common/types/CommonTypes";
 
 interface CustomProps {
   moveToOnboardingCode: () => void;
@@ -46,7 +47,7 @@ export default function index(props: CustomProps) {
       <ProgressBar step={1} />
       <OnboardingTitleBox titleText="프로필 캐릭터를 지정해주세요" subtitleText="러비에서만 보여지는 프로필이에요" />
       <ProfileGrid>
-        {profileOnboardingData.map((profile: ProfileOnboardingDataTypes, index: number) => (
+        {MyProfileCustomData.map((profile: ProfileCustomDataTypes, index: number) => (
           <BtnWrapper type="button" key={index} onClick={() => handleProfileClick(index)}>
             <ProfileIcon as={selectedProfile === index ? profile.selected : profile.default} />
           </BtnWrapper>

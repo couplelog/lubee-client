@@ -26,3 +26,8 @@ export interface EmojisDataTypes {
   account: string;
   emojiData: EmojiTypes[];
 }
+
+export interface ProfileCustomDataTypes {
+  default: string;
+  selected: string;
+}

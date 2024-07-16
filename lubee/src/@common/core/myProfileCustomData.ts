@@ -1,7 +1,4 @@
-export interface ProfileOnboardingDataTypes {
-  default: string;
-  selected: string;
-}
+import { ProfileCustomDataTypes } from "@common/types/CommonTypes";
 
 import {
   Profile1Ic,
@@ -18,7 +15,7 @@ import {
   ProfileStroke6Ic,
 } from "@assets/index";
 
-export const profileOnboardingData: ProfileOnboardingDataTypes[] = [
+export const MyProfileCustomData: ProfileCustomDataTypes[] = [
   { default: Profile1Ic, selected: ProfileStroke1Ic },
   { default: Profile2Ic, selected: ProfileStroke2Ic },
   { default: Profile3Ic, selected: ProfileStroke3Ic },
