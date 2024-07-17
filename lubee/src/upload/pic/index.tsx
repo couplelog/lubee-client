@@ -6,15 +6,28 @@ import { useState } from "react";
 import SelectLocationModal from "upload/components/SelectLocationModal";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useNavigate } from "react-router-dom";
+import { LocationDataTypes } from "upload/types/LocationDataTypes";
 interface UploadProps {
   // picSrc: string;
   location: string;
   setLocation: (location: string) => void;
   moveToUploadLocation: () => void;
+  searchInput: string;
+  setSearchInput: (input: string) => void;
+  filteredLocations: LocationDataTypes[];
+  setFilteredLocations: (locations: LocationDataTypes[]) => void;
 }
 
 export default function index(props: UploadProps) {
-  const { location, setLocation, moveToUploadLocation } = props;
+  const {
+    location,
+    setLocation,
+    moveToUploadLocation,
+    searchInput,
+    setSearchInput,
+    filteredLocations,
+    setFilteredLocations,
+  } = props;
   const navigate = useNavigate();
   const [openLocationModal, setOpenLocationModal] = useState<boolean>(false);
 
@@ -49,7 +62,14 @@ export default function index(props: UploadProps) {
         </BtnWrapper>
       </Footer>
       {openLocationModal && (
-        <SelectLocationModal setOpenLocationModal={setOpenLocationModal} setLocation={setLocation} />
+        <SelectLocationModal
+          setOpenLocationModal={setOpenLocationModal}
+          setLocation={setLocation}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          filteredLocations={filteredLocations}
+          setFilteredLocations={setFilteredLocations}
+        />
       )}
     </Wrapper>
   );
