@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { HoneyYellowIc, PlayIc, RewindIc } from "@assets/index";
+import { HoneyYellowIc, PlayIc } from "@assets/index";
+import rewindImg from "@assets/image/rewindImg.png";
 
 interface HoneyBoxProps {
   count: number;
@@ -31,7 +32,7 @@ export default function HoneyBox(props: HoneyBoxProps) {
           </TextContainer>
         </ProgressContainer>
       </HoneyContainer>
-      <RewindIcon />
+      <Image src={rewindImg} />
     </Container>
   );
 }
@@ -121,8 +122,10 @@ const CountText = styled.p<{ $count: boolean; $percentage?: number }>`
   text-align: center;
 `;
 
-const RewindIcon = styled(RewindIc)`
-  display: flex;
+const Image = styled.img`
   width: 7.6rem;
   height: 7.6rem;
+  padding: 0;
+  border: none;
+  background: none;
 `;
