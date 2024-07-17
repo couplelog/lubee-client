@@ -23,13 +23,11 @@ export default function HoneyBox(props: HoneyBoxProps) {
           <ProgressBarContainer>
             <ProgressBar style={{ width: `${percentage}%` }} />
           </ProgressBarContainer>
-          <PlayIcon />
           <TextContainer>
-            <CountText $count={true} $percentage={percentage}>
-              {count}
-            </CountText>
-            <CountText $count={false}>50</CountText>
+            <CountText $percentage={percentage}>{count}</CountText>
+            <TotalText>50</TotalText>
           </TextContainer>
+          <PlayIcon />
         </ProgressContainer>
       </HoneyContainer>
       <RewindBtn />
@@ -81,11 +79,11 @@ const SubtitleText = styled.p`
 const ProgressContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
   position: relative;
 `;
 
 const ProgressBarContainer = styled.div`
+  position: relative;
   width: 23.3rem;
   height: 0.8rem;
   border-radius: 32px;
@@ -100,8 +98,8 @@ const ProgressBar = styled.div`
 
 const PlayIcon = styled(PlayIc)`
   position: absolute;
-  top: 10%;
-  right: 0;
+  top: 50%;
+  left: 23.3rem;
   transform: translate(-50%, -50%);
   width: 1.6rem;
   height: 1.6rem;
@@ -109,15 +107,31 @@ const PlayIcon = styled(PlayIc)`
 
 const TextContainer = styled.section`
   display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  width: 23.3rem;
+  margin-top: 0.4rem;
+  padding: 0 0.4rem;
+  transform: translateY(-50%);
 `;
 
-const CountText = styled.p<{ $count: boolean; $percentage?: number }>`
-  display: flex;
-
+const CountText = styled.p<{ $percentage: number }>`
+  position: absolute;
+  left: ${({ $percentage }) => $percentage}%;
+  transform: translateX(-50%);
   ${({ theme }) => theme.fonts.Caption_1};
 
-  margin-left: ${({ $count, $percentage }) => ($count ? `${$percentage}%` : "auto")};
-  transform: translateX(-50%);
-  color: ${({ theme, $count }) => ($count ? theme.colors.yellow_600 : theme.colors.gray_400)};
+  color: ${({ theme }) => theme.colors.yellow_600};
   text-align: center;
+`;
+
+const TotalText = styled.p`
+  ${({ theme }) => theme.fonts.Caption_1};
+
+  position: absolute;
+  right: 0;
+  color: ${({ theme }) => theme.colors.gray_400};
+  text-align: center;
+  transform: translateX(50%);
 `;
