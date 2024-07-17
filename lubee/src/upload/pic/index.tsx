@@ -6,15 +6,30 @@ import { useState } from "react";
 import SelectLocationModal from "upload/components/SelectLocationModal";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useNavigate } from "react-router-dom";
+import { LocationDataTypes } from "upload/types/LocationDataTypes";
 interface UploadProps {
   // picSrc: string;
   location: string;
   setLocation: (location: string) => void;
   moveToUploadLocation: () => void;
+  searchInput: string;
+  setSearchInput: (input: string) => void;
+  filteredLocations: LocationDataTypes[];
+  setFilteredLocations: (locations: LocationDataTypes[]) => void;
+  setUploadPic: (uploadPic: boolean) => void;
 }
 
 export default function index(props: UploadProps) {
-  const { location, setLocation, moveToUploadLocation } = props;
+  const {
+    location,
+    setLocation,
+    moveToUploadLocation,
+    searchInput,
+    setSearchInput,
+    filteredLocations,
+    setFilteredLocations,
+    setUploadPic,
+  } = props;
   const navigate = useNavigate();
   const [openLocationModal, setOpenLocationModal] = useState<boolean>(false);
 
@@ -44,12 +59,24 @@ export default function index(props: UploadProps) {
       </Header>
       <FullPicContainer picSrc={fullPic} location={location} setOpenLocationModal={setOpenLocationModal} />
       <Footer>
-        <BtnWrapper type="button" onClick={moveToHome}>
+        <BtnWrapper
+          type="button"
+          onClick={() => {
+            setUploadPic(false); // uploadPic 리셋
+            moveToHome();
+          }}>
           <ShareBtnIcon />
         </BtnWrapper>
       </Footer>
       {openLocationModal && (
-        <SelectLocationModal setOpenLocationModal={setOpenLocationModal} setLocation={setLocation} />
+        <SelectLocationModal
+          setOpenLocationModal={setOpenLocationModal}
+          setLocation={setLocation}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          filteredLocations={filteredLocations}
+          setFilteredLocations={setFilteredLocations}
+        />
       )}
     </Wrapper>
   );

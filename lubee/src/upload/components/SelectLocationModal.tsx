@@ -2,14 +2,21 @@ import { SearchIc, XIc } from "@assets/index";
 import { locationData } from "@common/core/locationData";
 import styled from "styled-components";
 import { BtnWrapper } from "@styles/btnStyle";
+import { useEffect } from "react";
+import { LocationDataTypes } from "upload/types/LocationDataTypes";
 
 interface SelectLocationModalProps {
   setOpenLocationModal: (open: boolean) => void;
   setLocation: (location: string) => void;
+  searchInput: string;
+  setSearchInput: (input: string) => void;
+  filteredLocations: LocationDataTypes[];
+  setFilteredLocations: (locations: LocationDataTypes[]) => void;
 }
 
 export default function SelectLocationModal(props: SelectLocationModalProps) {
-  const { setOpenLocationModal, setLocation } = props;
+  const { setOpenLocationModal, setLocation, searchInput, setSearchInput, filteredLocations, setFilteredLocations } =
+    props;
 
   function closeLocationModal(locationName?: string) {
     setOpenLocationModal(false);
@@ -17,6 +24,13 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
       setLocation(locationName);
     }
   }
+
+  /* 검색*/
+  useEffect(() => {
+    setFilteredLocations(
+      locationData.filter((location) => location.name.toLowerCase().includes(searchInput.toLowerCase())),
+    );
+  }, [searchInput]);
 
   return (
     <Background>
@@ -28,14 +42,19 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
           </BtnWrapper>
         </Header>
         <SearchBar>
-          <SearchInput />
+          <SearchInput
+            type="text"
+            placeholder="위치 검색"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
           <SearchButton type="button">
             <SearchIcon />
           </SearchButton>
         </SearchBar>
         <Locations>
-          {locationData &&
-            locationData.map((data) => {
+          {filteredLocations &&
+            filteredLocations.map((data) => {
               const { name, distance, info, id } = data;
               return (
                 <LocationBox key={id} type="button" onClick={() => closeLocationModal(name)}>
