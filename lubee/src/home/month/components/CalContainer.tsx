@@ -5,6 +5,8 @@ import { Day } from "@common/core/calendarData";
 import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
 import { fullPicData } from "@common/core/fullPicData";
+import { formatMonth, getTodayDate, getTodayMonth, getTodayYear, isFutureDate } from "@common/utils/dateFormat";
+import { infoToast } from "@common/utils/toast";
 
 interface CalContainerProps {
   info: CalInfoTypes;
@@ -50,22 +52,28 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   // List 배열에 사진을 업로드한 날짜는 1로 찍기
   const LIST = new Array(42).fill(0);
   const { year, month, start, length, holiday, data } = info;
-  const formatMonth = (month: number): string => {
-    return month < 10 ? `0${month}` : `${month}`;
-  };
 
   data.forEach((el) => (LIST[el.date + start - 1] = 1));
 
+  // DateDetail 모달에서 헤더에 date 표기 위한
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
 
   function handleDateDetailModal(date: number) {
-    setSelectedDate(date);
-    if (setOpenDateDetailModal) {
-      setOpenDateDetailModal(true);
+    if (isFutureDate(year, month, date)) {
+      infoToast("오늘 이전만 선택가능합니다");
+      setSelectedDate(date);
+      return;
     }
-    setOpenDateDetailModalLocal(true);
-  }
 
+    setSelectedDate(date);
+
+    setTimeout(() => {
+      if (setOpenDateDetailModal) {
+        setOpenDateDetailModal(true);
+      }
+      setOpenDateDetailModalLocal(true);
+    }, 400); // 잠시 홀딩된 뒤 모달 띄우기
+  }
   return (
     <Container>
       <Header>
@@ -79,13 +87,22 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         {Day.map((day) => (
           <Weekday key={day}>{day}</Weekday>
         ))}
-        {LIST.map((val, idx) => (
-          <Item key={idx} $isUploaded={val === 1} onClick={() => handleDateDetailModal(idx - start + 1)}>
-            <Date $isHoliday={holiday.includes(idx - start + 1)}>
-              {idx - start < 0 || idx - start + 1 > length ? "" : idx - start + 1}
-            </Date>
-          </Item>
-        ))}
+        {LIST.map((val, idx) => {
+          const date = idx - start + 1;
+          const isToday = year === getTodayYear && month === getTodayMonth && date === getTodayDate;
+          const isEmpty = idx - start < 0 || date > length;
+
+          return (
+            <Item
+              key={idx}
+              $isUploaded={val === 1}
+              $isToday={isToday}
+              $isEmpty={isEmpty}
+              onClick={() => !isEmpty && handleDateDetailModal(date)}>
+              <Date $isHoliday={holiday.includes(date)}>{idx - start < 0 || date > length ? "" : date}</Date>
+            </Item>
+          );
+        })}
       </Grid>
       {openDateDetailModalLocal && (
         <DateDetailModal
@@ -100,8 +117,6 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 };
 
 export default CalContainer;
-
-// Rest of your styled components...
 
 const Container = styled.div`
   display: flex;
@@ -147,14 +162,29 @@ const Grid = styled.ul`
   grid-template-rows: repeat(6, 1fr);
 `;
 
-const Item = styled.button<{ $isUploaded: boolean }>`
+const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
   border-radius: 31px;
-  background-color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.yellow : theme.colors.white)};
-  color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.gray_800 : theme.colors.gray_500)};
+  background-color: ${({ theme, $isUploaded, $isToday, $isEmpty }) =>
+    $isEmpty
+      ? theme.colors.white
+      : $isToday
+        ? theme.colors.yellow_100
+        : $isUploaded
+          ? theme.colors.yellow
+          : theme.colors.white};
+  color: ${({ theme, $isUploaded, $isEmpty }) =>
+    $isEmpty ? theme.colors.gray_400 : $isUploaded ? theme.colors.gray_800 : theme.colors.gray_500};
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${({ theme, $isEmpty }) => ($isEmpty ? theme.colors.white : theme.colors.gray_800)};
+    color: ${({ theme, $isEmpty }) => ($isEmpty ? theme.colors.gray_400 : theme.colors.white)};
+    cursor: ${({ $isEmpty }) => ($isEmpty ? "default" : "pointer")};
+  }
 `;
 
 //color: ${({ theme, $isHoliday }) => $isHoliday && theme.colors.gray_500};
