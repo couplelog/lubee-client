@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { XIc, EditIc } from "@assets/index";
-import { MyProfileCustomData } from "@common/core/myProfileCustomData";
-import { MintProfileCustomData } from "@common/core/mintProfileCustomData";
+import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
 
 interface MypageProfileBoxProps {
   myName: string;
@@ -12,8 +11,10 @@ interface MypageProfileBoxProps {
 
 export default function MypageProfileBox(props: MypageProfileBoxProps) {
   const { myName, myBirth, partnerName, partnerBirth } = props;
-  const myProfile = MyProfileCustomData[0].selected;
-  const partnerProfile = MintProfileCustomData[0].selected;
+
+  /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
+  const myProfile = getHoverProfileIconSrc("me", "profile1");
+  const partnerProfile = getHoverProfileIconSrc("partner", "profile2");
 
   return (
     <Container>
