@@ -2,29 +2,26 @@ import Location from "upload/location";
 import Pic from "upload/pic";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { uploadLocationState, uploadPicState } from "@common/recoil/atom";
+import { uploadPicState } from "@common/recoil/atom";
 import { locationData } from "@common/core/locationData";
 
 export default function index() {
   const [location, setLocation] = useState<string>("");
-  const [uploadLocation, setUploadLocation] = useRecoilState(uploadLocationState);
   const [uploadPic, setUploadPic] = useRecoilState(uploadPicState);
   const [searchInput, setSearchInput] = useState("");
   const [filteredLocations, setFilteredLocations] = useState(locationData);
 
-  function moveToUploadPic() {
-    setUploadLocation(false);
-    setUploadPic(true);
+  function moveToUploadLocation() {
+    setUploadPic(false);
   }
 
-  function moveToUploadLocation() {
-    setUploadLocation(true);
-    setUploadPic(false);
+  function moveToUploadPic() {
+    setUploadPic(true);
   }
 
   return (
     <>
-      {uploadLocation && (
+      {!uploadPic && (
         <Location
           setLocation={setLocation}
           moveToUploadPic={moveToUploadPic}
@@ -43,6 +40,7 @@ export default function index() {
           setSearchInput={setSearchInput}
           filteredLocations={filteredLocations}
           setFilteredLocations={setFilteredLocations}
+          setUploadPic={setUploadPic}
         />
       )}
     </>
