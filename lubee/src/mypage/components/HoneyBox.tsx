@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { HoneyYellowIc, PlayIc } from "@assets/index";
-import rewindImg from "@assets/image/rewindImg.png";
+import RewindBtn from "./RewindBtn";
 
 interface HoneyBoxProps {
   count: number;
@@ -32,7 +32,7 @@ export default function HoneyBox(props: HoneyBoxProps) {
           </TextContainer>
         </ProgressContainer>
       </HoneyContainer>
-      <Image src={rewindImg} />
+      <RewindBtn />
     </Container>
   );
 }
@@ -46,9 +46,9 @@ const HoneyContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  width: 100%;
+  width: 26.5rem;
   height: 7.6rem;
-  padding: 1.1rem 1.3rem 0.5rem 1.2rem;
+  padding: 1.1rem 1.2rem 0.6rem;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0 0 4.412px 0 rgb(171 176 188 / 30%);
 `;
@@ -109,23 +109,15 @@ const PlayIcon = styled(PlayIc)`
 
 const TextContainer = styled.section`
   display: flex;
-  width: 23.3rem;
 `;
 
 const CountText = styled.p<{ $count: boolean; $percentage?: number }>`
   display: flex;
+
   ${({ theme }) => theme.fonts.Caption_1};
 
-  margin-left: ${({ $count, $percentage }) => ($count ? `${$percentage}%` : "45%")};
+  margin-left: ${({ $count, $percentage }) => ($count ? `${$percentage}%` : "auto")};
   transform: translateX(-50%);
   color: ${({ theme, $count }) => ($count ? theme.colors.yellow_600 : theme.colors.gray_400)};
   text-align: center;
-`;
-
-const Image = styled.img`
-  width: 7.6rem;
-  height: 7.6rem;
-  padding: 0;
-  border: none;
-  background: none;
 `;
