@@ -4,6 +4,7 @@ import { CAL } from "@common/core/calendarData";
 import CalContainer from "home/month/components/CalContainer";
 import { BtnWrapper } from "@styles/btnStyle";
 import { BackSmallIc, ForwardIc } from "@assets/index";
+import { getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 
 interface ToggleCalendarProps {
   showCalendar: boolean;
@@ -11,7 +12,8 @@ interface ToggleCalendarProps {
 }
 
 export default function ToggleCalendar({ showCalendar, handleCalendar }: ToggleCalendarProps) {
-  const [currentCalendarIndex, setCurrentCalendarIndex] = useState(0);
+  const initialIndex = CAL.findIndex((cal) => cal.year === getTodayYear && cal.month === getTodayMonth);
+  const [currentCalendarIndex, setCurrentCalendarIndex] = useState(initialIndex !== -1 ? initialIndex : 0);
   const [openDateDetailModal, setOpenDateDetailModal] = useState(false);
 
   const handleBackBtn = () => {

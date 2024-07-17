@@ -75,48 +75,6 @@ const CAL: CalInfoTypes[] = [
 
     data: [{ date: 5 }, { date: 7 }],
   },
-  {
-    year: 2024,
-    month: 9,
-    start: 0,
-    length: 30,
-    holiday: [16, 17, 18],
-
-    data: [{ date: 5 }, { date: 7 }],
-  },
-  {
-    year: 2024,
-    month: 10,
-    start: 2,
-    length: 31,
-    holiday: [3, 9],
-
-    data: [],
-  },
-  {
-    year: 2024,
-    month: 11,
-    start: 5,
-    length: 30,
-    holiday: [1],
-    data: [{ date: 5 }, { date: 7 }],
-  },
-  {
-    year: 2024,
-    month: 12,
-    start: 1,
-    length: 31,
-    holiday: [1],
-    data: [{ date: 10 }, { date: 7 }],
-  },
-  {
-    year: 2025,
-    month: 1,
-    start: 4,
-    length: 31,
-    holiday: [1],
-    data: [{ date: 5 }, { date: 7 }],
-  },
 ];
 
 export { CAL, Day };
