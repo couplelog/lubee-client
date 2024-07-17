@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 
-export default function ProfileBox() {
+export default function TodayProfileBox() {
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile1");
 
