@@ -6,7 +6,7 @@ import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
 import { fullPicData } from "@common/core/fullPicData";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear, isFutureDate } from "@common/utils/dateFormat";
-import { errorToast, infoToast } from "@common/utils/toast";
+import { infoToast } from "@common/utils/toast";
 
 interface CalContainerProps {
   info: CalInfoTypes;
@@ -117,8 +117,6 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 };
 
 export default CalContainer;
-
-// Rest of your styled components...
 
 const Container = styled.div`
   display: flex;
