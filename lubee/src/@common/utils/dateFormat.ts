@@ -9,6 +9,7 @@ export const formatMonth = (month: number): string => {
   return month < 10 ? `0${month}` : `${month}`;
 };
 
+// 오늘 이후의 날짜인지 확인하는 함수
 export const isFutureDate = (year: number, month: number, date: number): boolean => {
   return new Date(year, month - 1, date) > today;
 };
