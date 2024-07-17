@@ -42,6 +42,7 @@ const MypageContainer = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
+  padding-top: 5.6rem;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -52,9 +53,11 @@ const MypageContainer = styled.section`
 `;
 
 const SettingIcon = styled(SettingIc)`
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
   width: 2.4rem;
   height: 2.4rem;
-  margin: 2rem 0 1.2rem;
 `;
 
 const TopContainer = styled.section`

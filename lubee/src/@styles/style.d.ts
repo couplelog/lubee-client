@@ -55,6 +55,7 @@ declare module "styled-components" {
       Ginto_18: SerializedStyles;
       Ginto_20: SerializedStyles;
       Day: SerializedStyles;
+      Rewind: SerializedStyles;
     };
   }
 }
