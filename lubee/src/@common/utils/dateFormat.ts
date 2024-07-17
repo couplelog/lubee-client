@@ -8,3 +8,7 @@ export const getTodayYear = today.getFullYear();
 export const formatMonth = (month: number): string => {
   return month < 10 ? `0${month}` : `${month}`;
 };
+
+export const isFutureDate = (year: number, month: number, date: number): boolean => {
+  return new Date(year, month - 1, date) > today;
+};
