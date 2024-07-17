@@ -90,9 +90,15 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         {LIST.map((val, idx) => {
           const date = idx - start + 1;
           const isToday = year === getTodayYear && month === getTodayMonth && date === getTodayDate;
+          const isEmpty = idx - start < 0 || date > length;
 
           return (
-            <Item key={idx} $isUploaded={val === 1} $isToday={isToday} onClick={() => handleDateDetailModal(date)}>
+            <Item
+              key={idx}
+              $isUploaded={val === 1}
+              $isToday={isToday}
+              $isEmpty={isEmpty}
+              onClick={() => !isEmpty && handleDateDetailModal(date)}>
               <Date $isHoliday={holiday.includes(date)}>{idx - start < 0 || date > length ? "" : date}</Date>
             </Item>
           );
@@ -158,20 +164,28 @@ const Grid = styled.ul`
   grid-template-rows: repeat(6, 1fr);
 `;
 
-const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean }>`
+const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
   border-radius: 31px;
-  background-color: ${({ theme, $isUploaded, $isToday }) =>
-    $isToday ? theme.colors.yellow_100 : $isUploaded ? theme.colors.yellow : theme.colors.white};
-  color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.gray_800 : theme.colors.gray_500)};
+  background-color: ${({ theme, $isUploaded, $isToday, $isEmpty }) =>
+    $isEmpty
+      ? theme.colors.white
+      : $isToday
+        ? theme.colors.yellow_100
+        : $isUploaded
+          ? theme.colors.yellow
+          : theme.colors.white};
+  color: ${({ theme, $isUploaded, $isEmpty }) =>
+    $isEmpty ? theme.colors.gray_400 : $isUploaded ? theme.colors.gray_800 : theme.colors.gray_500};
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.gray_800};
-    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme, $isEmpty }) => ($isEmpty ? theme.colors.white : theme.colors.gray_800)};
+    color: ${({ theme, $isEmpty }) => ($isEmpty ? theme.colors.gray_400 : theme.colors.white)};
+    cursor: ${({ $isEmpty }) => ($isEmpty ? "default" : "pointer")};
   }
 `;
 
