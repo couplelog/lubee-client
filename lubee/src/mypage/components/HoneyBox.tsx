@@ -109,11 +109,10 @@ const TextContainer = styled.section`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  top: 50%;
+  top: 100%;
   width: 23.3rem;
   margin-top: 0.4rem;
   padding: 0 0.4rem;
-  transform: translateY(-50%);
 `;
 
 const CountText = styled.p<{ $percentage: number }>`
