@@ -19,7 +19,10 @@ export default function MypageProfileBox(props: MypageProfileBoxProps) {
   return (
     <Container>
       <ProfileContainer>
-        <ProfileIcon as={myProfile} />
+        <IconsContainer>
+          <ProfileIcon as={myProfile} />
+          <EditIcon />
+        </IconsContainer>
         <TextContainer>
           <NameText>{myName}</NameText>
           <BirthText>{myBirth}</BirthText>
@@ -49,9 +52,22 @@ const ProfileContainer = styled.section`
   align-items: center;
 `;
 
+const IconsContainer = styled.div`
+  display: flex;
+  position: relative;
+`;
+
 const ProfileIcon = styled.svg`
   width: 6rem;
   height: 6rem;
+`;
+
+const EditIcon = styled(EditIc)`
+  position: absolute;
+  top: 4.5rem;
+  right: 0.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
 `;
 
 const TextContainer = styled.section`
@@ -78,9 +94,4 @@ const XIcon = styled(XIc)`
   width: 1.2rem;
   height: 1.2rem;
   margin-top: 2.6rem;
-`;
-
-const EditIcon = styled(EditIc)`
-  width: 1.2rem;
-  height: 1.2rem;
 `;
