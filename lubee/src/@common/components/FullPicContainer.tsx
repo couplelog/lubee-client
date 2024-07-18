@@ -16,7 +16,7 @@ export default function FullPicContainer(props: FullPicProps) {
 
   return (
     <PicBox>
-      <Pic src={picSrc}></Pic>
+      <Pic src={picSrc} alt="업로드한 이미지"></Pic>
       <BtnWrapper
         type="button"
         onClick={() => {

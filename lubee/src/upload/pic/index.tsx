@@ -1,14 +1,12 @@
 import styled from "styled-components";
 import { BackIc, ShareBtnIc } from "@assets/index";
-import fullPic from "@assets/image/fullPic.png";
 import FullPicContainer from "@common/components/FullPicContainer";
 import { useState } from "react";
 import SelectLocationModal from "upload/components/SelectLocationModal";
 import { BtnWrapper } from "@styles/btnStyle";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { LocationDataTypes } from "upload/types/LocationDataTypes";
 interface UploadProps {
-  // picSrc: string;
   location: string;
   setLocation: (location: string) => void;
   moveToUploadLocation: () => void;
@@ -45,6 +43,8 @@ export default function index(props: UploadProps) {
       console.log(prevPage);
     }
   }
+  const locationState = useLocation();
+  const picSrc = locationState.state?.picSrc; // 업로드한 이미지 src
 
   return (
     <Wrapper>
@@ -57,7 +57,7 @@ export default function index(props: UploadProps) {
           <BackIcon />
         </BtnWrapper>
       </Header>
-      <FullPicContainer picSrc={fullPic} location={location} setOpenLocationModal={setOpenLocationModal} />
+      <FullPicContainer picSrc={picSrc} location={location} setOpenLocationModal={setOpenLocationModal} />
       <Footer>
         <BtnWrapper
           type="button"
