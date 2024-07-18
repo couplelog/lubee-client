@@ -2,6 +2,7 @@ import { ToggleHoneyIc, TogglePastIc } from "@assets/index";
 import styled from "styled-components";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { readPic } from "home/utils/readPic";
 
 interface ToggleProps {
   handleCalendar: () => void;
@@ -9,26 +10,29 @@ interface ToggleProps {
 }
 export default function Toggle(props: ToggleProps) {
   const { handleCalendar, showCalendar } = props;
-  const [isFile, setIsFile] = useState<File[] | null>(null);
+  const navigate = useNavigate();
 
   /* 사진 업로드 */
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const navigate = useNavigate();
-  function saveFile(imageFile: File[]) {
-    setIsFile(imageFile);
-    // setUploadLocation(true);
-    navigate("/upload");
-  }
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [, setPicSrc] = useState<File>();
+  const [, setVerified] = useState(true);
+
   function handleAddPicBtn() {
     fileInputRef.current && fileInputRef.current.click();
   }
-  function handleFileInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target.files) {
-      const fileList = Array.from(e.target.files);
-      saveFile(fileList);
+
+  const uploadPic = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const picObj = event.target.files;
+
+    readPic({ input: picObj, setPicSrc: setPicSrc, setVerified: setVerified });
+    if (picObj && picObj[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(picObj[0]);
+      reader.onloadend = () => {
+        navigate("/upload", { state: { picSrc: reader.result } }); //useLocation 사용하기 위해 state 전달
+      };
     }
-    console.log(isFile);
-  }
+  };
 
   return (
     <Background>
@@ -41,7 +45,9 @@ export default function Toggle(props: ToggleProps) {
               type="file"
               ref={fileInputRef}
               multiple={false}
-              onChange={handleFileInputChange}
+              onChange={(event) => {
+                uploadPic(event);
+              }}
               accept="image/gif,image/jpeg,image/png,image/jpg,image/webp,image/heic"
             />
           </Today>
