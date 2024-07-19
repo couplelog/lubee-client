@@ -30,21 +30,21 @@ const Wrapper = styled.section`
 `;
 
 const ProgressBar1Icon = styled(ProgressBar1Ic)`
-  width: 5.9rem;
+  width: 7.9rem;
   height: 1.9rem;
 `;
 
 const ProgressBar2Icon = styled(ProgressBar2Ic)`
-  width: 5.9rem;
+  width: 7.9rem;
   height: 1.9rem;
 `;
 
 const ProgressBar3Icon = styled(ProgressBar3Ic)`
-  width: 5.9rem;
+  width: 7.9rem;
   height: 1.9rem;
 `;
 
 const ProgressBar4Icon = styled(ProgressBar4Ic)`
-  width: 5.9rem;
+  width: 7.9rem;
   height: 1.9rem;
 `;
