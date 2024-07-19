@@ -35,7 +35,7 @@ export default function index(props: ConnectProps) {
       try {
         await navigator.share({
           title: "연인으로부터 러비 초대장이 도착했어요! 링크를 눌러 초대장을 받아주세요.",
-          text: "연인의 러비코드: 1234 5678",
+          text: "연인으로부터 러비 초대장이 도착했어요!\n링크를 눌러 초대장을 받아주세요.\n연인의 러비코드: 1234 5678",
           url: "https://example.com", // 실제 공유할 URL로 변경
         });
         console.log("공유 성공");
