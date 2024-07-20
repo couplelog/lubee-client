@@ -144,7 +144,7 @@ const fonts = {
   `,
 
   Ginto_16: css`
-    font-family: "ABC Ginto Nord Condensed Unlicensed Trial", sans-serif;
+    font-family: Pretendard;
     font-style: normal;
     font-size: 1.6rem;
     font-weight: 500;
@@ -152,7 +152,7 @@ const fonts = {
   `,
 
   Ginto_18: css`
-    font-family: "ABC Ginto Nord Condensed Unlicensed Trial", sans-serif;
+    font-family: Pretendard;
     font-style: normal;
     font-size: 1.8rem;
     font-weight: 500;
@@ -160,7 +160,7 @@ const fonts = {
   `,
 
   Ginto_20: css`
-    font-family: "ABC Ginto Nord Condensed Unlicensed Trial", sans-serif;
+    font-family: Pretendard;
     font-style: normal;
     font-size: 2.8rem;
     font-weight: 500;
