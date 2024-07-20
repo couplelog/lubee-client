@@ -9,7 +9,7 @@ const usePostLogin = () => {
 
   useEffect(() => {
     api
-      .post("서버가 주는 링크", null, {
+      .post("api/users/kakao/simpleLogin", null, {
         headers: {
           Authorization: `Bearer ${KAKAO_CODE}`,
         },
