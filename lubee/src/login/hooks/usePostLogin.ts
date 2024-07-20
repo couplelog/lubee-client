@@ -17,7 +17,8 @@ const usePostLogin = () => {
       .then((res: loginResProps) => {
         console.log("로그인 성공");
         console.log(res);
-        // 로그인완료되고 메인뷰로 이동
+        // 로그인 완료되고 메인뷰로 이동
+        navigate("/home/today");
       })
       .catch((err: loginErrorProps) => {
         if (err.response.data.code === 404) {
