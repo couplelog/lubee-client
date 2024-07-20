@@ -36,7 +36,7 @@ const Router = createBrowserRouter([
       { index: true, element: <Splash /> },
       { path: "/splash", element: <Splash /> },
       { path: "/login", element: <Login /> },
-      { path: "/api/users/kakao", element: <LoginCallback /> },
+      { path: "/api/users/kakao/simpleLogin", element: <LoginCallback /> },
       { path: "/onboarding", element: <Onboarding /> },
       {
         path: "/home",
