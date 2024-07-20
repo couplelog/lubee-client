@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ExploreDeactivateIc, HomeDeactivateIc, MyActivateIc } from "@assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
+import { infoToast } from "@common/utils/toast";
 
 export default function MypageFooter() {
   const navigate = useNavigate();
@@ -36,13 +37,17 @@ export default function MypageFooter() {
     }
   }
 
+  function moveToExplore() {
+    infoToast("서비스 준비중입니다");
+  }
+
   return (
     <Container>
       <BtnWrapper type="button" onClick={moveToHome}>
         <HomeDeactivateIcon />
         <DeactivateText>홈</DeactivateText>
       </BtnWrapper>
-      <BtnWrapper type="button">
+      <BtnWrapper type="button" onClick={moveToExplore}>
         <ExploreDeactivateIcon />
         <DeactivateText>탐색</DeactivateText>
       </BtnWrapper>

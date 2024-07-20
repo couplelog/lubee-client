@@ -132,7 +132,15 @@ const fonts = {
     font-style: normal;
     font-size: 1.2rem;
     font-weight: 700;
-    line-height: 1.2rem; /* 100% */
+    line-height: 1.2rem;
+  `,
+
+  Rewind: css`
+    font-family: Pretendard;
+    font-style: normal;
+    font-size: 0.8228rem;
+    font-weight: 500;
+    line-height: 1.6455rem;
   `,
 
   Ginto_16: css`

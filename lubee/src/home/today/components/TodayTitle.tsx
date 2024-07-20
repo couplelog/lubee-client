@@ -21,6 +21,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: auto;
+  margin-top: 0.8rem;
 `;
 
 const DateText = styled.p`

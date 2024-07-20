@@ -1,6 +1,7 @@
 export interface EmojiTypes {
   emoji: string;
   iconSrc: string;
+  hoverIconSrc?: string;
 }
 
 export interface FullPicDataTypes {

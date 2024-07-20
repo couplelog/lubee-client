@@ -1,11 +1,6 @@
-interface LocationDataProps {
-  name: string;
-  distance: number;
-  info: string;
-  id: number;
-}
+import { LocationDataTypes } from "upload/types/LocationDataTypes";
 
-export const locationData: LocationDataProps[] = [
+export const locationData: LocationDataTypes[] = [
   {
     id: 1,
     name: "하이",

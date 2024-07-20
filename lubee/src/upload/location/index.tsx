@@ -5,18 +5,32 @@ import { locationData } from "@common/core/locationData";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BtnWrapper } from "@styles/btnStyle";
+import { LocationDataTypes } from "upload/types/LocationDataTypes";
 
 interface LocationProps {
   setLocation: (location: string) => void;
   moveToUploadPic: () => void;
+  searchInput: string;
+  setSearchInput: (input: string) => void;
+  filteredLocations: LocationDataTypes[];
+  setFilteredLocations: (locations: LocationDataTypes[]) => void;
 }
 
 export default function index(props: LocationProps) {
-  const { setLocation, moveToUploadPic } = props;
+  const { setLocation, moveToUploadPic, searchInput, setSearchInput, filteredLocations, setFilteredLocations } = props;
+
   const navigate = useNavigate();
+
   useEffect(() => {
     localStorage.getItem("currentPage");
   }, []);
+
+  /* 검색*/
+  useEffect(() => {
+    setFilteredLocations(
+      locationData.filter((location) => location.name.toLowerCase().includes(searchInput.toLowerCase())),
+    );
+  }, [searchInput]);
 
   function handleSelectLocation(locationName?: string) {
     if (locationName) {
@@ -28,7 +42,6 @@ export default function index(props: LocationProps) {
   function moveToHome() {
     // 헤더에서 전에 어떤 페이지였는지 불러오기
     const prevPage = localStorage.getItem("currentPage");
-
     if (prevPage === "today") {
       navigate("/home/today");
     } else {
@@ -45,14 +58,19 @@ export default function index(props: LocationProps) {
         <Text>위치 설정</Text>
       </Header>
       <SearchBar>
-        <SearchInput />
+        <SearchInput
+          type="text"
+          placeholder="위치 검색"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
         <SearchButton type="button">
           <SearchIcon />
         </SearchButton>
       </SearchBar>
       <Locations>
-        {locationData &&
-          locationData.map((data) => {
+        {filteredLocations &&
+          filteredLocations.map((data) => {
             const { id, name, distance, info } = data;
             return (
               <LocationBox key={id} type="button" onClick={() => handleSelectLocation(name)}>

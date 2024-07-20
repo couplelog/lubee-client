@@ -4,8 +4,8 @@ import styled from "styled-components";
 import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
-//import DatePickerScroll from "../components/rolldate/DatePickerScroll";
 import OnboardingBtn from "../components/OnboardingBtn";
+import DateInput from "../components/DateInput";
 
 interface AnnivProps {
   moveToOnboardingBirth: () => void;
@@ -14,9 +14,11 @@ interface AnnivProps {
 export default function index(props: AnnivProps) {
   const { moveToOnboardingBirth } = props;
   const navigate = useNavigate();
-  const [anniv, setAnniv] = useState("");
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
+  const [day, setDay] = useState("");
 
-  const isOnboardingBtnDisabled = anniv === "";
+  const isOnboardingBtnDisabled = !(year && month && day);
 
   function handleBackBtn() {
     moveToOnboardingBirth();
@@ -24,12 +26,7 @@ export default function index(props: AnnivProps) {
 
   function handleXBtn() {
     navigate("/login");
-    console.log(setAnniv);
   }
-
-  // function handleDateChange(date: string) {
-  //   setAnniv(date);
-  // }
 
   function handleOnboardingBtn() {
     navigate("/congrats/join");
@@ -43,7 +40,7 @@ export default function index(props: AnnivProps) {
         titleText="연인과 처음 만난 날을 입력해주세요"
         subtitleText="나와 연인의 기념일을 알 수 있어요"
       />
-      {/* <DatePickerScroll onDateChange={handleDateChange} /> */}
+      <DateInput year={year} setYear={setYear} month={month} setMonth={setMonth} day={day} setDay={setDay} />
       <OnboardingBtn handleOnboardingBtn={handleOnboardingBtn} text="완료" $disabled={isOnboardingBtnDisabled} />
     </Wrapper>
   );
@@ -56,4 +53,5 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) => theme.colors.white};
 `;

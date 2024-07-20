@@ -2,7 +2,7 @@ import styled from "styled-components";
 import DateBox from "./components/DateBox";
 import TodayTitle from "./components/TodayTitle";
 import HoneyIconContainer from "./components/HoneyIconContainer";
-import ProfileBox from "./components/ProfileBox";
+import TodayProfileBox from "./components/TodayProfileBox";
 import ContentContainer from "./components/ContentContainer";
 import { PlusIc } from "@assets/index";
 import { useState } from "react";
@@ -29,7 +29,7 @@ export default function index() {
         <TodayTitle day={387} />
         <SubContainer>
           <HoneyIconContainer />
-          <ProfileBox />
+          <TodayProfileBox />
         </SubContainer>
       </Container>
       <ContentContainer />

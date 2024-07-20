@@ -35,6 +35,6 @@
       "@type/*": ["type/*"]
     }
   },
-  "include": ["src", "src/onboarding/components/rolldate/rolldate.d.ts"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

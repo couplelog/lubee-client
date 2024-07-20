@@ -64,6 +64,19 @@ import TogglePastIc from "./icon/togglePastIc.svg?react";
 import ToggleHoneyIc from "./icon/toggleHoneyIc.svg?react";
 import BackSmallIc from "./icon/backSmallIc.svg?react";
 import ForwardIc from "./icon/forwardIc.svg?react";
+import SettingIc from "./icon/settingIc.svg?react";
+import EditIc from "./icon/editIc.svg?react";
+import HoneyYellowIc from "./icon/honeyYellowIc.svg?react";
+import PlayIc from "./icon/playIc.svg?react";
+import BannerIc from "./icon/bannerIc.svg?react";
+import NextIc from "./icon/nextIc.svg?react";
+import MintProfileStroke1Ic from "./icon/mintProfileStroke1Ic.svg?react";
+import MintProfileStroke2Ic from "./icon/mintProfileStroke2Ic.svg?react";
+import MintProfileStroke3Ic from "./icon/mintProfileStroke3Ic.svg?react";
+import MintProfileStroke4Ic from "./icon/mintProfileStroke4Ic.svg?react";
+import MintProfileStroke5Ic from "./icon/mintProfileStroke5Ic.svg?react";
+import MintProfileStroke6Ic from "./icon/mintProfileStroke6Ic.svg?react";
+import RewindIc from "./icon/rewindIc.svg?react";
 
 export {
   LogoIc,
@@ -132,4 +145,17 @@ export {
   TogglePastIc,
   BackSmallIc,
   ForwardIc,
+  SettingIc,
+  EditIc,
+  HoneyYellowIc,
+  PlayIc,
+  BannerIc,
+  NextIc,
+  MintProfileStroke1Ic,
+  MintProfileStroke2Ic,
+  MintProfileStroke3Ic,
+  MintProfileStroke4Ic,
+  MintProfileStroke5Ic,
+  MintProfileStroke6Ic,
+  RewindIc,
 };

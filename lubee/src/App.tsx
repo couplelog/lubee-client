@@ -4,6 +4,8 @@ import GlobalStyle from "@styles/globalStyle";
 import theme from "@styles/theme";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
+import "react-toastify/dist/ReactToastify.css";
+import { StyledToastContainer } from "@styles/toast";
 
 import { createBrowserRouter } from "react-router-dom";
 import Settings from "settings";
@@ -77,6 +79,18 @@ function App() {
         <ThemeProvider theme={theme}>
           <RouterProvider router={Router} />
           <GlobalStyle />
+          <StyledToastContainer
+            position="bottom-center"
+            autoClose={3000}
+            hideProgressBar
+            closeButton={false}
+            closeOnClick={false}
+            pauseOnHover={false}
+            draggable={false}
+            rtl={false}
+            pauseOnFocusLoss={false}
+            limit={1}
+          />
         </ThemeProvider>
       </RecoilRoot>
     </QueryClientProvider>

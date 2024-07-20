@@ -6,7 +6,7 @@ import OnboardingHeader from "../components/OnboardingHeader";
 import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
-import { ProfileOnboardingDataTypes, profileOnboardingData } from "@common/core/profileOnboardingData";
+import { profileIconsData } from "@common/core/profileIconsData";
 
 interface CustomProps {
   moveToOnboardingCode: () => void;
@@ -18,6 +18,9 @@ export default function index(props: CustomProps) {
   const navigate = useNavigate();
   const [selectedProfile, setSelectedProfile] = useState<number | null>(null);
   const isOnboardingBtnDisabled = selectedProfile === null;
+
+  // 프로필 아이콘 중에 "me"만 filter
+  const myProfileIcons = profileIconsData.find((data) => data.account === "me")?.profileIcon || [];
 
   function handleBackBtn() {
     moveToOnboardingCode();
@@ -46,9 +49,9 @@ export default function index(props: CustomProps) {
       <ProgressBar step={1} />
       <OnboardingTitleBox titleText="프로필 캐릭터를 지정해주세요" subtitleText="러비에서만 보여지는 프로필이에요" />
       <ProfileGrid>
-        {profileOnboardingData.map((profile: ProfileOnboardingDataTypes, index: number) => (
+        {myProfileIcons.map((data, index) => (
           <BtnWrapper type="button" key={index} onClick={() => handleProfileClick(index)}>
-            <ProfileIcon as={selectedProfile === index ? profile.selected : profile.default} />
+            <ProfileIcon as={selectedProfile === index ? data.hoverIconSrc : data.iconSrc} />
           </BtnWrapper>
         ))}
       </ProfileGrid>
@@ -64,6 +67,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const ProfileGrid = styled.section`
