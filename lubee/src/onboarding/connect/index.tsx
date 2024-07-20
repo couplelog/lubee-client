@@ -8,6 +8,7 @@ import OnboardingHeader from "../components/OnboardingHeader";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import YellowBox from "../components/YellowBox";
 import CopyCodeModal from "../components/CopyCodeModal";
+import { useGetLubeeCode } from "./hooks/useGetLubeeCode";
 
 interface ConnectProps {
   moveToOnboardingCode: () => void;
@@ -51,6 +52,9 @@ export default function index(props: ConnectProps) {
     moveToOnboardingCode();
   }
 
+  const lubeeCode = useGetLubeeCode();
+  if (!lubeeCode) return <></>;
+
   return (
     <Wrapper>
       <OnboardingHeader handleXBtn={handleXBtn} showXIcon />
@@ -60,7 +64,7 @@ export default function index(props: ConnectProps) {
         <MyCodeText>나의 러비코드</MyCodeText>
         <BtnWrapper type="button" onClick={handleInviteClick}>
           <YellowBox $disabled={false}>
-            12345 67890
+            {lubeeCode.response.code}
             <CopyIcon />
           </YellowBox>
         </BtnWrapper>
