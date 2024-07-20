@@ -4,7 +4,6 @@ export interface loginResProps {
     data: {
       accessToken: string;
       refreshToken: string;
-      role: string;
     };
   };
 }
