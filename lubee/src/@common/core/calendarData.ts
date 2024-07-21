@@ -1,7 +1,5 @@
 import { CalInfoTypes } from "home/month/types/CalInfoTypes";
 
-const Day = ["일", "월", "화", "수", "목", "금", "토"];
-
 const CAL: CalInfoTypes[] = [
   {
     year: 2024,
@@ -51,7 +49,7 @@ const CAL: CalInfoTypes[] = [
   {
     year: 2024,
     month: 6,
-    start: 1,
+    start: 6,
     length: 30,
     holiday: [1],
 
@@ -77,4 +75,4 @@ const CAL: CalInfoTypes[] = [
   },
 ];
 
-export { CAL, Day };
+export { CAL };
