@@ -77,6 +77,7 @@ import MintProfileStroke4Ic from "./icon/mintProfileStroke4Ic.svg?react";
 import MintProfileStroke5Ic from "./icon/mintProfileStroke5Ic.svg?react";
 import MintProfileStroke6Ic from "./icon/mintProfileStroke6Ic.svg?react";
 import RewindIc from "./icon/rewindIc.svg?react";
+import PlusClickedIc from "./icon/plusClickedIc.svg?react";
 
 export {
   LogoIc,
@@ -158,4 +159,5 @@ export {
   MintProfileStroke5Ic,
   MintProfileStroke6Ic,
   RewindIc,
+  PlusClickedIc,
 };
