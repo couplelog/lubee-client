@@ -64,6 +64,7 @@ const Container = styled.section`
   bottom: 0;
   width: 100%;
   padding: 0 0 5.8rem;
+  border-radius: 16px 16px 0 0;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
