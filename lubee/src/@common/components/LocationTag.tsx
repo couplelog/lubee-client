@@ -32,10 +32,12 @@ const LocationPointIcon = styled(LocationPointIc)<{ $font: string }>`
   height: ${(props) => (props.$font === "fullPic" ? "1.8rem" : "0.98rem")};
 `;
 
+// vertical-align 지정 추가
 const LocationText = styled.p<{ $font: string }>`
   ${({ theme, $font }) => ($font === "fullPic" ? theme.fonts.SubTitle : theme.fonts.Caption_1)};
 
   color: ${({ theme, $font }) => ($font === "fullPic" ? theme.colors.gray_800 : theme.colors.gray_500)};
+  vertical-align: middle;
 `;
 
 // padding: 0.2rem 0.5rem;

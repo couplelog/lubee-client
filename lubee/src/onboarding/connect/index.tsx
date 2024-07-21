@@ -122,6 +122,7 @@ const MyCodeContainer = styled.div`
 const CopyIcon = styled(CopyIc)`
   width: 1.6rem;
   height: 1.6rem;
+  vertical-align: middle;
 `;
 
 const BtnBox = styled.div`
