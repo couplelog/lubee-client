@@ -127,7 +127,7 @@ const Container = styled.div`
 
 const Header = styled.header`
   display: flex;
-  gap: 2.3rem;
+  gap: 0.8rem;
   align-items: center;
   padding: 0 0 0 1rem;
 `;
