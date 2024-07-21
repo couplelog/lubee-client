@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useRef } from "react";
 import styled from "styled-components";
 import YellowBox from "../components/YellowBox";
 
@@ -13,6 +13,15 @@ interface DateInputProps {
 
 export default function DateInput(props: DateInputProps) {
   const { year, setYear, month, setMonth, day, setDay } = props;
+
+  const yellowBoxRef = useRef<{ focus: () => void }>(null);
+
+  useEffect(() => {
+    // 페이지가 로드되고 나서 입력 필드에 포커스를 설정
+    if (yellowBoxRef.current) {
+      yellowBoxRef.current.focus();
+    }
+  }, []);
 
   const monthTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -76,7 +85,13 @@ export default function DateInput(props: DateInputProps) {
 
   return (
     <YellowBoxContainer>
-      <YellowBox inputValue={year} setInputValue={handleYearChange} $disabled={true} placeholder="YYYY" />
+      <YellowBox
+        inputValue={year}
+        setInputValue={handleYearChange}
+        $disabled={true}
+        placeholder="YYYY"
+        ref={yellowBoxRef}
+      />
       <YellowBox inputValue={month} setInputValue={handleMonthChange} $disabled={true} placeholder="MM" />
       <YellowBox inputValue={day} setInputValue={handleDayChange} $disabled={true} placeholder="DD" />
     </YellowBoxContainer>
