@@ -4,7 +4,7 @@ import TodayTitle from "./components/TodayTitle";
 import HoneyIconContainer from "./components/HoneyIconContainer";
 import TodayProfileBox from "./components/TodayProfileBox";
 import ContentContainer from "./components/ContentContainer";
-import { PlusIc } from "@assets/index";
+import { PlusIc, PlusClickedIc } from "@assets/index";
 import { useState } from "react";
 import Toggle from "./components/Toggle";
 import ToggleCalendar from "./components/ToggleCalendar";
@@ -12,9 +12,11 @@ import ToggleCalendar from "./components/ToggleCalendar";
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
+  const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
+    setIsPlusClicked((clicked) => !clicked);
   }
 
   function handleCalendar() {
@@ -35,7 +37,7 @@ export default function index() {
       <ContentContainer />
       {!showCalendar && (
         <BtnWrapper type="button" onClick={handlePlusBtn}>
-          <PlusIcon />
+          {isPlusClicked ? <PlusClickedIcon /> : <PlusIcon />}
         </BtnWrapper>
       )}
       {openToggle && <Toggle handleCalendar={handleCalendar} showCalendar={showCalendar} />}
@@ -75,6 +77,14 @@ const SubContainer = styled.section`
 `;
 
 const PlusIcon = styled(PlusIc)`
+  position: absolute;
+  right: 1.8rem;
+  bottom: 7.5rem;
+  width: 6.4rem;
+  height: 6.4rem;
+`;
+
+const PlusClickedIcon = styled(PlusClickedIc)`
   position: absolute;
   right: 1.8rem;
   bottom: 7.5rem;

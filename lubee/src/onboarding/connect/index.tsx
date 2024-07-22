@@ -95,6 +95,21 @@ const LubeeCodeIcon = styled(LubeeCodeIc)`
   width: 20.5rem;
   height: 12.7rem;
   margin-top: 6rem;
+
+  @media (height <= 800px) {
+    width: 20.5rem;
+    height: 12.7rem;
+  }
+
+  @media (height <= 600px) {
+    width: 15.375rem;
+    height: 9.525rem;
+  }
+
+  @media (height <= 400px) {
+    width: 10.25rem;
+    height: 6.35rem;
+  }
 `;
 
 const MyCodeText = styled.p`
@@ -114,6 +129,7 @@ const MyCodeContainer = styled.div`
 const CopyIcon = styled(CopyIc)`
   width: 1.6rem;
   height: 1.6rem;
+  vertical-align: middle;
 `;
 
 const BtnBox = styled.div`

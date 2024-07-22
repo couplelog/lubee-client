@@ -58,12 +58,7 @@ export default function index(props: LocationProps) {
         <Text>위치 설정</Text>
       </Header>
       <SearchBar>
-        <SearchInput
-          type="text"
-          placeholder="위치 검색"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
+        <SearchInput type="text" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
         <SearchButton type="button">
           <SearchIcon />
         </SearchButton>
@@ -126,6 +121,7 @@ const SearchBar = styled.div`
 
 const SearchInput = styled.input`
   flex: 1;
+  height: 3.8rem;
   padding: 0.7rem 2rem 0.7rem 5.4rem;
   border: none;
   border-radius: 46px;

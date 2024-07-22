@@ -29,6 +29,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 10.6rem;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const LogoIcon = styled(LogoIc)`
