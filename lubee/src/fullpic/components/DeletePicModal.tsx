@@ -8,13 +8,13 @@ interface DeletePicModalProps {
 
 export default function DeletePicModal(props: DeletePicModalProps) {
   const { handleTrashBtn } = props;
-  const { mutate } = useDeletePic();
+  const { mutate: deltePic } = useDeletePic();
 
   const location = useLocation();
   const { memory_id } = location.state;
 
   function handleDeleteBtn() {
-    mutate(memory_id, {
+    deltePic(memory_id, {
       onSuccess: () => {
         handleTrashBtn(false); // 삭제 시 모달 닫기
       },
