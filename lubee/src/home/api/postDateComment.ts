@@ -14,5 +14,5 @@ export async function postDateComment(props: DateCommentDataTypes) {
     date: date,
   });
 
-  return response;
+  return response.data;
 }

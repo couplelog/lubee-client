@@ -4,7 +4,7 @@ import { updateDateComment } from "../api/updateDateComment";
 export function useUpdateDateComment() {
   return useMutation(updateDateComment, {
     onSuccess: (data) => {
-      console.log("업데이트 성공", data);
+      console.log("코멘트 수정 성공", data);
     },
     onError: (error: any) => {
       // AxiosError 객체에서 response.data를 추출하여 접근
@@ -19,10 +19,10 @@ export function useUpdateDateComment() {
           console.log(message);
           alert(message); // alert 창으로 메시지 출력
         } else {
-          console.log("업데이트 실패", error);
+          console.log("코멘트 수정 실패", error);
         }
       } else {
-        console.log("업데이트 실패", error);
+        console.log("코멘트 수정 실패", error);
       }
     },
   });
