@@ -16,8 +16,8 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
   const partnerProfile = getProfileIconSrc("partner", "profile2");
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", selectedEmojiText);
-  const partnerEmoji = getEmojiSrc("partner", selectedEmojiText);
+  const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
+  const partnerEmoji = getEmojiSrc("partner", selectedEmojiText) || undefined;
 
   return (
     <Background>
