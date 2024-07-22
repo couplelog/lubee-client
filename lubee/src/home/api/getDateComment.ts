@@ -14,7 +14,7 @@ interface GetDateCommentRequest {
 // GET 요청에서는 보통 요청 바디를 사용하지 않음
 // 그래서 쿼리 파라미터로 id를 전달
 export async function getDateComment(request: GetDateCommentRequest) {
-  const { data } = await api.get<Response<DateCommentDataTypes[]>>(`/api/couples/lubee-code`, {
+  const { data } = await api.get<Response<DateCommentDataTypes[]>>(`/api/datecomments/{id}`, {
     params: { id: request.id },
   });
   return data;
