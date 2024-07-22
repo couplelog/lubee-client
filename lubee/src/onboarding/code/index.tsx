@@ -4,6 +4,7 @@ import OnboardingHeader from "../components/OnboardingHeader";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
+import { usePostLubeeCode } from "../hooks/usePostLubeeCode";
 
 interface CodeProps {
   moveToOnboardingConnect: () => void;
@@ -14,6 +15,7 @@ export default function index(props: CodeProps) {
   const { moveToOnboardingConnect, moveToOnboardingCustom } = props;
   const [code, setCode] = useState("");
   const yellowBoxRef = useRef<{ focus: () => void }>(null);
+  const { mutate: postLubeeCodeMutate } = usePostLubeeCode(moveToOnboardingCustom); // 성공 시 콜백 함수(custom 페이지로 넘어가는 함수) 전달
 
   useEffect(() => {
     // 페이지가 로드되고 나서 입력 필드에 포커스를 설정
@@ -29,7 +31,7 @@ export default function index(props: CodeProps) {
   }
 
   function handleOnboardingBtn() {
-    moveToOnboardingCustom();
+    postLubeeCodeMutate({ inputCode: code });
   }
 
   return (
