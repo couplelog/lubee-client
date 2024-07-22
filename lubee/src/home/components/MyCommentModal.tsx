@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { CheckIc, CheckYellowIc, PencilIc, EditXIc } from "@assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
-import { CommentModalProps } from "../types/CommentModalTypes";
+import { CommentModalProps } from "home/today/types/CommentModalTypes";
 
 export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;

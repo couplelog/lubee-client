@@ -1,7 +1,7 @@
 import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
-import Comment from "./Comment";
+import CommentBox from "home/components/CommentBox";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import HomePicBox from "home/components/HomePicBox";
 import { FullPicDataTypes } from "@common/types/CommonTypes";
@@ -19,10 +19,6 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile2");
 
-  const myComment =
-    "오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.";
-  const partnerComment = "Comment";
-
   return (
     <Background>
       <Container ref={ref} $showCalendar={showCalendar}>
@@ -31,10 +27,10 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
           <Text>{date}</Text>
         </Header>
         <Contents>
-          <CommentsBox>
-            <Comment iconSrc={myProfile} comment={myComment} />
-            <Comment iconSrc={partnerProfile} comment={partnerComment} />
-          </CommentsBox>
+          <CommentsContainer>
+            <CommentBox profileIconSrc={myProfile} isMyComment={true} isToday={false} />
+            <CommentBox profileIconSrc={partnerProfile} isMyComment={false} />
+          </CommentsContainer>
           <HomePicBoxWrapper>
             <HomePicBox url="/date" />
           </HomePicBoxWrapper>
@@ -88,7 +84,7 @@ const Contents = styled.div`
   padding: 0 2rem 2rem;
 `;
 
-const CommentsBox = styled.span`
+const CommentsContainer = styled.span`
   display: flex;
   gap: 1.6rem;
 `;

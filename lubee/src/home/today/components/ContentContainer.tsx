@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CommentBox from "./CommentBox";
+import CommentBox from "home/components/CommentBox";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import HomePicBox from "home/components/HomePicBox";
 
@@ -10,7 +10,7 @@ export default function ContentContainer() {
   return (
     <Container>
       <CommentsContainer>
-        <CommentBox profileIconSrc={myProfile} isMyComment={true} />
+        <CommentBox profileIconSrc={myProfile} isMyComment={true} isToday={true} />
         <CommentBox profileIconSrc={partnerProfile} isMyComment={false} />
       </CommentsContainer>
       <HomePicBox url="/date/index" />
