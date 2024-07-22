@@ -1,12 +1,12 @@
 import api from "@common/api/api";
 
-interface DateCommentDataTypes {
+interface PostDateCommentDataTypes {
   content: string;
   coupleId: number;
   date: string;
 }
 
-export async function postDateComment(props: DateCommentDataTypes) {
+export async function postDateComment(props: PostDateCommentDataTypes) {
   const { content, coupleId, date } = props;
   const response = await api.post("/api/datecomments", {
     content: content,
