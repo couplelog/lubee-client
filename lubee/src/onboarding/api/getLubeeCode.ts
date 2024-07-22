@@ -1,18 +1,11 @@
-import { AxiosResponse } from "axios";
-import { customAxios } from "api/customAxios";
+import api from "@common/api/api";
+import { Response } from "@common/types/Response";
 
-export interface ResponseTypes {
+interface LubeeCodeDataTypes {
   code: string;
 }
 
-interface GetLubeeCodeTypes {
-  success: boolean;
-  response: ResponseTypes;
-}
-
-export async function getLubeeCode(): Promise<ResponseTypes> {
-  const { data }: AxiosResponse<GetLubeeCodeTypes> = await customAxios.get(`/api/couples/lubee-code`);
-
-  const { response } = data;
-  return response;
+export async function getLubeeCode() {
+  const { data } = await api.get<Response<LubeeCodeDataTypes>>(`/api/couples/lubee-code`);
+  return data;
 }
