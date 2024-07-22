@@ -11,7 +11,7 @@ interface CommentBoxProps {
   myComment?: string;
   partnerComment?: string;
 
-  isToday?: boolean;
+  isToday: boolean;
 }
 
 export default function CommentBox(props: CommentBoxProps) {
@@ -56,7 +56,7 @@ export default function CommentBox(props: CommentBoxProps) {
 
   return (
     <>
-      <Container onClick={handleCommentInputModal}>
+      <Container onClick={handleCommentInputModal} $isToday={isToday}>
         <ProfileIcon as={profileIconSrc} />
         <Text
           $isDefault={
@@ -86,12 +86,12 @@ export default function CommentBox(props: CommentBoxProps) {
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ $isToday: boolean }>`
   display: flex;
   gap: 0.4rem;
   padding: 1.2rem;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme, $isToday }) => ($isToday ? theme.colors.white : theme.colors.gray_50)};
   cursor: pointer;
 `;
 

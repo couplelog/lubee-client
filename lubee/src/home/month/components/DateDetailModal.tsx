@@ -29,7 +29,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
         <Contents>
           <CommentsContainer>
             <CommentBox profileIconSrc={myProfile} isMyComment={true} isToday={false} />
-            <CommentBox profileIconSrc={partnerProfile} isMyComment={false} />
+            <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={false} />
           </CommentsContainer>
           <HomePicBoxWrapper>
             <HomePicBox url="/date" />
