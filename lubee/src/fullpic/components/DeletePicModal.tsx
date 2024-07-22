@@ -1,3 +1,5 @@
+import { useDeletePic } from "fullpic/hooks/useDeletePic";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 interface DeletePicModalProps {
@@ -6,6 +8,21 @@ interface DeletePicModalProps {
 
 export default function DeletePicModal(props: DeletePicModalProps) {
   const { handleTrashBtn } = props;
+  const { mutate } = useDeletePic();
+
+  const location = useLocation();
+  const { memory_id } = location.state;
+
+  function handleDeleteBtn() {
+    mutate(memory_id, {
+      onSuccess: () => {
+        handleTrashBtn(false); // 삭제 시 모달 닫기
+      },
+      onError: (error) => {
+        console.error("삭제 실패", error);
+      },
+    });
+  }
 
   return (
     <Background>
@@ -15,7 +32,9 @@ export default function DeletePicModal(props: DeletePicModalProps) {
           <p>영구적으로 사진이 삭제됩니다</p>
         </Text>
         <BtnContainer>
-          <DeleteBtn>삭제</DeleteBtn>
+          <DeleteBtn type="button" onClick={handleDeleteBtn}>
+            삭제
+          </DeleteBtn>
           <CloseBtn
             type="button"
             onClick={() => {
