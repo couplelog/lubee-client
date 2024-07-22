@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { CheckIc, CheckYellowIc, PencilIc, EditXIc } from "@assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
+import { usePostDateComment } from "home/hooks/usePostDateComment";
+import { getCurrentDate } from "@common/utils/dateFormat";
 
 export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
@@ -10,6 +12,7 @@ export default function MyCommentModal(props: CommentModalProps) {
   const [textLength, setTextLength] = useState(0);
   const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?";
   const [isEditing, setIsEditing] = useState(isDefaultText);
+  const { mutate: postDateCommentMutate } = usePostDateComment();
 
   // isDefaultText일 때는 placeholder를 출력하기 위함
   useEffect(() => {
@@ -45,6 +48,11 @@ export default function MyCommentModal(props: CommentModalProps) {
       } else {
         console.warn("setCommentText is undefined");
       }
+
+      // 서버에 코멘트 POST 요청으로
+      // coupleId는 임의로 1 넣어둠!
+      postDateCommentMutate({ content: text, coupleId: 1, date: getCurrentDate() });
+
       handleCloseBtn();
       setIsEditing(false);
     }
