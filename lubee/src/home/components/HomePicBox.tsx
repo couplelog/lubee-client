@@ -29,8 +29,8 @@ export default function HomePicBox(props: HomePicBoxProps) {
   const myProfile = getProfileIconSrc("me", "profile1");
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", "heart");
-  const partnerEmoji = getEmojiSrc("partner", "thumb");
+  const myEmoji = getEmojiSrc("me", "heart") || undefined;
+  const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
 
   return (
     <Container>
