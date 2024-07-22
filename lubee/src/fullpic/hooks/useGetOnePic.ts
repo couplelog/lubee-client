@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { getOnePic } from "fullpic/api/onePic";
+import { getOnePic } from "fullpic/api/getOnePic";
 
 export function useGetOnePic(memory_id: number) {
   const { data } = useQuery(["getOnePic", memory_id], () => getOnePic(memory_id), {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import FullPicContainer from "@common/components/FullPicContainer";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
-import { MemoryBaseDtoDataTypes } from "fullpic/api/onePic";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface OneContainerProps {
   account: string;
