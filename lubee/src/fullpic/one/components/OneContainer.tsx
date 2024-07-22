@@ -1,26 +1,26 @@
 import styled from "styled-components";
 import FullPicContainer from "@common/components/FullPicContainer";
-import fullPic from "@assets/image/fullPic.png";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/onePic";
 
 interface OneContainerProps {
-  name: string;
-  picSrc: string;
   account: string;
+  memoryBaseDto: MemoryBaseDtoDataTypes;
 }
 
 export default function OneContainer(props: OneContainerProps) {
-  const { name, account } = props;
+  const { account, memoryBaseDto } = props;
 
   const profile = getProfileIconSrc(account, "profile1");
+
   return (
     <Wrapper>
-      <Time>오후 2:17</Time>
+      <Time>{memoryBaseDto.upload_time}</Time>
       <Profile>
         <ProfileIcon as={profile} />
-        <Name>{name}</Name>
+        <Name>{memoryBaseDto.writer_profile}</Name>
       </Profile>
-      <FullPicContainer picSrc={fullPic} location={"느루 연남점"} />
+      <FullPicContainer picSrc={memoryBaseDto.picture} location={memoryBaseDto.location_name} />
     </Wrapper>
   );
 }

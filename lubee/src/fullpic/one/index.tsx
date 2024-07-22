@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import EmojiBar from "@common/components/EmojiBar";
 import { useState, useRef, useEffect } from "react";
-import fullPic from "@assets/image/fullPic.png";
 import EmojiDetailModal from "fullpic/components/EmojiDetailModal";
 import OneContainer from "./components/OneContainer";
 import DeletePicModal from "fullpic/components/DeletePicModal";
 import FullpicHeader from "fullpic/components/FullpicHeader";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import EmojiTag from "@common/components/EmojiTag";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
+import { useLocation } from "react-router-dom";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
@@ -35,10 +36,21 @@ export default function index() {
     };
   }, [modalRef]);
 
+  /*getOnePicResponse*/
+  const location = useLocation();
+  const { memory_id } = location.state;
+
+  const getOnePicResponse = useGetOnePic(memory_id);
+  if (!getOnePicResponse) return <></>;
+
+  const {
+    response: { memoryBaseDto },
+  } = getOnePicResponse;
+
   return (
     <Wrapper>
       <FullpicHeader handleTrashBtn={handleTrashBtn} />
-      <OneContainer name={"맹꽁이"} picSrc={fullPic} account="partner" />
+      <OneContainer account="partner" memoryBaseDto={memoryBaseDto} />
       <EmojiTagContainer
         type="button"
         onClick={() => {
