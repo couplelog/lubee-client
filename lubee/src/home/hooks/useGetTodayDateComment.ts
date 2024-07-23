@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { getTodayDateComment } from "../api/getTodayDateComment";
 
-export function useGetTodayDateComment(userId: number, coupleId: number, date: Date) {
+export function useGetTodayDateComment(userId: number, coupleId: number, date: string) {
   const { data, error, isLoading } = useQuery(
     ["getTodayDateComment", userId, coupleId, date],
     () => getTodayDateComment({ userId, coupleId, date }),

@@ -7,7 +7,7 @@ interface HoneyDataTypes {
 
 // date 넘겨주기
 interface GetTodayHoneyRequest {
-  Date: Date;
+  Date: string;
 }
 
 // GET 요청에서는 보통 요청 바디를 사용하지 않음
@@ -16,5 +16,5 @@ export async function getTodayHoney(request: GetTodayHoneyRequest) {
   const { data } = await api.get<Response<HoneyDataTypes>>(`/api/calendars/honey/today`, {
     params: { Date: request.Date },
   });
-  return data;
+  return data.response;
 }

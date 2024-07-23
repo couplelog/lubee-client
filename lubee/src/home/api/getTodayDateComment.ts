@@ -10,7 +10,7 @@ interface TodayDateCommentDataTypes {
 interface GetTodayDateCommentRequest {
   userId: number;
   coupleId: number;
-  date: Date;
+  date: string;
 }
 
 // GET 요청에서는 보통 요청 바디를 사용하지 않음

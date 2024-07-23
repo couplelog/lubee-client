@@ -17,5 +17,5 @@ export async function getMonthHoney(request: GetMonthHoneyRequest) {
   const { data } = await api.get<Response<HoneyDataTypes>>(`/api/calendars/honey/month`, {
     params: { year: request.year, month: request.month },
   });
-  return data;
+  return data.response;
 }

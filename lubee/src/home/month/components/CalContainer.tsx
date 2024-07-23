@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { fullPicData } from "@common/core/fullPicData";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear, isFutureDate } from "@common/utils/dateFormat";
 import { infoToast } from "@common/utils/toast";
+import { useGetMonthHoney } from "home/hooks/useGetMonthHoney";
 
 interface CalContainerProps {
   info: CalInfoTypes;
@@ -17,6 +18,8 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   /*모달 애니메이션*/
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const totalHoney = useGetMonthHoney(getTodayYear, getTodayMonth).data?.response;
+
   useEffect(() => {
     const listener = (e: MouseEvent) => {
       if (!modalRef.current || modalRef.current.contains(e.target as Node)) return;
@@ -79,7 +82,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         <HeaderDate>{`${year}.${formatMonth(month)}`}</HeaderDate>
         <HeaderHoney>
           <HoneyMonthIcon />
-          <HoneyCount>35</HoneyCount>
+          <HoneyCount>{totalHoney}</HoneyCount>
         </HeaderHoney>
       </Header>
       <Grid>

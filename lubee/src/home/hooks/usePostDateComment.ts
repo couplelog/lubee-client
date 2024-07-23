@@ -4,12 +4,8 @@ import { postDateComment } from "../api/postDateComment";
 export function usePostDateComment() {
   return useMutation(postDateComment, {
     // variables는 useMutation 훅의 mutate 함수에 전달되는 매개변수로, mutate 함수 호출 시 함께 전달된 데이터
-    onSuccess: (data, variables) => {
+    onSuccess: (data) => {
       console.log("전송 성공", data);
-      const id = data.data.response[0]?.id;
-      if (id) {
-        saveCommentIdToLocalStorage(variables.date, id); // ID를 로컬 스토리지에 저장
-      }
     },
     onError: (error: any) => {
       // AxiosError 객체에서 response.data를 추출하여 접근

@@ -45,7 +45,6 @@ import ProgressBar3Ic from "./icon/progressBar3Ic.svg?react";
 import ProgressBar4Ic from "./icon/progressBar4Ic.svg?react";
 import CongratIc from "./icon/congratIc.svg?react";
 import CompleteIc from "./icon/completeIc.svg?react";
-import HoneyIc from "./icon/honeyIc.svg?react";
 import PlusIc from "./icon/plusIc.svg?react";
 import CheckIc from "./icon/checkIc.svg?react";
 import CheckYellowIc from "./icon/checkYellowIc.svg?react";
@@ -134,7 +133,6 @@ export {
   ProgressBar4Ic,
   CongratIc,
   CompleteIc,
-  HoneyIc,
   PlusIc,
   CheckIc,
   CheckYellowIc,

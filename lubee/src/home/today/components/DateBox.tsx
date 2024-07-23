@@ -1,14 +1,7 @@
 import styled from "styled-components";
+import { getCurrentDate } from "@common/utils/dateFormat";
 
 export default function DateBox() {
-  function getCurrentDate() {
-    const today = new Date();
-    const year = today.getFullYear().toString();
-    const month = (today.getMonth() + 1).toString().padStart(2, "0");
-    const day = today.getDate().toString().padStart(2, "0");
-    return `${year}. ${month}. ${day}`;
-  }
-
   return (
     <Container>
       <DateText>{getCurrentDate()}</DateText>
