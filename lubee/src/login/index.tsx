@@ -2,19 +2,18 @@ import styled from "styled-components";
 import { LogoIc, SymbolLoginIc } from "@assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
 import CompanyText from "@common/components/CompanyText";
-import { useNavigate } from "react-router-dom";
+import { KAKAO_LINK } from "./constants/kakaoLink";
 
 export default function index() {
-  const navigate = useNavigate();
-
-  function moveToOnboarding() {
-    navigate("/onboarding");
+  function handleLogin() {
+    window.location.href = KAKAO_LINK;
   }
+
   return (
     <Wrapper>
       <LogoIcon />
       <SymbolLoginIcon />
-      <LoginBtn type="button" onClick={moveToOnboarding}>
+      <LoginBtn type="button" onClick={handleLogin}>
         카카오 계정으로 로그인하기
       </LoginBtn>
       <CompanyText />
@@ -30,6 +29,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 10.6rem;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const LogoIcon = styled(LogoIc)`

@@ -18,7 +18,7 @@ export default function CommentBox(props: CommentBoxProps) {
   const [commentText, setCommentText] = useState<string>("오늘의 데이트는 어떠셨나요?");
 
   const myDefaultText = "오늘의 데이트는 어떠셨나요?";
-  const partnerDefaultText = "연인은 아직 작성하지 않았어요.";
+  const partnerDefaultText = "연인은 아직 작성하지 않았어요";
   const myCommentText = myComment || myDefaultText;
   const partnerCommentText = partnerComment || partnerDefaultText;
 

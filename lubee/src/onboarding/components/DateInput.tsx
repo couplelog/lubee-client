@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import YellowBox from "../components/YellowBox";
 
@@ -14,17 +14,40 @@ interface DateInputProps {
 export default function DateInput(props: DateInputProps) {
   const { year, setYear, month, setMonth, day, setDay } = props;
 
-  // 한자리 수 입력 시 0 붙이기
+  const yellowBoxRef = useRef<{ focus: () => void }>(null);
+
   useEffect(() => {
-    if (month.length === 1 && month !== "0") {
-      setMonth(`0${month}`);
+    // 페이지가 로드되고 나서 입력 필드에 포커스를 설정
+    if (yellowBoxRef.current) {
+      yellowBoxRef.current.focus();
     }
+  }, []);
+
+  const monthTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const dayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 한 자리 수 입력 시 0 붙이기
+  // 500ms 동안 추가 입력이 없으면 0을 붙이는 방식
+  useEffect(() => {
+    if (monthTimeoutRef.current) {
+      clearTimeout(monthTimeoutRef.current);
+    }
+    monthTimeoutRef.current = setTimeout(() => {
+      if (month.length === 1 && month !== "0") {
+        setMonth(`0${month}`);
+      }
+    }, 500);
   }, [month]);
 
   useEffect(() => {
-    if (day.length === 1 && day !== "0") {
-      setDay(`0${day}`);
+    if (dayTimeoutRef.current) {
+      clearTimeout(dayTimeoutRef.current);
     }
+    dayTimeoutRef.current = setTimeout(() => {
+      if (day.length === 1 && day !== "0") {
+        setDay(`0${day}`);
+      }
+    }, 500);
   }, [day]);
 
   // 오늘보다 미래 선택 시 오늘 날짜로 변경
@@ -62,7 +85,13 @@ export default function DateInput(props: DateInputProps) {
 
   return (
     <YellowBoxContainer>
-      <YellowBox inputValue={year} setInputValue={handleYearChange} $disabled={true} placeholder="YYYY" />
+      <YellowBox
+        inputValue={year}
+        setInputValue={handleYearChange}
+        $disabled={true}
+        placeholder="YYYY"
+        ref={yellowBoxRef}
+      />
       <YellowBox inputValue={month} setInputValue={handleMonthChange} $disabled={true} placeholder="MM" />
       <YellowBox inputValue={day} setInputValue={handleDayChange} $disabled={true} placeholder="DD" />
     </YellowBoxContainer>

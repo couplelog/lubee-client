@@ -7,7 +7,7 @@ interface EmojiTagProps {
 
 export default function EmojiTag(props: EmojiTagProps) {
   const { font, children } = props;
-  return <Container $font={font}>{children}</Container>;
+  return children ? <Container $font={font}>{children}</Container> : null;
 }
 
 const Container = styled.div<{ $font: string }>`

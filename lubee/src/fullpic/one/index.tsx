@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import EmojiBar from "@common/components/EmojiBar";
 import { useState, useRef, useEffect } from "react";
-import fullPic from "@assets/image/fullPic.png";
 import EmojiDetailModal from "fullpic/components/EmojiDetailModal";
 import OneContainer from "./components/OneContainer";
 import DeletePicModal from "fullpic/components/DeletePicModal";
 import FullpicHeader from "fullpic/components/FullpicHeader";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import EmojiTag from "@common/components/EmojiTag";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
+import { useLocation } from "react-router-dom";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
@@ -19,8 +20,8 @@ export default function index() {
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", selectedEmojiText);
-  const partnerEmoji = getEmojiSrc("partner", "thumb");
+  const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
+  const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -35,22 +36,35 @@ export default function index() {
     };
   }, [modalRef]);
 
+  /*getOnePicResponse*/
+  const location = useLocation();
+  const { memory_id } = location.state;
+
+  const getOnePicResponse = useGetOnePic(memory_id);
+  if (!getOnePicResponse) return <></>;
+
+  const {
+    response: { memoryBaseDto },
+  } = getOnePicResponse;
+
   return (
     <Wrapper>
       <FullpicHeader handleTrashBtn={handleTrashBtn} />
-      <OneContainer name={"맹꽁이"} picSrc={fullPic} account="partner" />
-      <EmojiTagContainer
-        type="button"
-        onClick={() => {
-          if (setOpenEmojiDetail) {
-            setOpenEmojiDetail(true);
-          }
-        }}>
-        <EmojiTag font="fullPic">
-          <EmojiIcon as={myEmoji} />
-          <EmojiIcon as={partnerEmoji} />
-        </EmojiTag>
-      </EmojiTagContainer>
+      <OneContainer account="partner" memoryBaseDto={memoryBaseDto} />
+      {(myEmoji || partnerEmoji) && (
+        <EmojiTagContainer
+          type="button"
+          onClick={() => {
+            if (setOpenEmojiDetail) {
+              setOpenEmojiDetail(true);
+            }
+          }}>
+          <EmojiTag font="fullPic">
+            {myEmoji && <EmojiIcon as={myEmoji} />}
+            {partnerEmoji && <EmojiIcon as={partnerEmoji} />}
+          </EmojiTag>
+        </EmojiTagContainer>
+      )}
       <Footer>
         <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
       </Footer>

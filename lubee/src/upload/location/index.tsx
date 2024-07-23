@@ -1,43 +1,39 @@
 import styled from "styled-components";
 import { BackIc } from "@assets/index";
 import { SearchIc } from "@assets/index";
-import { locationData } from "@common/core/locationData";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BtnWrapper } from "@styles/btnStyle";
-import { LocationDataTypes } from "upload/types/LocationDataTypes";
+import { useGetLocationSearch } from "upload/hooks/useGetLocationSearch";
+import { useDebounce } from "@common/utils/useDebounce";
 
 interface LocationProps {
   setLocation: (location: string) => void;
-  moveToUploadPic: () => void;
+  moveToUploadPic: (locationId: number) => void;
   searchInput: string;
   setSearchInput: (input: string) => void;
-  filteredLocations: LocationDataTypes[];
-  setFilteredLocations: (locations: LocationDataTypes[]) => void;
 }
 
 export default function index(props: LocationProps) {
-  const { setLocation, moveToUploadPic, searchInput, setSearchInput, filteredLocations, setFilteredLocations } = props;
-
+  const { setLocation, moveToUploadPic, searchInput, setSearchInput } = props;
   const navigate = useNavigate();
+
+  /* 장소 불러오기 API*/
+  const debouncedSearchInput = useDebounce(searchInput, 300);
+  const locationSearch = useGetLocationSearch({ keyword: debouncedSearchInput });
+  if (!locationSearch) return <></>;
+  const {
+    response: { locations },
+  } = locationSearch;
+
+  function handleSelectLocation(locationName: string, locationId: number) {
+    setLocation(locationName);
+    moveToUploadPic(locationId);
+  }
 
   useEffect(() => {
     localStorage.getItem("currentPage");
   }, []);
-
-  /* 검색*/
-  useEffect(() => {
-    setFilteredLocations(
-      locationData.filter((location) => location.name.toLowerCase().includes(searchInput.toLowerCase())),
-    );
-  }, [searchInput]);
-
-  function handleSelectLocation(locationName?: string) {
-    if (locationName) {
-      setLocation(locationName);
-      moveToUploadPic();
-    }
-  }
 
   function moveToHome() {
     // 헤더에서 전에 어떤 페이지였는지 불러오기
@@ -58,26 +54,21 @@ export default function index(props: LocationProps) {
         <Text>위치 설정</Text>
       </Header>
       <SearchBar>
-        <SearchInput
-          type="text"
-          placeholder="위치 검색"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
+        <SearchInput type="text" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
         <SearchButton type="button">
           <SearchIcon />
         </SearchButton>
       </SearchBar>
       <Locations>
-        {filteredLocations &&
-          filteredLocations.map((data) => {
-            const { id, name, distance, info } = data;
+        {locations &&
+          locations.map((data) => {
+            const { locationId, name, parcelBaseAddress } = data;
             return (
-              <LocationBox key={id} type="button" onClick={() => handleSelectLocation(name)}>
+              <LocationBox key={locationId} type="button" onClick={() => handleSelectLocation(name, locationId)}>
                 <Name>{name}</Name>
                 <Details>
-                  <Distance>{`${distance}m,`}</Distance>
-                  <Info>{info}</Info>
+                  {/* <Distance>{`${distance}m,`}</Distance> */}
+                  <Info>{parcelBaseAddress}</Info>
                 </Details>
               </LocationBox>
             );
@@ -126,6 +117,7 @@ const SearchBar = styled.div`
 
 const SearchInput = styled.input`
   flex: 1;
+  height: 3.8rem;
   padding: 0.7rem 2rem 0.7rem 5.4rem;
   border: none;
   border-radius: 46px;
@@ -179,14 +171,14 @@ const Details = styled.div`
   gap: 0.3rem;
 `;
 
-const Distance = styled.p`
-  ${({ theme }) => theme.fonts.Body_1};
-
-  color: ${({ theme }) => theme.colors.gray_500};
-`;
-
 const Info = styled.p`
   ${({ theme }) => theme.fonts.Body_1};
 
   color: ${({ theme }) => theme.colors.gray_500};
 `;
+
+// const Distance = styled.p`
+//   ${({ theme }) => theme.fonts.Body_1};
+
+//   color: ${({ theme }) => theme.colors.gray_500};
+// `;

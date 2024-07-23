@@ -1,5 +1,5 @@
 // 오늘 날짜 얻기
-const today = new Date();
+export const today = new Date();
 export const getTodayDate = today.getDate();
 export const getTodayMonth = today.getMonth() + 1;
 export const getTodayYear = today.getFullYear();
