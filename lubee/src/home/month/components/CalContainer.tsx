@@ -3,9 +3,10 @@ import { CalInfoTypes } from "../types/CalInfoTypes";
 import { HoneyMonthIc } from "@assets/index";
 import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
-import { fullPicData } from "@common/core/fullPicData";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear, isFutureDate } from "@common/utils/dateFormat";
 import { infoToast } from "@common/utils/toast";
+import { useGetCalendar } from "home/hooks/useGetCalendar";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface CalContainerProps {
   info: CalInfoTypes;
@@ -48,10 +49,28 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   // data.map((el) => (LIST[el.date + start - 1] = el.price));
   // data.sort((a, b) => a.price - b.price);
 
-  const { year, month, start, length, holiday, data } = info;
-  // List 배열에 사진을 업로드한 날짜는 1로 찍기
+  const { year, month, start, length } = info;
   const LIST = new Array(start + length).fill(0);
-  data.forEach((el) => (LIST[el.date + start - 1] = 1));
+
+  /*달력에서 업로드한 day 조회 API*/
+  const [dayDto, setDayDto] = useState<MemoryBaseDtoDataTypes[]>([]);
+  const calendarData = useGetCalendar();
+  if (!calendarData) return <></>;
+  const {
+    response: { calendarMemoryYearMonthDtoList },
+  } = calendarData;
+  calendarMemoryYearMonthDtoList.forEach(({ year: y, month: m, calendarMemoryDayDtoList }) => {
+    if (y === year && m === month) {
+      calendarMemoryDayDtoList.forEach(({ day, memoryBaseListDto }) => {
+        LIST[day + start - 1] = 1; // List 배열에 사진을 업로드한 day는 1로 찍기
+
+        // Save memory data for the selected date
+        if (selectedDate !== null && selectedDate === day) {
+          setDayDto(memoryBaseListDto);
+        }
+      });
+    }
+  });
 
   // DateDetail 모달에서 헤더에 date 표기 위한
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
@@ -95,7 +114,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
               $isToday={isToday}
               $isEmpty={isEmpty}
               onClick={() => !isEmpty && handleDateDetailModal(date)}>
-              <Date $isHoliday={holiday.includes(date)}>{idx - start < 0 || date > length ? "" : date}</Date>
+              <Date>{idx - start < 0 || date > length ? "" : date}</Date>
             </Item>
           );
         })}
@@ -104,8 +123,8 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         <DateDetailModal
           ref={modalRef}
           date={`${month}월 ${selectedDate}일`}
-          fullPicData={fullPicData}
           showCalendar={showCalendar}
+          dayDto={dayDto}
         />
       )}
     </Container>
@@ -187,7 +206,7 @@ const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: 
 `;
 
 //color: ${({ theme, $isHoliday }) => $isHoliday && theme.colors.gray_500};
-const Date = styled.p<{ $isHoliday: boolean }>`
+const Date = styled.p`
   ${({ theme }) => theme.fonts.Ginto_18};
 `;
 
