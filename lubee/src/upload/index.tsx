@@ -19,6 +19,8 @@ export default function index() {
     setLocationId(locationId);
   }
 
+  console.log(uploadPic);
+
   return (
     <>
       {!uploadPic && (

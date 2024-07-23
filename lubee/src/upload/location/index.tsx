@@ -21,10 +21,8 @@ export default function index(props: LocationProps) {
   /* 장소 불러오기 API*/
   const debouncedSearchInput = useDebounce(searchInput, 300);
   const locationSearch = useGetLocationSearch({ keyword: debouncedSearchInput });
-  if (!locationSearch) return <></>;
-  const {
-    response: { locations },
-  } = locationSearch;
+
+  const locations = locationSearch?.response?.locations ?? [];
 
   function handleSelectLocation(locationName: string, locationId: number) {
     setLocation(locationName);
