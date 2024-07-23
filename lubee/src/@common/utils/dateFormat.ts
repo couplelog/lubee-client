@@ -3,6 +3,7 @@ export const today = new Date();
 export const getTodayDate = today.getDate();
 export const getTodayMonth = today.getMonth() + 1;
 export const getTodayYear = today.getFullYear();
+export const svrToday = today.toISOString;
 
 // 한 자릿수 달 앞에 0붙이기
 export const formatMonth = (month: number): string => {

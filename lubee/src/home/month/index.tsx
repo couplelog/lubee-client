@@ -4,14 +4,15 @@ import { CAL } from "@common/core/calendarData";
 import { getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 import { useEffect, useRef } from "react";
 
-const index = () => {
+export default function index() {
+  /*이번 달 상단에 위치시키는 ref*/
   const containerRef = useRef<HTMLDivElement | null>(null);
   const calendarRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const currentMonthIndex = CAL.findIndex((cal) => cal.year === getTodayYear && cal.month === getTodayMonth);
-    if (currentMonthIndex !== -1 && calendarRefs.current[currentMonthIndex]) {
-      calendarRefs.current[currentMonthIndex]?.scrollIntoView({
+    const currentMonthIdx = CAL.findIndex((cal) => cal.year === getTodayYear && cal.month === getTodayMonth);
+    if (currentMonthIdx !== -1 && calendarRefs.current[currentMonthIdx]) {
+      calendarRefs.current[currentMonthIdx]?.scrollIntoView({
         behavior: "smooth",
         block: "start",
         inline: "nearest",
@@ -28,9 +29,7 @@ const index = () => {
       ))}
     </CalWrapper>
   );
-};
-
-export default index;
+}
 
 const CalWrapper = styled.section`
   display: flex;

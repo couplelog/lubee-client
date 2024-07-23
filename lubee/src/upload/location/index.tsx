@@ -1,43 +1,37 @@
 import styled from "styled-components";
 import { BackIc } from "@assets/index";
 import { SearchIc } from "@assets/index";
-import { locationData } from "@common/core/locationData";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BtnWrapper } from "@styles/btnStyle";
-import { LocationDataTypes } from "upload/types/LocationDataTypes";
+import { useGetLocationSearch } from "upload/hooks/useGetLocationSearch";
+import { useDebounce } from "@common/utils/useDebounce";
 
 interface LocationProps {
   setLocation: (location: string) => void;
-  moveToUploadPic: () => void;
+  moveToUploadPic: (locationId: number) => void;
   searchInput: string;
   setSearchInput: (input: string) => void;
-  filteredLocations: LocationDataTypes[];
-  setFilteredLocations: (locations: LocationDataTypes[]) => void;
 }
 
 export default function index(props: LocationProps) {
-  const { setLocation, moveToUploadPic, searchInput, setSearchInput, filteredLocations, setFilteredLocations } = props;
-
+  const { setLocation, moveToUploadPic, searchInput, setSearchInput } = props;
   const navigate = useNavigate();
+
+  /* 장소 불러오기 API*/
+  const debouncedSearchInput = useDebounce(searchInput, 300);
+  const locationSearch = useGetLocationSearch({ keyword: debouncedSearchInput });
+
+  const locations = locationSearch?.response?.locations ?? [];
+
+  function handleSelectLocation(locationName: string, locationId: number) {
+    setLocation(locationName);
+    moveToUploadPic(locationId);
+  }
 
   useEffect(() => {
     localStorage.getItem("currentPage");
   }, []);
-
-  /* 검색*/
-  useEffect(() => {
-    setFilteredLocations(
-      locationData.filter((location) => location.name.toLowerCase().includes(searchInput.toLowerCase())),
-    );
-  }, [searchInput]);
-
-  function handleSelectLocation(locationName?: string) {
-    if (locationName) {
-      setLocation(locationName);
-      moveToUploadPic();
-    }
-  }
 
   function moveToHome() {
     // 헤더에서 전에 어떤 페이지였는지 불러오기
@@ -64,15 +58,15 @@ export default function index(props: LocationProps) {
         </SearchButton>
       </SearchBar>
       <Locations>
-        {filteredLocations &&
-          filteredLocations.map((data) => {
-            const { id, name, distance, info } = data;
+        {locations &&
+          locations.map((data) => {
+            const { locationId, name, parcelBaseAddress } = data;
             return (
-              <LocationBox key={id} type="button" onClick={() => handleSelectLocation(name)}>
+              <LocationBox key={locationId} type="button" onClick={() => handleSelectLocation(name, locationId)}>
                 <Name>{name}</Name>
                 <Details>
-                  <Distance>{`${distance}m,`}</Distance>
-                  <Info>{info}</Info>
+                  {/* <Distance>{`${distance}m,`}</Distance> */}
+                  <Info>{parcelBaseAddress}</Info>
                 </Details>
               </LocationBox>
             );
@@ -161,6 +155,7 @@ const LocationBox = styled.button`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  width: 100%;
   padding: 2rem 6.4rem 2rem 2.4rem;
 `;
 
@@ -168,6 +163,7 @@ const Name = styled.p`
   ${({ theme }) => theme.fonts.Body_2};
 
   color: ${({ theme }) => theme.colors.gray_800};
+  text-align: left;
 `;
 
 const Details = styled.div`
@@ -175,14 +171,14 @@ const Details = styled.div`
   gap: 0.3rem;
 `;
 
-const Distance = styled.p`
-  ${({ theme }) => theme.fonts.Body_1};
-
-  color: ${({ theme }) => theme.colors.gray_500};
-`;
-
 const Info = styled.p`
-  ${({ theme }) => theme.fonts.Body_1};
-
   color: ${({ theme }) => theme.colors.gray_500};
+  text-align: left;
+  ${({ theme }) => theme.fonts.Body_1};
 `;
+
+// const Distance = styled.p`
+//   ${({ theme }) => theme.fonts.Body_1};
+
+//   color: ${({ theme }) => theme.colors.gray_500};
+// `;

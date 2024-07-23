@@ -5,16 +5,17 @@ import { useState } from "react";
 import SelectLocationModal from "upload/components/SelectLocationModal";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LocationDataTypes } from "upload/types/LocationDataTypes";
+import { usePostUploadPic } from "upload/hooks/usePostUploadPic";
+
 interface UploadProps {
   location: string;
   setLocation: (location: string) => void;
   moveToUploadLocation: () => void;
   searchInput: string;
   setSearchInput: (input: string) => void;
-  filteredLocations: LocationDataTypes[];
-  setFilteredLocations: (locations: LocationDataTypes[]) => void;
   setUploadPic: (uploadPic: boolean) => void;
+  locationId: number;
+  setLocationId: (locationId: number) => void;
 }
 
 export default function index(props: UploadProps) {
@@ -24,9 +25,9 @@ export default function index(props: UploadProps) {
     moveToUploadLocation,
     searchInput,
     setSearchInput,
-    filteredLocations,
-    setFilteredLocations,
     setUploadPic,
+    locationId,
+    setLocationId,
   } = props;
   const navigate = useNavigate();
   const [openLocationModal, setOpenLocationModal] = useState<boolean>(false);
@@ -46,6 +47,8 @@ export default function index(props: UploadProps) {
   const locationState = useLocation();
   const picSrc = locationState.state?.picSrc; // 업로드한 이미지 src
 
+  const { mutate: postUploadPic } = usePostUploadPic();
+
   return (
     <Wrapper>
       <Header>
@@ -62,6 +65,7 @@ export default function index(props: UploadProps) {
         <BtnWrapper
           type="button"
           onClick={() => {
+            postUploadPic({ picture: picSrc, location_id: locationId });
             setUploadPic(false); // uploadPic 리셋
             moveToHome();
           }}>
@@ -74,8 +78,7 @@ export default function index(props: UploadProps) {
           setLocation={setLocation}
           searchInput={searchInput}
           setSearchInput={setSearchInput}
-          filteredLocations={filteredLocations}
-          setFilteredLocations={setFilteredLocations}
+          setLocationId={setLocationId}
         />
       )}
     </Wrapper>

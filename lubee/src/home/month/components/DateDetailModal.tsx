@@ -4,16 +4,16 @@ import { forwardRef } from "react";
 import CommentBox from "home/components/CommentBox";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import HomePicBox from "home/components/HomePicBox";
-import { FullPicDataTypes } from "@common/types/CommonTypes";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface DateDetailModalProps {
   date: string;
-  fullPicData: FullPicDataTypes[];
   showCalendar: boolean;
+  dayDto: MemoryBaseDtoDataTypes[];
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { date, showCalendar } = props;
+  const { date, showCalendar, dayDto } = props;
 
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getProfileIconSrc("me", "profile1");
@@ -32,7 +32,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={false} />
           </CommentsContainer>
           <HomePicBoxWrapper>
-            <HomePicBox url="/date" />
+            <HomePicBox url={`/${date}`} dayDto={dayDto} />
           </HomePicBoxWrapper>
         </Contents>
       </Container>
