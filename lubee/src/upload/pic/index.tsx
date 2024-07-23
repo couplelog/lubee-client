@@ -6,7 +6,7 @@ import SelectLocationModal from "upload/components/SelectLocationModal";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usePostUploadPic } from "upload/hooks/usePostUploadPic";
-import { today } from "@common/utils/dateFormat";
+
 interface UploadProps {
   location: string;
   setLocation: (location: string) => void;
@@ -65,7 +65,7 @@ export default function index(props: UploadProps) {
         <BtnWrapper
           type="button"
           onClick={() => {
-            postUploadPic({ picture: picSrc, location_id: locationId, time: today });
+            postUploadPic({ picture: picSrc, location_id: locationId });
             setUploadPic(false); // uploadPic 리셋
             moveToHome();
           }}>

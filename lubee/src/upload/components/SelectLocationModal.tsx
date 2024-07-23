@@ -16,9 +16,12 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
   const { setOpenLocationModal, setLocation, searchInput, setSearchInput, setLocationId } = props;
 
   /* 장소 불러오기 API*/
-  const debouncedSearchInput = useDebounce(searchInput, 300);
+  const debouncedSearchInput = useDebounce(searchInput, 1000);
   const locationSearch = useGetLocationSearch({ keyword: debouncedSearchInput });
-  if (!locationSearch) return <></>;
+
+  // Guard clause to prevent rendering when locationSearch is undefined or has errors
+  if (!locationSearch || !locationSearch.response) return <></>;
+
   const {
     response: { locations },
   } = locationSearch;
