@@ -5,7 +5,7 @@ import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
 import { usePostDateComment } from "home/hooks/usePostDateComment";
 import { useUpdateDateComment } from "home/hooks/useUpdateDateComment";
-import { today } from "@common/utils/dateFormat";
+import { getAPIDate } from "@common/utils/dateFormat";
 
 export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
@@ -15,6 +15,7 @@ export default function MyCommentModal(props: CommentModalProps) {
   const [isEditing, setIsEditing] = useState(isDefaultText);
   const { mutate: postDateCommentMutate } = usePostDateComment();
   const { mutate: updateDateCommentMutate } = useUpdateDateComment();
+  const [commentId, setCommentId] = useState<number | null>(null); // 코멘트id 저장
 
   // isDefaultText일 때는 placeholder를 출력하기 위함
   useEffect(() => {
@@ -54,16 +55,61 @@ export default function MyCommentModal(props: CommentModalProps) {
       if (isDefaultText) {
         // 서버에 코멘트 POST 요청으로
         // coupleId는 임의로 1 넣어둠!
-        postDateCommentMutate({ content: text, coupleId: 1, date: today.toISOString() });
+        postDateCommentMutate(
+          { content: text, coupleId: 1, date: getAPIDate() },
+          {
+            onSuccess: (data) => {
+              const id = data.response; // response 값을 commentId로 사용
+              console.log("POST 성공, 받은 ID:", id); // 로그 추가
+              if (id !== null && id !== undefined) {
+                setCommentId(id); // POST 요청 후 받은 코멘트 ID 저장
+                // 상태가 업데이트된 이후 PUT 요청 시도
+                updateCommentIfNeeded(id, text);
+              } else {
+                console.warn("POST 성공했지만 response 값이 null 또는 undefined입니다."); // 로그 추가
+              }
+            },
+            onError: (error) => {
+              console.error("POST 요청 실패", error); // 로그 추가
+            },
+          },
+        );
       } else {
-        // 코멘트 업데이트 요청
-        // 예시로 1 넣음
-        updateDateCommentMutate({ dateCommentId: 1, content: text });
+        // commentId가 존재할 때만 코멘트 업데이트 요청
+        if (commentId !== null) {
+          console.log("PUT 요청 시작, ID:", commentId); // 로그 추가
+          updateDateCommentMutate(
+            { datecommentId: commentId, content: text },
+            {
+              onSuccess: (data) => {
+                console.log("PUT 성공", data); // 로그 추가
+              },
+              onError: (error) => {
+                console.error("PUT 요청 실패", error); // 로그 추가
+              },
+            },
+          );
+        } else {
+          console.warn("commentId가 null입니다."); // 로그 추가
+        }
       }
-
-      handleCloseBtn();
-      setIsEditing(false);
     }
+  };
+
+  // 상태가 업데이트된 이후 PUT 요청을 보내기 위한 함수
+  const updateCommentIfNeeded = (id: number, content: string) => {
+    console.log("상태 업데이트 후 PUT 요청 시작, ID:", id); // 로그 추가
+    updateDateCommentMutate(
+      { datecommentId: id, content: content },
+      {
+        onSuccess: (data) => {
+          console.log("PUT 성공", data); // 로그 추가
+        },
+        onError: (error) => {
+          console.error("PUT 요청 실패", error); // 로그 추가
+        },
+      },
+    );
   };
 
   const handleEditClick = () => {

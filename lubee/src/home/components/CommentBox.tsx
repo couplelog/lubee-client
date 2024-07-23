@@ -8,14 +8,13 @@ interface CommentBoxProps {
   isMyComment: boolean;
 
   // 코멘트는 서버로부터 받아오기
-  myComment?: string;
-  partnerComment?: string;
+  comment: string;
 
   isToday: boolean;
 }
 
 export default function CommentBox(props: CommentBoxProps) {
-  const { profileIconSrc, isMyComment, myComment, partnerComment, isToday } = props;
+  const { profileIconSrc, isMyComment, comment, isToday } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>(
     isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?",
@@ -23,8 +22,8 @@ export default function CommentBox(props: CommentBoxProps) {
 
   const myDefaultText = isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
   const partnerDefaultText = "연인은 아직 작성하지 않았어요";
-  const myCommentText = myComment || myDefaultText;
-  const partnerCommentText = partnerComment || partnerDefaultText;
+  const myCommentText = comment || myDefaultText;
+  const partnerCommentText = comment || partnerDefaultText;
 
   useEffect(() => {
     if (isMyComment) {

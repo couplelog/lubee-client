@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import { getTodayDateComment } from "../api/getTodayDateComment";
 
-export function useGetTodayDateComment(userId: number, coupleId: number, date: string) {
+export function useGetTodayDateComment(coupleId: number, date: string) {
   const { data, error, isLoading } = useQuery(
-    ["getTodayDateComment", userId, coupleId, date],
-    () => getTodayDateComment({ userId, coupleId, date }),
+    ["getTodayDateComment", coupleId, date],
+    () => getTodayDateComment({ coupleId, date }),
     {
       onError: (error) => {
         // 서버에서 반환한 에러 메시지를 출력
