@@ -71,6 +71,13 @@ html {
     font-style: normal;
     font-weight: 400;
   }
+
+  @font-face {
+  font-family: "ABC Ginto Nord";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/ABCGintoRoundedNordCondensed-Regular-Trial.woff") format("woff");
+  }
 }
 `;
 

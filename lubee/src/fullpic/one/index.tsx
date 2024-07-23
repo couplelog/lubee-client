@@ -20,8 +20,8 @@ export default function index() {
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", selectedEmojiText);
-  const partnerEmoji = getEmojiSrc("partner", "thumb");
+  const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
+  const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -51,18 +51,20 @@ export default function index() {
     <Wrapper>
       <FullpicHeader handleTrashBtn={handleTrashBtn} />
       <OneContainer account="partner" memoryBaseDto={memoryBaseDto} />
-      <EmojiTagContainer
-        type="button"
-        onClick={() => {
-          if (setOpenEmojiDetail) {
-            setOpenEmojiDetail(true);
-          }
-        }}>
-        <EmojiTag font="fullPic">
-          <EmojiIcon as={myEmoji} />
-          <EmojiIcon as={partnerEmoji} />
-        </EmojiTag>
-      </EmojiTagContainer>
+      {(myEmoji || partnerEmoji) && (
+        <EmojiTagContainer
+          type="button"
+          onClick={() => {
+            if (setOpenEmojiDetail) {
+              setOpenEmojiDetail(true);
+            }
+          }}>
+          <EmojiTag font="fullPic">
+            {myEmoji && <EmojiIcon as={myEmoji} />}
+            {partnerEmoji && <EmojiIcon as={partnerEmoji} />}
+          </EmojiTag>
+        </EmojiTagContainer>
+      )}
       <Footer>
         <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
       </Footer>
