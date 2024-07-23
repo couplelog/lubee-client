@@ -154,6 +154,7 @@ const LocationBox = styled.button`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  width: 100%;
   padding: 2rem 6.4rem 2rem 2.4rem;
 `;
 
@@ -161,6 +162,7 @@ const Name = styled.p`
   ${({ theme }) => theme.fonts.Body_2};
 
   color: ${({ theme }) => theme.colors.gray_800};
+  text-align: left;
 `;
 
 const Details = styled.div`
@@ -169,9 +171,9 @@ const Details = styled.div`
 `;
 
 const Info = styled.p`
-  ${({ theme }) => theme.fonts.Body_1};
-
   color: ${({ theme }) => theme.colors.gray_500};
+  text-align: left;
+  ${({ theme }) => theme.fonts.Body_1};
 `;
 
 // const Distance = styled.p`
