@@ -8,7 +8,7 @@ interface LocationSearchDataTypes {
 
 interface LocationsDataTypes {
   name: string;
-  location_id: number;
+  locationId: number;
   parcelBaseAddress: string;
 }
 
@@ -17,7 +17,7 @@ export interface LocationSearchParams {
 }
 
 export async function getLocationSearch({ keyword }: LocationSearchParams) {
-  const { data } = await api.get<Response<LocationSearchDataTypes>>(`/api/locations/search`, {
+  const { data } = await api.get<Response<LocationSearchDataTypes>>(`/api/locations/search?keyword={keyword}`, {
     params: { keyword },
   });
   return data;

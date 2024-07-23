@@ -62,9 +62,9 @@ export default function index(props: LocationProps) {
       <Locations>
         {locations &&
           locations.map((data) => {
-            const { location_id, name, parcelBaseAddress } = data;
+            const { locationId, name, parcelBaseAddress } = data;
             return (
-              <LocationBox key={location_id} type="button" onClick={() => handleSelectLocation(name, location_id)}>
+              <LocationBox key={locationId} type="button" onClick={() => handleSelectLocation(name, locationId)}>
                 <Name>{name}</Name>
                 <Details>
                   {/* <Distance>{`${distance}m,`}</Distance> */}
