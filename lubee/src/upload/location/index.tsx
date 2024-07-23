@@ -21,10 +21,8 @@ export default function index(props: LocationProps) {
   /* 장소 불러오기 API*/
   const debouncedSearchInput = useDebounce(searchInput, 300);
   const locationSearch = useGetLocationSearch({ keyword: debouncedSearchInput });
-  if (!locationSearch) return <></>;
-  const {
-    response: { locations },
-  } = locationSearch;
+
+  const locations = locationSearch?.response?.locations ?? [];
 
   function handleSelectLocation(locationName: string, locationId: number) {
     setLocation(locationName);
@@ -157,6 +155,7 @@ const LocationBox = styled.button`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  width: 100%;
   padding: 2rem 6.4rem 2rem 2.4rem;
 `;
 
@@ -164,6 +163,7 @@ const Name = styled.p`
   ${({ theme }) => theme.fonts.Body_2};
 
   color: ${({ theme }) => theme.colors.gray_800};
+  text-align: left;
 `;
 
 const Details = styled.div`
@@ -172,9 +172,9 @@ const Details = styled.div`
 `;
 
 const Info = styled.p`
-  ${({ theme }) => theme.fonts.Body_1};
-
   color: ${({ theme }) => theme.colors.gray_500};
+  text-align: left;
+  ${({ theme }) => theme.fonts.Body_1};
 `;
 
 // const Distance = styled.p`

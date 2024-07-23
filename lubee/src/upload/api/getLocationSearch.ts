@@ -17,8 +17,6 @@ export interface LocationSearchParams {
 }
 
 export async function getLocationSearch({ keyword }: LocationSearchParams) {
-  const { data } = await api.get<Response<LocationSearchDataTypes>>(`/api/locations/search?keyword={keyword}`, {
-    params: { keyword },
-  });
+  const { data } = await api.get<Response<LocationSearchDataTypes>>(`/api/locations/search?keyword=${keyword}`);
   return data;
 }

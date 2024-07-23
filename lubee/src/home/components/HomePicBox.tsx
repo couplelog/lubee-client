@@ -6,24 +6,25 @@ import LocationTag from "@common/components/LocationTag";
 import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import { useNavigate } from "react-router-dom";
-import { fullPicData } from "@common/core/fullPicData";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface HomePicBoxProps {
   url: string;
+  dayDto: MemoryBaseDtoDataTypes[];
 }
 
 export default function HomePicBox(props: HomePicBoxProps) {
   const navigate = useNavigate();
-  const { url } = props;
+  const { url, dayDto = [] } = props;
 
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =
-    fullPicData.length < 5
+    dayDto.length < 5
       ? [
-          ...fullPicData.map((img, index) => ({ picSrc: img.picSrc, id: img.id || index })),
+          ...dayDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id })),
           { picSrc: blankImg, id: "blank" },
         ]
-      : fullPicData.map((img, index) => ({ picSrc: img.picSrc, id: img.id || index }));
+      : dayDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id }));
 
   /*프로필 아이콘*/
   const myProfile = getProfileIconSrc("me", "profile1");
@@ -42,12 +43,17 @@ export default function HomePicBox(props: HomePicBoxProps) {
             key={img.id}
             type="button"
             onClick={() => {
-              navigate(`/fullpic${url}`);
+              navigate(`/fullpic${url}`, {
+                state: { memoryId: img.id },
+              });
             }}>
             <Image src={img.picSrc} />
             <ProfileIcon as={myProfile} />
             <TagContainer>
-              <LocationTag location="청수당공명" font="smallPic" />
+              <LocationTag
+                location={dayDto.find((memory) => memory.memory_id === img.id)?.location_name || ""}
+                font="smallPic"
+              />
               <EmojiTag font="smallPic">
                 <EmojiIcon as={myEmoji} />
                 <EmojiIcon as={partnerEmoji} />
