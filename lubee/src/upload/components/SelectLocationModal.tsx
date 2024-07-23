@@ -9,10 +9,11 @@ interface SelectLocationModalProps {
   setLocation: (location: string) => void;
   searchInput: string;
   setSearchInput: (input: string) => void;
+  setLocationId: (locationId: number) => void;
 }
 
 export default function SelectLocationModal(props: SelectLocationModalProps) {
-  const { setOpenLocationModal, setLocation, searchInput, setSearchInput } = props;
+  const { setOpenLocationModal, setLocation, searchInput, setSearchInput, setLocationId } = props;
 
   /* 장소 불러오기 API*/
   const debouncedSearchInput = useDebounce(searchInput, 300);
@@ -22,10 +23,11 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
     response: { locations },
   } = locationSearch;
 
-  function closeLocationModal(locationName?: string) {
+  function closeLocationModal(locationName?: string, locationId?: number) {
     setOpenLocationModal(false);
-    if (locationName) {
+    if (locationName && locationId !== undefined) {
       setLocation(locationName);
+      setLocationId(locationId);
     }
   }
 
@@ -54,7 +56,7 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
             locations.map((data) => {
               const { location_id, name, parcelBaseAddress } = data;
               return (
-                <LocationBox key={location_id} type="button" onClick={() => closeLocationModal(name)}>
+                <LocationBox key={location_id} type="button" onClick={() => closeLocationModal(name, location_id)}>
                   <Name>{name}</Name>
                   <Details>
                     {/* <Distance>{`${distance}m,`}</Distance> */}

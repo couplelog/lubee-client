@@ -8,13 +8,15 @@ export default function index() {
   const [location, setLocation] = useState<string>("");
   const [uploadPic, setUploadPic] = useRecoilState(uploadPicState);
   const [searchInput, setSearchInput] = useState("");
+  const [locationId, setLocationId] = useState<number | null>(null);
 
   function moveToUploadLocation() {
     setUploadPic(false);
   }
 
-  function moveToUploadPic() {
+  function moveToUploadPic(locationId: number) {
     setUploadPic(true);
+    setLocationId(locationId);
   }
 
   return (
@@ -27,14 +29,16 @@ export default function index() {
           setSearchInput={setSearchInput}
         />
       )}
-      {uploadPic && (
+      {uploadPic && locationId !== null && (
         <Pic
           setLocation={setLocation}
           location={location}
+          locationId={locationId}
           moveToUploadLocation={moveToUploadLocation}
           searchInput={searchInput}
           setSearchInput={setSearchInput}
           setUploadPic={setUploadPic}
+          setLocationId={setLocationId}
         />
       )}
     </>

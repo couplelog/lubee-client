@@ -9,7 +9,7 @@ import { useDebounce } from "@common/utils/useDebounce";
 
 interface LocationProps {
   setLocation: (location: string) => void;
-  moveToUploadPic: () => void;
+  moveToUploadPic: (locationId: number) => void;
   searchInput: string;
   setSearchInput: (input: string) => void;
 }
@@ -26,11 +26,9 @@ export default function index(props: LocationProps) {
     response: { locations },
   } = locationSearch;
 
-  function handleSelectLocation(locationName?: string) {
-    if (locationName) {
-      setLocation(locationName);
-      moveToUploadPic();
-    }
+  function handleSelectLocation(locationName: string, locationId: number) {
+    setLocation(locationName);
+    moveToUploadPic(locationId);
   }
 
   useEffect(() => {
@@ -66,7 +64,7 @@ export default function index(props: LocationProps) {
           locations.map((data) => {
             const { location_id, name, parcelBaseAddress } = data;
             return (
-              <LocationBox key={location_id} type="button" onClick={() => handleSelectLocation(name)}>
+              <LocationBox key={location_id} type="button" onClick={() => handleSelectLocation(name, location_id)}>
                 <Name>{name}</Name>
                 <Details>
                   {/* <Distance>{`${distance}m,`}</Distance> */}

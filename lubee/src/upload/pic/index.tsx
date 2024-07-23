@@ -14,10 +14,21 @@ interface UploadProps {
   searchInput: string;
   setSearchInput: (input: string) => void;
   setUploadPic: (uploadPic: boolean) => void;
+  locationId: number;
+  setLocationId: (locationId: number) => void;
 }
 
 export default function index(props: UploadProps) {
-  const { location, setLocation, moveToUploadLocation, searchInput, setSearchInput, setUploadPic } = props;
+  const {
+    location,
+    setLocation,
+    moveToUploadLocation,
+    searchInput,
+    setSearchInput,
+    setUploadPic,
+    locationId,
+    setLocationId,
+  } = props;
   const navigate = useNavigate();
   const [openLocationModal, setOpenLocationModal] = useState<boolean>(false);
 
@@ -54,7 +65,7 @@ export default function index(props: UploadProps) {
         <BtnWrapper
           type="button"
           onClick={() => {
-            postUploadPic({ picture: picSrc, location_id: 2, time: today });
+            postUploadPic({ picture: picSrc, location_id: locationId, time: today });
             setUploadPic(false); // uploadPic 리셋
             moveToHome();
           }}>
@@ -67,6 +78,7 @@ export default function index(props: UploadProps) {
           setLocation={setLocation}
           searchInput={searchInput}
           setSearchInput={setSearchInput}
+          setLocationId={setLocationId}
         />
       )}
     </Wrapper>
