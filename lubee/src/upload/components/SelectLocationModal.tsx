@@ -1,36 +1,35 @@
 import { SearchIc, XIc } from "@assets/index";
-import { locationData } from "@common/core/locationData";
 import styled from "styled-components";
 import { BtnWrapper } from "@styles/btnStyle";
-import { useEffect } from "react";
-import { LocationDataTypes } from "upload/types/LocationDataTypes";
+import { useDebounce } from "@common/utils/useDebounce";
+import { useGetLocationSearch } from "upload/hooks/useGetLocationSearch";
 
 interface SelectLocationModalProps {
   setOpenLocationModal: (open: boolean) => void;
   setLocation: (location: string) => void;
   searchInput: string;
   setSearchInput: (input: string) => void;
-  filteredLocations: LocationDataTypes[];
-  setFilteredLocations: (locations: LocationDataTypes[]) => void;
+  setLocationId: (locationId: number) => void;
 }
 
 export default function SelectLocationModal(props: SelectLocationModalProps) {
-  const { setOpenLocationModal, setLocation, searchInput, setSearchInput, filteredLocations, setFilteredLocations } =
-    props;
+  const { setOpenLocationModal, setLocation, searchInput, setSearchInput, setLocationId } = props;
 
-  function closeLocationModal(locationName?: string) {
+  /* 장소 불러오기 API*/
+  const debouncedSearchInput = useDebounce(searchInput, 300);
+  const locationSearch = useGetLocationSearch({ keyword: debouncedSearchInput });
+  if (!locationSearch) return <></>;
+  const {
+    response: { locations },
+  } = locationSearch;
+
+  function closeLocationModal(locationName?: string, locationId?: number) {
     setOpenLocationModal(false);
-    if (locationName) {
+    if (locationName && locationId !== undefined) {
       setLocation(locationName);
+      setLocationId(locationId);
     }
   }
-
-  /* 검색*/
-  useEffect(() => {
-    setFilteredLocations(
-      locationData.filter((location) => location.name.toLowerCase().includes(searchInput.toLowerCase())),
-    );
-  }, [searchInput]);
 
   return (
     <Background>
@@ -53,15 +52,15 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
           </SearchButton>
         </SearchBar>
         <Locations>
-          {filteredLocations &&
-            filteredLocations.map((data) => {
-              const { name, distance, info, id } = data;
+          {locations &&
+            locations.map((data) => {
+              const { locationId, name, parcelBaseAddress } = data;
               return (
-                <LocationBox key={id} type="button" onClick={() => closeLocationModal(name)}>
+                <LocationBox key={locationId} type="button" onClick={() => closeLocationModal(name, locationId)}>
                   <Name>{name}</Name>
                   <Details>
-                    <Distance>{`${distance}m,`}</Distance>
-                    <Info>{info}</Info>
+                    {/* <Distance>{`${distance}m,`}</Distance> */}
+                    <Info>{parcelBaseAddress}</Info>
                   </Details>
                 </LocationBox>
               );
@@ -169,14 +168,14 @@ const Details = styled.div`
   gap: 0.3rem;
 `;
 
-const Distance = styled.p`
-  ${({ theme }) => theme.fonts.Body_1};
-
-  color: ${({ theme }) => theme.colors.gray_500};
-`;
-
 const Info = styled.p`
   ${({ theme }) => theme.fonts.Body_1};
 
   color: ${({ theme }) => theme.colors.gray_500};
 `;
+
+// const Distance = styled.p`
+//   ${({ theme }) => theme.fonts.Body_1};
+
+//   color: ${({ theme }) => theme.colors.gray_500};
+// `;
