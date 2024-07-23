@@ -15,11 +15,18 @@ export const isFutureDate = (year: number, month: number, date: number): boolean
   return new Date(year, month - 1, date) > today;
 };
 
-// 오늘 날짜 DDDD.MM.DD
+// 오늘 날짜 DDDD. MM. DD
 export function getCurrentDate() {
-  const today = new Date();
   const year = today.getFullYear().toString();
   const month = (today.getMonth() + 1).toString().padStart(2, "0");
   const day = today.getDate().toString().padStart(2, "0");
   return `${year}. ${month}. ${day}`;
+}
+
+// api용 날짜 포맷 DDDD.MM.DD
+export function getAPIDate() {
+  const year = today.getFullYear().toString();
+  const month = (today.getMonth() + 1).toString().padStart(2, "0");
+  const day = today.getDate().toString().padStart(2, "0");
+  return `${year}.${month}.${day}`;
 }

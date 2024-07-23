@@ -68,10 +68,11 @@ export default function HomePicBox(props: HomePicBoxProps) {
 
 const Container = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
+  grid-template-columns: repeat(2, 1fr);
 `;
 
 const ImgContainer = styled.button`

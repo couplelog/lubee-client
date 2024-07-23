@@ -9,13 +9,13 @@ import { useState } from "react";
 import Toggle from "./components/Toggle";
 import ToggleCalendar from "./components/ToggleCalendar";
 import { useGetTodayHoney } from "../hooks/useGetTodayHoney";
-import { getCurrentDate } from "@common/utils/dateFormat";
+import { getAPIDate } from "@common/utils/dateFormat";
 
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
-  const NumHoney = useGetTodayHoney(getCurrentDate()).data?.response ?? 0;
+  const NumHoney = useGetTodayHoney(getAPIDate()).data?.response ?? 0;
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
