@@ -34,12 +34,9 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
           <CommentsBox>
             <Comment iconSrc={myProfile} comment={myComment} />
             <Comment iconSrc={partnerProfile} comment={partnerComment} />
-            {dayDto.map((memory) => (
-              <Comment key={memory.memory_id} iconSrc={memory.writer_profile} comment={memory.reaction1} />
-            ))}
           </CommentsBox>
           <HomePicBoxWrapper>
-            <HomePicBox url="/date" />
+            <HomePicBox url={`/${date}`} dayDto={dayDto} />
           </HomePicBoxWrapper>
         </Contents>
       </Container>
