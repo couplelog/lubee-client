@@ -15,7 +15,7 @@ interface HomePicBoxProps {
 
 export default function HomePicBox(props: HomePicBoxProps) {
   const navigate = useNavigate();
-  const { url, dayDto } = props;
+  const { url, dayDto = [] } = props;
 
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =

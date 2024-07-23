@@ -13,7 +13,7 @@ interface FullPicProps {
 
 export default function FullPicContainer(props: FullPicProps) {
   const { picSrc, location, setOpenLocationModal } = props;
-
+  console.log(picSrc);
   return (
     <PicBox>
       <Pic src={picSrc} alt="업로드한 이미지"></Pic>
