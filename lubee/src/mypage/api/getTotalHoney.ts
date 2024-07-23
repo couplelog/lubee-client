@@ -7,5 +7,5 @@ interface HoneyDataTypes {
 
 export async function getTotalHoney() {
   const { data } = await api.get<Response<HoneyDataTypes>>(`/api/calendars/honey/total`);
-  return data;
+  return data.response;
 }

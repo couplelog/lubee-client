@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { HoneyIc } from "@assets/index";
+import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 
 export default function HoneyIconContainer() {
   return (
