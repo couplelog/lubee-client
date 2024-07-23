@@ -13,18 +13,26 @@ interface CalContainerProps {
   showCalendar?: boolean;
   setOpenDateDetailModal?: (open: boolean) => void;
 }
-
 const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
-  /*모달 애니메이션*/
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
+  // DateDetail 모달에서 헤더에 date 표기 위한
+  const [selectedDate, setSelectedDate] = useState<number | null>(null);
+  const [dayDto, setDayDto] = useState<MemoryBaseDtoDataTypes[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const { year, month, start, length } = info;
+  const LIST = new Array(start + length).fill(0);
+
+  const calendarData = useGetCalendar();
+
+  /*모달 애니메이션*/
   useEffect(() => {
     const listener = (e: MouseEvent) => {
       if (!modalRef.current || modalRef.current.contains(e.target as Node)) return;
       if (setOpenDateDetailModal) {
-        setOpenDateDetailModal(false); //부모 state 업데이트
+        setOpenDateDetailModal(false); // 부모 state 업데이트
       }
-      setOpenDateDetailModalLocal(false); //current state 업데이트
+      setOpenDateDetailModalLocal(false); // current state 업데이트
     };
     document.addEventListener("mousedown", listener);
     return () => {
@@ -32,48 +40,27 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
     };
   }, [modalRef]);
 
-  /*fullpic - Month 페이지로 이동하는 함수
-  const [date, setDate] = useState("");
-  const navigate = useNavigate();
-
-  const handleDateChange = (event) => {
-    setDate(event.target.value);
-  };
-
-  const handleGoToDate = () => {
-    if (date) {
-      navigate(`/fullpic/${date}`);
-    }
-  };*/
-
-  // data.map((el) => (LIST[el.date + start - 1] = el.price));
-  // data.sort((a, b) => a.price - b.price);
-
-  const { year, month, start, length } = info;
-  const LIST = new Array(start + length).fill(0);
-
   /*달력에서 업로드한 day 조회 API*/
-  const [dayDto, setDayDto] = useState<MemoryBaseDtoDataTypes[]>([]);
-  const calendarData = useGetCalendar();
-  if (!calendarData) return <></>;
-  const {
-    response: { calendarMemoryYearMonthDtoList },
-  } = calendarData;
-  calendarMemoryYearMonthDtoList.forEach(({ year: y, month: m, calendarMemoryDayDtoList }) => {
-    if (y === year && m === month) {
-      calendarMemoryDayDtoList.forEach(({ day, memoryBaseListDto }) => {
-        LIST[day + start - 1] = 1; // List 배열에 사진을 업로드한 day는 1로 찍기
+  useEffect(() => {
+    if (calendarData) {
+      const {
+        response: { calendarMemoryYearMonthDtoList },
+      } = calendarData;
 
-        // Save memory data for the selected date
-        if (selectedDate !== null && selectedDate === day) {
-          setDayDto(memoryBaseListDto);
+      calendarMemoryYearMonthDtoList.forEach(({ year: y, month: m, calendarMemoryDayDtoList }) => {
+        if (y === year && m === month) {
+          calendarMemoryDayDtoList.forEach(({ day, memoryBaseListDto }) => {
+            LIST[day + start - 1] = 1; // List 배열에 사진을 업로드한 day는 1로 찍기
+
+            // Save memory data for the selected date
+            if (selectedDate !== null && selectedDate === day) {
+              setDayDto(memoryBaseListDto);
+            }
+          });
         }
       });
     }
-  });
-
-  // DateDetail 모달에서 헤더에 date 표기 위한
-  const [selectedDate, setSelectedDate] = useState<number | null>(null);
+  }, [calendarData, selectedDate, year, month, start, LIST]);
 
   function handleDateDetailModal(date: number) {
     if (isFutureDate(year, month, date)) {
@@ -90,6 +77,10 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
       }
       setOpenDateDetailModalLocal(true);
     }, 400); // 잠시 홀딩된 뒤 모달 띄우기
+  }
+
+  if (!calendarData) {
+    return null;
   }
 
   return (
