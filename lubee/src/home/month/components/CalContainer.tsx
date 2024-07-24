@@ -12,18 +12,17 @@ interface CalContainerProps {
   showCalendar?: boolean;
   setOpenDateDetailModal?: (open: boolean) => void;
 }
+
 const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
-  // DateDetail 모달에서 헤더에 date 표기 위한
   const [selectedDate, setSelectedDate] = useState<number | undefined>();
   const modalRef = useRef<HTMLDivElement>(null);
 
   const { year, month, start, length } = info;
-  const LIST = new Array(start + length).fill(0);
+  const [list, setList] = useState<number[]>(new Array(start + length).fill(0)); // LIST 초기화
 
   const calendarData = useGetCalendar();
 
-  /*모달 애니메이션*/
   useEffect(() => {
     const listener = (e: MouseEvent) => {
       if (!modalRef.current || modalRef.current.contains(e.target as Node)) return;
@@ -36,7 +35,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
     return () => {
       document.removeEventListener("mousedown", listener);
     };
-  }, [modalRef]);
+  }, [modalRef, setOpenDateDetailModal]);
 
   /*달력에서 업로드한 day 조회 API*/
   useEffect(() => {
@@ -45,16 +44,20 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         response: { calendarMemoryYearMonthDtoList },
       } = calendarData;
 
+      const updatedList = new Array(start + length).fill(0); // 새로운 list
+
       calendarMemoryYearMonthDtoList.forEach(({ year: y, month: m, calendarMemoryDayDtoList }) => {
         if (y === year && m === month) {
           calendarMemoryDayDtoList.forEach(({ day }) => {
-            LIST[day + start - 1] = 1; // List 배열에 사진을 업로드한 day는 1로 찍기
+            updatedList[day + start - 1] = 1; // 사진을 업로드한 day는 1로찍기
             console.log("day", day);
           });
         }
       });
+
+      setList(updatedList); // Update the state with the new list only once
     }
-  }, [calendarData, selectedDate, year, month, start, LIST]);
+  }, [calendarData, year, month, start, length]);
 
   function handleDateDetailModal(date: number) {
     if (isFutureDate(year, month, date)) {
@@ -87,7 +90,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         </HeaderHoney>
       </Header>
       <Grid>
-        {LIST.map((val, idx) => {
+        {list.map((val, idx) => {
           const date = idx - start + 1;
           const isToday = year === getTodayYear && month === getTodayMonth && date === getTodayDate;
           const isEmpty = idx - start < 0 || date > length;
@@ -193,20 +196,6 @@ const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: 
   }
 `;
 
-//color: ${({ theme, $isHoliday }) => $isHoliday && theme.colors.gray_500};
 const Date = styled.p`
   ${({ theme }) => theme.fonts.Ginto_18};
 `;
-
-// const Price = styled.span<{ $isColored: string }>`
-//   ${({ theme }) => theme.fonts.Ginto_18};
-
-//   height: 1.8rem;
-//   color: ${({ theme, $isColored }) =>
-//     $isColored === "min" ? theme.colors.blue : $isColored === "max" ? theme.colors.red : theme.colors.grey_2};
-// `;
-
-// /* 일요일 column 빨간 색상으로 */
-// & > li:nth-child(7n + 1) {
-//   color: ${({ theme }) => theme.colors.red};
-// }
