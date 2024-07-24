@@ -29,7 +29,7 @@ export default function BlankImgBtn(props: BlankImgBtnProps) {
       const reader = new FileReader();
       reader.readAsDataURL(picObj[0]);
       reader.onloadend = () => {
-        navigate("/upload", { state: { picSrc: reader.result } }); //useLocation 사용하기 위해 state 전달
+        navigate("/upload", { state: { picSrc: picObj[0] } }); //useLocation 사용하기 위해 state 전달
       };
     }
   };
