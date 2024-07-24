@@ -10,11 +10,7 @@ const usePostLogin = () => {
 
   useEffect(() => {
     api
-      .post("api/users/kakao/simpleLogin", null, {
-        headers: {
-          Authorization: `Bearer ${KAKAO_CODE}`,
-        },
-      })
+      .post(`api/users/kakao/simpleLogin?code=${KAKAO_CODE}`)
       .then((res: loginResProps) => {
         const { accessToken } = res.data.data;
         setToken(accessToken);
