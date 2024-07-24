@@ -92,6 +92,13 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 
   const { response } = totalHoney;
 
+  // 선택 날짜를 서버에게 넘기기 위해 선택한 날짜의 YYYY.MM.DD 형식으로 만들기
+  const formatSelectedDate = (year: number, month: number, date: number) => {
+    const formattedMonth = String(month).padStart(2, "0");
+    const formattedDate = String(date).padStart(2, "0");
+    return `${year}.${formattedMonth}.${formattedDate}`;
+  };
+
   return (
     <Container>
       <Header>
@@ -125,6 +132,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
           date={`${month}월 ${selectedDate}일`}
           showCalendar={showCalendar}
           dayDto={dayDto}
+          serverDate={selectedDate ? formatSelectedDate(year, month, selectedDate) : ""}
         />
       )}
     </Container>

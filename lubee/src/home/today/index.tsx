@@ -3,7 +3,7 @@ import DateBox from "./components/DateBox";
 import TodayTitle from "./components/TodayTitle";
 import HoneyIconContainer from "./components/HoneyIconContainer";
 import TodayProfileBox from "./components/TodayProfileBox";
-import ContentContainer from "./components/ContentContainer";
+import ContentContainer from "../components/ContentContainer";
 import { PlusIc, PlusClickedIc } from "@assets/index";
 import { useState } from "react";
 import Toggle from "./components/Toggle";
@@ -30,6 +30,7 @@ export default function index() {
   function handleCalendar() {
     setOpenToggle(false);
     setShowCalendar((open) => !open);
+    setIsPlusClicked(false);
   }
 
   return (
