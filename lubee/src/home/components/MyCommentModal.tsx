@@ -63,8 +63,6 @@ export default function MyCommentModal(props: CommentModalProps) {
               console.log("POST 성공, 받은 ID:", id); // 로그 추가
               if (id !== null && id !== undefined) {
                 setCommentId(id); // POST 요청 후 받은 코멘트 ID 저장
-                // 상태가 업데이트된 이후 PUT 요청 시도
-                updateCommentIfNeeded(id, text);
               } else {
                 console.warn("POST 성공했지만 response 값이 null 또는 undefined입니다."); // 로그 추가
               }
@@ -94,22 +92,6 @@ export default function MyCommentModal(props: CommentModalProps) {
         }
       }
     }
-  };
-
-  // 상태가 업데이트된 이후 PUT 요청을 보내기 위한 함수
-  const updateCommentIfNeeded = (id: number, content: string) => {
-    console.log("상태 업데이트 후 PUT 요청 시작, ID:", id); // 로그 추가
-    updateDateCommentMutate(
-      { datecommentId: id, content: content },
-      {
-        onSuccess: (data) => {
-          console.log("PUT 성공", data); // 로그 추가
-        },
-        onError: (error) => {
-          console.error("PUT 요청 실패", error); // 로그 추가
-        },
-      },
-    );
   };
 
   const handleEditClick = () => {

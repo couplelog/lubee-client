@@ -14,7 +14,7 @@ interface GetTodayDateCommentRequest {
 
 interface GetTodayDateCommentResponse {
   mine: TodayDateCommentDataTypes;
-  lover: TodayDateCommentDataTypes | null;
+  lover: TodayDateCommentDataTypes;
 }
 
 export async function getTodayDateComment({ coupleId, date }: GetTodayDateCommentRequest) {
