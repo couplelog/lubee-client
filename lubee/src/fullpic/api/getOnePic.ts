@@ -17,20 +17,6 @@ interface OnePicDataTypes {
 }
 
 export async function getOnePic(memory_id: number) {
-  const { data } = await api.get<Response<OnePicDataTypes>>(`/api/memories/${memory_id}`);
+  const { data } = await api.get<Response<OnePicDataTypes>>(`/api/memories/?memory_id=${memory_id}`);
   return data;
 }
-
-// {
-//   "memoryBaseDto": [ # 매일 매일 기록을 올리는 것
-//      {
-//        "memory_id" : 1,
-//        "user_id" : 2, # 기록 올린사람의 user_id
-//        "location_name": "Central Park", # 위치
-//        "picture": "http://example.com/memories/centralpark.jpg",
-//        "writer_profile":  # 글 쓴 사람의 프로필
-//          "첫째"
-//        "reaction1": "기쁨",
-//        "reaction2": "나쁨"
-//      },
-// },
