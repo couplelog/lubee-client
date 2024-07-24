@@ -5,6 +5,8 @@ import CommentBox from "home/components/CommentBox";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import HomePicBox from "home/components/HomePicBox";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
+import { getAPIDate } from "@common/utils/dateFormat";
 
 interface DateDetailModalProps {
   date: string;
@@ -18,6 +20,9 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile2");
+  const { data } = useGetTodayDateComment(1, getAPIDate()); // coupleId는 임의로 1 넣음
+  const myComment = data?.mine?.content || "";
+  const partnerComment = data?.lover?.content || "";
 
   return (
     <Background>
@@ -28,8 +33,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
         </Header>
         <Contents>
           <CommentsContainer>
-            <CommentBox profileIconSrc={myProfile} isMyComment={true} isToday={false} />
-            <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={false} />
+            <CommentBox profileIconSrc={myProfile} isMyComment={true} isToday={false} comment={myComment} />
+            <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={false} comment={partnerComment} />
           </CommentsContainer>
           <HomePicBoxWrapper>
             <HomePicBox url={`/${date}`} dayDto={dayDto} />

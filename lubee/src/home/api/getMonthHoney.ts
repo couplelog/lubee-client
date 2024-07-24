@@ -11,8 +11,6 @@ interface GetMonthHoneyRequest {
   month: number;
 }
 
-// GET 요청에서는 보통 요청 바디를 사용하지 않음
-// 그래서 쿼리 파라미터로 전달
 export async function getMonthHoney({ year, month }: GetMonthHoneyRequest) {
   const { data } = await api.get<Response<HoneyDataTypes>>(`/api/calendars/honey/month?year=${year}&month=${month}`);
   return data.response;
