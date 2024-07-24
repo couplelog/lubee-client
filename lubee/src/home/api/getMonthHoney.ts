@@ -5,7 +5,6 @@ interface HoneyDataTypes {
   response: number;
 }
 
-// date 넘겨주기
 interface GetMonthHoneyRequest {
   year: number;
   month: number;

@@ -11,7 +11,7 @@ export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
   const [text, setText] = useState("");
   const [textLength, setTextLength] = useState(0);
-  const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?";
+  const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?" || commentText === "이날의 데이트는 어떠셨나요?";
   const [isEditing, setIsEditing] = useState(isDefaultText);
   const { mutate: postDateCommentMutate } = usePostDateComment();
   const { mutate: updateDateCommentMutate } = useUpdateDateComment();
@@ -68,6 +68,7 @@ export default function MyCommentModal(props: CommentModalProps) {
               } else {
                 console.warn("POST 성공했지만 response 값이 null 또는 undefined입니다."); // 로그 추가
               }
+              handleCloseBtn(); // POST 요청 성공 시 모달 닫기
             },
             onError: (error) => {
               console.error("POST 요청 실패", error); // 로그 추가
@@ -83,6 +84,7 @@ export default function MyCommentModal(props: CommentModalProps) {
             {
               onSuccess: (data) => {
                 console.log("PUT 성공", data); // 로그 추가
+                handleCloseBtn(); // PUT 요청 성공 시 모달 닫기
               },
               onError: (error) => {
                 console.error("PUT 요청 실패", error); // 로그 추가
@@ -104,6 +106,7 @@ export default function MyCommentModal(props: CommentModalProps) {
       {
         onSuccess: (data) => {
           console.log("PUT 성공", data); // 로그 추가
+          handleCloseBtn(); // PUT 요청 성공 시 모달 닫기
         },
         onError: (error) => {
           console.error("PUT 요청 실패", error); // 로그 추가
