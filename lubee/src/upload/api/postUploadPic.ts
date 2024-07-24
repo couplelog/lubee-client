@@ -1,18 +1,18 @@
 import api from "@common/api/api";
-
-interface postUploadPicDataTypes {
-  picture: File;
+export interface PostUploadPicDataTypes {
   location_id: number;
+  picture: File;
 }
 
-export async function postUploadPic({ picture, location_id }: postUploadPicDataTypes) {
-  // Create a FormData object
-  const formData = new FormData();
-  formData.append("picture", picture);
-  formData.append("location_id", location_id.toString());
+export async function postUploadPic({ location_id, picture }: PostUploadPicDataTypes) {
+  const requestBody = new FormData();
+  requestBody.append("picture", picture);
 
-  // Make the API request with the FormData object
-  const { data } = await api.post(`/api/memories/create`, formData);
+  const { data } = await api.post(`/api/memories/create?location_id=${location_id}`, requestBody, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 
   return data;
 }

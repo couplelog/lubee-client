@@ -1,8 +1,8 @@
 import { useMutation } from "react-query";
-import { postUploadPic } from "upload/api/postUploadPic";
+import { postUploadPic, PostUploadPicDataTypes } from "upload/api/postUploadPic";
 
 export function usePostUploadPic() {
-  return useMutation(postUploadPic, {
+  return useMutation((data: PostUploadPicDataTypes) => postUploadPic(data), {
     onSuccess: () => {
       console.log("업로드 성공");
     },
