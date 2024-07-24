@@ -21,7 +21,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
           <ShortBorderIc />
           <Text>{date}</Text>
         </Header>
-        <ContentContainer dayDto={dayDto} date={serverDate} />
+        <ContentContainer date={serverDate} dayDto={dayDto} isToday={false} />
       </Container>
     </Background>
   );

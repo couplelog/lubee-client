@@ -43,7 +43,7 @@ export default function index() {
           <TodayProfileBox />
         </SubContainer>
       </Container>
-      <ContentContainer dayDto={dayDto} date={`${getTodayMonth}월 ${getTodayDate}일`} />
+      <ContentContainer dayDto={dayDto} date={`${getTodayMonth}월 ${getTodayDate}일`} isToday={true} />
       {!showCalendar && (
         <BtnWrapper type="button" onClick={handlePlusBtn}>
           {isPlusClicked ? <PlusClickedIcon /> : <PlusIcon />}
