@@ -6,7 +6,6 @@ import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import MonthPicBox from "./MonthPicBox";
-import { useLocation } from "react-router-dom";
 
 interface DateDetailModalProps {
   dateText: string;

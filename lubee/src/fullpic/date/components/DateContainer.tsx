@@ -5,14 +5,16 @@ import FullPicContainer from "@common/components/FullPicContainer";
 import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 interface DateContainerProps {
   setOpenEmojiDetail: (open: boolean) => void;
   selectedEmojiText: string;
   setSelectedEmojiText: (text: string) => void;
+  specificDto: MemoryBaseDtoDataTypes[];
 }
 
 export default function DateContainer(props: DateContainerProps) {
-  const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText } = props;
+  const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText, specificDto } = props;
 
   // date 가져오기
   // const { date } = useParams<{ date: string }>();
@@ -24,19 +26,20 @@ export default function DateContainer(props: DateContainerProps) {
 
   return (
     <Wrapper>
-      {fullPicData &&
-        fullPicData.map((data) => {
-          const { time, picSrc, location, name, account } = data;
+      {specificDto &&
+        specificDto.map((data) => {
+          const { memory_id, user_id, location_name, picture, writer_profile, reaction1, reaction2, upload_time } =
+            data;
           /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
-          const profile = getProfileIconSrc(account, "profile2");
+          const profile = getProfileIconSrc("me", "profile2");
           return (
-            <ContentsBox key={time}>
-              <Time>{time}</Time>
+            <ContentsBox key={memory_id}>
+              <Time>{upload_time}</Time>
               <Profile>
                 <ProfileIcon as={profile} />
-                <Name>{name}</Name>
+                <Name>{writer_profile}</Name>
               </Profile>
-              <FullPicContainer picSrc={picSrc} location={location} />
+              <FullPicContainer picSrc={picture} location={location_name} />
               {(myEmoji || partnerEmoji) && (
                 <EmojiTagContainer
                   type="button"

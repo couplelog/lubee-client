@@ -49,7 +49,7 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
             type="button"
             onClick={() => {
               navigate(`/fullpic${url}`, {
-                state: { monthHeader },
+                state: { monthHeader, specificDto },
               });
             }}>
             <Image src={img.picSrc} />
