@@ -1,22 +1,17 @@
 export interface loginResProps {
-  data: {
-    code: number;
-    data: {
-      accessToken: string;
-      refreshToken: string;
-    };
+  success: boolean;
+  response: { message: string; accessToken: string; refreshToken: string };
+  success_or_error_code: {
+    status: number;
+    message: string;
   };
 }
 
 export interface loginErrorProps {
-  response: {
-    data: {
-      code: number;
-      message: string;
-      data: {
-        accessToken: string;
-        refreshToken: string;
-      };
-    };
+  success: boolean;
+  response: { message: string; accessToken: string; refreshToken: string };
+  success_or_error_code: {
+    status: number;
+    message: string;
   };
 }
