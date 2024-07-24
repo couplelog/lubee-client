@@ -9,13 +9,15 @@ import { useState } from "react";
 import Toggle from "./components/Toggle";
 import ToggleCalendar from "./components/ToggleCalendar";
 import { useGetTodayHoney } from "../hooks/useGetTodayHoney";
-import { getAPIDate } from "@common/utils/dateFormat";
+import { getServerDate, getTodayMonth, getTodayDate } from "@common/utils/dateFormat";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
-  const NumHoney = useGetTodayHoney(getAPIDate()).data?.response ?? 0;
+  const { data: totalHoney } = useGetTodayHoney(getServerDate());
+  const [dayDto, setDayDto] = useState<MemoryBaseDtoDataTypes[]>([]);
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
@@ -33,11 +35,13 @@ export default function index() {
         <DateBox />
         <TodayTitle day={387} />
         <SubContainer>
-          <HoneyIconContainer honey={NumHoney} />
+          <HoneyIconContainer
+            honey={totalHoney === undefined ? 0 : typeof totalHoney === "number" ? totalHoney : totalHoney.response}
+          />
           <TodayProfileBox />
         </SubContainer>
       </Container>
-      <ContentContainer />
+      <ContentContainer dayDto={dayDto} date={`${getTodayMonth}월 ${getTodayDate}일`} />
       {!showCalendar && (
         <BtnWrapper type="button" onClick={handlePlusBtn}>
           {isPlusClicked ? <PlusClickedIcon /> : <PlusIcon />}

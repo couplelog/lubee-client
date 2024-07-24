@@ -63,8 +63,10 @@ const Container = styled.div`
   gap: 6.75rem;
   justify-content: center;
   align-items: center;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  margin-bottom: 0;
   padding: 1.1rem 9.4rem 0;
   background-color: ${({ theme }) => theme.colors.white};
 `;

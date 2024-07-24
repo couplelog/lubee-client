@@ -25,10 +25,9 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   const LIST = new Array(start + length).fill(0);
 
   const calendarData = useGetCalendar();
+  const { data: totalHoney } = useGetMonthHoney(getTodayYear, getTodayMonth);
 
   /*모달 애니메이션*/
-  const totalHoney = useGetMonthHoney(getTodayYear, getTodayMonth).data?.response;
-
   useEffect(() => {
     const listener = (e: MouseEvent) => {
       if (!modalRef.current || modalRef.current.contains(e.target as Node)) return;
@@ -92,7 +91,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         <HeaderDate>{`${year}.${formatMonth(month)}`}</HeaderDate>
         <HeaderHoney>
           <HoneyMonthIcon />
-          <HoneyCount>{totalHoney}</HoneyCount>
+          <HoneyCount>{totalHoney !== undefined ? totalHoney : 0}</HoneyCount>
         </HeaderHoney>
       </Header>
       <Grid>

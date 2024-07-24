@@ -2,7 +2,7 @@ import api from "@common/api/api";
 import { Response } from "@common/types/Response";
 
 interface HoneyDataTypes {
-  response: number;
+  id: number;
 }
 
 interface GetMonthHoneyRequest {
@@ -12,5 +12,5 @@ interface GetMonthHoneyRequest {
 
 export async function getMonthHoney({ year, month }: GetMonthHoneyRequest) {
   const { data } = await api.get<Response<HoneyDataTypes>>(`/api/calendars/honey/month?year=${year}&month=${month}`);
-  return data.response;
+  return data.response.id;
 }

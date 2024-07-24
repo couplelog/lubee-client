@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { getTodayHoney } from "../api/getTodayHoney";
 
 export function useGetTodayHoney(date: string) {
-  const { data, error, isLoading } = useQuery(["getTodayHoney", date], () => getTodayHoney({ date }), {
+  const { data } = useQuery(["getTodayHoney", date], () => getTodayHoney({ date }), {
     onError: (error) => {
       // 서버에서 반환한 에러 메시지를 출력
       if (error && (error as any).message) {
@@ -13,5 +13,5 @@ export function useGetTodayHoney(date: string) {
     },
   });
 
-  return { data, error, isLoading };
+  return { data };
 }

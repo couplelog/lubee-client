@@ -43,31 +43,31 @@ const Container = styled.section`
 `;
 
 const Honey0Icon = styled(TodayHoney0Ic)`
-  width: 2.412rem;
+  width: 12rem;
   height: 2.4rem;
 `;
 
 const Honey1Icon = styled(TodayHoney1Ic)`
-  width: 2.412rem;
+  width: 12rem;
   height: 2.4rem;
 `;
 
 const Honey2Icon = styled(TodayHoney2Ic)`
-  width: 2.412rem;
+  width: 12rem;
   height: 2.4rem;
 `;
 
 const Honey3Icon = styled(TodayHoney3Ic)`
-  width: 2.412rem;
+  width: 12rem;
   height: 2.4rem;
 `;
 
 const Honey4Icon = styled(TodayHoney4Ic)`
-  width: 2.412rem;
+  width: 12rem;
   height: 2.4rem;
 `;
 
 const Honey5Icon = styled(TodayHoney5Ic)`
-  width: 2.412rem;
+  width: 12rem;
   height: 2.4rem;
 `;

@@ -3,7 +3,7 @@ import CommentBox from "home/components/CommentBox";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import HomePicBox from "home/components/HomePicBox";
 import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
-import { getAPIDate } from "@common/utils/dateFormat";
+import { getServerDate } from "@common/utils/dateFormat";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface ContentContainerProps {
@@ -15,7 +15,7 @@ export default function ContentContainer(props: ContentContainerProps) {
   const { date, dayDto } = props;
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile1");
-  const { data } = useGetTodayDateComment(1, getAPIDate()); // coupleId는 임의로 1 넣음
+  const { data } = useGetTodayDateComment(1, getServerDate()); // coupleId는 임의로 1 넣음
   const myComment = data?.mine?.content || "";
   const partnerComment = data?.lover?.content || "";
 
@@ -34,7 +34,6 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  min-height: 37rem;
 `;
 
 const CommentsContainer = styled.span`

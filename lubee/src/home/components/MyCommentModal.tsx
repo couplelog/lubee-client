@@ -5,7 +5,7 @@ import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
 import { usePostDateComment } from "home/hooks/usePostDateComment";
 import { useUpdateDateComment } from "home/hooks/useUpdateDateComment";
-import { getAPIDate } from "@common/utils/dateFormat";
+import { getServerDate } from "@common/utils/dateFormat";
 
 export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
@@ -56,7 +56,7 @@ export default function MyCommentModal(props: CommentModalProps) {
         // 서버에 코멘트 POST 요청으로
         // coupleId는 임의로 1 넣어둠!
         postDateCommentMutate(
-          { content: text, coupleId: 1, date: getAPIDate() },
+          { content: text, coupleId: 1, date: getServerDate() },
           {
             onSuccess: (data) => {
               const id = data.response; // response 값을 commentId로 사용
