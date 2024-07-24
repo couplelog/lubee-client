@@ -5,12 +5,14 @@ interface postUploadPicDataTypes {
   location_id: number;
 }
 
-export async function postUploadPic(props: postUploadPicDataTypes) {
-  const { picture, location_id } = props;
-  const { data } = await api.post(`/api/memories/create`, {
-    picture: picture,
-    location_id: location_id,
-  });
+export async function postUploadPic({ picture, location_id }: postUploadPicDataTypes) {
+  // Create a FormData object
+  const formData = new FormData();
+  formData.append("picture", picture);
+  formData.append("location_id", location_id.toString());
+
+  // Make the API request with the FormData object
+  const { data } = await api.post(`/api/memories/create`, formData);
 
   return data;
 }
