@@ -20,9 +20,15 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile2");
-  const { data } = useGetTodayDateComment(1, getServerDate()); // coupleId는 임의로 1 넣음
-  const myComment = data?.mine?.content || "";
-  const partnerComment = data?.lover?.content || "";
+
+  const commentData = useGetTodayDateComment(1, getServerDate()); // coupleId는 임의로 1 넣음
+  if (!commentData) return <></>;
+
+  const { response } = commentData;
+  const { mine, lover } = response;
+
+  const myComment = mine.content;
+  const partnerComment = lover?.content || "";
 
   return (
     <Background>

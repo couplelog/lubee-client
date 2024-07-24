@@ -14,6 +14,7 @@ interface CalContainerProps {
   showCalendar?: boolean;
   setOpenDateDetailModal?: (open: boolean) => void;
 }
+
 const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
   // DateDetail 모달에서 헤더에 date 표기 위한
@@ -26,9 +27,6 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 
   const calendarData = useGetCalendar();
   const totalHoney = useGetMonthHoney(getTodayYear, getTodayMonth);
-  if (!totalHoney) return <></>;
-
-  const { response } = totalHoney;
 
   /*모달 애니메이션*/
   useEffect(() => {
@@ -87,6 +85,12 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   if (!calendarData) {
     return null;
   }
+
+  if (!totalHoney) {
+    return null;
+  }
+
+  const { response } = totalHoney;
 
   return (
     <Container>

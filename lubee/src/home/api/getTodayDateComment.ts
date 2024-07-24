@@ -22,8 +22,5 @@ export async function getTodayDateComment({ coupleId, date }: GetTodayDateCommen
     `/api/datecomments/today?coupleId=${coupleId}&date=${date}`,
   );
 
-  // data.response에 접근하여 mine과 lover 데이터를 추출
-  const { mine, lover } = data.response;
-
-  return { mine, lover };
+  return data;
 }

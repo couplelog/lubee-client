@@ -8,5 +8,5 @@ export function useGetTodayDateComment(coupleId: number, date: string) {
     },
   });
 
-  return { data };
+  return data;
 }

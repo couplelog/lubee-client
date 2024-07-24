@@ -6,10 +6,7 @@ import PartnerCommentModal from "./PartnerCommentModal";
 interface CommentBoxProps {
   profileIconSrc: string;
   isMyComment: boolean;
-
-  // 코멘트는 서버로부터 받아오기
   comment: string;
-
   isToday: boolean;
 }
 

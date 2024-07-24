@@ -15,9 +15,15 @@ export default function ContentContainer(props: ContentContainerProps) {
   const { date, dayDto } = props;
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile1");
-  const { data } = useGetTodayDateComment(1, getServerDate()); // coupleId는 임의로 1 넣음
-  const myComment = data?.mine?.content || "";
-  const partnerComment = data?.lover?.content || "";
+
+  const commentData = useGetTodayDateComment(1, getServerDate()); // coupleId는 임의로 1 넣음
+  if (!commentData) return <></>;
+
+  const { response } = commentData;
+  const { mine, lover } = response;
+
+  const myComment = mine.content;
+  const partnerComment = lover?.content || "";
 
   return (
     <Container>
