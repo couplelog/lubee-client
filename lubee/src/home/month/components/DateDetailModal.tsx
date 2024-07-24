@@ -6,6 +6,7 @@ import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import MonthPicBox from "./MonthPicBox";
+import { useLocation } from "react-router-dom";
 
 interface DateDetailModalProps {
   dateText: string;
@@ -48,7 +49,13 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={partnerProfile} comment={partnerComment} />
           </CommentsBox>
           <HomePicBoxWrapper>
-            <MonthPicBox url={`/${date}`} specificDto={specificDto} />
+            <MonthPicBox
+              url={`/${date}`}
+              specificDto={specificDto}
+              year={year}
+              month={month}
+              selectedDate={selectedDate}
+            />
           </HomePicBoxWrapper>
         </Contents>
       </Container>

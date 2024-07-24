@@ -7,15 +7,19 @@ import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import { useNavigate } from "react-router-dom";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { monthHeaderDateFormat } from "@common/utils/dateFormat";
 
 interface MonthPicBoxProps {
   url: string;
   specificDto?: MemoryBaseDtoDataTypes[];
+  year: number;
+  month: number;
+  selectedDate?: number;
 }
 
 export default function MonthPicBox(props: MonthPicBoxProps) {
   const navigate = useNavigate();
-  const { url, specificDto = [] } = props;
+  const { url, specificDto = [], year, month, selectedDate } = props;
 
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =
@@ -32,6 +36,7 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
   const myEmoji = getEmojiSrc("me", "heart") || undefined;
   const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
+  const monthHeader = monthHeaderDateFormat(year, month, selectedDate);
 
   return (
     <Container>
@@ -43,7 +48,9 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
             key={img.id}
             type="button"
             onClick={() => {
-              navigate(`/fullpic${url}`);
+              navigate(`/fullpic${url}`, {
+                state: { monthHeader },
+              });
             }}>
             <Image src={img.picSrc} />
             <ProfileIcon as={myProfile} />

@@ -16,7 +16,7 @@ export const isFutureDate = (year: number, month: number, date: number): boolean
 };
 
 // 7월 24일 수요일 포맷
-export function weekdayFormat(date: Date): string {
+export function todayHeaderDateFormat(date: Date): string {
   const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 
   const weekdays = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
@@ -26,4 +26,15 @@ export function weekdayFormat(date: Date): string {
   const weekday = weekdays[date.getDay()];
 
   return `${month} ${day}일 ${weekday}`;
+}
+
+export function monthHeaderDateFormat(year: number, month: number, day?: number): string {
+  const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+
+  const weekdays = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+
+  const date = new Date(year, month - 1, day);
+  const weekday = weekdays[date.getDay()];
+
+  return `${months[month - 1]} ${day}일 ${weekday}`;
 }
