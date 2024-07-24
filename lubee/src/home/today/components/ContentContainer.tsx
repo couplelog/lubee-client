@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import CommentBox from "./CommentBox";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
-import HomePicBox from "home/components/HomePicBox";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
+import TodayPicBox from "home/today/components/TodayPicBox";
 
 export default function ContentContainer() {
   const myProfile = getProfileIconSrc("me", "profile1");
@@ -22,7 +22,7 @@ export default function ContentContainer() {
         <CommentBox profileIconSrc={myProfile} isMyComment={true} />
         <CommentBox profileIconSrc={partnerProfile} isMyComment={false} />
       </CommentsContainer>
-      <HomePicBox url={`/${date}/1`} specificDto={specificDto} />
+      <TodayPicBox url={`/${date}`} specificDto={specificDto} />
     </Container>
   );
 }
