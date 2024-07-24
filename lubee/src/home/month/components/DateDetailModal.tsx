@@ -7,14 +7,15 @@ import HomePicBox from "home/components/HomePicBox";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface DateDetailModalProps {
-  date: string;
+  dateText: string;
   showCalendar: boolean;
   dayDto: MemoryBaseDtoDataTypes[];
+  date: string;
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { date, showCalendar, dayDto } = props;
-
+  const { dateText, showCalendar, dayDto, date } = props;
+  console.log(dayDto);
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile2");
@@ -28,7 +29,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
       <Container ref={ref} $showCalendar={showCalendar}>
         <Header>
           <ShortBorderIc />
-          <Text>{date}</Text>
+          <Text>{dateText}</Text>
         </Header>
         <Contents>
           <CommentsBox>

@@ -25,6 +25,7 @@ const usePostLogin = () => {
           navigate("/onboarding");
         } else {
           navigate("/error");
+          console.log(KAKAO_CODE);
         }
       });
   }, []);

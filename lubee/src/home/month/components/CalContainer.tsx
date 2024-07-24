@@ -16,7 +16,7 @@ interface CalContainerProps {
 const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
   // DateDetail 모달에서 헤더에 date 표기 위한
-  const [selectedDate, setSelectedDate] = useState<number | null>(null);
+  const [selectedDate, setSelectedDate] = useState<number>();
   const [dayDto, setDayDto] = useState<MemoryBaseDtoDataTypes[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +51,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         if (y === year && m === month) {
           calendarMemoryDayDtoList.forEach(({ day, memoryBaseListDto }) => {
             LIST[day + start - 1] = 1; // List 배열에 사진을 업로드한 day는 1로 찍기
-
+            console.log("day", day);
             // Save memory data for the selected date
             if (selectedDate !== null && selectedDate === day) {
               setDayDto(memoryBaseListDto);
@@ -113,7 +113,8 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
       {openDateDetailModalLocal && (
         <DateDetailModal
           ref={modalRef}
-          date={`${month}월 ${selectedDate}일`}
+          dateText={`${month}월 ${selectedDate}일`}
+          date={`${formatMonth(month)}${selectedDate}`}
           showCalendar={showCalendar}
           dayDto={dayDto}
         />
