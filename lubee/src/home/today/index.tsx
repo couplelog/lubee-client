@@ -33,6 +33,8 @@ export default function index() {
     setIsPlusClicked(false);
   }
 
+  console.log(setDayDto); //setDayDto가 선언만 되고 호출되지 않은 문제 해결용..
+
   return (
     <Wrapper>
       <Container>
