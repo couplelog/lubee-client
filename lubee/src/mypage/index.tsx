@@ -8,7 +8,10 @@ import TabBar from "./components/TabBar";
 import { useGetTotalHoney } from "./hooks/useGetTotalHoney";
 
 export default function index() {
-  const { data: totalHoney } = useGetTotalHoney();
+  const totalHoney = useGetTotalHoney();
+  if (!totalHoney) return <></>;
+
+  const { response } = totalHoney;
 
   return (
     <Wrapper>
@@ -16,9 +19,7 @@ export default function index() {
         <SettingIcon />
         <TopContainer>
           <MypageProfileBox myName="불꽃피카츄" myBirth="02.01.18" partnerName="맹꽁이" partnerBirth="99.03.04" />
-          <HoneyBox
-            count={totalHoney === undefined ? 0 : typeof totalHoney === "number" ? totalHoney : totalHoney.response}
-          />
+          <HoneyBox count={response} />
           <Banner />
         </TopContainer>
         <BottomContainer>

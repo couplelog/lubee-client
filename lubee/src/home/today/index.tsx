@@ -16,8 +16,11 @@ export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
-  const { data: totalHoney } = useGetTodayHoney(getServerDate());
   const [dayDto, setDayDto] = useState<MemoryBaseDtoDataTypes[]>([]);
+  const totalHoney = useGetTodayHoney(getServerDate());
+  if (!totalHoney) return <></>;
+
+  const { response } = totalHoney;
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
@@ -35,9 +38,7 @@ export default function index() {
         <DateBox />
         <TodayTitle day={387} />
         <SubContainer>
-          <HoneyIconContainer
-            honey={totalHoney === undefined ? 0 : typeof totalHoney === "number" ? totalHoney : totalHoney.response}
-          />
+          <HoneyIconContainer honey={response} />
           <TodayProfileBox />
         </SubContainer>
       </Container>

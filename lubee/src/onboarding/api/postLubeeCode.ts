@@ -6,9 +6,9 @@ interface PostLubeeCodeDataTypes {
 
 export async function postLubeeCode(props: PostLubeeCodeDataTypes) {
   const { inputCode } = props;
-  const response = await api.post("/api/couples/link", {
+  const { data } = await api.post("/api/couples/link", {
     inputCode: inputCode,
   });
 
-  return response;
+  return data;
 }

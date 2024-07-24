@@ -7,5 +7,5 @@ export function useGetTotalHoney() {
       console.log("에러 발생", error);
     },
   });
-  return { data };
+  return data;
 }
