@@ -4,18 +4,28 @@ import { forwardRef } from "react";
 import Comment from "./Comment";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import HomePicBox from "home/components/HomePicBox";
+import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface DateDetailModalProps {
   dateText: string;
   showCalendar: boolean;
-  dayDto: MemoryBaseDtoDataTypes[];
   date: string;
+  selectedDate?: number;
+  year: number;
+  month: number;
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { dateText, showCalendar, dayDto, date } = props;
-  console.log(dayDto);
+  const { dateText, showCalendar, date, selectedDate, year, month } = props;
+
+  let specificDto: MemoryBaseDtoDataTypes[] | undefined;
+
+  if (selectedDate !== undefined) {
+    const response = useGetSpecificCalendar({ year: year, month: month, day: selectedDate });
+    specificDto = response?.response.memoryBaseListDto;
+  }
+
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile2");
@@ -37,7 +47,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={partnerProfile} comment={partnerComment} />
           </CommentsBox>
           <HomePicBoxWrapper>
-            <HomePicBox url={`/${date}`} dayDto={dayDto} />
+            <HomePicBox url={`/${date}`} specificDto={specificDto} />
           </HomePicBoxWrapper>
         </Contents>
       </Container>
