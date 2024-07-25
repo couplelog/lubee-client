@@ -79,11 +79,11 @@ import RewindIc from "./icon/rewindIc.svg?react";
 import PlusClickedIc from "./icon/plusClickedIc.svg?react";
 import LocationPointSmallIc from "./icon/locationPointSmallIc.svg?react";
 import TodayHoney0Ic from "./icon/todayHoney0Ic.svg?react";
-import TodayHoney1Ic from "./icon/todayHoney1Ic.svg?react";
-import TodayHoney2Ic from "./icon/todayHoney2Ic.svg?react";
-import TodayHoney3Ic from "./icon/todayHoney3Ic.svg?react";
-import TodayHoney4Ic from "./icon/todayHoney4Ic.svg?react";
-import TodayHoney5Ic from "./icon/todayHoney5Ic.svg?react";
+import TodayHoney1Ic from "./icon/todayHoney0Ic.svg?react";
+import TodayHoney2Ic from "./icon/todayHoney0Ic.svg?react";
+import TodayHoney3Ic from "./icon/todayHoney0Ic.svg?react";
+import TodayHoney4Ic from "./icon/todayHoney0Ic.svg?react";
+import TodayHoney5Ic from "./icon/todayHoney0Ic.svg?react";
 
 export {
   LogoIc,
