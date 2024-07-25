@@ -5,12 +5,15 @@ import { readPic } from "home/utils/readPic";
 import { useNavigate } from "react-router-dom";
 
 interface BlankImgBtnProps {
-  date?: number;
+  index?: number;
+  year: number;
+  month: number;
+  day: number;
 }
 
 export default function BlankImgBtn(props: BlankImgBtnProps) {
   const navigate = useNavigate();
-  const { date } = props;
+  const { index, year, month, day } = props;
 
   /* 사진 업로드 */
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -29,13 +32,13 @@ export default function BlankImgBtn(props: BlankImgBtnProps) {
       const reader = new FileReader();
       reader.readAsDataURL(picObj[0]);
       reader.onloadend = () => {
-        navigate("/upload", { state: { picSrc: picObj[0] } }); //useLocation 사용하기 위해 state 전달
+        navigate("/upload", { state: { picSrc: picObj[0], year: year, month: month, day: day } }); //useLocation 사용하기 위해 state 전달
       };
     }
   };
 
   return (
-    <Container type="button" key={date} onClick={handleAddPicBtn}>
+    <Container type="button" key={index} onClick={handleAddPicBtn}>
       <img src={blankImg} />
       <FileInput
         type="file"
