@@ -6,6 +6,7 @@ import { CommentModalProps } from "home/today/types/CommentModalTypes";
 import { usePostDateComment } from "home/hooks/usePostDateComment";
 import { useUpdateDateComment } from "home/hooks/useUpdateDateComment";
 import { getServerDate } from "@common/utils/dateFormat";
+import { saveCommentIdToLocalStorage, getCommentIdFromLocalStorage } from "../utils/commentIdStroage";
 
 export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
@@ -17,11 +18,11 @@ export default function MyCommentModal(props: CommentModalProps) {
   const { mutate: updateDateCommentMutate } = useUpdateDateComment();
   const [commentId, setCommentId] = useState<number | null>(null); // 코멘트id 저장
 
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 commentId를 불러옴
   useEffect(() => {
-    // 로컬 스토리지에서 commentId를 불러오기
-    const storedCommentId = localStorage.getItem("commentId");
-    if (storedCommentId) {
-      setCommentId(Number(storedCommentId));
+    const savedCommentId = getCommentIdFromLocalStorage(new Date());
+    if (savedCommentId) {
+      setCommentId(savedCommentId);
     }
   }, []);
 
@@ -71,7 +72,7 @@ export default function MyCommentModal(props: CommentModalProps) {
               console.log("POST 성공, 받은 ID:", id); // 로그 추가
               if (id !== null && id !== undefined) {
                 setCommentId(id); // POST 요청 후 받은 코멘트 ID 저장
-                localStorage.setItem("commentId", id.toString()); // 로컬 스토리지에 저장
+                saveCommentIdToLocalStorage(new Date(), id); // 로컬 스토리지에 저장
               } else {
                 console.warn("POST 성공했지만 response 값이 null 또는 undefined입니다."); // 로그 추가
               }
