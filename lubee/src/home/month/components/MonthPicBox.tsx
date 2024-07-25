@@ -51,8 +51,8 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   return (
     <Container>
       {displayPics.map((img, index) =>
-        img.picSrc === blankImg ? (
-          <BlankImgBtn key={img.id} date={index} />
+        img.picSrc === blankImg && selectedDate != undefined ? (
+          <BlankImgBtn key={img.id} index={index} year={year} month={month} day={selectedDate} />
         ) : (
           <ImgContainer
             key={img.id}
