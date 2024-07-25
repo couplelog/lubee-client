@@ -15,8 +15,8 @@ const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputwidth, setInputwidth] = useState("auto");
 
-  const MIN_WIDTH = 2; // 텍스트 입력 시 박스 최소 너비 (rem)
-  const MAX_WIDTH = 20; // 텍스트 입력 시 박스 최대 너비 (rem)
+  const MIN_WIDTH = 2.7; // 텍스트 입력 시 박스 최소 너비 (rem)
+  const MAX_WIDTH = 17.3; // 텍스트 입력 시 박스 최대 너비 (rem)
 
   // placeholder의 길이에 따라 input의 너비를 설정하는 useEffect
   useEffect(() => {
@@ -42,7 +42,7 @@ const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    if (value.length <= 8) {
+    if (value.length <= 10) {
       setInputValue?.(value);
     }
     if (inputRef.current) {

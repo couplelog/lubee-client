@@ -22,8 +22,15 @@ export default function index(props: ConnectProps) {
     navigate("/login");
   }
 
-  function handleInviteClick() {
-    setOpenCopyCodeModal(true);
+  async function handleInviteClick() {
+    const codeText = code || "복사할 코드가 없습니다."; // 코드가 없을 경우 기본 메시지 설정
+    try {
+      await navigator.clipboard.writeText(codeText);
+      setOpenCopyCodeModal(true);
+    } catch (err) {
+      alert("텍스트 복사에 실패했습니다. 브라우저 설정을 확인해주세요."); // 에러 발생 시 사용자에게 알림
+      console.error("텍스트 복사 실패:", err);
+    }
   }
 
   function handleCloseBtn() {

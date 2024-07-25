@@ -1,14 +1,14 @@
 import api from "@common/api/api";
 
-interface LubeeCodeDataTypes {
+interface PostLubeeCodeDataTypes {
   inputCode: string;
 }
 
-export async function postLubeeCode(props: LubeeCodeDataTypes) {
+export async function postLubeeCode(props: PostLubeeCodeDataTypes) {
   const { inputCode } = props;
-  const response = await api.post("/api/couples/link", {
+  const { data } = await api.post("/api/couples/link", {
     inputCode: inputCode,
   });
 
-  return response;
+  return data;
 }
