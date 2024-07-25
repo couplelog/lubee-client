@@ -7,6 +7,7 @@ import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import { useNavigate } from "react-router-dom";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 
 interface TodayPicBoxProps {
   url: string;
@@ -37,14 +38,14 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
     <Container>
       {displayPics.map((img, index) =>
         img.picSrc === blankImg ? (
-          <BlankImgBtn key={img.id} date={index} />
+          <BlankImgBtn key={img.id} index={index} year={getTodayYear} month={getTodayMonth} day={getTodayDate} />
         ) : (
           <ImgContainer
             key={img.id}
             type="button"
             onClick={() => {
-              navigate(`/fullpic${url}/${index}`, {
-                state: { index },
+              navigate(`/fullpic${url}/${img.id}`, {
+                state: { memory_id: img.id },
               });
             }}>
             <Image src={img.picSrc} />

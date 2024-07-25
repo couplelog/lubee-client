@@ -12,6 +12,8 @@ export default function index() {
   const location = useLocation();
   const { monthHeader } = location.state as { monthHeader: string };
   const { specificDto } = location.state as { specificDto: MemoryBaseDtoDataTypes[] };
+  const { memory_id } = location.state as { memory_id: number };
+  const [memoryId, setMemoryId] = useState<number>(memory_id);
   function handleTrashBtn(open: boolean) {
     setOpenDeletePicModal(open);
   }
@@ -39,8 +41,10 @@ export default function index() {
         setSelectedEmojiText={setSelectedEmojiText}
         selectedEmojiText={selectedEmojiText}
         specificDto={specificDto}
+        memory_id={memory_id}
+        setMemoryId={setMemoryId}
       />
-      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} />}
+      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memory_id} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}
     </Wrapper>
   );

@@ -46,6 +46,10 @@ export default function index(props: UploadProps) {
   }
   const locationState = useLocation();
   const picSrc = locationState.state?.picSrc as File; // 업로드한 이미지 src
+  const uploadYear = locationState.state.year;
+  const uploadMonth = locationState.state.month;
+  const uploadDay = locationState.state.day;
+
   console.log(picSrc);
   const { mutate: postUploadPic } = usePostUploadPic();
 
@@ -69,7 +73,13 @@ export default function index(props: UploadProps) {
         <BtnWrapper
           type="button"
           onClick={() => {
-            postUploadPic({ picture: picSrc, location_id: locationId });
+            postUploadPic({
+              picture: picSrc,
+              location_id: locationId,
+              year: uploadYear,
+              month: uploadMonth,
+              day: uploadDay,
+            });
             setUploadPic(false); // uploadPic 리셋
             moveToHome();
           }}>

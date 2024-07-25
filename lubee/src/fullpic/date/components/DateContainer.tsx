@@ -1,65 +1,86 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { fullPicData } from "@common/core/fullPicData";
 import EmojiBar from "@common/components/EmojiBar";
 import FullPicContainer from "@common/components/FullPicContainer";
 import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+
 interface DateContainerProps {
   setOpenEmojiDetail: (open: boolean) => void;
   selectedEmojiText: string;
   setSelectedEmojiText: (text: string) => void;
   specificDto: MemoryBaseDtoDataTypes[];
+  memory_id: number;
+  setMemoryId: (id: number) => void;
 }
 
 export default function DateContainer(props: DateContainerProps) {
-  const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText, specificDto } = props;
-
-  // date 가져오기
-  // const { date } = useParams<{ date: string }>();
-  // const filteredData = fullPicData.filter((data) => data.date === date);
+  const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText, specificDto, memory_id, setMemoryId } = props;
+  const picRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
   const myEmoji = getEmojiSrc("me", selectedEmojiText);
   const partnerEmoji = getEmojiSrc("partner", "thumb");
 
+  // 클릭한 memory_id와 일치하는 pic가는 ref
+  useEffect(() => {
+    const index = specificDto.findIndex((item) => item.memory_id === memory_id);
+
+    // 매칭 pic으로 스크롤
+    if (index !== -1 && picRefs.current[index]) {
+      picRefs.current[index]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+    }
+  }, [specificDto, memory_id]);
+
   return (
     <Wrapper>
-      {specificDto &&
-        specificDto.map((data) => {
-          const { memory_id, user_id, location_name, picture, writer_profile, reaction1, reaction2, upload_time } =
-            data;
-          /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
-          const profile = getProfileIconSrc("me", "profile2");
-          return (
-            <ContentsBox key={memory_id}>
-              <Time>{upload_time}</Time>
-              <Profile>
-                <ProfileIcon as={profile} />
-                <Name>{writer_profile}</Name>
-              </Profile>
-              <FullPicContainer picSrc={picture} location={location_name} />
-              {(myEmoji || partnerEmoji) && (
-                <EmojiTagContainer
-                  type="button"
-                  onClick={() => {
-                    if (setOpenEmojiDetail) {
-                      setOpenEmojiDetail(true);
-                    }
-                  }}>
-                  <EmojiTag font="fullPic">
-                    {myEmoji && <EmojiIcon as={myEmoji} />}
-                    {partnerEmoji && <EmojiIcon as={partnerEmoji} />}
-                  </EmojiTag>
-                </EmojiTagContainer>
-              )}
-              <Footer>
-                <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
-              </Footer>
-            </ContentsBox>
-          );
-        })}
+      {specificDto.map((data, index) => {
+        const {
+          memory_id: picMemoryId,
+          user_id,
+          location_name,
+          picture,
+          writer_profile,
+          reaction1,
+          reaction2,
+          upload_time,
+        } = data;
+        const profile = getProfileIconSrc("me", "profile2");
+
+        return (
+          <ContentsBox key={picMemoryId} ref={(el) => (picRefs.current[index] = el)}>
+            <Time>{upload_time}</Time>
+            <Profile>
+              <ProfileIcon as={profile} />
+              <Name>{writer_profile}</Name>
+            </Profile>
+            <FullPicContainer picSrc={picture} location={location_name} />
+            {(myEmoji || partnerEmoji) && (
+              <EmojiTagContainer
+                type="button"
+                onClick={() => {
+                  if (setOpenEmojiDetail) {
+                    setOpenEmojiDetail(true);
+                  }
+                }}>
+                <EmojiTag font="fullPic">
+                  {myEmoji && <EmojiIcon as={myEmoji} />}
+                  {partnerEmoji && <EmojiIcon as={partnerEmoji} />}
+                </EmojiTag>
+              </EmojiTagContainer>
+            )}
+            <Footer>
+              <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
+            </Footer>
+          </ContentsBox>
+        );
+      })}
     </Wrapper>
   );
 }

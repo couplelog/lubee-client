@@ -25,31 +25,41 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   const displayPics =
     specificDto.length < 5
       ? [
-          ...specificDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id })),
-          { picSrc: blankImg, id: "blank" },
+          ...specificDto.map((memory) => ({
+            picSrc: memory.picture,
+            id: memory.memory_id,
+            myEmoji: memory.reaction1,
+            partnerEmoji: memory.reaction2,
+          })),
+          { picSrc: blankImg, id: "blank", myEmoji: "", partnerEmoji: "" },
         ]
-      : specificDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id }));
+      : specificDto.map((memory) => ({
+          picSrc: memory.picture,
+          id: memory.memory_id,
+          myEmoji: memory.reaction1,
+          partnerEmoji: memory.reaction2,
+        }));
 
   /*프로필 아이콘*/
   const myProfile = getProfileIconSrc("me", "profile1");
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", "heart") || undefined;
-  const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
+  // const myEmoji = getEmojiSrc("me", "heart") || undefined;
+  // const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
   const monthHeader = monthHeaderDateFormat(year, month, selectedDate);
 
   return (
     <Container>
       {displayPics.map((img, index) =>
-        img.picSrc === blankImg ? (
-          <BlankImgBtn key={img.id} date={index} />
+        img.picSrc === blankImg && selectedDate != undefined ? (
+          <BlankImgBtn key={img.id} index={index} year={year} month={month} day={selectedDate} />
         ) : (
           <ImgContainer
             key={img.id}
             type="button"
             onClick={() => {
               navigate(`/fullpic${url}`, {
-                state: { monthHeader, specificDto },
+                state: { monthHeader, specificDto, memory_id: img.id },
               });
             }}>
             <Image src={img.picSrc} />
@@ -59,10 +69,12 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
                 location={specificDto.find((memory) => memory.memory_id === img.id)?.location_name || ""}
                 font="smallPic"
               />
-              <EmojiTag font="smallPic">
-                <EmojiIcon as={myEmoji} />
-                <EmojiIcon as={partnerEmoji} />
-              </EmojiTag>
+              {img.myEmoji || img.partnerEmoji ? (
+                <EmojiTag font="smallPic">
+                  {img.myEmoji && <EmojiIcon as={img.myEmoji} />}
+                  {img.partnerEmoji && <EmojiIcon as={img.partnerEmoji} />}
+                </EmojiTag>
+              ) : null}
             </TagContainer>
           </ImgContainer>
         ),
