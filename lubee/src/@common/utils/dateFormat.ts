@@ -38,3 +38,19 @@ export function monthHeaderDateFormat(year: number, month: number, day?: number)
 
   return `${months[month - 1]} ${day}일 ${weekday}`;
 }
+
+// 오늘 날짜 DDDD. MM. DD
+export function getCurrentDate() {
+  const year = today.getFullYear().toString();
+  const month = (today.getMonth() + 1).toString().padStart(2, "0");
+  const day = today.getDate().toString().padStart(2, "0");
+  return `${year}. ${month}. ${day}`;
+}
+
+// api용 날짜 포맷 DDDD.MM.DD
+export function getServerDate() {
+  const year = today.getFullYear().toString();
+  const month = (today.getMonth() + 1).toString().padStart(2, "0");
+  const day = today.getDate().toString().padStart(2, "0");
+  return `${year}.${month}.${day}`;
+}
