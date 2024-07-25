@@ -17,6 +17,14 @@ export default function MyCommentModal(props: CommentModalProps) {
   const { mutate: updateDateCommentMutate } = useUpdateDateComment();
   const [commentId, setCommentId] = useState<number | null>(null); // 코멘트id 저장
 
+  useEffect(() => {
+    // 로컬 스토리지에서 commentId를 불러오기
+    const storedCommentId = localStorage.getItem("commentId");
+    if (storedCommentId) {
+      setCommentId(Number(storedCommentId));
+    }
+  }, []);
+
   // isDefaultText일 때는 placeholder를 출력하기 위함
   useEffect(() => {
     if (isDefaultText) {
@@ -63,6 +71,7 @@ export default function MyCommentModal(props: CommentModalProps) {
               console.log("POST 성공, 받은 ID:", id); // 로그 추가
               if (id !== null && id !== undefined) {
                 setCommentId(id); // POST 요청 후 받은 코멘트 ID 저장
+                localStorage.setItem("commentId", id.toString()); // 로컬 스토리지에 저장
               } else {
                 console.warn("POST 성공했지만 response 값이 null 또는 undefined입니다."); // 로그 추가
               }

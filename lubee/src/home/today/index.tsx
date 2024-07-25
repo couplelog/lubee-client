@@ -7,7 +7,6 @@ import { PlusIc, PlusClickedIc } from "@assets/index";
 import { useState } from "react";
 import Toggle from "./components/Toggle";
 import ToggleCalendar from "./components/ToggleCalendar";
-import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 import { getServerDate, getTodayDate, getTodayMonth } from "@common/utils/dateFormat";
 import ContentContainer from "./components/ContentContainer";
@@ -16,7 +15,6 @@ export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
-  const [dayDto, setDayDto] = useState<MemoryBaseDtoDataTypes[]>([]);
   const totalHoney = useGetTodayHoney(getServerDate());
   if (!totalHoney) return <></>;
 
