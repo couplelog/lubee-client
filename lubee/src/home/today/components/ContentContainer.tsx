@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CommentBox from "./CommentBox";
+import CommentBox from "../../components/CommentBox";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
@@ -9,7 +9,7 @@ import TodayPicBox from "home/today/components/TodayPicBox";
 export default function ContentContainer() {
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile1");
-  const date = `${formatMonth(getTodayMonth)}${getTodayDate}`;
+  const urlDate = `${formatMonth(getTodayMonth)}${getTodayDate}`;
 
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
 
@@ -22,7 +22,7 @@ export default function ContentContainer() {
         <CommentBox profileIconSrc={myProfile} isMyComment={true} />
         <CommentBox profileIconSrc={partnerProfile} isMyComment={false} />
       </CommentsContainer>
-      <TodayPicBox url={`/${date}`} specificDto={specificDto} />
+      <TodayPicBox url={`/${urlDate}`} specificDto={specificDto} />
     </Container>
   );
 }

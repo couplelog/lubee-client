@@ -111,7 +111,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         <DateDetailModal
           ref={modalRef}
           dateText={`${month}월 ${selectedDate}일`}
-          date={`${formatMonth(month)}${selectedDate}`}
+          urlDate={`${formatMonth(month)}${selectedDate}`}
           showCalendar={showCalendar}
           selectedDate={selectedDate}
           month={month}

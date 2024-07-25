@@ -10,14 +10,14 @@ import MonthPicBox from "./MonthPicBox";
 interface DateDetailModalProps {
   dateText: string;
   showCalendar: boolean;
-  date: string;
+  urlDate: string;
   selectedDate?: number;
   year: number;
   month: number;
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { dateText, showCalendar, date, selectedDate, year, month } = props;
+  const { dateText, showCalendar, urlDate, selectedDate, year, month } = props;
 
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
 
@@ -49,7 +49,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
           </CommentsBox>
           <HomePicBoxWrapper>
             <MonthPicBox
-              url={`/${date}`}
+              url={`/${urlDate}`}
               specificDto={specificDto}
               year={year}
               month={month}
