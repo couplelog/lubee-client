@@ -1,11 +1,13 @@
 import { ShortBorderIc } from "@assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
-import Comment from "./Comment";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import MonthPicBox from "./MonthPicBox";
+import CommentBox from "home/components/CommentBox";
+import { getServerDate } from "@common/utils/dateFormat";
+import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
 
 interface DateDetailModalProps {
   dateText: string;
@@ -14,10 +16,11 @@ interface DateDetailModalProps {
   selectedDate?: number;
   year: number;
   month: number;
+  serverDate: string;
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { dateText, showCalendar, urlDate, selectedDate, year, month } = props;
+  const { dateText, showCalendar, urlDate, selectedDate, year, month, serverDate } = props;
 
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
 
@@ -31,9 +34,16 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile2");
 
-  const myComment =
-    "오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자. 오 드디어 100일이다 너무 신나!! 앞으로도 잘지내자.";
-  const partnerComment = "Comment";
+  /*혜연이 부분*/
+  const isToday = false;
+  const finalServerDate = isToday ? getServerDate() : serverDate; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
+  const commentData = useGetTodayDateComment(1, finalServerDate); // coupleId는 임의로 1 넣음
+  if (!commentData) return <></>;
+  const { response } = commentData;
+  const { mine, lover } = response || {};
+
+  const myComment = mine?.content || "";
+  const partnerComment = lover?.content || "";
 
   return (
     <Background>
@@ -43,10 +53,10 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
           <Text>{dateText}</Text>
         </Header>
         <Contents>
-          <CommentsBox>
-            <Comment iconSrc={myProfile} comment={myComment} />
-            <Comment iconSrc={partnerProfile} comment={partnerComment} />
-          </CommentsBox>
+          <CommentsContainer>
+            <CommentBox profileIconSrc={myProfile} isMyComment={true} isToday={true} comment={myComment} />
+            <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={true} comment={partnerComment} />
+          </CommentsContainer>
           <HomePicBoxWrapper>
             <MonthPicBox
               url={`/${urlDate}`}
@@ -106,7 +116,7 @@ const Contents = styled.div`
   padding: 0 2rem 2rem;
 `;
 
-const CommentsBox = styled.span`
+const CommentsContainer = styled.span`
   display: flex;
   gap: 1.6rem;
 `;
