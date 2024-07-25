@@ -3,17 +3,29 @@ import styled from "styled-components";
 import { forwardRef } from "react";
 import Comment from "./Comment";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
-import HomePicBox from "home/components/HomePicBox";
+import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import MonthPicBox from "./MonthPicBox";
 
 interface DateDetailModalProps {
-  date: string;
+  dateText: string;
   showCalendar: boolean;
-  dayDto: MemoryBaseDtoDataTypes[];
+  date: string;
+  selectedDate?: number;
+  year: number;
+  month: number;
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { date, showCalendar, dayDto } = props;
+  const { dateText, showCalendar, date, selectedDate, year, month } = props;
+
+  let specificDto: MemoryBaseDtoDataTypes[] | undefined;
+
+  if (selectedDate !== undefined) {
+    const response = useGetSpecificCalendar({ year: year, month: month, day: selectedDate });
+    specificDto = response?.response.memoryBaseListDto;
+  }
+  console.log("specificDto", specificDto);
 
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getProfileIconSrc("me", "profile1");
@@ -28,7 +40,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
       <Container ref={ref} $showCalendar={showCalendar}>
         <Header>
           <ShortBorderIc />
-          <Text>{date}</Text>
+          <Text>{dateText}</Text>
         </Header>
         <Contents>
           <CommentsBox>
@@ -36,7 +48,13 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <Comment iconSrc={partnerProfile} comment={partnerComment} />
           </CommentsBox>
           <HomePicBoxWrapper>
-            <HomePicBox url={`/${date}`} dayDto={dayDto} />
+            <MonthPicBox
+              url={`/${date}`}
+              specificDto={specificDto}
+              year={year}
+              month={month}
+              selectedDate={selectedDate}
+            />
           </HomePicBoxWrapper>
         </Contents>
       </Container>

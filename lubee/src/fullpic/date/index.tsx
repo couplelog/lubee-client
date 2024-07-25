@@ -4,10 +4,14 @@ import EmojiDetailModal from "fullpic/components/EmojiDetailModal";
 import DateContainer from "./components/DateContainer";
 import DeletePicModal from "fullpic/components/DeletePicModal";
 import FullpicHeader from "fullpic/components/FullpicHeader";
+import { useLocation } from "react-router-dom";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
-
+  const location = useLocation();
+  const { monthHeader } = location.state as { monthHeader: string };
+  const { specificDto } = location.state as { specificDto: MemoryBaseDtoDataTypes[] };
   function handleTrashBtn(open: boolean) {
     setOpenDeletePicModal(open);
   }
@@ -29,11 +33,12 @@ export default function index() {
 
   return (
     <Wrapper>
-      <FullpicHeader handleTrashBtn={handleTrashBtn} />
+      <FullpicHeader handleTrashBtn={handleTrashBtn} headerDate={monthHeader} />
       <DateContainer
         setOpenEmojiDetail={setOpenEmojiDetail}
         setSelectedEmojiText={setSelectedEmojiText}
         selectedEmojiText={selectedEmojiText}
+        specificDto={specificDto}
       />
       {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}

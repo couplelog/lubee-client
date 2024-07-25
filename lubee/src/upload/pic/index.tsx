@@ -45,8 +45,8 @@ export default function index(props: UploadProps) {
     }
   }
   const locationState = useLocation();
-  const picSrc = locationState.state?.picSrc; // 업로드한 이미지 src
-
+  const picSrc = locationState.state?.picSrc as File; // 업로드한 이미지 src
+  console.log(picSrc);
   const { mutate: postUploadPic } = usePostUploadPic();
 
   return (
@@ -60,7 +60,11 @@ export default function index(props: UploadProps) {
           <BackIcon />
         </BtnWrapper>
       </Header>
-      <FullPicContainer picSrc={picSrc} location={location} setOpenLocationModal={setOpenLocationModal} />
+      <FullPicContainer
+        picSrc={URL.createObjectURL(picSrc)}
+        location={location}
+        setOpenLocationModal={setOpenLocationModal}
+      />
       <Footer>
         <BtnWrapper
           type="button"

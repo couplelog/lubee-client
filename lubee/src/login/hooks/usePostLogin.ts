@@ -10,25 +10,24 @@ const usePostLogin = () => {
 
   useEffect(() => {
     api
-      .post("api/users/kakao/simpleLogin", null, {
-        headers: {
-          Authorization: `Bearer ${KAKAO_CODE}`,
-        },
-      })
-      .then((res: loginResProps) => {
-        const { accessToken } = res.data.data;
-        setToken(accessToken);
+      .post(`api/users/kakao/simpleLogin?code=${KAKAO_CODE}`)
+      .then((res) => {
+        const data = res.data as loginResProps; // AxiosResponse의 data를 loginResProps로 단언
+        setToken(data.response.accessToken);
         console.log("로그인 성공");
-        console.log(res);
+        console.log(data);
         // 로그인 완료되고 메인뷰로 이동
         navigate("/home/today");
       })
-      .catch((err: loginErrorProps) => {
-        if (err.response.data.code === 404) {
-          setToken(err.response.data.data.accessToken);
+      .catch((err) => {
+        // 에러 타입을 any로 설정
+        const errorData = err.response.data as loginErrorProps; // 에러 응답 데이터 단언
+        if (errorData.success_or_error_code.status === 404) {
+          setToken(errorData.response.accessToken);
           navigate("/onboarding");
         } else {
           navigate("/error");
+          console.log(KAKAO_CODE);
         }
       });
   }, []);

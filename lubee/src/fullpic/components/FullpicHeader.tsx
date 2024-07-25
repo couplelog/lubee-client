@@ -2,12 +2,12 @@ import { BackIc, TrashIc } from "@assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
 interface FullpicHeaderProps {
   handleTrashBtn: (open: boolean) => void;
+  headerDate: string;
 }
 export default function FullpicHeader(props: FullpicHeaderProps) {
-  const { handleTrashBtn } = props;
+  const { handleTrashBtn, headerDate } = props;
   const navigate = useNavigate();
 
   function moveToHome() {
@@ -28,7 +28,7 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
       <BtnWrapper type="button" onClick={moveToHome}>
         <BackIcon />
       </BtnWrapper>
-      <Date>6월 19일 수요일</Date>
+      <Date>{headerDate}</Date>
       <BtnWrapper
         type="button"
         onClick={() => {

@@ -7,8 +7,11 @@ import DeletePicModal from "fullpic/components/DeletePicModal";
 import FullpicHeader from "fullpic/components/FullpicHeader";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import EmojiTag from "@common/components/EmojiTag";
-import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
 import { useLocation } from "react-router-dom";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
+import { getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
+import { todayHeaderDateFormat, today } from "@common/utils/dateFormat";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
@@ -36,21 +39,21 @@ export default function index() {
     };
   }, [modalRef]);
 
-  /*getOnePicResponse*/
+  /*getSpecificCalendar*/
   const location = useLocation();
-  const { memory_id } = location.state;
+  const { index } = location.state as { index: number };
 
-  const getOnePicResponse = useGetOnePic(memory_id);
-  if (!getOnePicResponse) return <></>;
+  let specificDto: MemoryBaseDtoDataTypes[] | undefined;
 
-  const {
-    response: { memoryBaseDto },
-  } = getOnePicResponse;
+  const response = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
+  specificDto = response?.response.memoryBaseListDto;
+
+  const memoryBaseDto = specificDto?.[index];
 
   return (
     <Wrapper>
-      <FullpicHeader handleTrashBtn={handleTrashBtn} />
-      <OneContainer account="partner" memoryBaseDto={memoryBaseDto} />
+      <FullpicHeader handleTrashBtn={handleTrashBtn} headerDate={todayHeaderDateFormat(today)} />
+      {memoryBaseDto && <OneContainer account="partner" memoryBaseDto={memoryBaseDto} />}
       {(myEmoji || partnerEmoji) && (
         <EmojiTagContainer
           type="button"

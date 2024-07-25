@@ -8,23 +8,23 @@ import getEmojiSrc from "@common/utils/getEmojiSrc";
 import { useNavigate } from "react-router-dom";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
-interface HomePicBoxProps {
+interface TodayPicBoxProps {
   url: string;
-  dayDto: MemoryBaseDtoDataTypes[];
+  specificDto?: MemoryBaseDtoDataTypes[];
 }
 
-export default function HomePicBox(props: HomePicBoxProps) {
+export default function TodayPicBox(props: TodayPicBoxProps) {
   const navigate = useNavigate();
-  const { url, dayDto = [] } = props;
+  const { url, specificDto = [] } = props;
 
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =
-    dayDto.length < 5
+    specificDto.length < 5
       ? [
-          ...dayDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id })),
+          ...specificDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id })),
           { picSrc: blankImg, id: "blank" },
         ]
-      : dayDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id }));
+      : specificDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id }));
 
   /*프로필 아이콘*/
   const myProfile = getProfileIconSrc("me", "profile1");
@@ -43,15 +43,15 @@ export default function HomePicBox(props: HomePicBoxProps) {
             key={img.id}
             type="button"
             onClick={() => {
-              navigate(`/fullpic${url}`, {
-                state: { memoryId: img.id },
+              navigate(`/fullpic${url}/${index}`, {
+                state: { index },
               });
             }}>
             <Image src={img.picSrc} />
             <ProfileIcon as={myProfile} />
             <TagContainer>
               <LocationTag
-                location={dayDto.find((memory) => memory.memory_id === img.id)?.location_name || ""}
+                location={specificDto.find((memory) => memory.memory_id === img.id)?.location_name || ""}
                 font="smallPic"
               />
               <EmojiTag font="smallPic">
