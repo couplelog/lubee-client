@@ -5,15 +5,21 @@ import MypageProfileBox from "./components/MypageProfileBox";
 import HoneyBox from "./components/HoneyBox";
 import Banner from "./components/Banner";
 import TabBar from "./components/TabBar";
+import { useGetTotalHoney } from "./hooks/useGetTotalHoney";
 
 export default function index() {
+  const totalHoney = useGetTotalHoney();
+  if (!totalHoney) return <></>;
+
+  const { response } = totalHoney;
+
   return (
     <Wrapper>
       <MypageContainer>
         <SettingIcon />
         <TopContainer>
           <MypageProfileBox myName="불꽃피카츄" myBirth="02.01.18" partnerName="맹꽁이" partnerBirth="99.03.04" />
-          <HoneyBox count={25} />
+          <HoneyBox count={response} />
           <Banner />
         </TopContainer>
         <BottomContainer>
