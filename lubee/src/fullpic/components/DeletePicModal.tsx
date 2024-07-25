@@ -1,18 +1,16 @@
 import { useDeletePic } from "fullpic/hooks/useDeletePic";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 interface DeletePicModalProps {
   handleTrashBtn: (open: boolean) => void;
+  memory_id: number;
 }
 
 export default function DeletePicModal(props: DeletePicModalProps) {
-  const { handleTrashBtn } = props;
+  const { handleTrashBtn, memory_id } = props;
   const { mutate: deltePic } = useDeletePic();
 
-  const location = useLocation();
-  const { memory_id } = location.state;
-
+  console.log("memory_id", memory_id);
   function handleDeleteBtn() {
     deltePic(memory_id, {
       onSuccess: () => {

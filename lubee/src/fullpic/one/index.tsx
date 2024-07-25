@@ -41,14 +41,14 @@ export default function index() {
 
   /*getSpecificCalendar*/
   const location = useLocation();
-  const { index } = location.state as { index: number };
+  const { memory_id } = location.state as { memory_id: number };
 
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
 
   const response = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
   specificDto = response?.response.memoryBaseListDto;
 
-  const memoryBaseDto = specificDto?.[index];
+  const memoryBaseDto = specificDto?.find((memory) => memory.memory_id === memory_id);
 
   return (
     <Wrapper>
@@ -71,7 +71,7 @@ export default function index() {
       <Footer>
         <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
       </Footer>
-      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} />}
+      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memory_id} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}
     </Wrapper>
   );
