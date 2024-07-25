@@ -43,8 +43,8 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
             key={img.id}
             type="button"
             onClick={() => {
-              navigate(`/fullpic${url}/${index}`, {
-                state: { index },
+              navigate(`/fullpic${url}/${img.id}`, {
+                state: { memory_id: img.id },
               });
             }}>
             <Image src={img.picSrc} />
