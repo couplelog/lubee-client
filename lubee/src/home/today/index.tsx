@@ -3,16 +3,24 @@ import DateBox from "./components/DateBox";
 import TodayTitle from "./components/TodayTitle";
 import HoneyIconContainer from "./components/HoneyIconContainer";
 import TodayProfileBox from "./components/TodayProfileBox";
-import ContentContainer from "./components/ContentContainer";
 import { PlusIc, PlusClickedIc } from "@assets/index";
 import { useState } from "react";
 import Toggle from "./components/Toggle";
 import ToggleCalendar from "./components/ToggleCalendar";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
+import { getServerDate, getTodayDate, getTodayMonth } from "@common/utils/dateFormat";
+import ContentContainer from "./components/ContentContainer";
 
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
+  const [dayDto, setDayDto] = useState<MemoryBaseDtoDataTypes[]>([]);
+  const totalHoney = useGetTodayHoney(getServerDate());
+  if (!totalHoney) return <></>;
+
+  const { response } = totalHoney;
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
@@ -22,6 +30,7 @@ export default function index() {
   function handleCalendar() {
     setOpenToggle(false);
     setShowCalendar((open) => !open);
+    setIsPlusClicked(false);
   }
 
   return (
@@ -30,11 +39,11 @@ export default function index() {
         <DateBox />
         <TodayTitle day={387} />
         <SubContainer>
-          <HoneyIconContainer />
+          <HoneyIconContainer honey={response} />
           <TodayProfileBox />
         </SubContainer>
       </Container>
-      <ContentContainer />
+      <ContentContainer date={`${getTodayMonth}월 ${getTodayDate}일`} isToday={true} />
       {!showCalendar && (
         <BtnWrapper type="button" onClick={handlePlusBtn}>
           {isPlusClicked ? <PlusClickedIcon /> : <PlusIcon />}
