@@ -7,6 +7,8 @@ import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 import { profileIconsData } from "@common/core/profileIconsData";
+import { useRecoilState } from "recoil";
+import { profileState } from "@common/recoil/atom";
 
 interface CustomProps {
   moveToOnboardingCode: () => void;
@@ -18,6 +20,7 @@ export default function index(props: CustomProps) {
   const navigate = useNavigate();
   const [selectedProfile, setSelectedProfile] = useState<number | null>(null);
   const isOnboardingBtnDisabled = selectedProfile === null;
+  const [profile, setProfile] = useRecoilState(profileState);
 
   // 프로필 아이콘 중에 "me"만 filter
   const myProfileIcons = profileIconsData.find((data) => data.account === "me")?.profileIcon || [];
@@ -35,12 +38,12 @@ export default function index(props: CustomProps) {
   }
 
   function handleOnboardingBtn() {
-    moveToOnboardingProfile();
-    {
-      state: {
-        selectedProfile;
-      }
+    if (selectedProfile !== null) {
+      // 선택된 프로필 아이콘의 emoji를 Recoil 상태에 저장
+      const selectedProfileEmoji = myProfileIcons[selectedProfile].emoji;
+      setProfile(selectedProfileEmoji);
     }
+    moveToOnboardingProfile();
   }
 
   return (
