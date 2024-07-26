@@ -6,7 +6,7 @@ import HoneyBox from "./components/HoneyBox";
 import Banner from "./components/Banner";
 import TabBar from "./components/TabBar";
 import { useGetTotalHoney } from "./hooks/useGetTotalHoney";
-import getProfileIconSrc from "@common/utils/getProfileIconSrc";
+import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 export default function index() {
@@ -23,8 +23,8 @@ export default function index() {
     response: { nickname_first, profile_first, nickname_second, profile_second, birthday_first, birthday_second },
   } = CoupleInfo;
 
-  const myProfile = getProfileIconSrc("me", profile_first);
-  const partnerProfile = getProfileIconSrc("partner", profile_second);
+  const myProfile = getHoverProfileIconSrc("me", profile_first);
+  const partnerProfile = getHoverProfileIconSrc("partner", profile_second);
 
   return (
     <Wrapper>
@@ -34,10 +34,10 @@ export default function index() {
           <MypageProfileBox
             myName={nickname_first}
             myBirth={birthday_first}
-            myProfile={myProfile}
+            myProfile={myProfile ?? ""}
             partnerName={nickname_second}
             partnerBirth={birthday_second}
-            partnerProfile={partnerProfile}
+            partnerProfile={partnerProfile ?? ""}
           />
           <HoneyBox count={response} />
           <Banner />
