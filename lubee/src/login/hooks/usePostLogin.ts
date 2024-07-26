@@ -18,7 +18,7 @@ const usePostLogin = () => {
         setToken(data.response.accessToken);
         console.log("로그인 성공");
         console.log("로그인 데이터", data);
-        console.log("커플정보 얻기", couplesInfoResponse?.response);
+        console.log("커플정보 얻기", couplesInfoResponse?.success);
         if (couplesInfoResponse?.success) {
           // 로그인 완료되고 온보딩까지 마친 유저의 경우 home/today로 이동
           navigate("/home/today");
@@ -28,7 +28,6 @@ const usePostLogin = () => {
         }
       })
       .catch((err) => {
-        // 에러 타입을 any로 설정
         const errorData = err.response.data as loginErrorProps; // 에러 응답 데이터 단언
         if (errorData.success_or_error_code.status === 404) {
           setToken(errorData.response.accessToken);
