@@ -7,6 +7,8 @@ import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
+import { useRecoilState } from "recoil";
+import { profileState, nicknameState } from "@common/recoil/atom";
 
 interface ProfileProps {
   moveToOnboardingCustom: () => void;
@@ -16,10 +18,11 @@ interface ProfileProps {
 export default function index(props: ProfileProps) {
   const { moveToOnboardingCustom, moveToOnboardingBirth } = props;
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState("");
-  const isOnboardingBtnDisabled = nickname === "";
   const yellowBoxRef = useRef<{ focus: () => void }>(null);
-  const myProfile = getProfileIconSrc("me", "profile1");
+  const [profileEmoji] = useRecoilState(profileState); // 프로필 이모지 상태
+  const [nickname, setNickname] = useRecoilState(nicknameState); // 닉네임 상태
+  const isOnboardingBtnDisabled = nickname === "";
+  const myProfile = getProfileIconSrc("me", profileEmoji); // Recoil 상태에서 emoji 값을 가져옴
 
   useEffect(() => {
     // 페이지가 로드되고 나서 입력 필드에 포커스를 설정
@@ -37,6 +40,7 @@ export default function index(props: ProfileProps) {
   }
 
   function handleOnboardingBtn() {
+    setNickname(nickname); // 닉네임을 Recoil 상태에 저장
     moveToOnboardingBirth();
   }
 

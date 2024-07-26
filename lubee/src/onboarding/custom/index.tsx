@@ -20,7 +20,7 @@ export default function index(props: CustomProps) {
   const navigate = useNavigate();
   const [selectedProfile, setSelectedProfile] = useState<number | null>(null);
   const isOnboardingBtnDisabled = selectedProfile === null;
-  const [profile, setProfile] = useRecoilState(profileState);
+  const [_profile, setProfile] = useRecoilState(profileState);
 
   // 프로필 아이콘 중에 "me"만 filter
   const myProfileIcons = profileIconsData.find((data) => data.account === "me")?.profileIcon || [];
