@@ -8,6 +8,7 @@ import MonthPicBox from "./MonthPicBox";
 import CommentBox from "home/components/CommentBox";
 import { getServerDate } from "@common/utils/dateFormat";
 import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
+import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 interface DateDetailModalProps {
   dateText: string;
@@ -30,9 +31,16 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   }
   console.log("specificDto", specificDto);
 
-  /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
-  const myProfile = getProfileIconSrc("me", "profile1");
-  const partnerProfile = getProfileIconSrc("partner", "profile2");
+  /*커플 정보에서 프로필 가져와서 출력*/
+  const CoupleInfo = useGetCouplesInfo();
+  if (!CoupleInfo) return <></>;
+
+  const {
+    response: { profile_first, profile_second },
+  } = CoupleInfo;
+
+  const myProfile = getProfileIconSrc("me", profile_first);
+  const partnerProfile = getProfileIconSrc("partner", profile_second);
 
   /*혜연이 부분*/
   const isToday = false;

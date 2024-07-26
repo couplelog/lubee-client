@@ -6,6 +6,7 @@ import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import TodayPicBox from "home/today/components/TodayPicBox";
 import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
+import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 interface ContentContainerProps {
   date: string;
@@ -14,9 +15,15 @@ interface ContentContainerProps {
 
 export default function ContentContainer(props: ContentContainerProps) {
   const { date, isToday } = props;
+  const CoupleInfo = useGetCouplesInfo();
+  if (!CoupleInfo) return <></>;
 
-  const myProfile = getProfileIconSrc("me", "profile1");
-  const partnerProfile = getProfileIconSrc("partner", "profile1");
+  const {
+    response: { profile_first, profile_second },
+  } = CoupleInfo;
+
+  const myProfile = getProfileIconSrc("me", profile_first);
+  const partnerProfile = getProfileIconSrc("partner", profile_second);
   const urlDate = `${formatMonth(getTodayMonth)}${getTodayDate}`;
 
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
