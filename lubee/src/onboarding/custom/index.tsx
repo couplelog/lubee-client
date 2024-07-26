@@ -42,6 +42,9 @@ export default function index(props: CustomProps) {
       // 선택된 프로필 아이콘의 emoji를 Recoil 상태에 저장
       const selectedProfileEmoji = myProfileIcons[selectedProfile].emoji;
       setProfile(selectedProfileEmoji);
+
+      // 저장된 값을 콘솔에 출력
+      console.log("Selected Profile Emoji:", selectedProfileEmoji);
     }
     moveToOnboardingProfile();
   }
