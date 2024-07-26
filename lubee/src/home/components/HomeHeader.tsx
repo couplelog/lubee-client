@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { getToken, removeToken } from "login/utils/token";
 
 export default function HomeHeader() {
   const navigate = useNavigate();
@@ -21,6 +22,9 @@ export default function HomeHeader() {
     navigate("/home/month");
     setCurrentPage("month");
   }
+
+  // removeToken();
+  // console.log(getToken());
 
   return (
     <Container>
