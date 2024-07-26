@@ -6,6 +6,8 @@ import HoneyBox from "./components/HoneyBox";
 import Banner from "./components/Banner";
 import TabBar from "./components/TabBar";
 import { useGetTotalHoney } from "./hooks/useGetTotalHoney";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
+import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 export default function index() {
   const totalHoney = useGetTotalHoney();
@@ -13,12 +15,30 @@ export default function index() {
 
   const { response } = totalHoney;
 
+  /*커플정보에서 프로필 가져와서 출력*/
+  const CoupleInfo = useGetCouplesInfo();
+  if (!CoupleInfo) return <></>;
+
+  const {
+    response: { nickname_first, profile_first, nickname_second, profile_second, birthday_first, birthday_second },
+  } = CoupleInfo;
+
+  const myProfile = getProfileIconSrc("me", profile_first);
+  const partnerProfile = getProfileIconSrc("partner", profile_second);
+
   return (
     <Wrapper>
       <MypageContainer>
         <SettingIcon />
         <TopContainer>
-          <MypageProfileBox myName="불꽃피카츄" myBirth="02.01.18" partnerName="맹꽁이" partnerBirth="99.03.04" />
+          <MypageProfileBox
+            myName={nickname_first}
+            myBirth={birthday_first}
+            myProfile={myProfile}
+            partnerName={nickname_second}
+            partnerBirth={birthday_second}
+            partnerProfile={partnerProfile}
+          />
           <HoneyBox count={response} />
           <Banner />
         </TopContainer>
