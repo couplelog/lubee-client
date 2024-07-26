@@ -6,6 +6,8 @@ import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 import DateInput from "../components/DateInput";
+import { useRecoilState } from "recoil";
+import { startDateState } from "@common/recoil/atom";
 
 interface AnnivProps {
   moveToOnboardingBirth: () => void;
@@ -17,6 +19,7 @@ export default function index(props: AnnivProps) {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
+  const [_startDate, setStartDate] = useRecoilState(startDateState);
 
   const isOnboardingBtnDisabled = !(year && month && day);
 
@@ -29,6 +32,9 @@ export default function index(props: AnnivProps) {
   }
 
   function handleOnboardingBtn() {
+    // 기념일을 지정된 형식으로 저장
+    const formattedAnniv = `${year}.${month}.${day}`;
+    setStartDate(formattedAnniv);
     navigate("/congrats/join");
   }
 
