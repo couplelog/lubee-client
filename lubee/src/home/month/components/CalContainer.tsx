@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear, isFutureDate } from "@common/utils/dateFormat";
 import { infoToast } from "@common/utils/toast";
 import { useGetCalendar } from "home/hooks/useGetCalendar";
+import { useGetMonthHoney } from "home/hooks/useGetMonthHoney";
 
 interface CalContainerProps {
   info: CalInfoTypes;
@@ -22,6 +23,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   const [list, setList] = useState<number[]>(new Array(start + length).fill(0)); // LIST 초기화
 
   const calendarData = useGetCalendar();
+  const totalHoney = useGetMonthHoney(getTodayYear, getTodayMonth);
 
   useEffect(() => {
     const listener = (e: MouseEvent) => {
@@ -80,13 +82,27 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
     return null;
   }
 
+  /*혜연이 부분*/
+  if (!totalHoney) {
+    return null;
+  }
+
+  const { response } = totalHoney;
+
+  // 선택 날짜를 서버에게 넘기기 위해 선택한 날짜의 YYYY.MM.DD 형식으로 만들기
+  const formatSelectedDate = (year: number, month: number, date: number) => {
+    const formattedMonth = String(month).padStart(2, "0");
+    const formattedDate = String(date).padStart(2, "0");
+    return `${year}.${formattedMonth}.${formattedDate}`;
+  };
+
   return (
     <Container>
       <Header>
         <HeaderDate>{`${year}.${formatMonth(month)}`}</HeaderDate>
         <HeaderHoney>
           <HoneyMonthIcon />
-          <HoneyCount>35</HoneyCount>
+          <HoneyCount>{response}</HoneyCount>
         </HeaderHoney>
       </Header>
       <Grid>
@@ -111,11 +127,12 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         <DateDetailModal
           ref={modalRef}
           dateText={`${month}월 ${selectedDate}일`}
-          date={`${formatMonth(month)}${selectedDate}`}
+          urlDate={`${formatMonth(month)}${selectedDate}`}
           showCalendar={showCalendar}
           selectedDate={selectedDate}
           month={month}
           year={year}
+          serverDate={selectedDate ? formatSelectedDate(year, month, selectedDate) : ""}
         />
       )}
     </Container>

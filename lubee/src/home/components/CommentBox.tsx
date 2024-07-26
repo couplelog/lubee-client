@@ -6,21 +6,21 @@ import PartnerCommentModal from "./PartnerCommentModal";
 interface CommentBoxProps {
   profileIconSrc: string;
   isMyComment: boolean;
-
-  // 코멘트는 서버로부터 받아오기
-  myComment?: string;
-  partnerComment?: string;
+  comment: string;
+  isToday: boolean;
 }
 
 export default function CommentBox(props: CommentBoxProps) {
-  const { profileIconSrc, isMyComment, myComment, partnerComment } = props;
+  const { profileIconSrc, isMyComment, comment, isToday } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
-  const [commentText, setCommentText] = useState<string>("오늘의 데이트는 어떠셨나요?");
+  const [commentText, setCommentText] = useState<string>(
+    isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?",
+  );
 
-  const myDefaultText = "오늘의 데이트는 어떠셨나요?";
+  const myDefaultText = isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
   const partnerDefaultText = "연인은 아직 작성하지 않았어요";
-  const myCommentText = myComment || myDefaultText;
-  const partnerCommentText = partnerComment || partnerDefaultText;
+  const myCommentText = comment || myDefaultText;
+  const partnerCommentText = comment || partnerDefaultText;
 
   useEffect(() => {
     if (isMyComment) {
@@ -52,7 +52,7 @@ export default function CommentBox(props: CommentBoxProps) {
 
   return (
     <>
-      <Container onClick={handleCommentInputModal}>
+      <Container onClick={handleCommentInputModal} $isToday={isToday}>
         <ProfileIcon as={profileIconSrc} />
         <Text
           $isDefault={
@@ -82,12 +82,12 @@ export default function CommentBox(props: CommentBoxProps) {
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ $isToday: boolean }>`
   display: flex;
   gap: 0.4rem;
   padding: 1.2rem;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme, $isToday }) => ($isToday ? theme.colors.white : theme.colors.gray_50)};
   cursor: pointer;
 `;
 
