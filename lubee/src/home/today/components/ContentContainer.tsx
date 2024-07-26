@@ -15,6 +15,7 @@ interface ContentContainerProps {
 
 export default function ContentContainer(props: ContentContainerProps) {
   const { date, isToday } = props;
+  /*커플정보에서 프로필 가져와서 출력*/
   const CoupleInfo = useGetCouplesInfo();
   if (!CoupleInfo) return <></>;
 
@@ -24,6 +25,7 @@ export default function ContentContainer(props: ContentContainerProps) {
 
   const myProfile = getProfileIconSrc("me", profile_first);
   const partnerProfile = getProfileIconSrc("partner", profile_second);
+
   const urlDate = `${formatMonth(getTodayMonth)}${getTodayDate}`;
 
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
