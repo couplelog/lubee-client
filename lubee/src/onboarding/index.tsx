@@ -78,7 +78,9 @@ export default function index() {
 
   return (
     <>
-      {onboardingConnect && <Connect moveToOnboardingCode={moveToOnboardingCode} />}
+      {onboardingConnect && (
+        <Connect moveToOnboardingCode={moveToOnboardingCode} moveToOnboardingCustom={moveToOnboardingCustom} />
+      )}
       {onboardingCode && (
         <Code moveToOnboardingConnect={moveToOnboardingConnect} moveToOnboardingCustom={moveToOnboardingCustom} />
       )}
