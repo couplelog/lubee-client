@@ -5,16 +5,14 @@ import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
 interface MypageProfileBoxProps {
   myName: string;
   myBirth: string;
+  myProfile: string;
   partnerName: string;
   partnerBirth: string;
+  partnerProfile: string;
 }
 
 export default function MypageProfileBox(props: MypageProfileBoxProps) {
-  const { myName, myBirth, partnerName, partnerBirth } = props;
-
-  /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
-  const myProfile = getHoverProfileIconSrc("me", "profile1");
-  const partnerProfile = getHoverProfileIconSrc("partner", "profile2");
+  const { myName, myBirth, partnerName, partnerBirth, myProfile, partnerProfile } = props;
 
   return (
     <Container>

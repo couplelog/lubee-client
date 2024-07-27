@@ -1,9 +1,17 @@
 import styled from "styled-components";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
+import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 export default function TodayProfileBox() {
-  const myProfile = getProfileIconSrc("me", "profile1");
-  const partnerProfile = getProfileIconSrc("partner", "profile1");
+  const { data: CoupleInfo } = useGetCouplesInfo();
+  if (!CoupleInfo) return <></>;
+
+  const {
+    response: { profile_first, profile_second },
+  } = CoupleInfo;
+
+  const myProfile = getProfileIconSrc("me", profile_first);
+  const partnerProfile = getProfileIconSrc("partner", profile_second);
 
   return (
     <Wrapper>

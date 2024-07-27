@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 interface TodayTitleProps {
   day: number;
@@ -6,11 +7,17 @@ interface TodayTitleProps {
 
 export default function TodayTitle(props: TodayTitleProps) {
   const { day } = props;
+  const { data: CoupleInfo } = useGetCouplesInfo();
+  if (!CoupleInfo) return <></>;
+
+  const {
+    response: { nickname_first },
+  } = CoupleInfo;
 
   return (
     <Container>
       <DateText>
-        맹꽁이 님과 <NumberText>{day}</NumberText>일 째{"\n"}꿀 모으는 날
+        {nickname_first} 님과 <NumberText>{day}</NumberText>일 째{"\n"}꿀 모으는 날
       </DateText>
     </Container>
   );
