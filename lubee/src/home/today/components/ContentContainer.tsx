@@ -39,7 +39,7 @@ export default function ContentContainer(props: ContentContainerProps) {
   const partnerComment = response?.comment_second || "";
 
   // 데이터가 없을 경우 빈 화면을 반환
-  if (!CoupleInfo || !commentData) return <></>;
+  if (!CoupleInfo) return <></>;
 
   return (
     <Container>
