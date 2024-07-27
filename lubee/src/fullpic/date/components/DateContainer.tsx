@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 import EmojiBar from "@common/components/EmojiBar";
 import FullPicContainer from "@common/components/FullPicContainer";
@@ -20,9 +20,39 @@ export default function DateContainer(props: DateContainerProps) {
   const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText, specificDto, memory_id, setMemoryId } = props;
   const picRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", selectedEmojiText);
-  const partnerEmoji = getEmojiSrc("partner", "thumb");
+  // 스크롤할때마다 memoryId를 반영할 수 있게
+  const observer = useRef<IntersectionObserver | null>(null);
+  const handleIntersection = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const picMemoryId = entry.target.getAttribute("data-memory-id");
+          if (picMemoryId) {
+            setMemoryId(Number(picMemoryId));
+          }
+        }
+      });
+    },
+    [setMemoryId],
+  );
+  useEffect(() => {
+    observer.current = new IntersectionObserver(handleIntersection, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5,
+    });
+
+    const currentObserver = observer.current;
+    picRefs.current.forEach((pic) => {
+      if (pic) currentObserver.observe(pic);
+    });
+
+    return () => {
+      picRefs.current.forEach((pic) => {
+        if (pic) currentObserver.unobserve(pic);
+      });
+    };
+  }, [specificDto, handleIntersection]);
 
   // 클릭한 memory_id와 일치하는 pic가는 ref
   useEffect(() => {
@@ -37,6 +67,10 @@ export default function DateContainer(props: DateContainerProps) {
       });
     }
   }, [specificDto, memory_id]);
+
+  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
+  const myEmoji = getEmojiSrc("me", selectedEmojiText);
+  const partnerEmoji = getEmojiSrc("partner", "thumb");
 
   return (
     <Wrapper>
