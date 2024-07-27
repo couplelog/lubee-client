@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getToken, removeToken } from "login/utils/token";
 
-export default function HomeHeader() {
+export default function MonthHomeHeader() {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<string>(() => {
     return localStorage.getItem("currentPage") || "today";
@@ -55,9 +54,8 @@ const Today = styled.button<{ $currentPage: string }>`
   border-radius: 32px;
   ${({ theme }) => theme.fonts.Body_4};
 
-  background-color: ${({ theme, $currentPage }) =>
-    $currentPage === "today" ? theme.colors.gray_600 : theme.colors.gray_50};
-  color: ${({ theme, $currentPage }) => ($currentPage === "today" ? theme.colors.white : theme.colors.gray_800)};
+  background-color: ${({ theme }) => theme.colors.gray_50};
+  color: ${({ theme }) => theme.colors.gray_800};
 `;
 
 const Month = styled.button<{ $currentPage: string }>`
@@ -67,7 +65,6 @@ const Month = styled.button<{ $currentPage: string }>`
   border-radius: 32px;
   ${({ theme }) => theme.fonts.Body_4};
 
-  background-color: ${({ theme, $currentPage }) =>
-    $currentPage === "month" ? theme.colors.gray_600 : theme.colors.gray_50};
-  color: ${({ theme, $currentPage }) => ($currentPage === "month" ? theme.colors.white : theme.colors.gray_800)};
+  background-color: ${({ theme }) => theme.colors.gray_600};
+  color: ${({ theme }) => theme.colors.white};
 `;
