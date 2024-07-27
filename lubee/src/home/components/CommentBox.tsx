@@ -14,32 +14,20 @@ interface CommentBoxProps {
 export default function CommentBox(props: CommentBoxProps) {
   const { profileIconSrc, isMyComment, comment, isToday, finalServerDate } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
-  const [commentText, setCommentText] = useState<string>(
-    isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?",
-  );
+  const [commentText, setCommentText] = useState<string>("");
 
   const myDefaultText = isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
   const partnerDefaultText = "연인은 아직 작성하지 않았어요";
-  const myCommentText = comment || myDefaultText;
-  const partnerCommentText = comment || partnerDefaultText;
 
   useEffect(() => {
     if (isMyComment) {
-      setCommentText(myCommentText);
+      setCommentText(comment || myDefaultText);
     } else {
-      if (myCommentText === myDefaultText && partnerCommentText === partnerDefaultText) {
-        setCommentText(partnerDefaultText);
-      } else if (myCommentText !== myDefaultText) {
-        setCommentText(partnerDefaultText);
-      } else if (myCommentText === myDefaultText && partnerCommentText !== partnerDefaultText) {
-        setCommentText("나의 한마디를 입력하면 볼 수 있어요!");
-      }
+      setCommentText(comment || partnerDefaultText);
     }
-  }, [isMyComment, myCommentText, partnerCommentText]);
+  }, [comment]);
 
   function handleCommentInputModal() {
-    // 연인 미작성, 나 미작성일 때 PartnerCommentModal 안 열리게끔
-    // 아직 MyCommentModal에서 작성해도 "나의 한마디를 입력하면 볼 수 있어요!" 뜨는데 서버 연결로 바뀔 예정 . .
     const isDefaultText = commentText === partnerDefaultText || commentText === "나의 한마디를 입력하면 볼 수 있어요!";
 
     if (!isDefaultText) {
