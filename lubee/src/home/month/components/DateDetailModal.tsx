@@ -31,13 +31,11 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   }
   console.log("specificDto", specificDto);
 
-  /*커플 정보에서 프로필 가져와서 출력*/
-  const CoupleInfo = useGetCouplesInfo();
-  if (!CoupleInfo) return <></>;
-
-  const {
-    response: { profile_first, profile_second },
-  } = CoupleInfo;
+  /*커플정보에서 프로필 가져와서 출력*/
+  const { data: CoupleInfo } = useGetCouplesInfo();
+  const { response: coupleResponse } = CoupleInfo || {};
+  const profile_first = coupleResponse?.profile_first || "";
+  const profile_second = coupleResponse?.profile_second || "";
 
   const myProfile = getProfileIconSrc("me", profile_first);
   const partnerProfile = getProfileIconSrc("partner", profile_second);
