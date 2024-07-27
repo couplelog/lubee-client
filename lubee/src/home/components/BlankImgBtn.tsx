@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import blankImg from "@assets/image/blankImg.png";
+import blankImg from "assets/image/blankImg.png";
 import { useState, useRef } from "react";
 import { readPic } from "home/utils/readPic";
 import { useNavigate } from "react-router-dom";

@@ -10,7 +10,7 @@ import {
   MintHoneyIc,
   MintSmileIc,
   MintThumbIc,
-} from "@assets/index";
+} from "assets/index";
 
 export const YellowHeartBigIcon = styled(YellowHeartIc)`
   width: 3.48rem;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import MypageBlankImgBtn from "./MypageBlankImgBtn";
-import album1Img from "@assets/image/album1Img.png";
-import album2Img from "@assets/image/album2Img.png";
+import album1Img from "assets/image/album1Img.png";
+import album2Img from "assets/image/album2Img.png";
 
 export default function AlbumsContainer() {
   return (

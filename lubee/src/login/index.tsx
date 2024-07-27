@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LogoIc, SymbolLoginIc } from "@assets/index";
+import { LogoIc, SymbolLoginIc } from "assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
 import CompanyText from "@common/components/CompanyText";
 import { KAKAO_LINK } from "./constants/kakaoLink";
