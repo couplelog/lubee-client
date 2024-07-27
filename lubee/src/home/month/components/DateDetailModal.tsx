@@ -40,16 +40,13 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const myProfile = getProfileIconSrc("me", profile_first);
   const partnerProfile = getProfileIconSrc("partner", profile_second);
 
-  /*혜연이 부분*/
+  /*코멘트 부분*/
   const isToday = false;
   const finalServerDate = isToday ? getServerDate() : serverDate; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
   const commentData = useGetTodayDateComment(finalServerDate);
-  if (!commentData) return <></>;
-  const { response } = commentData;
-  const { mine, lover } = response || {};
-
-  const myComment = mine?.content || "";
-  const partnerComment = lover?.content || "";
+  const { response } = commentData || {};
+  const myComment = response?.comment_first || "";
+  const partnerComment = response?.comment_second || "";
 
   return (
     <Background>
