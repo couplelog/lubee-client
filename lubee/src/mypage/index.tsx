@@ -10,18 +10,15 @@ import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 export default function index() {
+  // 훅을 조건문 밖에서 호출
   const totalHoney = useGetTotalHoney();
-  if (!totalHoney) return <></>;
+  const { data: coupleInfo } = useGetCouplesInfo();
+
+  if (!totalHoney || !coupleInfo) return <></>;
 
   const { response } = totalHoney;
-
-  /*커플정보에서 프로필 가져와서 출력*/
-  const CoupleInfo = useGetCouplesInfo();
-  if (!CoupleInfo) return <></>;
-
-  const {
-    response: { nickname_first, profile_first, nickname_second, profile_second, birthday_first, birthday_second },
-  } = CoupleInfo;
+  const { nickname_first, profile_first, nickname_second, profile_second, birthday_first, birthday_second } =
+    coupleInfo.response;
 
   const myProfile = getHoverProfileIconSrc("me", profile_first);
   const partnerProfile = getHoverProfileIconSrc("partner", profile_second);
