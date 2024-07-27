@@ -53,34 +53,14 @@ export default function MyCommentModal(props: CommentModalProps) {
       if (isDefaultText) {
         // 서버에 코멘트 POST 요청으로
         if (finalServerDate) {
-          postDateCommentMutate(
-            { content: text, date: finalServerDate },
-            {
-              onSuccess: (data) => {
-                console.log("POST 요청 성공", data);
-              },
-              onError: (error) => {
-                console.error("POST 요청 실패", error); // 로그 추가
-              },
-            },
-          );
+          postDateCommentMutate({ content: text, date: finalServerDate });
         } else {
           console.error("finalServerDate is undefined");
         }
       } else {
         // 서버에 코멘트 UPDATE 요청으로
         if (finalServerDate) {
-          updateDateCommentMutate(
-            { content: text, date: finalServerDate },
-            {
-              onSuccess: (data) => {
-                console.log("UPDATE 요청 성공", data);
-              },
-              onError: (error) => {
-                console.error("UPDATE 요청 실패", error); // 로그 추가
-              },
-            },
-          );
+          updateDateCommentMutate({ content: text, date: finalServerDate });
         } else {
           console.error("finalServerDate is undefined");
         }
