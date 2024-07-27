@@ -21,7 +21,7 @@ const Container = styled.div<{ $font: string }>`
   display: flex;
   gap: ${(props) => (props.$font === "fullPic" ? "0.8rem" : "0.4rem")};
   align-items: center;
-  width: auto;
+  width: ${(props) => (props.$font === "fullPic" ? "auto" : "10rem")};
   padding: ${(props) => (props.$font === "fullPic" ? "0.6rem 1.2rem" : "0.2rem 0.5rem")};
   border-radius: 32px;
   background-color: ${({ theme, $font }) => ($font === "fullPic" ? theme.colors.gray_100 : theme.colors.gray_50)};
@@ -42,6 +42,7 @@ const LocationText = styled.p<{ $font: string }>`
   ${({ theme, $font }) => ($font === "fullPic" ? theme.fonts.SubTitle : theme.fonts.Caption_1)};
 
   color: ${({ theme, $font }) => ($font === "fullPic" ? theme.colors.gray_800 : theme.colors.gray_500)};
+  text-align: left;
   vertical-align: middle;
 `;
 
