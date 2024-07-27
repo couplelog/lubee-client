@@ -17,12 +17,14 @@ export default function index() {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
   const totalHoney = useGetTodayHoney(getServerDate());
-  const { data: loveDayData, isLoading: isLoadingLoveDay, error: errorLoveDay } = useGetLoveDay();
+  const loveDay = useGetLoveDay();
 
-  if (!loveDayData || !isLoadingLoveDay || !errorLoveDay || !totalHoney) return <></>;
+  if (!totalHoney || !loveDay || !loveDay?.response) return <></>;
 
   const { response } = totalHoney;
-  const { love_day } = loveDayData.response;
+  const {
+    response: { love_day },
+  } = loveDay;
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
@@ -62,9 +64,6 @@ const Wrapper = styled.section`
   flex-direction: column;
   gap: 1.6rem;
   align-items: center;
-  width: 100%;
-  overflow-y: auto;
-  -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
   &::-webkit-scrollbar {
