@@ -7,7 +7,7 @@ interface TodayTitleProps {
 
 export default function TodayTitle(props: TodayTitleProps) {
   const { day } = props;
-  const CoupleInfo = useGetCouplesInfo();
+  const { data: CoupleInfo } = useGetCouplesInfo();
   if (!CoupleInfo) return <></>;
 
   const {

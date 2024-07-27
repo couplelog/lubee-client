@@ -16,12 +16,10 @@ interface ContentContainerProps {
 export default function ContentContainer(props: ContentContainerProps) {
   const { date, isToday } = props;
   /*커플정보에서 프로필 가져와서 출력*/
-  const CoupleInfo = useGetCouplesInfo();
-  if (!CoupleInfo) return <></>;
-
-  const {
-    response: { profile_first, profile_second },
-  } = CoupleInfo;
+  const { data: CoupleInfo } = useGetCouplesInfo();
+  const { response: coupleResponse } = CoupleInfo || {};
+  const profile_first = coupleResponse?.profile_first || "";
+  const profile_second = coupleResponse?.profile_second || "";
 
   const myProfile = getProfileIconSrc("me", profile_first);
   const partnerProfile = getProfileIconSrc("partner", profile_second);
@@ -36,20 +34,16 @@ export default function ContentContainer(props: ContentContainerProps) {
   /*혜연이 부분*/
   const finalServerDate = isToday ? getServerDate() : date; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
   const commentData = useGetTodayDateComment(1, finalServerDate); // coupleId는 임의로 1 넣음
-  if (!commentData) return <></>;
 
-  /* comment가 null일 경우 발생하는 에러를 위해서 기존 주석 코드 -> 주석 아래코드  */
-  // const { response } = commentData;
-  // const { mine, lover } = response;
-
-  // const myComment = mine.content;
-  // const partnerComment = lover?.content || "";
-
-  const { response } = commentData;
-  const { mine, lover } = response || {};
+  const { response: commentResponse } = commentData || {};
+  const mine = commentResponse?.mine;
+  const lover = commentResponse?.lover;
 
   const myComment = mine?.content || "";
   const partnerComment = lover?.content || "";
+
+  // 데이터가 없을 경우 빈 화면을 반환
+  if (!CoupleInfo || !commentData) return <></>;
 
   return (
     <Container>

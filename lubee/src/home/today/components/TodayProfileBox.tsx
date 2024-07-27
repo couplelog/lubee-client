@@ -3,7 +3,7 @@ import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 export default function TodayProfileBox() {
-  const CoupleInfo = useGetCouplesInfo();
+  const { data: CoupleInfo } = useGetCouplesInfo();
   if (!CoupleInfo) return <></>;
 
   const {
