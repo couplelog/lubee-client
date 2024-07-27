@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { XIc, EditIc } from "@assets/index";
+import { XIc, EditIc } from "assets/index";
+import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
 
 interface MypageProfileBoxProps {
   myName: string;

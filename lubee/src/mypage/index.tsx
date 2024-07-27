@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import MypageFooter from "./components/MypageFooter";
-import { SettingIc } from "@assets/index";
+import { SettingIc } from "assets/index";
 import MypageProfileBox from "./components/MypageProfileBox";
 import HoneyBox from "./components/HoneyBox";
 import Banner from "./components/Banner";

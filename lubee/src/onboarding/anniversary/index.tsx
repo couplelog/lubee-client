@@ -6,6 +6,9 @@ import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 import DateInput from "../components/DateInput";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { profileState, nicknameState, birthdayState, startDateState } from "@common/recoil/atom";
+import { usePostLoginUser } from "../hooks/usePostLoginUser";
 
 interface AnnivProps {
   moveToOnboardingBirth: () => void;
@@ -17,6 +20,11 @@ export default function index(props: AnnivProps) {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
+  const [_startDate, setStartDate] = useRecoilState(startDateState);
+  const profile = useRecoilValue(profileState);
+  const nickname = useRecoilValue(nicknameState);
+  const birthday = useRecoilValue(birthdayState);
+  const { mutate: postLoginUserMutate } = usePostLoginUser();
 
   const isOnboardingBtnDisabled = !(year && month && day);
 
@@ -29,6 +37,18 @@ export default function index(props: AnnivProps) {
   }
 
   function handleOnboardingBtn() {
+    // 기념일을 지정된 형식으로 저장
+    const formattedAnniv = `${year}.${month}.${day}`;
+    setStartDate(formattedAnniv);
+
+    // Recoil 상태를 사용하여 POST 요청
+    postLoginUserMutate({
+      nickname: nickname,
+      profile: profile,
+      birthday: birthday,
+      startDate: formattedAnniv,
+    });
+
     navigate("/congrats/join");
   }
 

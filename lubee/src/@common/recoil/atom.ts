@@ -34,3 +34,24 @@ export const onboardingAnnivState = atom<boolean>({
   key: "onboardingAnnivState",
   default: false,
 });
+
+/*온보딩 정보 post를 위한*/
+export const profileState = atom<string>({
+  key: "profileState",
+  default: "",
+});
+
+export const nicknameState = atom<string>({
+  key: "nicknameState",
+  default: "",
+});
+
+export const birthdayState = atom<string>({
+  key: "birthdayState",
+  default: "",
+});
+
+export const startDateState = atom<string>({
+  key: "startDateState",
+  default: "",
+});

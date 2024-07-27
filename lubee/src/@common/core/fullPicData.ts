@@ -1,4 +1,4 @@
-import fullPic from "@assets/image/fullPic.png";
+import fullPic from "assets/image/fullPic.png";
 import { FullPicDataTypes } from "@common/types/CommonTypes";
 
 export const fullPicData: FullPicDataTypes[] = [

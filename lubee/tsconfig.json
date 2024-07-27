@@ -26,7 +26,6 @@
     "paths": {
       "@api/*": ["api/*"],
       "@atom/*": ["atom/*"],
-      "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@core/*": ["core/*"],
       "@hooks/*": ["hooks/*"],

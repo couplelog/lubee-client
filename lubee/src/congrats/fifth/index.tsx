@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CongratsIc, FifthHoneyIc } from "@assets/index";
+import { CongratsIc, FifthHoneyIc } from "assets/index";
 import CongratsTitleBox from "congrats/components/CongratsTitleBox";
 
 export default function index() {

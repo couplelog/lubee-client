@@ -1,4 +1,4 @@
-import { SearchIc, XIc } from "@assets/index";
+import { SearchIc, XIc } from "assets/index";
 import styled from "styled-components";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useDebounce } from "@common/utils/useDebounce";

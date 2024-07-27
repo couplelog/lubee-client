@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LocationPointIc, LocationPointSmallIc } from "@assets/index";
+import { LocationPointIc, LocationPointSmallIc } from "assets/index";
 
 interface LocationProps {
   location: string;

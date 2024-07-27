@@ -6,6 +6,8 @@ import ProgressBar from "../components/ProgressBar";
 import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 import DateInput from "../components/DateInput";
+import { useRecoilState } from "recoil";
+import { birthdayState } from "@common/recoil/atom";
 
 interface BirthProps {
   moveToOnboardingProfile: () => void;
@@ -18,6 +20,7 @@ export default function index(props: BirthProps) {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
+  const [_birthday, setBirthday] = useRecoilState(birthdayState);
 
   const isOnboardingBtnDisabled = !(year && month && day);
 
@@ -30,6 +33,9 @@ export default function index(props: BirthProps) {
   }
 
   function handleOnboardingBtn() {
+    // 생년월일을 지정된 형식으로 저장
+    const formattedBirthday = `${year}.${month}.${day}`;
+    setBirthday(formattedBirthday);
     moveToOnboardingAnniv();
   }
 
