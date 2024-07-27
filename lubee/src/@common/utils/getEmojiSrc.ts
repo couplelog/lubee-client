@@ -1,7 +1,7 @@
 import { emojisData } from "@common/core/emojisData";
 
-const getEmojiSrc = (account: string, emoji: string) => {
-  if (emoji == "") {
+const getEmojiSrc = (account: string, emoji: string | null) => {
+  if (emoji == "" || emoji == null || emoji == undefined) {
     return null;
   }
 
