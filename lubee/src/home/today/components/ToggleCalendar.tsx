@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CAL } from "@common/core/calendarData";
 import CalContainer from "home/month/components/CalContainer";
 import { BtnWrapper } from "@styles/btnStyle";
-import { BackSmallIc, ForwardIc } from "@assets/index";
+import { BackSmallIc, ForwardIc } from "assets/index";
 import { getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 
 interface ToggleCalendarProps {

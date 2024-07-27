@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
-import { LubeeCodeIc, CopyIc } from "@assets/index";
+import { useState, useEffect } from "react";
+import { LubeeCodeIc, CopyIc } from "assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
 import { BtnWrapper } from "@styles/btnStyle";
 import OnboardingHeader from "../components/OnboardingHeader";
@@ -9,14 +9,43 @@ import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import YellowBox from "../components/YellowBox";
 import CopyCodeModal from "../components/CopyCodeModal";
 import { useGetLubeeCode } from "onboarding/hooks/useGetLubeeCode";
+import { infoToast } from "@common/utils/toast";
+
 interface ConnectProps {
   moveToOnboardingCode: () => void;
+  moveToOnboardingCustom: () => void;
 }
 
 export default function index(props: ConnectProps) {
-  const { moveToOnboardingCode } = props;
+  const { moveToOnboardingCode, moveToOnboardingCustom } = props;
   const navigate = useNavigate();
   const [openCopyCodeModal, setOpenCopyCodeModal] = useState<boolean>(false);
+  const [lubeeCode, setLubeeCode] = useState<any>(null);
+
+  // useGetLubeeCode 훅을 사용한 상태 업데이트
+  const fetchedLubeeCode = useGetLubeeCode();
+
+  useEffect(() => {
+    // lubeeCode 값이 변경될 때마다 상태 업데이트
+    if (fetchedLubeeCode) {
+      setLubeeCode(fetchedLubeeCode);
+    }
+  }, [fetchedLubeeCode]);
+
+  useEffect(() => {
+    if (lubeeCode?.response?.code === "ALREADY_COUPLE") {
+      infoToast("이미 커플로 등록된 상태입니다.");
+      setTimeout(() => {
+        moveToOnboardingCustom();
+      }, 2000);
+    }
+  }, [lubeeCode, moveToOnboardingCustom]);
+
+  if (!lubeeCode) return <></>;
+
+  const {
+    response: { code },
+  } = lubeeCode;
 
   function handleXBtn() {
     navigate("/login");
@@ -42,7 +71,7 @@ export default function index(props: ConnectProps) {
       try {
         await navigator.share({
           title: "연인으로부터 러비 초대장이 도착했어요! 링크를 눌러 초대장을 받아주세요.",
-          text: "연인으로부터 러비 초대장이 도착했어요!\n링크를 눌러 초대장을 받아주세요.\n연인의 러비코드: 1234 5678",
+          text: `연인으로부터 러비 초대장이 도착했어요!\n링크를 눌러 초대장을 받아주세요.\n연인의 러비코드: ${code}`,
           url: "https://example.com", // 실제 공유할 URL로 변경
         });
         console.log("공유 성공");
@@ -57,13 +86,6 @@ export default function index(props: ConnectProps) {
   function handleOnboardingBtn() {
     moveToOnboardingCode();
   }
-
-  const lubeeCode = useGetLubeeCode();
-  if (!lubeeCode) return <></>;
-
-  const {
-    response: { code },
-  } = lubeeCode;
 
   return (
     <Wrapper>

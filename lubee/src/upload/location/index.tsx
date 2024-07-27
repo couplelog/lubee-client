@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { BackIc } from "@assets/index";
-import { SearchIc } from "@assets/index";
+import { BackIc } from "assets/index";
+import { SearchIc } from "assets/index";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BtnWrapper } from "@styles/btnStyle";

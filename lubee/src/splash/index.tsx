@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { LogoGrayIc, SymbolIc } from "@assets/index";
+import { LogoGrayIc, SymbolIc } from "assets/index";
 import CompanyText from "@common/components/CompanyText";
 
 export default function index() {

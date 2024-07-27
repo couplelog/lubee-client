@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import collectImg from "@assets/image/collectImg.png";
-import collect2Img from "@assets/image/collect2Img.png";
-import collect3Img from "@assets/image/collect3Img.png";
+import collectImg from "assets/image/collectImg.png";
+import collect2Img from "assets/image/collect2Img.png";
+import collect3Img from "assets/image/collect3Img.png";
 
 export default function AlbumContainer() {
   return (

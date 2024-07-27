@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { CalInfoTypes } from "../types/CalInfoTypes";
-import { HoneyMonthIc } from "@assets/index";
+import { HoneyMonthIc } from "assets/index";
 import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear, isFutureDate } from "@common/utils/dateFormat";

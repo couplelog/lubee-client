@@ -1,4 +1,4 @@
-import { ShortBorderIc } from "@assets/index";
+import { ShortBorderIc } from "assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";

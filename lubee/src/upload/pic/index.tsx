@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BackIc, ShareBtnIc } from "@assets/index";
+import { BackIc, ShareBtnIc } from "assets/index";
 import FullPicContainer from "@common/components/FullPicContainer";
 import { useState } from "react";
 import SelectLocationModal from "upload/components/SelectLocationModal";
