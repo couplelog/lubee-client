@@ -27,10 +27,10 @@ export default function MonthHomeHeader() {
 
   return (
     <Container>
-      <Today type="button" onClick={moveToHomeToday} $currentPage={currentPage}>
+      <Today type="button" onClick={moveToHomeToday}>
         오늘
       </Today>
-      <Month type="button" onClick={moveToHomeMonth} $currentPage={currentPage}>
+      <Month type="button" onClick={moveToHomeMonth}>
         월간
       </Month>
     </Container>
@@ -47,7 +47,7 @@ const Container = styled.div`
   padding: 1.3rem 0 2.3rem;
 `;
 
-const Today = styled.button<{ $currentPage: string }>`
+const Today = styled.button`
   display: flex;
   align-items: center;
   padding: 0.8rem 2rem;
@@ -58,7 +58,7 @@ const Today = styled.button<{ $currentPage: string }>`
   color: ${({ theme }) => theme.colors.gray_800};
 `;
 
-const Month = styled.button<{ $currentPage: string }>`
+const Month = styled.button`
   display: flex;
   align-items: center;
   padding: 0.8rem 2rem;
