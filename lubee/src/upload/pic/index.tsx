@@ -32,18 +32,6 @@ export default function index(props: UploadProps) {
   const navigate = useNavigate();
   const [openLocationModal, setOpenLocationModal] = useState<boolean>(false);
 
-  function moveToHome() {
-    // 헤더에서 전에 어떤 페이지였는지 불러오기
-    const prevPage = localStorage.getItem("currentPage");
-
-    if (prevPage === "today") {
-      navigate("/home/today");
-      console.log(prevPage);
-    } else {
-      navigate("/home/month");
-      console.log(prevPage);
-    }
-  }
   const locationState = useLocation();
   const picSrc = locationState.state?.picSrc as File; // 업로드한 이미지 src
   const uploadYear = locationState.state.year;
@@ -81,7 +69,7 @@ export default function index(props: UploadProps) {
               day: uploadDay,
             });
             setUploadPic(false); // uploadPic 리셋
-            moveToHome();
+            navigate("/loading");
           }}>
           <ShareBtnIcon />
         </BtnWrapper>
