@@ -1,12 +1,5 @@
 import styled from "styled-components";
-import {
-  TodayHoney0Ic,
-  TodayHoney1Ic,
-  TodayHoney2Ic,
-  TodayHoney3Ic,
-  TodayHoney4Ic,
-  TodayHoney5Ic,
-} from "@assets/index";
+import { TodayHoney0Ic, TodayHoney1Ic, TodayHoney2Ic, TodayHoney3Ic, TodayHoney4Ic, TodayHoney5Ic } from "assets/index";
 
 interface HoneyIconContainerProps {
   honey: number;

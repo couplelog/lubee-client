@@ -1,6 +1,5 @@
 import { profileIconsData } from "@common/core/profileIconsData";
-import blankImg from "@assets/image/blankImg.png";
-
+import blankImg from "assets/image/blankImg.png";
 const getHoverProfileIconSrc = (account: string, emoji: string) => {
   const accountData = profileIconsData.find((data) => data.account === account);
   if (accountData) {

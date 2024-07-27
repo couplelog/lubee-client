@@ -1,4 +1,4 @@
-import { BackIc, XIc } from "@assets/index";
+import { BackIc, XIc } from "assets/index";
 import styled from "styled-components";
 
 interface OnboardingHeaderProps {

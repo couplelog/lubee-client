@@ -1,4 +1,4 @@
-import { BackIc, TrashIc } from "@assets/index";
+import { BackIc, TrashIc } from "assets/index";
 import { useDeleteReaction } from "@common/hooks/useDeleteReaction";
 import { usePostReaction } from "@common/hooks/usePostReaction";
 import { BtnWrapper } from "@styles/btnStyle";

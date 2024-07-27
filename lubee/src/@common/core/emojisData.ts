@@ -9,7 +9,7 @@ import {
   MintHoneyIc,
   MintSmileIc,
   MintThumbIc,
-} from "@assets/index";
+} from "assets/index";
 import { EmojisDataTypes } from "@common/types/CommonTypes";
 
 export const emojisData: EmojisDataTypes[] = [

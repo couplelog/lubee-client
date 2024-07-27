@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ProgressBar1Ic, ProgressBar2Ic, ProgressBar3Ic, ProgressBar4Ic } from "@assets/index";
+import { ProgressBar1Ic, ProgressBar2Ic, ProgressBar3Ic, ProgressBar4Ic } from "assets/index";
 
 interface ProgressBarProps {
   step: number;
