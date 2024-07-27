@@ -10,15 +10,19 @@ import ToggleCalendar from "./components/ToggleCalendar";
 import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 import { getServerDate, getTodayDate, getTodayMonth } from "@common/utils/dateFormat";
 import ContentContainer from "./components/ContentContainer";
+import { useGetLoveDay } from "home/hooks/useGetLoveDay";
 
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
   const totalHoney = useGetTodayHoney(getServerDate());
-  if (!totalHoney) return <></>;
+  const { data: loveDayData, isLoading: isLoadingLoveDay, error: errorLoveDay } = useGetLoveDay();
+
+  if (!loveDayData || !isLoadingLoveDay || !errorLoveDay || !totalHoney) return <></>;
 
   const { response } = totalHoney;
+  const { love_day } = loveDayData.response;
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
@@ -35,7 +39,7 @@ export default function index() {
     <Wrapper>
       <Container>
         <DateBox />
-        <TodayTitle day={387} />
+        <TodayTitle day={love_day} />
         <SubContainer>
           <HoneyIconContainer honey={response} />
           <TodayProfileBox />
