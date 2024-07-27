@@ -12,7 +12,7 @@ export async function postUploadPic({ location_id, picture, year, month, day }: 
   requestBody.append("picture", picture);
 
   const { data } = await api.post(
-    `/api/memories/create?location_id=${location_id}&&year=${year}&&month=${month}&&day=${day}`,
+    `/api/memories/create?location_id=${location_id}&year=${year}&month=${month}&day=${day}`,
     requestBody,
     {
       headers: {

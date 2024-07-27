@@ -6,7 +6,7 @@ export interface PostReactionDataTypes {
 }
 
 export async function postReaction({ memory_id, reaction }: PostReactionDataTypes) {
-  const { data } = await api.post(`/api/memories/reaction/?memory_id=${memory_id}&&reaction=${reaction}`);
+  const { data } = await api.post(`/api/memories/reaction/?memory_id=${memory_id}&reaction=${reaction}`);
 
   return data;
 }
