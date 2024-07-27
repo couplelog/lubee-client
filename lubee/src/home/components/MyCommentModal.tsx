@@ -5,10 +5,9 @@ import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
 import { usePostDateComment } from "home/hooks/usePostDateComment";
 import { useUpdateDateComment } from "home/hooks/useUpdateDateComment";
-import { getServerDate } from "@common/utils/dateFormat";
 
 export default function MyCommentModal(props: CommentModalProps) {
-  const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
+  const { handleCloseBtn, profileIconSrc, commentText, setCommentText, finalServerDate } = props;
   const [text, setText] = useState("");
   const [textLength, setTextLength] = useState(0);
   const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?" || commentText === "이날의 데이트는 어떠셨나요?";
@@ -53,17 +52,38 @@ export default function MyCommentModal(props: CommentModalProps) {
 
       if (isDefaultText) {
         // 서버에 코멘트 POST 요청으로
-        postDateCommentMutate(
-          { content: text, date: getServerDate() },
-          {
-            onSuccess: (data) => {
-              console.log("POST 요청 성공", data);
+        if (finalServerDate) {
+          postDateCommentMutate(
+            { content: text, date: finalServerDate },
+            {
+              onSuccess: (data) => {
+                console.log("POST 요청 성공", data);
+              },
+              onError: (error) => {
+                console.error("POST 요청 실패", error); // 로그 추가
+              },
             },
-            onError: (error) => {
-              console.error("POST 요청 실패", error); // 로그 추가
+          );
+        } else {
+          console.error("finalServerDate is undefined");
+        }
+      } else {
+        // 서버에 코멘트 UPDATE 요청으로
+        if (finalServerDate) {
+          updateDateCommentMutate(
+            { content: text, date: finalServerDate },
+            {
+              onSuccess: (data) => {
+                console.log("UPDATE 요청 성공", data);
+              },
+              onError: (error) => {
+                console.error("UPDATE 요청 실패", error); // 로그 추가
+              },
             },
-          },
-        );
+          );
+        } else {
+          console.error("finalServerDate is undefined");
+        }
       }
     }
   };
