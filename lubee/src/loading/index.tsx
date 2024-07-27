@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { LogoGrayIc } from "assets/index";
+
 import CompanyText from "@common/components/CompanyText";
+import { SymbolIc } from "assets";
 
 export default function index() {
   const navigate = useNavigate();
@@ -26,8 +27,8 @@ export default function index() {
   return (
     <Wrapper>
       <LogoContainer>
+        <SymbolIcon />
         <Text>loading...</Text>
-        <LogoIcon />
       </LogoContainer>
       <CompanyText />
     </Wrapper>
@@ -41,7 +42,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.yellow};
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const LogoContainer = styled.section`
@@ -58,7 +59,7 @@ const Text = styled.p`
   color: ${({ theme }) => theme.colors.gray_700};
 `;
 
-const LogoIcon = styled(LogoGrayIc)`
-  width: 15rem;
-  height: 3.9rem;
+const SymbolIcon = styled(SymbolIc)`
+  width: 4.6rem;
+  height: 4.6rem;
 `;
