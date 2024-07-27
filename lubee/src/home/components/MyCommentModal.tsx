@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { CheckIc, CheckYellowIc, PencilIc, EditXIc } from "@assets/index";
+import { CheckIc, CheckYellowIc, PencilIc, EditXIc } from "assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
 import { usePostDateComment } from "home/hooks/usePostDateComment";

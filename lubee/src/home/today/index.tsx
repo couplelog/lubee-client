@@ -3,7 +3,7 @@ import DateBox from "./components/DateBox";
 import TodayTitle from "./components/TodayTitle";
 import HoneyIconContainer from "./components/HoneyIconContainer";
 import TodayProfileBox from "./components/TodayProfileBox";
-import { PlusIc, PlusClickedIc } from "@assets/index";
+import { PlusIc, PlusClickedIc } from "assets/index";
 import { useState } from "react";
 import Toggle from "./components/Toggle";
 import ToggleCalendar from "./components/ToggleCalendar";

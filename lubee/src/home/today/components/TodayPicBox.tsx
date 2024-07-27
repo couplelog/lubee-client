@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import BlankImgBtn from "home/components/BlankImgBtn";
-import blankImg from "@assets/image/blankImg.png";
+import blankImg from "assets/image/blankImg.png";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import LocationTag from "@common/components/LocationTag";
 import EmojiTag from "@common/components/EmojiTag";

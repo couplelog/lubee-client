@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RewindIc } from "@assets/index";
+import { RewindIc } from "assets/index";
 
 export default function RewindBtn() {
   return (

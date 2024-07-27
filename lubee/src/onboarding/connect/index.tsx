@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { LubeeCodeIc, CopyIc } from "@assets/index";
+import { LubeeCodeIc, CopyIc } from "assets/index";
 import { btnOnboardingStyle } from "@styles/btnStyle";
 import { BtnWrapper } from "@styles/btnStyle";
 import OnboardingHeader from "../components/OnboardingHeader";

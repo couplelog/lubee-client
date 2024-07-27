@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ExploreDeactivateIc, HomeDeactivateIc, MyActivateIc } from "@assets/index";
+import { ExploreDeactivateIc, HomeDeactivateIc, MyActivateIc } from "assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
 import { infoToast } from "@common/utils/toast";
 

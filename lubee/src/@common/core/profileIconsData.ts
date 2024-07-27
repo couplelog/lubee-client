@@ -17,7 +17,7 @@ import {
   ProfileStroke4Ic,
   ProfileStroke5Ic,
   ProfileStroke6Ic,
-} from "@assets/index";
+} from "assets/index";
 import {
   MintProfile1Ic,
   MintProfile2Ic,
@@ -25,7 +25,7 @@ import {
   MintProfile4Ic,
   MintProfile5Ic,
   MintProfile6Ic,
-} from "@assets/index";
+} from "assets/index";
 import { ProfileIconDataTypes } from "@common/types/CommonTypes";
 
 export const profileIconsData: ProfileIconDataTypes[] = [

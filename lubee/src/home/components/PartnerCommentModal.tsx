@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { EditXIc } from "@assets/index";
+import { EditXIc } from "assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
 

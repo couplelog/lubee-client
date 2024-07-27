@@ -1,4 +1,4 @@
-import { ToggleHoneyIc, TogglePastIc } from "@assets/index";
+import { ToggleHoneyIc, TogglePastIc } from "assets/index";
 import styled from "styled-components";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";

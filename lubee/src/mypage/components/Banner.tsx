@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BannerIc, NextIc } from "@assets/index";
+import { BannerIc, NextIc } from "assets/index";
 
 export default function Banner() {
   return (

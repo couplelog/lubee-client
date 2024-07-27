@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { HoneyYellowIc, PlayIc } from "@assets/index";
+import { HoneyYellowIc, PlayIc } from "assets/index";
 import RewindBtn from "./RewindBtn";
 
 interface HoneyBoxProps {
