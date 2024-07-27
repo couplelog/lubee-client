@@ -7,8 +7,9 @@ import { infoToast } from "@common/utils/toast";
 
 export default function index() {
   const navigate = useNavigate();
-  const couplesInfoResponse = useGetCouplesInfo();
+  const { data: couplesInfoResponse } = useGetCouplesInfo();
   console.log("커플정보를 얻을 수 있는지 확인 ", couplesInfoResponse?.success);
+  console.log(couplesInfoResponse);
 
   function handleOnboardingBtn() {
     if (couplesInfoResponse?.success) {
