@@ -4,6 +4,7 @@ import { CAL } from "@common/core/calendarData";
 import { getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 import { useEffect, useRef } from "react";
 import MonthHomeHeader from "./components/MonthHomeHeader";
+import { Suspense } from "react";
 
 export default function index() {
   /*이번 달 상단에 위치시키는 ref*/
@@ -23,14 +24,16 @@ export default function index() {
 
   return (
     <>
-      <MonthHomeHeader />
-      <CalWrapper ref={containerRef}>
-        {CAL.map((cal, idx) => (
-          <div key={idx} ref={(el) => (calendarRefs.current[idx] = el)}>
-            <CalContainer info={cal} />
-          </div>
-        ))}
-      </CalWrapper>
+      <Suspense fallback={<div>로딩중</div>}>
+        <MonthHomeHeader />
+        <CalWrapper ref={containerRef}>
+          {CAL.map((cal, idx) => (
+            <div key={idx} ref={(el) => (calendarRefs.current[idx] = el)}>
+              <CalContainer info={cal} />
+            </div>
+          ))}
+        </CalWrapper>
+      </Suspense>
     </>
   );
 }
