@@ -7,8 +7,8 @@ export interface MemoryBaseDtoDataTypes {
   location_name: string;
   picture: string;
   writer_profile: string;
-  reaction1: string;
-  reaction2: string;
+  reaction_first: string;
+  reaction_second: string;
   upload_time: string;
 }
 

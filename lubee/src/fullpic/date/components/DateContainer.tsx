@@ -81,8 +81,8 @@ export default function DateContainer(props: DateContainerProps) {
           location_name,
           picture,
           writer_profile,
-          reaction1,
-          reaction2,
+          reaction_first,
+          reaction_second,
           upload_time,
         } = data;
         const profile = getProfileIconSrc("me", "profile2");
