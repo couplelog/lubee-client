@@ -10,15 +10,18 @@ import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
   const location = useLocation();
+
   const { monthHeader } = location.state as { monthHeader: string };
   const { specificDto } = location.state as { specificDto: MemoryBaseDtoDataTypes[] };
   const { memory_id } = location.state as { memory_id: number };
+
   const [memoryId, setMemoryId] = useState<number>(memory_id);
+
   function handleTrashBtn(open: boolean) {
     setOpenDeletePicModal(open);
   }
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
-  const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
+  const [selectedEmojiText, setSelectedEmojiText] = useState<string>("");
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -35,7 +38,12 @@ export default function index() {
 
   return (
     <Wrapper>
-      <FullpicHeader handleTrashBtn={handleTrashBtn} headerDate={monthHeader} />
+      <FullpicHeader
+        handleTrashBtn={handleTrashBtn}
+        headerDate={monthHeader}
+        selectedEmojiText={selectedEmojiText}
+        memory_id={memoryId}
+      />
       <DateContainer
         setOpenEmojiDetail={setOpenEmojiDetail}
         setSelectedEmojiText={setSelectedEmojiText}
