@@ -6,7 +6,6 @@ import { CommentModalProps } from "home/today/types/CommentModalTypes";
 import { usePostDateComment } from "home/hooks/usePostDateComment";
 import { useUpdateDateComment } from "home/hooks/useUpdateDateComment";
 import { getServerDate } from "@common/utils/dateFormat";
-import { saveCommentIdToLocalStorage, getCommentIdFromLocalStorage } from "../utils/commentIdStroage";
 
 export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText } = props;
@@ -16,15 +15,6 @@ export default function MyCommentModal(props: CommentModalProps) {
   const [isEditing, setIsEditing] = useState(isDefaultText);
   const { mutate: postDateCommentMutate } = usePostDateComment();
   const { mutate: updateDateCommentMutate } = useUpdateDateComment();
-  const [commentId, setCommentId] = useState<number | null>(null); // 코멘트id 저장
-
-  // 컴포넌트가 마운트될 때 로컬 스토리지에서 commentId를 불러옴
-  useEffect(() => {
-    const savedCommentId = getCommentIdFromLocalStorage(new Date());
-    if (savedCommentId) {
-      setCommentId(savedCommentId);
-    }
-  }, []);
 
   // isDefaultText일 때는 placeholder를 출력하기 위함
   useEffect(() => {
@@ -63,43 +53,17 @@ export default function MyCommentModal(props: CommentModalProps) {
 
       if (isDefaultText) {
         // 서버에 코멘트 POST 요청으로
-        // coupleId는 임의로 1 넣어둠!
         postDateCommentMutate(
-          { content: text, coupleId: 1, date: getServerDate() },
+          { content: text, date: getServerDate() },
           {
             onSuccess: (data) => {
-              const id = data.response; // response 값을 commentId로 사용
-              console.log("POST 성공, 받은 ID:", id); // 로그 추가
-              if (id !== null && id !== undefined) {
-                setCommentId(id); // POST 요청 후 받은 코멘트 ID 저장
-                saveCommentIdToLocalStorage(new Date(), id); // 로컬 스토리지에 저장
-              } else {
-                console.warn("POST 성공했지만 response 값이 null 또는 undefined입니다."); // 로그 추가
-              }
+              console.log("POST 요청 성공", data);
             },
             onError: (error) => {
               console.error("POST 요청 실패", error); // 로그 추가
             },
           },
         );
-      } else {
-        // commentId가 존재할 때만 코멘트 업데이트 요청
-        if (commentId !== null) {
-          console.log("PUT 요청 시작, ID:", commentId); // 로그 추가
-          updateDateCommentMutate(
-            { datecommentId: commentId, content: text },
-            {
-              onSuccess: (data) => {
-                console.log("PUT 성공", data); // 로그 추가
-              },
-              onError: (error) => {
-                console.error("PUT 요청 실패", error); // 로그 추가
-              },
-            },
-          );
-        } else {
-          console.warn("commentId가 null입니다."); // 로그 추가
-        }
       }
     }
   };

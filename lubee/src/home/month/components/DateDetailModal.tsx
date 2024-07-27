@@ -43,7 +43,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   /*혜연이 부분*/
   const isToday = false;
   const finalServerDate = isToday ? getServerDate() : serverDate; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
-  const commentData = useGetTodayDateComment(1, finalServerDate); // coupleId는 임의로 1 넣음
+  const commentData = useGetTodayDateComment(finalServerDate);
   if (!commentData) return <></>;
   const { response } = commentData;
   const { mine, lover } = response || {};
