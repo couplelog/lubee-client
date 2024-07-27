@@ -22,17 +22,33 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
   const displayPics =
     specificDto.length < 5
       ? [
-          ...specificDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id })),
-          { picSrc: blankImg, id: "blank" },
+          ...specificDto.map((memory) => ({
+            picSrc: memory.picture,
+            id: memory.memory_id,
+            myEmoji: memory.reaction_first,
+            partnerEmoji: memory.reaction_second,
+          })),
+          { picSrc: blankImg, id: "blank", myEmoji: "", partnerEmoji: "" },
         ]
-      : specificDto.map((memory) => ({ picSrc: memory.picture, id: memory.memory_id }));
+      : specificDto.map((memory) => ({
+          picSrc: memory.picture,
+          id: memory.memory_id,
+          myEmoji: memory.reaction_first,
+          partnerEmoji: memory.reaction_second,
+        }));
 
   /*프로필 아이콘*/
   const myProfile = getProfileIconSrc("me", "profile1");
 
-  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", "heart") || undefined;
-  const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
+  /*리액션 아이콘*/
+  const myEmojiIcon = (emoji: string | null) => {
+    const emojiSrc = getEmojiSrc("me", emoji);
+    return emojiSrc ? <EmojiIcon as={emojiSrc} /> : null;
+  };
+  const partnerEmojiIcon = (emoji: string | null) => {
+    const emojiSrc = getEmojiSrc("partner", emoji);
+    return emojiSrc ? <EmojiIcon as={emojiSrc} /> : null;
+  };
 
   return (
     <Container>
@@ -55,10 +71,12 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
                 location={specificDto.find((memory) => memory.memory_id === img.id)?.location_name || ""}
                 font="smallPic"
               />
-              <EmojiTag font="smallPic">
-                <EmojiIcon as={myEmoji} />
-                <EmojiIcon as={partnerEmoji} />
-              </EmojiTag>
+              {img.myEmoji || img.partnerEmoji ? (
+                <EmojiTag font="smallPic">
+                  {myEmojiIcon(img.myEmoji)}
+                  {partnerEmojiIcon(img.partnerEmoji)}
+                </EmojiTag>
+              ) : null}
             </TagContainer>
           </ImgContainer>
         ),
@@ -101,6 +119,7 @@ const ProfileIcon = styled.svg`
 const TagContainer = styled.div`
   display: flex;
   gap: 0.4rem;
+  align-items: flex-end;
   position: absolute;
   bottom: 1.2rem;
   left: 1.21rem;
