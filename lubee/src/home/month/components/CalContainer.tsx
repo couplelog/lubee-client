@@ -23,7 +23,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   const [list, setList] = useState<number[]>(new Array(start + length).fill(0)); // LIST 초기화
 
   const calendarData = useGetCalendar();
-  const totalHoney = useGetMonthHoney(getTodayYear, getTodayMonth);
+  const totalHoney = useGetMonthHoney(year, month);
 
   useEffect(() => {
     const listener = (e: MouseEvent) => {

@@ -3,4 +3,5 @@ export interface CommentModalProps {
   profileIconSrc: string;
   commentText: string;
   setCommentText?: (text: string) => void;
+  finalServerDate?: string;
 }

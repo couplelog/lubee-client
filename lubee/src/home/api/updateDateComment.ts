@@ -1,15 +1,14 @@
 import api from "@common/api/api";
 
 interface UpdateDateCommentRequestTypes {
-  datecommentId: number;
+  date: string;
   content: string;
 }
 
 export async function updateDateComment(props: UpdateDateCommentRequestTypes) {
-  const { datecommentId, content } = props;
-
+  const { date, content } = props;
   const { data } = await api.put("/api/datecomments", {
-    datecommentId: datecommentId,
+    date: date,
     content: content,
   });
 
