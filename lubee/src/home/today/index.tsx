@@ -10,15 +10,21 @@ import ToggleCalendar from "./components/ToggleCalendar";
 import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 import { getServerDate, getTodayDate, getTodayMonth } from "@common/utils/dateFormat";
 import ContentContainer from "./components/ContentContainer";
+import { useGetLoveDay } from "home/hooks/useGetLoveDay";
 
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
   const totalHoney = useGetTodayHoney(getServerDate());
-  if (!totalHoney) return <></>;
+  const loveDay = useGetLoveDay();
+
+  if (!totalHoney || !loveDay || !loveDay?.response) return <></>;
 
   const { response } = totalHoney;
+  const {
+    response: { love_day },
+  } = loveDay;
 
   function handlePlusBtn() {
     setOpenToggle((open) => !open);
@@ -35,7 +41,7 @@ export default function index() {
     <Wrapper>
       <Container>
         <DateBox />
-        <TodayTitle day={387} />
+        <TodayTitle day={love_day} />
         <SubContainer>
           <HoneyIconContainer honey={response} />
           <TodayProfileBox />
@@ -58,9 +64,6 @@ const Wrapper = styled.section`
   flex-direction: column;
   gap: 1.6rem;
   align-items: center;
-  width: 100%;
-  overflow-y: auto;
-  -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
   &::-webkit-scrollbar {
