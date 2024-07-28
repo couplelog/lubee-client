@@ -64,6 +64,8 @@ const Wrapper = styled.section`
   flex-direction: column;
   gap: 1.6rem;
   align-items: center;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
   &::-webkit-scrollbar {
