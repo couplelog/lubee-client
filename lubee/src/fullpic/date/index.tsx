@@ -58,7 +58,7 @@ export default function index() {
         memory_id={memory_id}
         setMemoryId={setMemoryId}
       />
-      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memory_id} />}
+      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memoryId} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}
     </Wrapper>
   );
