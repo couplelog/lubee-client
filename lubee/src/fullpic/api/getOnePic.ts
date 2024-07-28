@@ -6,7 +6,8 @@ export interface MemoryBaseDtoDataTypes {
   user_id: number;
   location_name: string;
   picture: string;
-  writer_profile: string;
+  writer_profile_first: string;
+  writer_profile_second: string;
   reaction_first: string;
   reaction_second: string;
   upload_time: string;
