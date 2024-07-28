@@ -12,6 +12,7 @@ import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 import { todayHeaderDateFormat, today } from "@common/utils/dateFormat";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
@@ -63,6 +64,10 @@ export default function index() {
     setOpenDeletePicModal(open);
   }
 
+  const { data: emojiData } = useGetOnePic(memory_id);
+  if (!emojiData) return <></>;
+  const { reaction_first } = emojiData.response;
+  console.log(emojiData);
   return (
     <Wrapper>
       <FullpicHeader
@@ -70,6 +75,7 @@ export default function index() {
         headerDate={todayHeaderDateFormat(today)}
         selectedEmojiText={selectedEmojiText}
         memory_id={memory_id}
+        reaction_first={reaction_first}
       />
       {memoryBaseDto && <OneContainer account="partner" memoryBaseDto={memoryBaseDto} />}
       {(myEmoji || partnerEmoji) && (

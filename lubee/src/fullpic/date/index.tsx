@@ -6,6 +6,7 @@ import DeletePicModal from "fullpic/components/DeletePicModal";
 import FullpicHeader from "fullpic/components/FullpicHeader";
 import { useLocation } from "react-router-dom";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
@@ -36,6 +37,10 @@ export default function index() {
     };
   }, [modalRef]);
 
+  const { data: emojiData } = useGetOnePic(memory_id);
+  if (!emojiData) return <></>;
+  const { reaction_first } = emojiData.response;
+
   return (
     <Wrapper>
       <FullpicHeader
@@ -43,6 +48,7 @@ export default function index() {
         headerDate={monthHeader}
         selectedEmojiText={selectedEmojiText}
         memory_id={memoryId}
+        reaction_first={reaction_first}
       />
       <DateContainer
         setOpenEmojiDetail={setOpenEmojiDetail}
