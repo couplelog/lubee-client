@@ -8,10 +8,11 @@ interface CommentBoxProps {
   isMyComment: boolean;
   comment: string;
   isToday: boolean;
+  finalServerDate?: string;
 }
 
 export default function CommentBox(props: CommentBoxProps) {
-  const { profileIconSrc, isMyComment, comment, isToday } = props;
+  const { profileIconSrc, isMyComment, comment, isToday, finalServerDate } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>(
     isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?",
@@ -70,6 +71,7 @@ export default function CommentBox(props: CommentBoxProps) {
             profileIconSrc={profileIconSrc}
             commentText={commentText}
             setCommentText={setCommentText}
+            finalServerDate={finalServerDate}
           />
         ) : (
           <PartnerCommentModal
