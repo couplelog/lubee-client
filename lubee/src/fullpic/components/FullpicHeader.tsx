@@ -4,6 +4,7 @@ import { usePostReaction } from "@common/hooks/usePostReaction";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 
 interface FullpicHeaderProps {
   handleTrashBtn: (open: boolean) => void;
@@ -16,18 +17,23 @@ interface FullpicHeaderProps {
 export default function FullpicHeader(props: FullpicHeaderProps) {
   const { handleTrashBtn, headerDate, selectedEmojiText, memory_id, reaction_first } = props;
   const navigate = useNavigate();
-
+  const [countPost, setCountPost] = useState(0);
   /*뒤로가기하면 반응이 안바뀌더라도 무조건 deleteReaction+postReaction */
   const { mutate: postReactionMutate } = usePostReaction();
   const { mutate: updateReactionMutate } = useUpdateReaction();
 
   console.log("myEmoji", reaction_first);
 
+  useEffect(() => {
+    setCountPost(1);
+    console.log(countPost);
+  }, [postReactionMutate]);
+
   function moveToHome() {
     const prevPage = localStorage.getItem("currentPage");
 
     // 새로운 리액션 추가
-    if (reaction_first === null && selectedEmojiText !== null) {
+    if (reaction_first === null && selectedEmojiText !== "" && countPost !== 1) {
       postReactionMutate(
         { memory_id: memory_id, reaction: selectedEmojiText },
         {
