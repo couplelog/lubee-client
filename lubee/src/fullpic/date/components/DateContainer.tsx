@@ -115,7 +115,7 @@ export default function DateContainer(props: DateContainerProps) {
               </EmojiTagContainer>
             )}
             <Footer>
-              <EmojiBar setSelectedEmojiText={setSelectedEmojiText} selectedEmojiText={selectedEmojiText} />
+              <EmojiBar setSelectedEmojiText={setSelectedEmojiText} memory_id={picMemoryId} />
             </Footer>
           </ContentsBox>
         );

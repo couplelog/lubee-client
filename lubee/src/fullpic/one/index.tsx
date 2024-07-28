@@ -93,7 +93,7 @@ export default function index() {
         </EmojiTagContainer>
       )}
       <Footer>
-        <EmojiBar setSelectedEmojiText={setSelectedEmojiText} selectedEmojiText={selectedEmojiText} />
+        <EmojiBar setSelectedEmojiText={setSelectedEmojiText} memory_id={memory_id} />
       </Footer>
       {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memory_id} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}

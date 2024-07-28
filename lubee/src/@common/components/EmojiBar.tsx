@@ -7,21 +7,36 @@ import {
   YellowThumbBigIcon,
 } from "@common/components/BigEmojiIcons";
 import styled from "styled-components";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface EmojiBarProps {
   setSelectedEmojiText: (emoji: string) => void;
-  selectedEmojiText: string;
+  memory_id: number;
 }
 
 export default function EmojiBar(props: EmojiBarProps) {
-  const { setSelectedEmojiText, selectedEmojiText } = props;
-  const [emoji, setEmoji] = useState(selectedEmojiText);
-  // const [emoji, setEmoji] = useState<string>(() => {
-  //   return localStorage.getItem("emoji") || "";
-  // });
+  const { setSelectedEmojiText, memory_id } = props;
+  const [updatedData, setUpdatedData] = useState<MemoryBaseDtoDataTypes | null>(null);
+  const [emoji, setEmoji] = useState<string>("");
+
+  const { data: emojiData } = useGetOnePic(memory_id);
+  if (!emojiData) return <></>;
+
+  // get 상태 업데이트
+  useEffect(() => {
+    if (emojiData) {
+      setUpdatedData(emojiData.response);
+    }
+  }, [emojiData]);
 
   useEffect(() => {
-    // localStorage.setItem("emoji", emoji);
+    if (updatedData) {
+      setEmoji(updatedData.reaction_first || ""); // 타입 에러
+    }
+  }, [updatedData]);
+
+  useEffect(() => {
     setSelectedEmojiText(emoji);
   }, [emoji, setSelectedEmojiText]);
 
