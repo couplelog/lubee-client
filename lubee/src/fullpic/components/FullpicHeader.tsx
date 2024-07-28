@@ -18,7 +18,7 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
   const { handleTrashBtn, headerDate, selectedEmojiText, memory_id, reaction_first } = props;
   const navigate = useNavigate();
   const [countPost, setCountPost] = useState(0);
-  /*뒤로가기하면 반응이 안바뀌더라도 무조건 deleteReaction+postReaction */
+
   const { mutate: postReactionMutate } = usePostReaction();
   const { mutate: updateReactionMutate } = useUpdateReaction();
 
