@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import EmojiBar from "@common/components/EmojiBar";
 import FullPicContainer from "@common/components/FullPicContainer";
@@ -18,9 +18,31 @@ interface DateContainerProps {
 
 export default function DateContainer(props: DateContainerProps) {
   const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText, specificDto, memory_id, setMemoryId } = props;
+  /*페이지 네이션*/
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 1; // Change this to the number of items you want to show per page
+  const itemsPerPage = 1;
   const totalPages = Math.ceil(specificDto.length / itemsPerPage);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // memory_id와 일치하는 페이지
+  useEffect(() => {
+    const initialPage = specificDto.findIndex((item) => item.memory_id === memory_id);
+    if (initialPage !== -1) {
+      setCurrentPage(Math.floor(initialPage / itemsPerPage));
+    }
+  }, [memory_id, specificDto, itemsPerPage]);
+
+  // 클릭한 memory_id가 먼저 보이게 하는 ref
+  useEffect(() => {
+    const initialPage = specificDto.findIndex((item) => item.memory_id === memory_id);
+    if (initialPage !== -1 && itemRefs.current[initialPage % itemsPerPage]) {
+      itemRefs.current[initialPage % itemsPerPage]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+    }
+  }, [currentPage, memory_id, specificDto, itemsPerPage]);
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
@@ -66,7 +88,7 @@ export default function DateContainer(props: DateContainerProps) {
         const partnerEmoji = reaction_second ? getEmojiSrc("partner", reaction_second) : undefined;
 
         return (
-          <ContentsBox key={picMemoryId}>
+          <ContentsBox key={picMemoryId} ref={(el) => (itemRefs.current[index] = el)}>
             <Time>{upload_time}</Time>
             <Profile>
               <ProfileIcon as={profile} />
@@ -177,13 +199,14 @@ const Pagination = styled.div`
 `;
 
 const PageButton = styled.button`
-  padding: 0.5rem 1rem;
-  border: none;
-  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.yellow};
+  color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
 
   &:disabled {
-    background: ${({ theme }) => theme.colors.gray_500};
+    background-color: ${({ theme }) => theme.colors.gray_50};
     cursor: not-allowed;
   }
 `;
