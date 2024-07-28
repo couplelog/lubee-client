@@ -21,9 +21,7 @@ export default function EmojiBar(props: EmojiBarProps) {
   const [emoji, setEmoji] = useState<string>("");
 
   const { data: emojiData } = useGetOnePic(memory_id);
-  if (!emojiData) return <></>;
 
-  // get 상태 업데이트
   useEffect(() => {
     if (emojiData) {
       setUpdatedData(emojiData.response);
@@ -32,7 +30,7 @@ export default function EmojiBar(props: EmojiBarProps) {
 
   useEffect(() => {
     if (updatedData) {
-      setEmoji(updatedData.reaction_first || ""); // 타입 에러
+      setEmoji(updatedData.reaction_first || "");
     }
   }, [updatedData]);
 
@@ -58,6 +56,11 @@ export default function EmojiBar(props: EmojiBarProps) {
   }
   function handleSmile() {
     toggleEmoji("smile");
+  }
+
+  // 데이터 Unavailable시
+  if (!emojiData) {
+    return <div>Loading...</div>;
   }
 
   return (
