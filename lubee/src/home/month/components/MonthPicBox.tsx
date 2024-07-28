@@ -21,6 +21,7 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   const navigate = useNavigate();
   const { url, specificDto = [], year, month, selectedDate } = props;
 
+  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
   const myEmojiIcon = (emoji: string | null) => {
     const emojiSrc = getEmojiSrc("me", emoji);
     return emojiSrc ? <EmojiIcon as={emojiSrc} /> : null;
@@ -52,9 +53,6 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   /*프로필 아이콘*/
   const myProfile = getProfileIconSrc("me", "profile1");
 
-  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  // const myEmoji = getEmojiSrc("me", "heart") || undefined;
-  // const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
   const monthHeader = monthHeaderDateFormat(year, month, selectedDate);
 
   return (
