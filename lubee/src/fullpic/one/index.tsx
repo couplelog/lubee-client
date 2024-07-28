@@ -11,12 +11,14 @@ import { useLocation } from "react-router-dom";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 import { todayHeaderDateFormat, today } from "@common/utils/dateFormat";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
 
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
   const [selectedEmojiText, setSelectedEmojiText] = useState<string>("");
+  const [specificDto, setSpecificDto] = useState<MemoryBaseDtoDataTypes[]>();
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -35,22 +37,27 @@ export default function index() {
   const location = useLocation();
   const { memory_id } = location.state as { memory_id: number };
 
-  const response = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
-  //let specificDto: MemoryBaseDtoDataTypes[] | undefined;
-  //specificDto = response?.response.memoryBaseListDto;
-  const specificDto = response?.response.memoryBaseListDto;
+  const data = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
   const memoryBaseDto = specificDto?.find((memory) => memory.memory_id === memory_id);
+
+  useEffect(() => {
+    // data바뀔때마다 상태 업데이트
+    if (data) {
+      setSpecificDto(data?.response.memoryBaseListDto);
+    }
+  }, [data]);
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
   useEffect(() => {
-    if (memoryBaseDto?.reaction1) {
-      setSelectedEmojiText(memoryBaseDto.reaction1);
+    if (memoryBaseDto?.reaction_first) {
+      setSelectedEmojiText(memoryBaseDto.reaction_first);
     }
-  }, [memoryBaseDto?.reaction1]);
+  }, [memoryBaseDto?.reaction_first]);
 
-  //const myEmoji = getEmojiSrc("me", selectedEmojiText);
-  let myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
-  const partnerEmoji = memoryBaseDto?.reaction2 ? getEmojiSrc("partner", memoryBaseDto.reaction2) : undefined;
+  const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
+  const partnerEmoji = memoryBaseDto?.reaction_second
+    ? getEmojiSrc("partner", memoryBaseDto.reaction_second)
+    : undefined;
 
   function handleTrashBtn(open: boolean) {
     setOpenDeletePicModal(open);
@@ -80,7 +87,7 @@ export default function index() {
         </EmojiTagContainer>
       )}
       <Footer>
-        <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
+        <EmojiBar setSelectedEmojiText={setSelectedEmojiText} selectedEmojiText={selectedEmojiText} />
       </Footer>
       {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memory_id} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}
