@@ -8,36 +8,41 @@ import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 import { getServerDate } from "@common/utils/dateFormat";
 
 export default function index() {
-  const totalHoney = useGetTodayHoney(getServerDate());
-  if (!totalHoney) return <></>;
-
-  const { response } = totalHoney;
-
   const navigate = useNavigate();
+  const { data: totalHoney, isLoading, isFetching } = useGetTodayHoney(getServerDate());
+
   useEffect(() => {
     localStorage.getItem("currentPage");
   }, []);
 
   useEffect(() => {
-    if (response === 1) {
-      navigate("/congrats/first");
-    } else if (response === 5) {
-      navigate("/congrats/fifth");
+    // 로딩 상태일 때 로딩 화면 표시
+    if (isLoading || isFetching) {
+      return;
     }
-  }, [response, navigate]);
+  }, [isLoading, isFetching]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const prevPage = localStorage.getItem("currentPage");
-      if (prevPage === "today") {
-        navigate("/home/today");
+    if (!isLoading && !isFetching && totalHoney !== undefined) {
+      const { response } = totalHoney;
+      if (response === 1) {
+        navigate("/congrats/first");
+      } else if (response === 5) {
+        navigate("/congrats/fifth");
       } else {
-        navigate("/home/month");
-      }
-    }, 3000); // 3초 후에 로그인 페이지로 이동
+        const timer = setTimeout(() => {
+          const prevPage = localStorage.getItem("currentPage");
+          if (prevPage === "today") {
+            navigate("/home/today");
+          } else {
+            navigate("/home/month");
+          }
+        }, 3000); // 3초 후에 홈 페이지로 이동
 
-    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 정리
-  }, [navigate]);
+        return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 정리
+      }
+    }
+  }, [totalHoney, isLoading, isFetching, navigate]);
 
   return (
     <Wrapper>
