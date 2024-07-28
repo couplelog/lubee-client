@@ -68,10 +68,6 @@ export default function DateContainer(props: DateContainerProps) {
     }
   }, [specificDto, memory_id]);
 
-  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", selectedEmojiText);
-  const partnerEmoji = getEmojiSrc("partner", "thumb");
-
   return (
     <Wrapper>
       {specificDto.map((data, index) => {
@@ -80,19 +76,28 @@ export default function DateContainer(props: DateContainerProps) {
           user_id,
           location_name,
           picture,
-          writer_profile,
+          writer_profile_first,
+          writer_profile_second,
           reaction_first,
           reaction_second,
           upload_time,
         } = data;
         const profile = getProfileIconSrc("me", "profile2");
 
+        useEffect(() => {
+          if (reaction_first) {
+            setSelectedEmojiText(reaction_first);
+          }
+        }, [reaction_first]);
+        const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
+        const partnerEmoji = reaction_second ? getEmojiSrc("partner", reaction_second) : undefined;
+
         return (
           <ContentsBox key={picMemoryId} ref={(el) => (picRefs.current[index] = el)}>
             <Time>{upload_time}</Time>
             <Profile>
               <ProfileIcon as={profile} />
-              <Name>{writer_profile}</Name>
+              <Name>{writer_profile_first}</Name>
             </Profile>
             <FullPicContainer picSrc={picture} location={location_name} />
             {(myEmoji || partnerEmoji) && (
@@ -110,7 +115,7 @@ export default function DateContainer(props: DateContainerProps) {
               </EmojiTagContainer>
             )}
             <Footer>
-              <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
+              <EmojiBar setSelectedEmojiText={setSelectedEmojiText} selectedEmojiText={selectedEmojiText} />
             </Footer>
           </ContentsBox>
         );
