@@ -1,15 +1,30 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
 import CompanyText from "@common/components/CompanyText";
 import { SymbolIc } from "assets";
+/* 오늘의 꿀 조회로 1개, 5개일 때 congrats로 navigate*/
+import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
+import { getServerDate } from "@common/utils/dateFormat";
 
 export default function index() {
+  const totalHoney = useGetTodayHoney(getServerDate());
+  if (!totalHoney) return <></>;
+
+  const { response } = totalHoney;
+
   const navigate = useNavigate();
   useEffect(() => {
     localStorage.getItem("currentPage");
   }, []);
+
+  useEffect(() => {
+    if (response === 1) {
+      navigate("/congrats/first");
+    } else if (response === 5) {
+      navigate("/congrats/fifth");
+    }
+  }, [response, navigate]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
