@@ -8,23 +8,18 @@ import FullpicHeader from "fullpic/components/FullpicHeader";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import EmojiTag from "@common/components/EmojiTag";
 import { useLocation } from "react-router-dom";
-import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 import { todayHeaderDateFormat, today } from "@common/utils/dateFormat";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
 
-  function handleTrashBtn(open: boolean) {
-    setOpenDeletePicModal(open);
-  }
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
-  const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
-
-  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
-  const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
+  const [selectedEmojiText, setSelectedEmojiText] = useState<string>("");
+  const [specificDto, setSpecificDto] = useState<MemoryBaseDtoDataTypes[]>();
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -43,16 +38,45 @@ export default function index() {
   const location = useLocation();
   const { memory_id } = location.state as { memory_id: number };
 
-  let specificDto: MemoryBaseDtoDataTypes[] | undefined;
-
-  const response = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
-  specificDto = response?.response.memoryBaseListDto;
-
+  const data = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
   const memoryBaseDto = specificDto?.find((memory) => memory.memory_id === memory_id);
 
+  useEffect(() => {
+    // data바뀔때마다 상태 업데이트
+    if (data) {
+      setSpecificDto(data?.response.memoryBaseListDto);
+    }
+  }, [data]);
+
+  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
+  useEffect(() => {
+    if (memoryBaseDto?.reaction_first) {
+      setSelectedEmojiText(memoryBaseDto.reaction_first);
+    }
+  }, [memoryBaseDto?.reaction_first]);
+
+  const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
+  const partnerEmoji = memoryBaseDto?.reaction_second
+    ? getEmojiSrc("partner", memoryBaseDto.reaction_second)
+    : undefined;
+
+  function handleTrashBtn(open: boolean) {
+    setOpenDeletePicModal(open);
+  }
+
+  const { data: emojiData } = useGetOnePic(memory_id);
+  if (!emojiData) return <></>;
+  const { reaction_first } = emojiData.response;
+  console.log(emojiData);
   return (
     <Wrapper>
-      <FullpicHeader handleTrashBtn={handleTrashBtn} headerDate={todayHeaderDateFormat(today)} />
+      <FullpicHeader
+        handleTrashBtn={handleTrashBtn}
+        headerDate={todayHeaderDateFormat(today)}
+        selectedEmojiText={selectedEmojiText}
+        memory_id={memory_id}
+        reaction_first={reaction_first}
+      />
       {memoryBaseDto && <OneContainer account="partner" memoryBaseDto={memoryBaseDto} />}
       {(myEmoji || partnerEmoji) && (
         <EmojiTagContainer
@@ -69,7 +93,7 @@ export default function index() {
         </EmojiTagContainer>
       )}
       <Footer>
-        <EmojiBar setSelectedEmojiText={setSelectedEmojiText} />
+        <EmojiBar setSelectedEmojiText={setSelectedEmojiText} selectedEmojiText={selectedEmojiText} />
       </Footer>
       {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memory_id} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}

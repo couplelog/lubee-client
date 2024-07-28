@@ -33,12 +33,14 @@ const usePostLogin = () => {
     }
   }, [KAKAO_CODE, navigate]);
 
+  // 403에러 캐치해서 로딩페이지 띄우기
+
   useEffect(() => {
     if (!isLoading && couplesInfoResponse) {
       console.log("커플정보 얻기", couplesInfoResponse.success);
       if (couplesInfoResponse.success) {
         console.log(couplesInfoResponse);
-        navigate("/home/today");
+        navigate("/loading");
       } else {
         navigate("/onboarding");
       }

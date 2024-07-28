@@ -1,4 +1,5 @@
 import { useDeletePic } from "fullpic/hooks/useDeletePic";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface DeletePicModalProps {
@@ -9,12 +10,15 @@ interface DeletePicModalProps {
 export default function DeletePicModal(props: DeletePicModalProps) {
   const { handleTrashBtn, memory_id } = props;
   const { mutate: deltePic } = useDeletePic();
+  const navigate = useNavigate();
 
   console.log("memory_id", memory_id);
+
   function handleDeleteBtn() {
     deltePic(memory_id, {
       onSuccess: () => {
         handleTrashBtn(false); // 삭제 시 모달 닫기
+        navigate("/loading");
       },
       onError: (error) => {
         console.error("삭제 실패", error);

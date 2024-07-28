@@ -10,16 +10,18 @@ import styled from "styled-components";
 
 interface EmojiBarProps {
   setSelectedEmojiText: (emoji: string) => void;
+  selectedEmojiText: string;
 }
 
 export default function EmojiBar(props: EmojiBarProps) {
-  const { setSelectedEmojiText } = props;
-  const [emoji, setEmoji] = useState<string>(() => {
-    return localStorage.getItem("emoji") || "";
-  });
+  const { setSelectedEmojiText, selectedEmojiText } = props;
+  const [emoji, setEmoji] = useState(selectedEmojiText);
+  // const [emoji, setEmoji] = useState<string>(() => {
+  //   return localStorage.getItem("emoji") || "";
+  // });
 
   useEffect(() => {
-    localStorage.setItem("emoji", emoji);
+    // localStorage.setItem("emoji", emoji);
     setSelectedEmojiText(emoji);
   }, [emoji, setSelectedEmojiText]);
 

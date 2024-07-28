@@ -6,19 +6,23 @@ import DeletePicModal from "fullpic/components/DeletePicModal";
 import FullpicHeader from "fullpic/components/FullpicHeader";
 import { useLocation } from "react-router-dom";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
   const location = useLocation();
+
   const { monthHeader } = location.state as { monthHeader: string };
   const { specificDto } = location.state as { specificDto: MemoryBaseDtoDataTypes[] };
   const { memory_id } = location.state as { memory_id: number };
+
   const [memoryId, setMemoryId] = useState<number>(memory_id);
+
   function handleTrashBtn(open: boolean) {
     setOpenDeletePicModal(open);
   }
   const [openEmojiDetail, setOpenEmojiDetail] = useState<boolean>(false);
-  const [selectedEmojiText, setSelectedEmojiText] = useState<string>(localStorage.getItem("emoji") || "");
+  const [selectedEmojiText, setSelectedEmojiText] = useState<string>("");
 
   /*모달 애니메이션*/
   const modalRef = useRef<HTMLDivElement>(null);
@@ -33,9 +37,19 @@ export default function index() {
     };
   }, [modalRef]);
 
+  const { data: emojiData } = useGetOnePic(memory_id);
+  if (!emojiData) return <></>;
+  const { reaction_first } = emojiData.response;
+
   return (
     <Wrapper>
-      <FullpicHeader handleTrashBtn={handleTrashBtn} headerDate={monthHeader} />
+      <FullpicHeader
+        handleTrashBtn={handleTrashBtn}
+        headerDate={monthHeader}
+        selectedEmojiText={selectedEmojiText}
+        memory_id={memoryId}
+        reaction_first={reaction_first}
+      />
       <DateContainer
         setOpenEmojiDetail={setOpenEmojiDetail}
         setSelectedEmojiText={setSelectedEmojiText}
@@ -44,7 +58,7 @@ export default function index() {
         memory_id={memory_id}
         setMemoryId={setMemoryId}
       />
-      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memory_id} />}
+      {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memoryId} />}
       {openEmojiDetail && <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} />}
     </Wrapper>
   );

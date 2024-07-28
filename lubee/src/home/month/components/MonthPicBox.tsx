@@ -21,6 +21,16 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   const navigate = useNavigate();
   const { url, specificDto = [], year, month, selectedDate } = props;
 
+  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
+  const myEmojiIcon = (emoji: string | null) => {
+    const emojiSrc = getEmojiSrc("me", emoji);
+    return emojiSrc ? <EmojiIcon as={emojiSrc} /> : null;
+  };
+  const partnerEmojiIcon = (emoji: string | null) => {
+    const emojiSrc = getEmojiSrc("partner", emoji);
+    return emojiSrc ? <EmojiIcon as={emojiSrc} /> : null;
+  };
+
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =
     specificDto.length < 5
@@ -28,24 +38,21 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
           ...specificDto.map((memory) => ({
             picSrc: memory.picture,
             id: memory.memory_id,
-            myEmoji: memory.reaction1,
-            partnerEmoji: memory.reaction2,
+            myEmoji: memory.reaction_first,
+            partnerEmoji: memory.reaction_second,
           })),
           { picSrc: blankImg, id: "blank", myEmoji: "", partnerEmoji: "" },
         ]
       : specificDto.map((memory) => ({
           picSrc: memory.picture,
           id: memory.memory_id,
-          myEmoji: memory.reaction1,
-          partnerEmoji: memory.reaction2,
+          myEmoji: memory.reaction_first,
+          partnerEmoji: memory.reaction_second,
         }));
 
   /*프로필 아이콘*/
   const myProfile = getProfileIconSrc("me", "profile1");
 
-  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  // const myEmoji = getEmojiSrc("me", "heart") || undefined;
-  // const partnerEmoji = getEmojiSrc("partner", "thumb") || undefined;
   const monthHeader = monthHeaderDateFormat(year, month, selectedDate);
 
   return (
@@ -71,8 +78,8 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
               />
               {img.myEmoji || img.partnerEmoji ? (
                 <EmojiTag font="smallPic">
-                  {img.myEmoji && <EmojiIcon as={img.myEmoji} />}
-                  {img.partnerEmoji && <EmojiIcon as={img.partnerEmoji} />}
+                  {myEmojiIcon(img.myEmoji)}
+                  {partnerEmojiIcon(img.partnerEmoji)}
                 </EmojiTag>
               ) : null}
             </TagContainer>

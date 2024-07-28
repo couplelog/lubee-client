@@ -7,6 +7,7 @@ import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import TodayPicBox from "home/today/components/TodayPicBox";
 import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
+import { useEffect, useState } from "react";
 
 interface ContentContainerProps {
   date: string;
@@ -15,6 +16,7 @@ interface ContentContainerProps {
 
 export default function ContentContainer(props: ContentContainerProps) {
   const { date, isToday } = props;
+
   /*커플정보에서 프로필 가져와서 출력*/
   const { data: CoupleInfo } = useGetCouplesInfo();
   const { response: coupleResponse } = CoupleInfo || {};
@@ -25,11 +27,15 @@ export default function ContentContainer(props: ContentContainerProps) {
   const partnerProfile = getProfileIconSrc("partner", profile_second);
 
   const urlDate = `${formatMonth(getTodayMonth)}${getTodayDate}`;
-
-  let specificDto: MemoryBaseDtoDataTypes[] | undefined;
-
+  const [specificDto, setSpecificDto] = useState<MemoryBaseDtoDataTypes[]>();
   const data = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
-  specificDto = data?.response.memoryBaseListDto;
+
+  useEffect(() => {
+    // data바뀔때마다 상태 업데이트
+    if (data) {
+      setSpecificDto(data?.response.memoryBaseListDto);
+    }
+  }, [data]);
 
   /*코멘트 부분*/
   const finalServerDate = isToday ? getServerDate() : date; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로

@@ -1,25 +1,74 @@
 import { BackIc, TrashIc } from "assets/index";
+import { useUpdateReaction } from "@common/hooks/useUpdateReaction";
+import { usePostReaction } from "@common/hooks/usePostReaction";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+
 interface FullpicHeaderProps {
   handleTrashBtn: (open: boolean) => void;
   headerDate: string;
+  selectedEmojiText: string;
+  memory_id: number;
+  reaction_first: string | null;
 }
+
 export default function FullpicHeader(props: FullpicHeaderProps) {
-  const { handleTrashBtn, headerDate } = props;
+  const { handleTrashBtn, headerDate, selectedEmojiText, memory_id, reaction_first } = props;
   const navigate = useNavigate();
+  const [countPost, setCountPost] = useState(0);
+
+  const { mutate: postReactionMutate } = usePostReaction();
+  const { mutate: updateReactionMutate } = useUpdateReaction();
+
+  console.log("myEmoji", reaction_first);
+
+  useEffect(() => {
+    setCountPost(1);
+    console.log(countPost);
+  }, [postReactionMutate]);
 
   function moveToHome() {
-    // 헤더에서 전에 어떤 페이지였는지 불러오기
     const prevPage = localStorage.getItem("currentPage");
 
-    if (prevPage === "today") {
-      navigate("/home/today");
-      console.log(prevPage);
-    } else {
-      navigate("/home/month");
-      console.log(prevPage);
+    // 새로운 리액션 추가
+    if (reaction_first === null && selectedEmojiText !== "" && countPost !== 1) {
+      postReactionMutate(
+        { memory_id: memory_id, reaction: selectedEmojiText },
+        {
+          onSuccess: () => {
+            if (prevPage === "today") {
+              navigate("/home/today");
+            } else {
+              navigate("/home/month");
+            }
+          },
+        },
+      );
+    }
+    // 리액션이 다를때
+    else if (reaction_first !== selectedEmojiText) {
+      updateReactionMutate(
+        { memory_id: memory_id, reaction: selectedEmojiText },
+        {
+          onSuccess: () => {
+            if (prevPage === "today") {
+              navigate("/home/today");
+            } else {
+              navigate("/home/month");
+            }
+          },
+        },
+      );
+    }
+    // no change일때
+    else {
+      if (prevPage === "today") {
+        navigate("/home/today");
+      } else {
+        navigate("/home/month");
+      }
     }
   }
 

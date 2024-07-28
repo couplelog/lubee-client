@@ -1,4 +1,4 @@
-import { successToast } from "@common/utils/toast";
+import { infoToast } from "@common/utils/toast";
 
 export interface readPicProps {
   input: FileList | null;
@@ -15,6 +15,6 @@ export const readPic = ({ input, setPicSrc, setVerified }: readPicProps) => {
     reader.readAsDataURL(input[0]);
     setPicSrc(input[0]);
     setVerified(false);
-    successToast("사진 등록 성공");
+    infoToast("사진 등록 성공");
   }
 };

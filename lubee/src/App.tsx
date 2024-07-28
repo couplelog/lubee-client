@@ -26,6 +26,7 @@ import First from "congrats/first";
 import Fifth from "congrats/fifth";
 import Join from "congrats/join";
 import LoginCallback from "login/components/LoginCallback";
+import Loading from "loading";
 
 const Router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const Router = createBrowserRouter([
     children: [
       { index: true, element: <Splash /> },
       { path: "/splash", element: <Splash /> },
+      { path: "/loading", element: <Loading /> },
       { path: "/login", element: <Login /> },
       { path: "/api/users/kakao/simpleLogin", element: <LoginCallback /> },
       { path: "/onboarding", element: <Onboarding /> },

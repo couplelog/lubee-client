@@ -11,6 +11,7 @@ import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 import { getServerDate, getTodayDate, getTodayMonth } from "@common/utils/dateFormat";
 import ContentContainer from "./components/ContentContainer";
 import { useGetLoveDay } from "home/hooks/useGetLoveDay";
+import TodayHomeHeader from "./components/TodayHomeHeader";
 
 export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
@@ -38,24 +39,27 @@ export default function index() {
   }
 
   return (
-    <Wrapper>
-      <Container>
-        <DateBox />
-        <TodayTitle day={love_day} />
-        <SubContainer>
-          <HoneyIconContainer honey={response} />
-          <TodayProfileBox />
-        </SubContainer>
-      </Container>
-      <ContentContainer date={`${getTodayMonth}월 ${getTodayDate}일`} isToday={true} />
-      {!showCalendar && (
-        <BtnWrapper type="button" onClick={handlePlusBtn}>
-          {isPlusClicked ? <PlusClickedIcon /> : <PlusIcon />}
-        </BtnWrapper>
-      )}
-      {openToggle && <Toggle handleCalendar={handleCalendar} showCalendar={showCalendar} />}
-      {showCalendar && <ToggleCalendar showCalendar={showCalendar} handleCalendar={handleCalendar} />}
-    </Wrapper>
+    <>
+      <TodayHomeHeader />
+      <Wrapper>
+        <Container>
+          <DateBox />
+          <TodayTitle day={love_day} />
+          <SubContainer>
+            <HoneyIconContainer honey={response} />
+            <TodayProfileBox />
+          </SubContainer>
+        </Container>
+        <ContentContainer date={`${getTodayMonth}월 ${getTodayDate}일`} isToday={true} />
+        {!showCalendar && (
+          <BtnWrapper type="button" onClick={handlePlusBtn}>
+            {isPlusClicked ? <PlusClickedIcon /> : <PlusIcon />}
+          </BtnWrapper>
+        )}
+        {openToggle && <Toggle handleCalendar={handleCalendar} showCalendar={showCalendar} />}
+        {showCalendar && <ToggleCalendar showCalendar={showCalendar} handleCalendar={handleCalendar} />}
+      </Wrapper>
+    </>
   );
 }
 
