@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
 import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
+import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 interface EmojiDetailModalProps {
   selectedEmojiText: string;
@@ -13,19 +14,20 @@ interface EmojiDetailModalProps {
 const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((props, ref) => {
   const { selectedEmojiText, memory_id } = props;
 
-  /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const { data: emojiData } = useGetOnePic(memory_id);
-  if (!emojiData) return <></>;
+  const { data: coupleInfo } = useGetCouplesInfo(); // 서버한테 어떤 프로필과 닉네임 선택했는지 받아오면 됨
+  const { data: emojiData } = useGetOnePic(memory_id); // 서버한테 어떤 공감을 선택했는지 받아오면 됨
+  if (!emojiData || !coupleInfo) return <></>;
 
   const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined; //내 이모지는 바뀔 수 있으니까 selected로
   const partnerEmoji = getEmojiSrc("partner", emojiData.response.reaction_second) || undefined;
 
-  const writerProfileFirst = emojiData.response.writer_profile_first;
-  const writerProfileSecond = emojiData.response.writer_profile_second;
+  const { nickname_first, profile_first, nickname_second, profile_second } = coupleInfo.response;
 
-  const isFirstWriter = writerProfileFirst !== null;
-  const myProfile = getHoverProfileIconSrc("me", isFirstWriter ? writerProfileFirst : writerProfileSecond);
-  const partnerProfile = getHoverProfileIconSrc("partner", isFirstWriter ? writerProfileSecond : writerProfileFirst);
+  const myProfile = getHoverProfileIconSrc("me", profile_first);
+  const partnerProfile = getHoverProfileIconSrc("partner", profile_second);
+
+  const myNickname = nickname_first;
+  const partnerNickname = nickname_second;
 
   return (
     <Background>
@@ -39,7 +41,7 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
             <MyEmoji>
               <Profile>
                 <ProfileIcon as={myProfile} />
-                <Name>불꽃피카츄</Name>
+                <Name>{myNickname}</Name>
               </Profile>
               <EmojiIcon as={myEmoji} />
             </MyEmoji>
@@ -47,7 +49,7 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
           <PartnerEmoji>
             <Profile>
               <ProfileIcon as={partnerProfile} />
-              <Name>맹꽁이</Name>
+              <Name>{partnerNickname}</Name>
             </Profile>
             <EmojiIcon as={partnerEmoji} />
           </PartnerEmoji>
