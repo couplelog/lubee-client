@@ -3,21 +3,26 @@ import styled from "styled-components";
 import { forwardRef } from "react";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
 
 interface EmojiDetailModalProps {
   selectedEmojiText: string;
+  memory_id: number;
 }
 
 const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((props, ref) => {
-  const { selectedEmojiText } = props;
+  const { selectedEmojiText, memory_id } = props;
 
   /* 서버한테 어떤 프로필을 선택했는지 받아오면 됨*/
   const myProfile = getProfileIconSrc("me", "profile1");
   const partnerProfile = getProfileIconSrc("partner", "profile2");
 
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
-  const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
-  const partnerEmoji = getEmojiSrc("partner", selectedEmojiText) || undefined;
+  const { data: emojiData } = useGetOnePic(memory_id);
+  if (!emojiData) return <></>;
+
+  const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined; //내 이모지는 바뀔 수 있으니까 selected로
+  const partnerEmoji = getEmojiSrc("partner", emojiData.response.reaction_second) || undefined;
 
   return (
     <Background>
