@@ -32,6 +32,7 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
   }
 
   const prevPage = localStorage.getItem("currentPage");
+  console.log(prevPage);
 
   useEffect(() => {
     // 배열을 다시 로컬 스토리지에 저장

@@ -18,6 +18,8 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
   const navigate = useNavigate();
   const { url, specificDto = [] } = props;
 
+  localStorage.setItem("currentPage", "today"); // 컴포넌트가 렌더링될 때 "today"를 로컬 스토리지에 저장
+
   /*이미지 개수가 5개 이하이면 이미지 추가하는 버튼 만들어주는 array*/
   const displayPics =
     specificDto.length < 5
@@ -106,6 +108,7 @@ const Image = styled.img`
   height: 16.7rem;
   padding: 0;
   border: none;
+  border-radius: 12px;
   background: none;
 `;
 

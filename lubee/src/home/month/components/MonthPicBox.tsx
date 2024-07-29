@@ -21,6 +21,8 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   const navigate = useNavigate();
   const { url, specificDto = [], year, month, selectedDate } = props;
 
+  localStorage.setItem("currentPage", "month"); // 컴포넌트가 렌더링될 때 "month"를 로컬 스토리지에 저장
+
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
   const myEmojiIcon = (emoji: string | null) => {
     const emojiSrc = getEmojiSrc("me", emoji);
@@ -111,6 +113,7 @@ const Image = styled.img`
   height: 16.7rem;
   padding: 0;
   border: none;
+  border-radius: 12px;
   background: none;
 `;
 
