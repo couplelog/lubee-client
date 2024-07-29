@@ -8,6 +8,7 @@ import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 const usePostLogin = () => {
   const KAKAO_CODE = new URL(window.location.href).searchParams.get("code");
   const navigate = useNavigate();
+  // 여기서 useGetCouplesInfo를 호출하지 않고 useEffect로 로그인 요청이 완료된 후에 GetCouplesInfo를 호출
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 추적
 
   useEffect(() => {

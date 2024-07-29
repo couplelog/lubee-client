@@ -68,6 +68,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  min-height: 37rem;
 `;
 
 const CommentsContainer = styled.span`
