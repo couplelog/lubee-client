@@ -6,44 +6,50 @@ import { SymbolIc } from "assets";
 /* 오늘의 꿀 조회로 1개, 5개일 때 congrats로 navigate*/
 import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 import { getServerDate } from "@common/utils/dateFormat";
+import { usePostUploadPic } from "upload/hooks/usePostUploadPic";
 
 export default function index() {
   const navigate = useNavigate();
-  const { data: totalHoney, isLoading, isFetching } = useGetTodayHoney(getServerDate());
+  const { data: totalHoney, refetch: refetchHoney } = useGetTodayHoney(getServerDate());
 
   useEffect(() => {
-    localStorage.getItem("currentPage");
-  }, []);
+    const timer = setTimeout(async () => {
+      try {
+        // 꿀 개수를 불러옴
+        const { data: updatedHoney } = await refetchHoney();
+        if (updatedHoney !== undefined) {
+          const { response } = updatedHoney;
 
-  useEffect(() => {
-    // 로딩 상태일 때 로딩 화면 표시
-    if (isLoading || isFetching) {
-      return;
-    }
-  }, [isLoading, isFetching]);
-
-  useEffect(() => {
-    if (!isLoading && !isFetching && totalHoney !== undefined) {
-      const { response } = totalHoney;
-      if (response === 1) {
-        navigate("/congrats/first");
-      } else if (response === 5) {
-        navigate("/congrats/fifth");
-      } else {
-        const timer = setTimeout(() => {
-          const prevPage = localStorage.getItem("currentPage");
-          if (prevPage === "today") {
-            navigate("/home/today");
+          // 꿀 개수에 따라 다른 화면으로 이동
+          if (response === 1) {
+            navigate("/congrats/first");
+          } else if (response === 5) {
+            navigate("/congrats/fifth");
           } else {
-            navigate("/home/month");
+            const prevPage = localStorage.getItem("currentPage");
+            if (prevPage === "today") {
+              navigate("/home/today");
+            } else {
+              navigate("/home/month");
+            }
           }
-        }, 3000); // 3초 후에 홈 페이지로 이동
-
-        return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 정리
+        }
+      } catch (error) {
+        console.error("꿀 개수를 불러오는 중 오류 발생:", error);
+        // 오류가 발생한 경우 기본 페이지로 이동
+        const prevPage = localStorage.getItem("currentPage");
+        if (prevPage === "today") {
+          navigate("/home/today");
+        } else {
+          navigate("/home/month");
+        }
       }
-    }
-  }, [totalHoney, isLoading, isFetching, navigate]);
+    }, 3000); // 3초 후에 꿀 개수를 불러와서 화면 이동
 
+    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 정리
+  }, [navigate, refetchHoney]);
+
+  // 무조건 기본으로 로딩 화면을 표시
   return (
     <Wrapper>
       <LogoContainer>
