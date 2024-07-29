@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import EmojiBar from "@common/components/EmojiBar";
 import FullPicContainer from "@common/components/FullPicContainer";
@@ -18,59 +18,53 @@ interface DateContainerProps {
 
 export default function DateContainer(props: DateContainerProps) {
   const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText, specificDto, memory_id, setMemoryId } = props;
-  const picRefs = useRef<(HTMLDivElement | null)[]>([]);
+  /*페이지 네이션*/
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 1;
+  const totalPages = Math.ceil(specificDto.length / itemsPerPage);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // 스크롤할때마다 memoryId를 반영할 수 있게
-  const observer = useRef<IntersectionObserver | null>(null);
-  const handleIntersection = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const picMemoryId = entry.target.getAttribute("data-memory-id");
-          if (picMemoryId) {
-            setMemoryId(Number(picMemoryId));
-          }
-        }
-      });
-    },
-    [setMemoryId],
-  );
+  // memory_id와 일치하는 페이지
   useEffect(() => {
-    observer.current = new IntersectionObserver(handleIntersection, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.5,
-    });
+    const initialPage = specificDto.findIndex((item) => item.memory_id === memory_id);
+    if (initialPage !== -1) {
+      setCurrentPage(Math.floor(initialPage / itemsPerPage));
+    }
+  }, [memory_id, specificDto, itemsPerPage]);
 
-    const currentObserver = observer.current;
-    picRefs.current.forEach((pic) => {
-      if (pic) currentObserver.observe(pic);
-    });
-
-    return () => {
-      picRefs.current.forEach((pic) => {
-        if (pic) currentObserver.unobserve(pic);
-      });
-    };
-  }, [specificDto, handleIntersection]);
-
-  // 클릭한 memory_id와 일치하는 pic가는 ref
+  // 클릭한 memory_id가 먼저 보이게 하는 ref
   useEffect(() => {
-    const index = specificDto.findIndex((item) => item.memory_id === memory_id);
-
-    // 매칭 pic으로 스크롤
-    if (index !== -1 && picRefs.current[index]) {
-      picRefs.current[index]?.scrollIntoView({
+    const initialPage = specificDto.findIndex((item) => item.memory_id === memory_id);
+    if (initialPage !== -1 && itemRefs.current[initialPage % itemsPerPage]) {
+      itemRefs.current[initialPage % itemsPerPage]?.scrollIntoView({
         behavior: "smooth",
         block: "center",
         inline: "center",
       });
     }
-  }, [specificDto, memory_id]);
+  }, [currentPage, memory_id, specificDto, itemsPerPage]);
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      const newPage = currentPage - 1;
+      setCurrentPage(newPage);
+      setMemoryId(specificDto[newPage * itemsPerPage].memory_id);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      const newPage = currentPage + 1;
+      setCurrentPage(newPage);
+      setMemoryId(specificDto[newPage * itemsPerPage].memory_id);
+    }
+  };
+
+  const currentItems = specificDto.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
   return (
     <Wrapper>
-      {specificDto.map((data, index) => {
+      {currentItems.map((data, index) => {
         const {
           memory_id: picMemoryId,
           user_id,
@@ -88,12 +82,13 @@ export default function DateContainer(props: DateContainerProps) {
           if (reaction_first) {
             setSelectedEmojiText(reaction_first);
           }
-        }, [reaction_first]);
+        }, [reaction_first, setSelectedEmojiText]);
+
         const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
         const partnerEmoji = reaction_second ? getEmojiSrc("partner", reaction_second) : undefined;
 
         return (
-          <ContentsBox key={picMemoryId} ref={(el) => (picRefs.current[index] = el)}>
+          <ContentsBox key={picMemoryId} ref={(el) => (itemRefs.current[index] = el)}>
             <Time>{upload_time}</Time>
             <Profile>
               <ProfileIcon as={profile} />
@@ -115,31 +110,38 @@ export default function DateContainer(props: DateContainerProps) {
               </EmojiTagContainer>
             )}
             <Footer>
-              <EmojiBar setSelectedEmojiText={setSelectedEmojiText} selectedEmojiText={selectedEmojiText} />
+              <EmojiBar setSelectedEmojiText={setSelectedEmojiText} memory_id={picMemoryId} />
             </Footer>
           </ContentsBox>
         );
       })}
+      <Pagination>
+        <PageButton onClick={handlePrevPage} disabled={currentPage === 0}>
+          {"<"}
+        </PageButton>
+        <PageIndicator>
+          {currentPage + 1} / {totalPages}
+        </PageIndicator>
+        <PageButton onClick={handleNextPage} disabled={currentPage === totalPages - 1}>
+          {">"}
+        </PageButton>
+      </Pagination>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
   display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
 `;
 
 const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 2rem;
 `;
 
 const Time = styled.p`
@@ -187,4 +189,31 @@ const Footer = styled.div`
 const EmojiIcon = styled.svg`
   width: 2.4rem;
   height: 2.4rem;
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+const PageButton = styled.button`
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.yellow};
+  color: ${({ theme }) => theme.colors.white};
+  cursor: pointer;
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.gray_50};
+    cursor: not-allowed;
+  }
+`;
+
+const PageIndicator = styled.span`
+  margin: 0 1rem;
+  ${({ theme }) => theme.fonts.Body_3}
+
+  color: ${({ theme }) => theme.colors.gray_900};
 `;

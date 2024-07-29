@@ -17,38 +17,60 @@ interface FullpicHeaderProps {
 export default function FullpicHeader(props: FullpicHeaderProps) {
   const { handleTrashBtn, headerDate, selectedEmojiText, memory_id, reaction_first } = props;
   const navigate = useNavigate();
-  const [countPost, setCountPost] = useState(0);
 
   const { mutate: postReactionMutate } = usePostReaction();
   const { mutate: updateReactionMutate } = useUpdateReaction();
 
   console.log("myEmoji", reaction_first);
 
+  // 로컬 스토리지에서 배열 가져오기
+  const [numbersArray, setNumbersArray] = useState<number[]>(JSON.parse(localStorage.getItem("numbersArray") || "[]"));
+
+  // 배열에 특정 숫자가 있는지 확인하는 함수
+  function isNumberInArray(number: number): boolean {
+    return numbersArray.includes(number);
+  }
+
+  const prevPage = localStorage.getItem("currentPage");
+
   useEffect(() => {
-    setCountPost(1);
-    console.log(countPost);
-  }, [postReactionMutate]);
+    // 배열을 다시 로컬 스토리지에 저장
+    localStorage.setItem("numbersArray", JSON.stringify(numbersArray));
+    console.log("업데이트 배열:", numbersArray);
+  }, [numbersArray]);
 
   function moveToHome() {
-    const prevPage = localStorage.getItem("currentPage");
-
     // 새로운 리액션 추가
-    if (reaction_first === null && selectedEmojiText !== "" && countPost !== 1) {
-      postReactionMutate(
-        { memory_id: memory_id, reaction: selectedEmojiText },
-        {
-          onSuccess: () => {
-            if (prevPage === "today") {
-              navigate("/home/today");
-            } else {
-              navigate("/home/month");
-            }
+    if (!isNumberInArray(memory_id)) {
+      if (reaction_first === null && selectedEmojiText !== "") {
+        postReactionMutate(
+          { memory_id: memory_id, reaction: selectedEmojiText },
+          {
+            onSuccess: () => {
+              // 배열에 숫자 추가
+              const updatedArray = [...numbersArray, memory_id];
+              setNumbersArray(updatedArray);
+              // 로컬 스토리지에 업데이트된 배열 저장
+              localStorage.setItem("numbersArray", JSON.stringify(updatedArray));
+              // 페이지 이동
+              if (prevPage === "today") {
+                navigate("/home/today");
+              } else {
+                navigate("/home/month");
+              }
+            },
           },
-        },
-      );
+        );
+      } else {
+        if (prevPage === "today") {
+          navigate("/home/today");
+        } else {
+          navigate("/home/month");
+        }
+      }
     }
-    // 리액션이 다를때
-    else if (reaction_first !== selectedEmojiText) {
+    // 리액션이 다를 때
+    else {
       updateReactionMutate(
         { memory_id: memory_id, reaction: selectedEmojiText },
         {
@@ -61,14 +83,6 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
           },
         },
       );
-    }
-    // no change일때
-    else {
-      if (prevPage === "today") {
-        navigate("/home/today");
-      } else {
-        navigate("/home/month");
-      }
     }
   }
 

@@ -7,21 +7,34 @@ import {
   YellowThumbBigIcon,
 } from "@common/components/BigEmojiIcons";
 import styled from "styled-components";
+import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
+import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 
 interface EmojiBarProps {
   setSelectedEmojiText: (emoji: string) => void;
-  selectedEmojiText: string;
+  memory_id: number;
 }
 
 export default function EmojiBar(props: EmojiBarProps) {
-  const { setSelectedEmojiText, selectedEmojiText } = props;
-  const [emoji, setEmoji] = useState(selectedEmojiText);
-  // const [emoji, setEmoji] = useState<string>(() => {
-  //   return localStorage.getItem("emoji") || "";
-  // });
+  const { setSelectedEmojiText, memory_id } = props;
+  const [updatedData, setUpdatedData] = useState<MemoryBaseDtoDataTypes | null>(null);
+  const [emoji, setEmoji] = useState<string>("");
+
+  const { data: emojiData } = useGetOnePic(memory_id);
 
   useEffect(() => {
-    // localStorage.setItem("emoji", emoji);
+    if (emojiData) {
+      setUpdatedData(emojiData.response);
+    }
+  }, [emojiData]);
+
+  useEffect(() => {
+    if (updatedData) {
+      setEmoji(updatedData.reaction_first || "");
+    }
+  }, [updatedData]);
+
+  useEffect(() => {
     setSelectedEmojiText(emoji);
   }, [emoji, setSelectedEmojiText]);
 
@@ -43,6 +56,11 @@ export default function EmojiBar(props: EmojiBarProps) {
   }
   function handleSmile() {
     toggleEmoji("smile");
+  }
+
+  // 데이터 Unavailable시
+  if (!emojiData) {
+    return <div>Loading...</div>;
   }
 
   return (
