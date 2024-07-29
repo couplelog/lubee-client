@@ -71,7 +71,6 @@ export default function index() {
 
   // account를 프로필이 null이 아닌 것으로 설정
   const account = memoryBaseDto?.writer_profile_first !== null ? "me" : "partner";
-  console.log(memoryBaseDto);
 
   return (
     <Wrapper>

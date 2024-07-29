@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import FullPicContainer from "@common/components/FullPicContainer";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
-import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
+import getProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 interface OneContainerProps {
@@ -19,7 +19,7 @@ export default function OneContainer(props: OneContainerProps) {
 
   // 작성자가 첫 번째 프로필이면 "me", 아니면 "partner"
   const writerProfile =
-    account === "me" ? getHoverProfileIconSrc("me", profile_first) : getHoverProfileIconSrc("partner", profile_second);
+    account === "me" ? getProfileIconSrc("me", profile_first) : getProfileIconSrc("partner", profile_second);
 
   const writerNickname = account === "me" ? nickname_first : nickname_second;
 
