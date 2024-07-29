@@ -17,7 +17,7 @@ export default function index() {
   const [openToggle, setOpenToggle] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isPlusClicked, setIsPlusClicked] = useState<boolean>(false);
-  const totalHoney = useGetTodayHoney(getServerDate());
+  const { data: totalHoney } = useGetTodayHoney(getServerDate());
   const loveDay = useGetLoveDay();
 
   if (!totalHoney || !loveDay || !loveDay?.response) return <></>;
