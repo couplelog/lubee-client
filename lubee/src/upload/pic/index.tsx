@@ -38,7 +38,7 @@ export default function index(props: UploadProps) {
   const uploadMonth = locationState.state.month;
   const uploadDay = locationState.state.day;
 
-  console.log(picSrc);
+  console.log(openLocationModal);
   const { mutate: postUploadPic } = usePostUploadPic();
 
   return (
