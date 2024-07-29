@@ -109,7 +109,7 @@ const Image = styled.img`
   width: 16.7rem;
   height: 16.7rem;
   padding: 0;
-  border: none;
+  border-radius: 20px;
   background: none;
 `;
 
