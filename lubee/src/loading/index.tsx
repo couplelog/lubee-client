@@ -10,7 +10,10 @@ import { getServerDate } from "@common/utils/dateFormat";
 export default function index() {
   const navigate = useNavigate();
   const { refetch: refetchHoney } = useGetTodayHoney(getServerDate()); // refetch: refetchHoney: 데이터를 다시 가져오는 함수로, useEffect 훅 내에서 사용
-  const [previousHoney, setPreviousHoney] = useState<number | null>(null); // 이전 꿀 개수를 저장
+  const [previousHoney, setPreviousHoney] = useState<number | null>(() => {
+    const savedHoney = localStorage.getItem("previousHoney");
+    return savedHoney !== null ? JSON.parse(savedHoney) : null;
+  });
 
   useEffect(() => {
     const fetchHoney = async () => {
@@ -21,9 +24,17 @@ export default function index() {
         if (updatedHoney !== undefined) {
           const { response } = updatedHoney;
           console.log("Fetched honey count:", response);
+          console.log("Previous honey count:", previousHoney);
 
-          // 꿀 개수가 이전보다 증가한 경우에만 축하 페이지로 이동
-          if (previousHoney !== null && response > previousHoney) {
+          if (previousHoney === null) {
+            setPreviousHoney(response);
+            localStorage.setItem("previousHoney", JSON.stringify(response));
+            return;
+          }
+
+          if (response > previousHoney) {
+            // 꿀 개수가 이전보다 증가한 경우
+            console.log("Honey count increased:", previousHoney, "->", response);
             if (response === 1) {
               navigate("/congrats/first");
             } else if (response === 5) {
@@ -46,6 +57,7 @@ export default function index() {
           }
           // 이전 꿀 개수 업데이트
           setPreviousHoney(response);
+          localStorage.setItem("previousHoney", JSON.stringify(response));
         }
       } catch (error) {
         // 오류가 발생한 경우 기본 페이지로 이동
