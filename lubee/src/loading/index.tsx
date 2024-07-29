@@ -30,8 +30,8 @@ export default function index() {
             return;
           }
 
+          // 꿀 개수가 이전보다 증가한 경우
           if (response > previousHoney) {
-            // 꿀 개수가 이전보다 증가한 경우
             if (response === 1) {
               navigate("/congrats/first");
             } else if (response === 5) {
@@ -52,19 +52,14 @@ export default function index() {
               navigate("/home/month");
             }
           }
+
           // 이전 꿀 개수 업데이트
           setPreviousHoney(response);
           localStorage.setItem("previousHoney", JSON.stringify(response));
         }
       } catch (error) {
-        // 오류가 발생한 경우 기본 페이지로 이동
         console.error("Error fetching honey count:", error);
-        const prevPage = localStorage.getItem("currentPage");
-        if (prevPage === "today") {
-          navigate("/home/today");
-        } else {
-          navigate("/home/month");
-        }
+        navigate("/home/today");
       }
     };
 

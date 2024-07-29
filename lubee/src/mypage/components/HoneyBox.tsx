@@ -11,13 +11,15 @@ export default function HoneyBox(props: HoneyBoxProps) {
   const total = 50;
   const percentage = (count / total) * 100;
 
+  const rest = total - count;
+
   return (
     <Container>
       <HoneyContainer>
         <TitleContainer>
           <HoneyYellowIcon />
           <TitleText>전체 꿀 {count}개</TitleText>
-          <SubtitleText>리와인드까지 25개</SubtitleText>
+          <SubtitleText>리와인드까지 {rest}개</SubtitleText>
         </TitleContainer>
         <ProgressContainer>
           <ProgressBarContainer>

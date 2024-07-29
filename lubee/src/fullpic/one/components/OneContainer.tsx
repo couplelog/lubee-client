@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import FullPicContainer from "@common/components/FullPicContainer";
-import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import getProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
+import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 interface OneContainerProps {
   account: string;
@@ -10,15 +11,24 @@ interface OneContainerProps {
 
 export default function OneContainer(props: OneContainerProps) {
   const { account, memoryBaseDto } = props;
+  console.log(memoryBaseDto);
 
-  const profile = getProfileIconSrc(account, "profile1");
+  const { data: coupleInfo } = useGetCouplesInfo();
+  if (!coupleInfo) return <></>;
+  const { nickname_first, profile_first, nickname_second, profile_second } = coupleInfo.response;
+
+  // 작성자가 첫 번째 프로필이면 "me", 아니면 "partner"
+  const writerProfile =
+    account === "me" ? getProfileIconSrc("me", profile_first) : getProfileIconSrc("partner", profile_second);
+
+  const writerNickname = account === "me" ? nickname_first : nickname_second;
 
   return (
     <Wrapper>
       <Time>{memoryBaseDto.upload_time}</Time>
       <Profile>
-        <ProfileIcon as={profile} />
-        <Name>{memoryBaseDto.writer_profile}</Name>
+        <ProfileIcon as={writerProfile} />
+        <Name>{writerNickname}</Name>
       </Profile>
       <FullPicContainer picSrc={memoryBaseDto.picture} location={memoryBaseDto.location_name} />
     </Wrapper>

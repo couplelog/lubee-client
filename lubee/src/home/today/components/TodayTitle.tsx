@@ -11,13 +11,13 @@ export default function TodayTitle(props: TodayTitleProps) {
   if (!CoupleInfo) return <></>;
 
   const {
-    response: { nickname_first },
+    response: { nickname_second },
   } = CoupleInfo;
 
   return (
     <Container>
       <DateText>
-        {nickname_first} 님과 <NumberText>{day}</NumberText>일 째{"\n"}꿀 모으는 날
+        {nickname_second} 님과 <NumberText>{day}</NumberText>일 째{"\n"}꿀 모으는 날
       </DateText>
     </Container>
   );
