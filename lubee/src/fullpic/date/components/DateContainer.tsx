@@ -6,7 +6,6 @@ import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
-import { LeftArrowIc, RightArrowIc } from "assets";
 
 interface DateContainerProps {
   setOpenEmojiDetail: (open: boolean) => void;
@@ -116,12 +115,17 @@ export default function DateContainer(props: DateContainerProps) {
           </ContentsBox>
         );
       })}
-      <LeftButton onClick={handlePrevPage} disabled={currentPage === 0}>
-        <LeftArrowIcon />
-      </LeftButton>
-      <RightButton onClick={handleNextPage} disabled={currentPage === totalPages - 1}>
-        <RightArrowIcon />
-      </RightButton>
+      <Pagination>
+        <PageButton onClick={handlePrevPage} disabled={currentPage === 0}>
+          {"<"}
+        </PageButton>
+        <PageIndicator>
+          {currentPage + 1} / {totalPages}
+        </PageIndicator>
+        <PageButton onClick={handleNextPage} disabled={currentPage === totalPages - 1}>
+          {">"}
+        </PageButton>
+      </Pagination>
     </Wrapper>
   );
 }
@@ -187,47 +191,28 @@ const EmojiIcon = styled.svg`
   height: 2.4rem;
 `;
 
-// const Pagination = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-top: 1rem;
-// `;
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-const LeftButton = styled.button`
-  position: absolute;
-  top: 25rem;
-  left: 2rem;
-  padding: 0;
-  border: none;
-  background: none;
+const PageButton = styled.button`
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.yellow};
+  color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
 
   &:disabled {
+    background-color: ${({ theme }) => theme.colors.gray_50};
     cursor: not-allowed;
   }
 `;
 
-const RightButton = styled.button`
-  position: absolute;
-  top: 25rem;
-  right: 2rem;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
+const PageIndicator = styled.span`
+  margin: 0 1rem;
+  ${({ theme }) => theme.fonts.Body_3}
 
-  &:disabled {
-    cursor: not-allowed;
-  }
-`;
-
-const RightArrowIcon = styled(RightArrowIc)`
-  width: 5rem;
-  height: 5rem;
-`;
-
-const LeftArrowIcon = styled(LeftArrowIc)`
-  width: 5rem;
-  height: 5rem;
+  color: ${({ theme }) => theme.colors.gray_900};
 `;
