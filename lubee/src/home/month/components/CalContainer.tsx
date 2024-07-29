@@ -123,7 +123,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
               $isToday={isToday}
               $isEmpty={isEmpty}
               onClick={() => !isEmpty && handleDateDetailModal(date)}>
-              <Date>{idx - start < 0 || date > length ? "" : date}</Date>
+              <Date $isUploaded={val === 1}>{idx - start < 0 || date > length ? "" : date}</Date>
             </Item>
           );
         })}
@@ -152,14 +152,14 @@ const Container = styled.div`
   gap: 1.6rem;
   width: 100%;
   height: fit-content;
-  padding: 1.6rem 1.2rem;
+  padding: 2rem 2.8rem;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const Header = styled.header`
   display: flex;
-  gap: 0.8rem;
+  gap: 1.1rem;
   align-items: center;
   padding: 0 0 0 1rem;
 `;
@@ -219,8 +219,8 @@ const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: 
   }
 `;
 
-const Date = styled.p`
+const Date = styled.p<{ $isUploaded: boolean }>`
   ${({ theme }) => theme.fonts.Calendar_Number_Body};
 
-  color: ${({ theme }) => theme.colors.gray_500};
+  color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.gray_800 : theme.colors.gray_500)};
 `;
