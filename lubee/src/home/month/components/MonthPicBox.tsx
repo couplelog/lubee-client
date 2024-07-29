@@ -124,6 +124,7 @@ const ProfileIcon = styled.svg`
 const TagContainer = styled.div`
   display: flex;
   gap: 0.4rem;
+  align-items: flex-end;
   position: absolute;
   bottom: 1.2rem;
   left: 1.21rem;
