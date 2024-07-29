@@ -7,6 +7,7 @@ import FullpicHeader from "fullpic/components/FullpicHeader";
 import { useLocation } from "react-router-dom";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
+import { LeftArrowIc, RightArrowIc } from "assets";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
@@ -17,6 +18,9 @@ export default function index() {
   const { memory_id } = location.state as { memory_id: number };
 
   const [memoryId, setMemoryId] = useState<number>(memory_id);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 1;
+  const totalPages = Math.ceil(specificDto.length / itemsPerPage);
 
   function handleTrashBtn(open: boolean) {
     setOpenDeletePicModal(open);
@@ -41,6 +45,23 @@ export default function index() {
   if (!emojiData) return <></>;
   const { reaction_first } = emojiData.response;
 
+  /*페이지 네이션*/
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      const newPage = currentPage - 1;
+      setCurrentPage(newPage);
+      setMemoryId(specificDto[newPage * itemsPerPage].memory_id);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      const newPage = currentPage + 1;
+      setCurrentPage(newPage);
+      setMemoryId(specificDto[newPage * itemsPerPage].memory_id);
+    }
+  };
+
   return (
     <Wrapper>
       <FullpicHeader
@@ -56,8 +77,20 @@ export default function index() {
         selectedEmojiText={selectedEmojiText}
         specificDto={specificDto}
         memory_id={memory_id}
-        setMemoryId={setMemoryId}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        setCurrentPage={setCurrentPage}
       />
+      {currentPage !== 0 ? (
+        <LeftPageButton onClick={handlePrevPage}>
+          <LeftArrowIcon />
+        </LeftPageButton>
+      ) : null}
+      {currentPage !== totalPages - 1 ? (
+        <RightPageButton onClick={handleNextPage}>
+          <RightArrowIcon />
+        </RightPageButton>
+      ) : null}
       {openDeletePicModal && <DeletePicModal handleTrashBtn={handleTrashBtn} memory_id={memoryId} />}
       {openEmojiDetail && (
         <EmojiDetailModal ref={modalRef} selectedEmojiText={selectedEmojiText} memory_id={memoryId} />
@@ -77,4 +110,32 @@ const Wrapper = styled.section`
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
   }
+`;
+
+const LeftPageButton = styled.button`
+  position: absolute;
+  top: 31rem;
+  left: 1.5rem;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+`;
+
+const RightPageButton = styled.button`
+  position: absolute;
+  top: 31rem;
+  right: 1.5rem;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+`;
+
+const LeftArrowIcon = styled(LeftArrowIc)`
+  width: 3rem;
+  height: 3rem;
+`;
+
+const RightArrowIcon = styled(RightArrowIc)`
+  width: 3rem;
+  height: 3rem;
 `;

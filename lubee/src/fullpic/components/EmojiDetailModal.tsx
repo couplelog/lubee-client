@@ -46,13 +46,15 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
               <EmojiIcon as={myEmoji} />
             </MyEmoji>
           )}
-          <PartnerEmoji>
-            <Profile>
-              <ProfileIcon as={partnerProfile} />
-              <Name>{partnerNickname}</Name>
-            </Profile>
-            <EmojiIcon as={partnerEmoji} />
-          </PartnerEmoji>
+          {partnerEmoji && (
+            <PartnerEmoji>
+              <Profile>
+                <ProfileIcon as={partnerProfile} />
+                <Name>{partnerNickname}</Name>
+              </Profile>
+              <EmojiIcon as={partnerEmoji} />
+            </PartnerEmoji>
+          )}
         </EmojiBox>
       </Container>
     </Background>

@@ -112,7 +112,6 @@ const Image = styled.img`
   width: 16.7rem;
   height: 16.7rem;
   padding: 0;
-  border: none;
   border-radius: 12px;
   background: none;
 `;
@@ -128,6 +127,7 @@ const ProfileIcon = styled.svg`
 const TagContainer = styled.div`
   display: flex;
   gap: 0.4rem;
+  align-items: flex-end;
   position: absolute;
   bottom: 1.2rem;
   left: 1.21rem;

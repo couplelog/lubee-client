@@ -22,7 +22,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
   const { year, month, start, length } = info;
   const [list, setList] = useState<number[]>(new Array(start + length).fill(0)); // LIST 초기화
 
-  const calendarData = useGetCalendar();
+  const { data: calendarData, refetch: refetchCalendarData } = useGetCalendar();
   const totalHoney = useGetMonthHoney(year, month);
 
   useEffect(() => {
@@ -57,9 +57,14 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         }
       });
 
-      setList(updatedList); // Update the state with the new list only once
+      setList(updatedList);
     }
   }, [calendarData, year, month, start, length]);
+
+  // calendarData가 바뀔 때마다 useGetCalendar refetch
+  useEffect(() => {
+    refetchCalendarData();
+  }, [calendarData, refetchCalendarData]);
 
   function handleDateDetailModal(date: number) {
     if (isFutureDate(year, month, date)) {

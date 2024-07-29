@@ -1,29 +1,21 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function MonthHomeHeader() {
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState<string>(() => {
-    return localStorage.getItem("currentPage") || "today";
-  });
 
   useEffect(() => {
-    localStorage.setItem("currentPage", currentPage);
-  }, [currentPage]);
+    localStorage.setItem("currentPage", "month");
+  }, []);
 
   function moveToHomeToday() {
     navigate("/home/today");
-    setCurrentPage("today");
   }
 
   function moveToHomeMonth() {
     navigate("/home/month");
-    setCurrentPage("month");
   }
-
-  // removeToken();
-  // console.log(getToken());
 
   return (
     <Container>
