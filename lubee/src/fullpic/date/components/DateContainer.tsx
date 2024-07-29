@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import EmojiBar from "@common/components/EmojiBar";
 import FullPicContainer from "@common/components/FullPicContainer";
@@ -13,15 +13,22 @@ interface DateContainerProps {
   setSelectedEmojiText: (text: string) => void;
   specificDto: MemoryBaseDtoDataTypes[];
   memory_id: number;
-  setMemoryId: (id: number) => void;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  itemsPerPage: number;
 }
 
 export default function DateContainer(props: DateContainerProps) {
-  const { setOpenEmojiDetail, selectedEmojiText, setSelectedEmojiText, specificDto, memory_id, setMemoryId } = props;
-  /*페이지 네이션*/
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 1;
-  const totalPages = Math.ceil(specificDto.length / itemsPerPage);
+  const {
+    setOpenEmojiDetail,
+    selectedEmojiText,
+    setSelectedEmojiText,
+    specificDto,
+    memory_id,
+    currentPage,
+    setCurrentPage,
+    itemsPerPage,
+  } = props;
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // memory_id와 일치하는 페이지
@@ -43,22 +50,6 @@ export default function DateContainer(props: DateContainerProps) {
       });
     }
   }, [currentPage, memory_id, specificDto, itemsPerPage]);
-
-  const handlePrevPage = () => {
-    if (currentPage > 0) {
-      const newPage = currentPage - 1;
-      setCurrentPage(newPage);
-      setMemoryId(specificDto[newPage * itemsPerPage].memory_id);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages - 1) {
-      const newPage = currentPage + 1;
-      setCurrentPage(newPage);
-      setMemoryId(specificDto[newPage * itemsPerPage].memory_id);
-    }
-  };
 
   const currentItems = specificDto.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
@@ -115,17 +106,6 @@ export default function DateContainer(props: DateContainerProps) {
           </ContentsBox>
         );
       })}
-      <Pagination>
-        <PageButton onClick={handlePrevPage} disabled={currentPage === 0}>
-          {"<"}
-        </PageButton>
-        <PageIndicator>
-          {currentPage + 1} / {totalPages}
-        </PageIndicator>
-        <PageButton onClick={handleNextPage} disabled={currentPage === totalPages - 1}>
-          {">"}
-        </PageButton>
-      </Pagination>
     </Wrapper>
   );
 }
@@ -141,7 +121,6 @@ const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
 `;
 
 const Time = styled.p`
@@ -189,30 +168,4 @@ const Footer = styled.div`
 const EmojiIcon = styled.svg`
   width: 2.4rem;
   height: 2.4rem;
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const PageButton = styled.button`
-  padding: 0.2rem 0.5rem;
-  border-radius: 5px;
-  background-color: ${({ theme }) => theme.colors.yellow};
-  color: ${({ theme }) => theme.colors.white};
-  cursor: pointer;
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.gray_50};
-    cursor: not-allowed;
-  }
-`;
-
-const PageIndicator = styled.span`
-  margin: 0 1rem;
-  ${({ theme }) => theme.fonts.Body_3}
-
-  color: ${({ theme }) => theme.colors.gray_900};
 `;
