@@ -1,4 +1,4 @@
-import { ToggleHoneyIc, TogglePastIc } from "assets/index";
+import { ToggleTodayIc, TogglePastIc } from "assets/index";
 import styled from "styled-components";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -74,14 +74,14 @@ const Container = styled.div`
   position: absolute;
   right: 2rem;
   bottom: 15.1rem;
-  padding: 1.2rem 1.6rem;
+  padding: 1.2rem 1.4rem;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const Today = styled.button`
   display: flex;
-  gap: 3.6rem;
+  gap: 1.8rem;
   align-items: center;
 `;
 
@@ -91,7 +91,7 @@ const FileInput = styled.input`
 
 const Past = styled.button`
   display: flex;
-  gap: 3.6rem;
+  gap: 1.8rem;
   align-items: center;
 `;
 
@@ -101,12 +101,12 @@ const Text = styled.p`
   color: ${({ theme }) => theme.colors.gray_800};
 `;
 
-const ToggleHoneyIcon = styled(ToggleHoneyIc)`
-  width: 2.4rem;
-  height: 2.4rem;
+const ToggleHoneyIcon = styled(ToggleTodayIc)`
+  width: 2.5rem;
+  height: 2.5rem;
 `;
 
 const TogglePastIcon = styled(TogglePastIc)`
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2.5rem;
+  height: 2.5rem;
 `;

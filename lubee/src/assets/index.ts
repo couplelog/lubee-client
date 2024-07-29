@@ -60,7 +60,7 @@ import CongratsIc from "./icon/congratsIc.svg?react";
 import FirstHoneyIc from "./icon/firstHoneyIc.svg?react";
 import FifthHoneyIc from "./icon/fifthHoneyIc.svg?react";
 import TogglePastIc from "./icon/togglePastIc.svg?react";
-import ToggleHoneyIc from "./icon/toggleHoneyIc.svg?react";
+import ToggleTodayIc from "./icon/toggleTodayIc.svg?react";
 import BackSmallIc from "./icon/backSmallIc.svg?react";
 import ForwardIc from "./icon/forwardIc.svg?react";
 import SettingIc from "./icon/settingIc.svg?react";
@@ -149,7 +149,7 @@ export {
   CongratsIc,
   FirstHoneyIc,
   FifthHoneyIc,
-  ToggleHoneyIc,
+  ToggleTodayIc,
   TogglePastIc,
   BackSmallIc,
   ForwardIc,
