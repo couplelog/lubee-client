@@ -53,7 +53,8 @@ declare module "styled-components" {
 
       Date_Indicator_1: SerializedStyles;
       Date_Indicator_2: SerializedStyles;
-      Ginto_20: SerializedStyles;
+      Calendar_Honey: SerializedStyles;
+      Calendar_Number_Body: SerializedStyles;
       Rewind: SerializedStyles;
     };
   }

@@ -165,7 +165,7 @@ const Header = styled.header`
 `;
 
 const HeaderDate = styled.p`
-  ${({ theme }) => theme.fonts.Ginto_16};
+  ${({ theme }) => theme.fonts.Calendar_Honey};
 
   color: ${({ theme }) => theme.colors.gray_800};
 `;
@@ -181,8 +181,9 @@ const HoneyMonthIcon = styled(HoneyMonthIc)`
 `;
 
 const HoneyCount = styled.p`
+  ${({ theme }) => theme.fonts.Calendar_Honey};
+
   color: ${({ theme }) => theme.colors.gray_800};
-  ${({ theme }) => theme.fonts.Ginto_16};
 `;
 
 const Grid = styled.ul`
@@ -219,5 +220,7 @@ const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: 
 `;
 
 const Date = styled.p`
-  ${({ theme }) => theme.fonts.Ginto_18};
+  ${({ theme }) => theme.fonts.Calendar_Number_Body};
+
+  color: ${({ theme }) => theme.colors.gray_500};
 `;
