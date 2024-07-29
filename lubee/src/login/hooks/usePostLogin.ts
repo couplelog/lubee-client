@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "@common/api/api";
 import { loginErrorProps, loginResProps } from "login/types/loginProps";
@@ -8,7 +8,7 @@ import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 const usePostLogin = () => {
   const KAKAO_CODE = new URL(window.location.href).searchParams.get("code");
   const navigate = useNavigate();
-  const { data: couplesInfoResponse, isLoading, error } = useGetCouplesInfo();
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 추적
 
   useEffect(() => {
     if (KAKAO_CODE) {
@@ -17,6 +17,7 @@ const usePostLogin = () => {
         .then((res) => {
           const data = res.data as loginResProps; // AxiosResponse의 data를 loginResProps로 단언
           setToken(data.response.accessToken);
+          setIsLoggedIn(true); // 로그인 성공 시 상태 업데이트
           console.log("로그인 성공");
           console.log("로그인 데이터", data);
         })
@@ -34,6 +35,9 @@ const usePostLogin = () => {
   }, [KAKAO_CODE, navigate]);
 
   // 403에러 캐치해서 로딩페이지 띄우기
+  // useGetCouplesInfo 훅은 isLoggedIn이 true일 때만 쿼리를 실행
+  // 로그인 토큰이 설정된 이후에만 GetCouplesInfo API 호출을 해서 403 에러를 방지
+  const { data: couplesInfoResponse, isLoading, error } = useGetCouplesInfo(isLoggedIn); // 로그인 상태를 의존성으로 추가
 
   useEffect(() => {
     if (!isLoading && couplesInfoResponse) {
