@@ -56,7 +56,7 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
     <Container>
       {displayPics.map((img, index) => {
         const memory = specificDto.find((memory) => memory.memory_id === img.id);
-        const account = memory?.writer_profile_first !== null ? "me" : "partner";
+        const account = memory?.writer_profile_first !== null ? "me" : "partner"; // 작성자가 첫 번째 프로필이면 "me", 아니면 "partner"
         const writerProfile =
           account === "me"
             ? getProfileIconSrc("me", memory?.writer_profile_first || "")

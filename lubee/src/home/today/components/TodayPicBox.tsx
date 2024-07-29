@@ -37,9 +37,6 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
           partnerEmoji: memory.reaction_second,
         }));
 
-  /*프로필 아이콘*/
-  const myProfile = getProfileIconSrc("me", "profile1");
-
   /*리액션 아이콘*/
   const myEmojiIcon = (emoji: string | null) => {
     const emojiSrc = getEmojiSrc("me", emoji);
@@ -52,8 +49,15 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
 
   return (
     <Container>
-      {displayPics.map((img, index) =>
-        img.picSrc === blankImg ? (
+      {displayPics.map((img, index) => {
+        const memory = specificDto.find((memory) => memory.memory_id === img.id);
+        const account = memory?.writer_profile_first !== null ? "me" : "partner"; // 작성자가 첫 번째 프로필이면 "me", 아니면 "partner"
+        const writerProfile =
+          account === "me"
+            ? getProfileIconSrc("me", memory?.writer_profile_first || "")
+            : getProfileIconSrc("partner", memory?.writer_profile_second || "");
+
+        return img.picSrc === blankImg ? (
           <BlankImgBtn key={img.id} index={index} year={getTodayYear} month={getTodayMonth} day={getTodayDate} />
         ) : (
           <ImgContainer
@@ -65,12 +69,9 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
               });
             }}>
             <Image src={img.picSrc} />
-            <ProfileIcon as={myProfile} />
+            <ProfileIcon as={writerProfile} />
             <TagContainer>
-              <LocationTag
-                location={specificDto.find((memory) => memory.memory_id === img.id)?.location_name || ""}
-                font="smallPic"
-              />
+              <LocationTag location={memory?.location_name || ""} font="smallPic" />
               {img.myEmoji || img.partnerEmoji ? (
                 <EmojiTag font="smallPic">
                   {myEmojiIcon(img.myEmoji)}
@@ -79,8 +80,8 @@ export default function TodayPicBox(props: TodayPicBoxProps) {
               ) : null}
             </TagContainer>
           </ImgContainer>
-        ),
-      )}
+        );
+      })}
     </Container>
   );
 }
