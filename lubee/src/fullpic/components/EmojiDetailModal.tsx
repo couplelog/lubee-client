@@ -2,7 +2,7 @@ import { ShortBorderIc } from "assets/index";
 import styled from "styled-components";
 import { forwardRef } from "react";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
-import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
+import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
@@ -23,8 +23,8 @@ const EmojiDetailModal = forwardRef<HTMLDivElement, EmojiDetailModalProps>((prop
 
   const { nickname_first, profile_first, nickname_second, profile_second } = coupleInfo.response;
 
-  const myProfile = getHoverProfileIconSrc("me", profile_first);
-  const partnerProfile = getHoverProfileIconSrc("partner", profile_second);
+  const myProfile = getProfileIconSrc("me", profile_first);
+  const partnerProfile = getProfileIconSrc("partner", profile_second);
 
   const myNickname = nickname_first;
   const partnerNickname = nickname_second;

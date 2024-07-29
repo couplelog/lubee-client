@@ -50,15 +50,19 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
           partnerEmoji: memory.reaction_second,
         }));
 
-  /*프로필 아이콘*/
-  const myProfile = getProfileIconSrc("me", "profile1");
-
   const monthHeader = monthHeaderDateFormat(year, month, selectedDate);
 
   return (
     <Container>
-      {displayPics.map((img, index) =>
-        img.picSrc === blankImg && selectedDate != undefined ? (
+      {displayPics.map((img, index) => {
+        const memory = specificDto.find((memory) => memory.memory_id === img.id);
+        const account = memory?.writer_profile_first !== null ? "me" : "partner";
+        const writerProfile =
+          account === "me"
+            ? getProfileIconSrc("me", memory?.writer_profile_first || "")
+            : getProfileIconSrc("partner", memory?.writer_profile_second || "");
+
+        return img.picSrc === blankImg && selectedDate != undefined ? (
           <BlankImgBtn key={img.id} index={index} year={year} month={month} day={selectedDate} />
         ) : (
           <ImgContainer
@@ -70,12 +74,9 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
               });
             }}>
             <Image src={img.picSrc} />
-            <ProfileIcon as={myProfile} />
+            <ProfileIcon as={writerProfile} />
             <TagContainer>
-              <LocationTag
-                location={specificDto.find((memory) => memory.memory_id === img.id)?.location_name || ""}
-                font="smallPic"
-              />
+              <LocationTag location={memory?.location_name || ""} font="smallPic" />
               {img.myEmoji || img.partnerEmoji ? (
                 <EmojiTag font="smallPic">
                   {myEmojiIcon(img.myEmoji)}
@@ -84,8 +85,8 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
               ) : null}
             </TagContainer>
           </ImgContainer>
-        ),
-      )}
+        );
+      })}
     </Container>
   );
 }

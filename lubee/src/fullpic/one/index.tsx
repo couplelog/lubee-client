@@ -68,6 +68,11 @@ export default function index() {
   if (!emojiData) return <></>;
   const { reaction_first } = emojiData.response;
   console.log(emojiData);
+
+  // account를 프로필이 null이 아닌 것으로 설정
+  const account = memoryBaseDto?.writer_profile_first !== null ? "me" : "partner";
+  console.log(memoryBaseDto);
+
   return (
     <Wrapper>
       <FullpicHeader
@@ -77,7 +82,7 @@ export default function index() {
         memory_id={memory_id}
         reaction_first={reaction_first}
       />
-      {memoryBaseDto && <OneContainer account="partner" memoryBaseDto={memoryBaseDto} />}
+      {memoryBaseDto && <OneContainer account={account} memoryBaseDto={memoryBaseDto} />}
       {(myEmoji || partnerEmoji) && (
         <EmojiTagContainer
           type="button"
