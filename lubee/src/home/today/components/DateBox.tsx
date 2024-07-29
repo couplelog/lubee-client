@@ -26,7 +26,7 @@ const Container = styled.button`
 `;
 
 const DateText = styled.p`
-  ${({ theme }) => theme.fonts.Ginto_16};
+  ${({ theme }) => theme.fonts.Date_Indicator_1};
 
   color: ${({ theme }) => theme.colors.gray_600};
 `;

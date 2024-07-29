@@ -51,8 +51,8 @@ declare module "styled-components" {
       Caption_1: SerializedStyles;
       Caption_0: SerializedStyles;
 
-      Ginto_16: SerializedStyles;
-      Ginto_18: SerializedStyles;
+      Date_Indicator_1: SerializedStyles;
+      Date_Indicator_2: SerializedStyles;
       Ginto_20: SerializedStyles;
       Rewind: SerializedStyles;
     };
