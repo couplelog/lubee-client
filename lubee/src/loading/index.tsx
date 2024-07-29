@@ -23,8 +23,6 @@ export default function index() {
         const { data: updatedHoney } = await refetchHoney();
         if (updatedHoney !== undefined) {
           const { response } = updatedHoney;
-          console.log("Fetched honey count:", response);
-          console.log("Previous honey count:", previousHoney);
 
           if (previousHoney === null) {
             setPreviousHoney(response);
@@ -34,7 +32,6 @@ export default function index() {
 
           if (response > previousHoney) {
             // 꿀 개수가 이전보다 증가한 경우
-            console.log("Honey count increased:", previousHoney, "->", response);
             if (response === 1) {
               navigate("/congrats/first");
             } else if (response === 5) {
