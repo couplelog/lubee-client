@@ -22,13 +22,8 @@ export default function index() {
           const { response } = updatedHoney;
           console.log("Fetched honey count:", response);
 
-          if (previousHoney === null) {
-            setPreviousHoney(response);
-            return;
-          }
-
           // 꿀 개수가 이전보다 증가한 경우에만 축하 페이지로 이동
-          if (response > previousHoney) {
+          if (previousHoney !== null && response > previousHoney) {
             if (response === 1) {
               navigate("/congrats/first");
             } else if (response === 5) {
@@ -64,7 +59,7 @@ export default function index() {
       }
     };
 
-    const timer = setTimeout(fetchHoney, 3000); // 3초 후에 꿀 개수를 불러와서 화면 이동
+    const timer = setTimeout(fetchHoney, 2000); // 2초 후에 꿀 개수를 불러와서 화면 이동. 2초 기다린 후 꿀 개수 불러오는 데 추가로 더 걸려서 수정...
 
     return () => clearTimeout(timer);
   }, [navigate, refetchHoney, previousHoney]);
