@@ -4,8 +4,9 @@ import EmojiBar from "@common/components/EmojiBar";
 import FullPicContainer from "@common/components/FullPicContainer";
 import EmojiTag from "@common/components/EmojiTag";
 import getEmojiSrc from "@common/utils/getEmojiSrc";
-import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
+import getProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
+import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 interface DateContainerProps {
   setOpenEmojiDetail: (open: boolean) => void;
@@ -58,16 +59,13 @@ export default function DateContainer(props: DateContainerProps) {
       {currentItems.map((data, index) => {
         const {
           memory_id: picMemoryId,
-          user_id,
           location_name,
           picture,
           writer_profile_first,
-          writer_profile_second,
           reaction_first,
           reaction_second,
           upload_time,
         } = data;
-        const profile = getProfileIconSrc("me", "profile2");
 
         useEffect(() => {
           if (reaction_first) {
@@ -78,12 +76,25 @@ export default function DateContainer(props: DateContainerProps) {
         const myEmoji = getEmojiSrc("me", selectedEmojiText) || undefined;
         const partnerEmoji = reaction_second ? getEmojiSrc("partner", reaction_second) : undefined;
 
+        const { data: coupleInfo } = useGetCouplesInfo();
+        if (!coupleInfo) return <></>;
+        const { nickname_first, profile_first, nickname_second, profile_second } = coupleInfo.response;
+
+        // account를 프로필이 null이 아닌 것으로 설정
+        const account = writer_profile_first !== null ? "me" : "partner";
+
+        // 작성자가 첫 번째 프로필이면 "me", 아니면 "partner"
+        const writerProfile =
+          account === "me" ? getProfileIconSrc("me", profile_first) : getProfileIconSrc("partner", profile_second);
+
+        const writerNickname = account === "me" ? nickname_first : nickname_second;
+
         return (
           <ContentsBox key={picMemoryId} ref={(el) => (itemRefs.current[index] = el)}>
             <Time>{upload_time}</Time>
             <Profile>
-              <ProfileIcon as={profile} />
-              <Name>{writer_profile_first}</Name>
+              <ProfileIcon as={writerProfile} />
+              <Name>{writerNickname}</Name>
             </Profile>
             <FullPicContainer picSrc={picture} location={location_name} />
             {(myEmoji || partnerEmoji) && (

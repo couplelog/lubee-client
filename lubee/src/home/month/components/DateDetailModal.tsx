@@ -96,6 +96,7 @@ const Container = styled.section<{ $showCalendar: boolean }>`
   position: ${(props) => (props.$showCalendar ? "none" : "absolute")};
   bottom: 0;
   max-height: 49rem;
+  border-radius: 16px 16px 0 0;
   background-color: ${({ theme }) => theme.colors.white};
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

@@ -21,6 +21,8 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   const navigate = useNavigate();
   const { url, specificDto = [], year, month, selectedDate } = props;
 
+  localStorage.setItem("currentPage", "month"); // 컴포넌트가 렌더링될 때 "month"를 로컬 스토리지에 저장
+
   /* 서버한테 어떤 공감을 선택했는지 받아오면 됨*/
   const myEmojiIcon = (emoji: string | null) => {
     const emojiSrc = getEmojiSrc("me", emoji);
@@ -50,15 +52,19 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
           partnerEmoji: memory.reaction_second,
         }));
 
-  /*프로필 아이콘*/
-  const myProfile = getProfileIconSrc("me", "profile1");
-
   const monthHeader = monthHeaderDateFormat(year, month, selectedDate);
 
   return (
     <Container>
-      {displayPics.map((img, index) =>
-        img.picSrc === blankImg && selectedDate != undefined ? (
+      {displayPics.map((img, index) => {
+        const memory = specificDto.find((memory) => memory.memory_id === img.id);
+        const account = memory?.writer_profile_first !== null ? "me" : "partner"; // 작성자가 첫 번째 프로필이면 "me", 아니면 "partner"
+        const writerProfile =
+          account === "me"
+            ? getProfileIconSrc("me", memory?.writer_profile_first || "")
+            : getProfileIconSrc("partner", memory?.writer_profile_second || "");
+
+        return img.picSrc === blankImg && selectedDate != undefined ? (
           <BlankImgBtn key={img.id} index={index} year={year} month={month} day={selectedDate} />
         ) : (
           <ImgContainer
@@ -70,12 +76,9 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
               });
             }}>
             <Image src={img.picSrc} />
-            <ProfileIcon as={myProfile} />
+            <ProfileIcon as={writerProfile} />
             <TagContainer>
-              <LocationTag
-                location={specificDto.find((memory) => memory.memory_id === img.id)?.location_name || ""}
-                font="smallPic"
-              />
+              <LocationTag location={memory?.location_name || ""} font="smallPic" />
               {img.myEmoji || img.partnerEmoji ? (
                 <EmojiTag font="smallPic">
                   {myEmojiIcon(img.myEmoji)}
@@ -84,8 +87,8 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
               ) : null}
             </TagContainer>
           </ImgContainer>
-        ),
-      )}
+        );
+      })}
     </Container>
   );
 }
@@ -109,7 +112,7 @@ const Image = styled.img`
   width: 16.7rem;
   height: 16.7rem;
   padding: 0;
-  border-radius: 20px;
+  border-radius: 12px;
   background: none;
 `;
 
