@@ -16,15 +16,10 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
   const { setOpenLocationModal, setLocation, searchInput, setSearchInput, setLocationId } = props;
 
   /* 장소 불러오기 API*/
-  const debouncedSearchInput = useDebounce(searchInput, 1000);
+  const debouncedSearchInput = useDebounce(searchInput, 300);
   const locationSearch = useGetLocationSearch({ keyword: debouncedSearchInput });
 
-  // Guard clause to prevent rendering when locationSearch is undefined or has errors
-  if (!locationSearch || !locationSearch.response) return <></>;
-
-  const {
-    response: { locations },
-  } = locationSearch;
+  const locations = locationSearch?.response?.locations ?? [];
 
   function closeLocationModal(locationName?: string, locationId?: number) {
     setOpenLocationModal(false);
@@ -62,7 +57,6 @@ export default function SelectLocationModal(props: SelectLocationModalProps) {
                 <LocationBox key={locationId} type="button" onClick={() => closeLocationModal(name, locationId)}>
                   <Name>{name}</Name>
                   <Details>
-                    {/* <Distance>{`${distance}m,`}</Distance> */}
                     <Info>{parcelBaseAddress}</Info>
                   </Details>
                 </LocationBox>

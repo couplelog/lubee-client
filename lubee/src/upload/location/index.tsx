@@ -65,7 +65,6 @@ export default function index(props: LocationProps) {
               <LocationBox key={locationId} type="button" onClick={() => handleSelectLocation(name, locationId)}>
                 <Name>{name}</Name>
                 <Details>
-                  {/* <Distance>{`${distance}m,`}</Distance> */}
                   <Info>{parcelBaseAddress}</Info>
                 </Details>
               </LocationBox>
