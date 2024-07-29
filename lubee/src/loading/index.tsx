@@ -6,16 +6,16 @@ import { SymbolIc } from "assets";
 /* 오늘의 꿀 조회로 1개, 5개일 때 congrats로 navigate*/
 import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 import { getServerDate } from "@common/utils/dateFormat";
-import { usePostUploadPic } from "upload/hooks/usePostUploadPic";
 
 export default function index() {
   const navigate = useNavigate();
-  const { data: totalHoney, refetch: refetchHoney } = useGetTodayHoney(getServerDate());
+  const { refetch: refetchHoney } = useGetTodayHoney(getServerDate()); // refetch: refetchHoney: 데이터를 다시 가져오는 함수로, useEffect 훅 내에서 사용
 
   useEffect(() => {
     const timer = setTimeout(async () => {
       try {
         // 꿀 개수를 불러옴
+        // refetchHoney 함수는 비동기 함수로, 데이터를 다시 가져옴
         const { data: updatedHoney } = await refetchHoney();
         if (updatedHoney !== undefined) {
           const { response } = updatedHoney;
