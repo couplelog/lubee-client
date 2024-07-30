@@ -123,7 +123,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
               $isToday={isToday}
               $isEmpty={isEmpty}
               onClick={() => !isEmpty && handleDateDetailModal(date)}>
-              <Date $isUploaded={val === 1}>{idx - start < 0 || date > length ? "" : date}</Date>
+              <Date>{idx - start < 0 || date > length ? "" : date}</Date>
             </Item>
           );
         })}
@@ -219,8 +219,6 @@ const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: 
   }
 `;
 
-const Date = styled.p<{ $isUploaded: boolean }>`
+const Date = styled.p`
   ${({ theme }) => theme.fonts.Calendar_Number_Body};
-
-  color: ${({ theme, $isUploaded }) => ($isUploaded ? theme.colors.gray_800 : theme.colors.gray_500)};
 `;
