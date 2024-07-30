@@ -68,7 +68,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 
   function handleDateDetailModal(date: number) {
     if (isFutureDate(year, month, date)) {
-      infoToast("오늘 이전만 선택가능합니다");
+      infoToast("오늘 이전의 날짜를 선택해주세요");
       setSelectedDate(date);
       return;
     }
