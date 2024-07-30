@@ -33,7 +33,7 @@ const usePostLogin = () => {
     }
   }, [KAKAO_CODE, navigate]);
 
-  // 403에러 캐치해서 로딩페이지 띄우기
+  // // 403에러 캐치해서 로딩페이지 띄우기
 
   useEffect(() => {
     if (!isLoading && couplesInfoResponse) {
@@ -46,9 +46,13 @@ const usePostLogin = () => {
       }
     } else if (!isLoading && error) {
       console.log("커플 정보 가져오기 실패", error);
-      navigate("/error");
+      navigate("/onboarding");
     }
   }, [isLoading, couplesInfoResponse, error, navigate]);
 };
 
 export default usePostLogin;
+
+// else if (!isLoading && error) {
+//   console.log("커플 정보 가져오기 실패", error);
+//   navigate("/error");
