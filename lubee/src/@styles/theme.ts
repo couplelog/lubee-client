@@ -130,9 +130,10 @@ const fonts = {
   Rewind: css`
     font-family: Pretendard;
     font-style: normal;
-    font-size: 0.8228rem;
+    font-size: 1.5rem;
     font-weight: 500;
-    line-height: 1.6455rem;
+    line-height: 120%; /* 18px */
+    letter-spacing: -0.206px;
   `,
 
   // 홈_오늘 날짜
@@ -164,6 +165,7 @@ const fonts = {
     line-height: 140%; /* 22.4px */
     letter-spacing: -0.144px;
   `,
+
   Calendar_Number_Body: css`
     font-family: Pretendard;
     font-style: normal;

@@ -5,8 +5,11 @@ export default function RewindBtn() {
   return (
     <Wrapper>
       <TextContainer>
-        <TitleText>Rewind</TitleText>
-        <SubtitleText>3일 뒤에 사라져요</SubtitleText>
+        <TitleText>
+          Rewind
+          <br />
+          3days
+        </TitleText>
       </TextContainer>
       <RewindIcon />
     </Wrapper>
@@ -36,17 +39,9 @@ const TextContainer = styled.section`
 
 const TitleText = styled.h3`
   display: flex;
-  ${({ theme }) => theme.fonts.Body_0};
-
-  color: ${({ theme }) => theme.colors.white};
-`;
-
-const SubtitleText = styled.p`
-  display: flex;
   ${({ theme }) => theme.fonts.Rewind};
 
   color: ${({ theme }) => theme.colors.white};
-  white-space: nowrap;
 `;
 
 const RewindIcon = styled(RewindIc)`
