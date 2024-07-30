@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "@common/api/api";
 import { loginErrorProps, loginResProps } from "login/types/loginProps";
@@ -8,51 +8,50 @@ import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 const usePostLogin = () => {
   const KAKAO_CODE = new URL(window.location.href).searchParams.get("code");
   const navigate = useNavigate();
-  const { data: couplesInfoResponse, isLoading, error } = useGetCouplesInfo();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [_token, setTokenState] = useState("");
 
   useEffect(() => {
     if (KAKAO_CODE) {
       api
         .post(`api/users/kakao/simpleLogin?code=${KAKAO_CODE}`)
         .then((res) => {
-          const data = res.data as loginResProps; // AxiosResponse의 data를 loginResProps로 단언
+          const data = res.data as loginResProps;
           setToken(data.response.accessToken);
+          setTokenState(data.response.accessToken);
+          setIsLoggedIn(true);
           console.log("로그인 성공");
           console.log("로그인 데이터", data);
         })
         .catch((err) => {
-          const errorData = err.response.data as loginErrorProps; // 에러 응답 데이터 단언
+          const errorData = err.response.data as loginErrorProps;
           if (errorData.success_or_error_code.status === 404) {
             setToken(errorData.response.accessToken);
+            setTokenState(errorData.response.accessToken);
             navigate("/onboarding");
           } else {
+            console.error("로그인 에러:", err);
             navigate("/error");
-            console.log(KAKAO_CODE);
           }
         });
     }
   }, [KAKAO_CODE, navigate]);
 
-  // // 403에러 캐치해서 로딩페이지 띄우기
+  const { data: couplesInfoResponse, isLoading, error } = useGetCouplesInfo(isLoggedIn);
 
   useEffect(() => {
-    if (!isLoading && couplesInfoResponse) {
-      console.log("커플정보 얻기", couplesInfoResponse.success);
-      if (couplesInfoResponse.success) {
-        console.log(couplesInfoResponse);
+    if (isLoggedIn && !isLoading) {
+      if (couplesInfoResponse?.success) {
+        console.log("커플정보 얻기 성공:", couplesInfoResponse);
         navigate("/loading");
       } else {
+        console.error("커플 정보 가져오기 실패:", error);
         navigate("/onboarding");
       }
-    } else if (!isLoading && error) {
-      console.log("커플 정보 가져오기 실패", error);
-      navigate("/onboarding");
     }
-  }, [isLoading, couplesInfoResponse, error, navigate]);
+  }, [isLoggedIn, isLoading, couplesInfoResponse, error, navigate]);
+
+  return null;
 };
 
 export default usePostLogin;
-
-// else if (!isLoading && error) {
-//   console.log("커플 정보 가져오기 실패", error);
-//   navigate("/error");
