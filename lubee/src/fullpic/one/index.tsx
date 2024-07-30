@@ -123,7 +123,7 @@ const Wrapper = styled.section`
 
 const EmojiTagContainer = styled.button`
   position: absolute;
-  top: 45rem;
+  top: 43.5rem;
   left: 4rem;
   padding: 0;
   border: none;
