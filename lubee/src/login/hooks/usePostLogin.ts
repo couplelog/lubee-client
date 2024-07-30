@@ -36,10 +36,10 @@ const usePostLogin = () => {
   // useGetCouplesInfo를 호출하는 로직을 useEffect 외부로 이동
   const couplesInfo = useGetCouplesInfo(isLoggedIn);
   console.log("couplesInfo", couplesInfo);
-
+  console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
   useEffect(() => {
     if (isLoggedIn && couplesInfo) {
-      if (couplesInfo.error) {
+      if (!couplesInfo.data) {
         navigate("/onboarding");
       } else {
         navigate("/loading");
