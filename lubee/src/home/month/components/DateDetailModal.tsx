@@ -63,8 +63,15 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
               isToday={true}
               comment={myComment}
               finalServerDate={finalServerDate}
+              isDateDetailModal={true}
             />
-            <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={true} comment={partnerComment} />
+            <CommentBox
+              profileIconSrc={partnerProfile}
+              isMyComment={false}
+              isToday={true}
+              comment={partnerComment}
+              isDateDetailModal={true}
+            />
           </CommentsContainer>
           <HomePicBoxWrapper>
             <MonthPicBox
