@@ -8,7 +8,6 @@ import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 const usePostLogin = () => {
   const KAKAO_CODE = new URL(window.location.href).searchParams.get("code");
   const navigate = useNavigate();
-  // 여기서 useGetCouplesInfo를 호출하지 않고 useEffect로 로그인 요청이 완료된 후에 GetCouplesInfo를 호출
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 추적
 
   useEffect(() => {
@@ -35,16 +34,20 @@ const usePostLogin = () => {
           }
         });
     }
-  }, [KAKAO_CODE]);
+  }, [KAKAO_CODE, navigate]);
+
+  // useGetCouplesInfo를 호출하는 로직을 useEffect 외부로 이동
+  const couplesInfo = useGetCouplesInfo(isLoggedIn);
 
   useEffect(() => {
-    const response = useGetCouplesInfo(isLoggedIn);
-    if (!response) {
-      navigate("/onboarding");
-    } else {
-      navigate("/loading");
+    if (isLoggedIn) {
+      if (!couplesInfo) {
+        navigate("/onboarding");
+      } else {
+        navigate("/loading");
+      }
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, couplesInfo, navigate]);
 };
 
 export default usePostLogin;
