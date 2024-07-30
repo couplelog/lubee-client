@@ -5,6 +5,7 @@ import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
 import { usePostDateComment } from "home/hooks/usePostDateComment";
 import { useUpdateDateComment } from "home/hooks/useUpdateDateComment";
+import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
 
 export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText, finalServerDate, isDateDetailModal } = props;
@@ -14,6 +15,8 @@ export default function MyCommentModal(props: CommentModalProps) {
   const [isEditing, setIsEditing] = useState(isDefaultText);
   const { mutate: postDateCommentMutate } = usePostDateComment();
   const { mutate: updateDateCommentMutate } = useUpdateDateComment();
+
+  const { refetch } = useGetTodayDateComment(finalServerDate || "");
 
   // isDefaultText일 때는 placeholder를 출력하기 위함
   useEffect(() => {
@@ -53,14 +56,28 @@ export default function MyCommentModal(props: CommentModalProps) {
       if (isDefaultText) {
         // 서버에 코멘트 POST 요청으로
         if (finalServerDate) {
-          postDateCommentMutate({ content: text, date: finalServerDate });
+          postDateCommentMutate(
+            { content: text, date: finalServerDate },
+            {
+              onSuccess: () => {
+                refetch(); // 코멘트 저장 후 데이터 다시 불러오기
+              },
+            },
+          );
         } else {
           console.error("finalServerDate is undefined");
         }
       } else {
         // 서버에 코멘트 UPDATE 요청으로
         if (finalServerDate) {
-          updateDateCommentMutate({ content: text, date: finalServerDate });
+          updateDateCommentMutate(
+            { content: text, date: finalServerDate },
+            {
+              onSuccess: () => {
+                refetch(); // 코멘트 업데이트 후 데이터 다시 불러오기
+              },
+            },
+          );
         } else {
           console.error("finalServerDate is undefined");
         }

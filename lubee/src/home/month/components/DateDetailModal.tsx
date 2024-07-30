@@ -43,7 +43,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   /*코멘트 부분*/
   const isToday = false;
   const finalServerDate = isToday ? getServerDate() : serverDate; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
-  const { data: commentData, refetch } = useGetTodayDateComment(finalServerDate);
+  const { data: commentData } = useGetTodayDateComment(finalServerDate);
   const { response } = commentData || {};
   const myComment = response?.comment_first || "";
   const partnerComment = response?.comment_second || "";
