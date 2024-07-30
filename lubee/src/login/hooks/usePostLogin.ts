@@ -35,7 +35,7 @@ const usePostLogin = () => {
           }
         });
     }
-  }, []);
+  }, [KAKAO_CODE]);
 
   useEffect(() => {
     const response = useGetCouplesInfo(isLoggedIn);
@@ -45,23 +45,6 @@ const usePostLogin = () => {
       navigate("/loading");
     }
   }, [isLoggedIn]);
-
-  // 403에러 캐치해서 로딩페이지 띄우기
-  // useGetCouplesInfo 훅은 isLoggedIn이 true일 때만 쿼리를 실행
-  // 로그인 토큰이 설정된 이후에만 GetCouplesInfo API 호출을 해서 403 에러를 방지
-  // const { data: couplesInfoResponse, isLoading } = useGetCouplesInfo(isLoggedIn); // 로그인 상태를 의존성으로 추가
-
-  // useEffect(() => {
-  //   if (!isLoading && couplesInfoResponse) {
-  //     console.log("커플정보 얻기", couplesInfoResponse.success);
-  //     if (couplesInfoResponse.success) {
-  //       console.log(couplesInfoResponse);
-  //       navigate("/loading");
-  //     } else {
-  //       navigate("/onboarding");
-  //     }
-  //   }
-  // }, [isLoading, couplesInfoResponse, navigate]);
 };
 
 export default usePostLogin;
