@@ -24,8 +24,10 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
   console.log("myEmoji", reaction_first);
 
   // 로컬 스토리지에서 배열 가져오기
-  const [numbersArray, setNumbersArray] = useState<number[]>(JSON.parse(localStorage.getItem("numbersArray") || "[]"));
-
+  const [numbersArray, setNumbersArray] = useState<number[]>(
+    JSON.parse(sessionStorage.getItem("numbersArray") || "[]"),
+  );
+  console.log("기존 배열", numbersArray);
   // 배열에 특정 숫자가 있는지 확인하는 함수
   function isNumberInArray(number: number): boolean {
     return numbersArray.includes(number);
@@ -35,7 +37,7 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
 
   useEffect(() => {
     // 배열을 다시 로컬 스토리지에 저장
-    localStorage.setItem("numbersArray", JSON.stringify(numbersArray));
+    sessionStorage.setItem("numbersArray", JSON.stringify(numbersArray));
     console.log("업데이트 배열:", numbersArray);
   }, [numbersArray]);
 
@@ -51,7 +53,7 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
               const updatedArray = [...numbersArray, memory_id];
               setNumbersArray(updatedArray);
               // 로컬 스토리지에 업데이트된 배열 저장
-              localStorage.setItem("numbersArray", JSON.stringify(updatedArray));
+              sessionStorage.setItem("numbersArray", JSON.stringify(updatedArray));
               // 페이지 이동
               if (prevPage === "today") {
                 navigate("/home/today");
