@@ -55,3 +55,10 @@ export const startDateState = atom<string>({
   key: "startDateState",
   default: "",
 });
+
+/* 이모지 저장 array*/
+
+export const emojiNumbersArrayState = atom<number[]>({
+  key: "emojiNumbersArray",
+  default: JSON.parse(sessionStorage.getItem("numbersArray") || "[]"),
+});

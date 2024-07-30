@@ -1,5 +1,3 @@
-import { infoToast } from "@common/utils/toast";
-
 export interface readPicProps {
   input: FileList | null;
   setPicSrc: React.Dispatch<React.SetStateAction<File | undefined>>;
@@ -15,6 +13,5 @@ export const readPic = ({ input, setPicSrc, setVerified }: readPicProps) => {
     reader.readAsDataURL(input[0]);
     setPicSrc(input[0]);
     setVerified(false);
-    infoToast("사진 등록 성공");
   }
 };
