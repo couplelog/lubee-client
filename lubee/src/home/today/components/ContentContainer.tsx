@@ -39,7 +39,7 @@ export default function ContentContainer(props: ContentContainerProps) {
 
   /*코멘트 부분*/
   const finalServerDate = isToday ? getServerDate() : date; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
-  const commentData = useGetTodayDateComment(finalServerDate);
+  const { data: commentData, refetch } = useGetTodayDateComment(finalServerDate);
   const { response } = commentData || {};
   const myComment = response?.comment_first || "";
   const partnerComment = response?.comment_second || "";
