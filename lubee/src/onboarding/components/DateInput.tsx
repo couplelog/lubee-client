@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import YellowBox from "../components/YellowBox";
-import { infoToast } from "@common/utils/toast";
 
 interface DateInputProps {
   year: string;
@@ -50,13 +49,6 @@ export default function DateInput(props: DateInputProps) {
       }
     }, 500);
   }, [day]);
-
-  // 년도가 네 글자가 아닌 경우 infoToast를 띄우기
-  useEffect(() => {
-    if (year.length > 0 && year.length !== 4) {
-      infoToast("네 자릿수의 년도를 입력해주세요");
-    }
-  }, [year]);
 
   // 오늘보다 미래 선택 시 오늘 날짜로 변경
   useEffect(() => {

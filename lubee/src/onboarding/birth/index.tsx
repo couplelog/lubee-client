@@ -8,6 +8,7 @@ import OnboardingBtn from "../components/OnboardingBtn";
 import DateInput from "../components/DateInput";
 import { useRecoilState } from "recoil";
 import { birthdayState } from "@common/recoil/atom";
+import { infoToast } from "@common/utils/toast";
 
 interface BirthProps {
   moveToOnboardingProfile: () => void;
@@ -33,6 +34,12 @@ export default function index(props: BirthProps) {
   }
 
   function handleOnboardingBtn() {
+    // 년도가 네 자리 숫자가 아닌 경우 토스트 메시지 띄우기
+    if (year.length !== 4) {
+      infoToast("네 자릿수의 년도를 입력해주세요");
+      return;
+    }
+
     // 생년월일을 지정된 형식으로 저장
     const formattedBirthday = `${year}.${month}.${day}`;
     setBirthday(formattedBirthday);
