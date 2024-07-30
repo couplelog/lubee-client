@@ -4,11 +4,12 @@ import { styled } from "styled-components";
 export const StyledToastContainer = styled(ToastContainer)`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 8.2rem;
 
   .Toastify__toast {
     width: 26.8rem;
-    height: 2.6rem;
+    height: 4.9rem;
     border-radius: 8.121px;
     background-color: ${({ theme }) => theme.colors.gray_700};
     box-shadow:
