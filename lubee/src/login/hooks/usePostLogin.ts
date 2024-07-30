@@ -59,7 +59,7 @@ const usePostLogin = () => {
       console.log("커플 정보 가져오기 실패", error);
       navigate("/onboarding");
     }
-  }, [isLoading, couplesInfoResponse, navigate]);
+  }, []);
 };
 
 export default usePostLogin;
