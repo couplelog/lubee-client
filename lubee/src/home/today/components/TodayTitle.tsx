@@ -39,7 +39,7 @@ const DateText = styled.p`
 `;
 
 const NumberText = styled.span`
-  ${({ theme }) => theme.fonts.Ginto_20};
+  ${({ theme }) => theme.fonts.Date_Indicator_2};
 
   color: ${({ theme }) => theme.colors.yellow};
 `;

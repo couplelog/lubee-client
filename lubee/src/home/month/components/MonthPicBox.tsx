@@ -114,6 +114,8 @@ const Image = styled.img`
   padding: 0;
   border-radius: 12px;
   background: none;
+  object-fit: cover;
+  object-position: center;
 `;
 
 const ProfileIcon = styled.svg`

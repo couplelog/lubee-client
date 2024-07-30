@@ -135,28 +135,42 @@ const fonts = {
     line-height: 1.6455rem;
   `,
 
-  Ginto_16: css`
+  // 홈_오늘 날짜
+  Date_Indicator_1: css`
     font-family: Pretendard;
     font-style: normal;
-    font-size: 1.6rem;
-    font-weight: 500;
-    line-height: 2.24rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: -0.2px;
   `,
 
-  Ginto_18: css`
-    font-family: Pretendard;
-    font-style: normal;
-    font-size: 1.8rem;
-    font-weight: 500;
-    line-height: 2.2rem;
-  `,
-
-  Ginto_20: css`
+  // 387일
+  Date_Indicator_2: css`
     font-family: Pretendard;
     font-style: normal;
     font-size: 2.8rem;
-    font-weight: 500;
-    line-height: 3.64rem;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: -0.5px;
+  `,
+
+  // 달력 헤더 텍스트, 꿀 텍스트
+  Calendar_Honey: css`
+    font-family: Pretendard;
+    font-style: normal;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: -0.144px;
+  `,
+  Calendar_Number_Body: css`
+    font-family: Pretendard;
+    font-style: normal;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 18px; /* 128.571% */
+    letter-spacing: -0.1px;
   `,
 };
 

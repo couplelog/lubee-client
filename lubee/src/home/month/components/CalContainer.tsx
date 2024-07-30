@@ -68,7 +68,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 
   function handleDateDetailModal(date: number) {
     if (isFutureDate(year, month, date)) {
-      infoToast("오늘 이전만 선택가능합니다");
+      infoToast("오늘 이전의 날짜를 선택해주세요");
       setSelectedDate(date);
       return;
     }
@@ -152,20 +152,20 @@ const Container = styled.div`
   gap: 1.6rem;
   width: 100%;
   height: fit-content;
-  padding: 1.6rem 1.2rem;
+  padding: 2rem 2.8rem;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const Header = styled.header`
   display: flex;
-  gap: 0.8rem;
+  gap: 1.1rem;
   align-items: center;
   padding: 0 0 0 1rem;
 `;
 
 const HeaderDate = styled.p`
-  ${({ theme }) => theme.fonts.Ginto_16};
+  ${({ theme }) => theme.fonts.Calendar_Honey};
 
   color: ${({ theme }) => theme.colors.gray_800};
 `;
@@ -181,8 +181,9 @@ const HoneyMonthIcon = styled(HoneyMonthIc)`
 `;
 
 const HoneyCount = styled.p`
+  ${({ theme }) => theme.fonts.Calendar_Honey};
+
   color: ${({ theme }) => theme.colors.gray_800};
-  ${({ theme }) => theme.fonts.Ginto_16};
 `;
 
 const Grid = styled.ul`
@@ -219,5 +220,5 @@ const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: 
 `;
 
 const Date = styled.p`
-  ${({ theme }) => theme.fonts.Ginto_18};
+  ${({ theme }) => theme.fonts.Calendar_Number_Body};
 `;
