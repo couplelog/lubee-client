@@ -51,7 +51,6 @@ const fonts = {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.8rem;
-    letter-spacing: -0.1px;
   `,
 
   SubTitle: css`
@@ -59,7 +58,6 @@ const fonts = {
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 2.4rem;
-    letter-spacing: -0.1px;
   `,
 
   Body_4: css`
@@ -67,7 +65,6 @@ const fonts = {
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 2.4rem;
-    letter-spacing: -0.3px;
   `,
 
   Body_3: css`
@@ -75,7 +72,6 @@ const fonts = {
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 2.4rem;
-    letter-spacing: -0.3px;
   `,
 
   Body_2: css`
@@ -83,7 +79,6 @@ const fonts = {
     font-size: 1.4rem;
     font-weight: 600;
     line-height: 1.82rem;
-    letter-spacing: -0.1px;
   `,
 
   Body_1: css`
@@ -91,7 +86,6 @@ const fonts = {
     font-size: 1.2rem;
     font-weight: 600;
     line-height: 1.6rem;
-    letter-spacing: -0.1px;
   `,
 
   /*맹꽁이 님과 387일 째 꿀 모으는 날에 해당하는 글씨체인듯*/
@@ -100,7 +94,6 @@ const fonts = {
     font-size: 2.8rem;
     font-weight: 600;
     line-height: 3.64rem;
-    letter-spacing: -0.5px;
   `,
 
   Caption_2: css`
@@ -108,7 +101,6 @@ const fonts = {
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 2rem;
-    letter-spacing: -0.2px;
   `,
 
   Caption_1: css`
@@ -116,7 +108,6 @@ const fonts = {
     font-size: 1.1rem;
     font-weight: 500;
     line-height: 1.6rem;
-    letter-spacing: -0.2px;
   `,
 
   Caption_0: css`
@@ -124,7 +115,6 @@ const fonts = {
     font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.3rem;
-    letter-spacing: -0.1px;
   `,
 
   Rewind: css`
@@ -132,8 +122,7 @@ const fonts = {
     font-style: normal;
     font-size: 1.5rem;
     font-weight: 500;
-    line-height: 120%; /* 18px */
-    letter-spacing: -0.206px;
+    line-height: 120%;
   `,
 
   // 홈_오늘 날짜
@@ -143,7 +132,6 @@ const fonts = {
     font-size: 1.4rem;
     font-weight: 700;
     line-height: 130%;
-    letter-spacing: -0.2px;
   `,
 
   // 387일
@@ -153,7 +141,6 @@ const fonts = {
     font-size: 2.8rem;
     font-weight: 700;
     line-height: 130%;
-    letter-spacing: -0.5px;
   `,
 
   // 달력 헤더 텍스트, 꿀 텍스트
@@ -162,8 +149,7 @@ const fonts = {
     font-style: normal;
     font-size: 1.6rem;
     font-weight: 700;
-    line-height: 140%; /* 22.4px */
-    letter-spacing: -0.144px;
+    line-height: 140%;
   `,
 
   Calendar_Number_Body: css`
@@ -171,8 +157,7 @@ const fonts = {
     font-style: normal;
     font-size: 1.4rem;
     font-weight: 600;
-    line-height: 18px; /* 128.571% */
-    letter-spacing: -0.1px;
+    line-height: 18px;
   `,
 };
 

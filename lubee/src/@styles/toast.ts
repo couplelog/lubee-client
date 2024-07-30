@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 export const StyledToastContainer = styled(ToastContainer)`
   display: flex;
   justify-content: center;
-  margin-bottom: 1.6rem;
+  margin-bottom: 8.2rem;
 
   .Toastify__toast {
     width: 26.8rem;
