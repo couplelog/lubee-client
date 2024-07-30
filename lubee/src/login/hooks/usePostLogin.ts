@@ -38,34 +38,30 @@ const usePostLogin = () => {
   }, []);
 
   useEffect(() => {
-    console.log("isLoggenIn", isLoggedIn);
+    const response = useGetCouplesInfo(isLoggedIn);
+    if (!response) {
+      navigate("/onboarding");
+    } else {
+      navigate("/loading");
+    }
   }, [isLoggedIn]);
 
   // 403에러 캐치해서 로딩페이지 띄우기
   // useGetCouplesInfo 훅은 isLoggedIn이 true일 때만 쿼리를 실행
   // 로그인 토큰이 설정된 이후에만 GetCouplesInfo API 호출을 해서 403 에러를 방지
-  const { data: couplesInfoResponse, isLoading, error } = useGetCouplesInfo(isLoggedIn); // 로그인 상태를 의존성으로 추가
+  // const { data: couplesInfoResponse, isLoading } = useGetCouplesInfo(isLoggedIn); // 로그인 상태를 의존성으로 추가
 
-  useEffect(() => {
-    if (couplesInfoResponse?.success_or_error_code.status === 404) {
-      navigate("/onboarding");
-    }
-  }, [couplesInfoResponse?.success_or_error_code.status]);
-
-  useEffect(() => {
-    if (!isLoading && couplesInfoResponse) {
-      console.log("커플정보 얻기", couplesInfoResponse.success);
-      if (couplesInfoResponse.success) {
-        console.log(couplesInfoResponse);
-        navigate("/loading");
-      } else {
-        navigate("/onboarding");
-      }
-    } else if (couplesInfoResponse?.success_or_error_code.status === 404) {
-      console.log("커플 정보 가져오기 실패", error);
-      navigate("/onboarding");
-    }
-  }, [isLoading, couplesInfoResponse, navigate]);
+  // useEffect(() => {
+  //   if (!isLoading && couplesInfoResponse) {
+  //     console.log("커플정보 얻기", couplesInfoResponse.success);
+  //     if (couplesInfoResponse.success) {
+  //       console.log(couplesInfoResponse);
+  //       navigate("/loading");
+  //     } else {
+  //       navigate("/onboarding");
+  //     }
+  //   }
+  // }, [isLoading, couplesInfoResponse, navigate]);
 };
 
 export default usePostLogin;
