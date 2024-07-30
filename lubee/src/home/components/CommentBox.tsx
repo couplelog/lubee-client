@@ -9,10 +9,11 @@ interface CommentBoxProps {
   comment: string;
   isToday: boolean;
   finalServerDate?: string;
+  isDateDetailModal: boolean;
 }
 
 export default function CommentBox(props: CommentBoxProps) {
-  const { profileIconSrc, isMyComment, comment, isToday, finalServerDate } = props;
+  const { profileIconSrc, isMyComment, comment, isToday, finalServerDate, isDateDetailModal } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>("");
 
@@ -61,12 +62,14 @@ export default function CommentBox(props: CommentBoxProps) {
             commentText={commentText}
             setCommentText={setCommentText}
             finalServerDate={finalServerDate}
+            isDateDetailModal={isDateDetailModal}
           />
         ) : (
           <PartnerCommentModal
             handleCloseBtn={handleCloseBtn}
             profileIconSrc={profileIconSrc}
             commentText={commentText}
+            isDateDetailModal={isDateDetailModal}
           />
         ))}
     </>

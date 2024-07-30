@@ -56,8 +56,15 @@ export default function ContentContainer(props: ContentContainerProps) {
           isToday={true}
           comment={myComment}
           finalServerDate={finalServerDate}
+          isDateDetailModal={false}
         />
-        <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={true} comment={partnerComment} />
+        <CommentBox
+          profileIconSrc={partnerProfile}
+          isMyComment={false}
+          isToday={true}
+          comment={partnerComment}
+          isDateDetailModal={false}
+        />
       </CommentsContainer>
       <TodayPicBox url={`/${urlDate}`} specificDto={specificDto} />
     </Container>
