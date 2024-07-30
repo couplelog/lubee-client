@@ -41,7 +41,7 @@ const usePostLogin = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      if (couplesInfo.error) {
+      if (couplesInfo.data?.success_or_error_code.status === 404) {
         navigate("/onboarding");
       } else {
         navigate("/loading");
