@@ -8,6 +8,10 @@ import { useLocation } from "react-router-dom";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import { useGetOnePic } from "fullpic/hooks/useGetOnePic";
 import { LeftArrowIc, RightArrowIc } from "assets";
+import { usePostReaction } from "@common/hooks/usePostReaction";
+import { useUpdateReaction } from "@common/hooks/useUpdateReaction";
+import { useRecoilState } from "recoil";
+import { emojiNumbersArrayState } from "@common/recoil/atom";
 
 export default function index() {
   const [openDeletePicModal, setOpenDeletePicModal] = useState<boolean>(false);
@@ -21,6 +25,23 @@ export default function index() {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 1;
   const totalPages = Math.ceil(specificDto.length / itemsPerPage);
+
+  const { mutate: postReactionMutate } = usePostReaction();
+  const { mutate: updateReactionMutate } = useUpdateReaction();
+
+  //recoil로 기존 array를 sessionstorage에서 가져오기
+  const [numbersArray, setNumbersArray] = useRecoilState(emojiNumbersArrayState);
+  console.log("기존 배열", numbersArray);
+
+  // 배열에 특정 숫자가 있는지 확인하는 함수
+  function isNumberInArray(number: number): boolean {
+    return numbersArray.includes(number);
+  }
+  useEffect(() => {
+    // 배열을 다시 세션 스토리지에 저장
+    sessionStorage.setItem("numbersArray", JSON.stringify(numbersArray));
+    console.log("업데이트 배열:", numbersArray);
+  }, [numbersArray]);
 
   function handleTrashBtn(open: boolean) {
     setOpenDeletePicModal(open);
@@ -51,6 +72,7 @@ export default function index() {
       const newPage = currentPage - 1;
       setCurrentPage(newPage);
       setMemoryId(specificDto[newPage * itemsPerPage].memory_id);
+      fetchEmoji();
     }
   };
 
@@ -59,8 +81,33 @@ export default function index() {
       const newPage = currentPage + 1;
       setCurrentPage(newPage);
       setMemoryId(specificDto[newPage * itemsPerPage].memory_id);
+      fetchEmoji();
     }
   };
+
+  function fetchEmoji() {
+    // 새로운 리액션 추가
+    if (!isNumberInArray(memory_id)) {
+      if (reaction_first === null && selectedEmojiText !== "") {
+        postReactionMutate(
+          { memory_id: memory_id, reaction: selectedEmojiText },
+          {
+            onSuccess: () => {
+              // 배열에 숫자 추가
+              const updatedArray = [...numbersArray, memory_id];
+              setNumbersArray(updatedArray);
+              // 로컬 스토리지에 업데이트된 배열 저장
+              sessionStorage.setItem("numbersArray", JSON.stringify(updatedArray));
+            },
+          },
+        );
+      }
+    }
+    // 리액션이 다를 때
+    else {
+      updateReactionMutate({ memory_id: memory_id, reaction: selectedEmojiText });
+    }
+  }
 
   return (
     <Wrapper>

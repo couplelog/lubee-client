@@ -8,7 +8,7 @@ import { useState } from "react";
 import Toggle from "./components/Toggle";
 import ToggleCalendar from "./components/ToggleCalendar";
 import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
-import { getServerDate, getTodayDate, getTodayMonth } from "@common/utils/dateFormat";
+import { getServerDate, getTodayDate, getTodayMonth, getTodayYear } from "@common/utils/dateFormat";
 import ContentContainer from "./components/ContentContainer";
 import { useGetLoveDay } from "home/hooks/useGetLoveDay";
 import TodayHomeHeader from "./components/TodayHomeHeader";
@@ -56,7 +56,15 @@ export default function index() {
             {isPlusClicked ? <PlusClickedIcon /> : <PlusIcon />}
           </BtnWrapper>
         )}
-        {openToggle && <Toggle handleCalendar={handleCalendar} showCalendar={showCalendar} />}
+        {openToggle && (
+          <Toggle
+            handleCalendar={handleCalendar}
+            showCalendar={showCalendar}
+            year={getTodayYear}
+            month={getTodayMonth}
+            day={getTodayDate}
+          />
+        )}
         {showCalendar && <ToggleCalendar showCalendar={showCalendar} handleCalendar={handleCalendar} />}
       </Wrapper>
     </>
