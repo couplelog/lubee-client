@@ -19,17 +19,14 @@ const usePostLogin = () => {
           setToken(data.response.accessToken);
           setIsLoggedIn(true); // 로그인 성공 시 상태 업데이트
           console.log("로그인 성공");
-          console.log("로그인 데이터", data);
         })
         .catch((err) => {
           const errorData = err.response.data as loginErrorProps; // 에러 응답 데이터 단언
           if (errorData.success_or_error_code.status === 404) {
-            setToken(errorData.response.accessToken);
             console.log("404에러");
             navigate("/login");
           } else {
             console.log("로그인 실패");
-            console.log("KAKAO_CODE", KAKAO_CODE);
             navigate("/error");
           }
         });
@@ -38,16 +35,17 @@ const usePostLogin = () => {
 
   // useGetCouplesInfo를 호출하는 로직을 useEffect 외부로 이동
   const couplesInfo = useGetCouplesInfo(isLoggedIn);
+  console.log("couplesInfo", couplesInfo);
 
   useEffect(() => {
-    if (isLoggedIn && couplesInfo.data) {
-      if (couplesInfo.data.success_or_error_code.status === 404) {
+    if (isLoggedIn && couplesInfo) {
+      if (couplesInfo.error) {
         navigate("/onboarding");
       } else {
         navigate("/loading");
       }
     }
-  }, [isLoggedIn, couplesInfo, navigate]);
+  }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
 };
 
 export default usePostLogin;
