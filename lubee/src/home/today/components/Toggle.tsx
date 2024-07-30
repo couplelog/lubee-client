@@ -7,9 +7,12 @@ import { readPic } from "home/utils/readPic";
 interface ToggleProps {
   handleCalendar: () => void;
   showCalendar: boolean;
+  year: number;
+  month: number;
+  day: number;
 }
 export default function Toggle(props: ToggleProps) {
-  const { handleCalendar, showCalendar } = props;
+  const { handleCalendar, showCalendar, year, month, day } = props;
   const navigate = useNavigate();
 
   /* 사진 업로드 */
@@ -29,7 +32,7 @@ export default function Toggle(props: ToggleProps) {
       const reader = new FileReader();
       reader.readAsDataURL(picObj[0]);
       reader.onloadend = () => {
-        navigate("/upload", { state: { picSrc: picObj[0] } }); //useLocation 사용하기 위해 state 전달
+        navigate("/upload", { state: { picSrc: picObj[0], year: year, month: month, day: day } }); //useLocation 사용하기 위해 state 전달
       };
     }
   };
