@@ -47,6 +47,12 @@ const usePostLogin = () => {
   const { data: couplesInfoResponse, isLoading, error } = useGetCouplesInfo(isLoggedIn); // 로그인 상태를 의존성으로 추가
 
   useEffect(() => {
+    if (couplesInfoResponse?.success_or_error_code.status === 404) {
+      navigate("/onboarding");
+    }
+  }, [couplesInfoResponse?.success_or_error_code.status]);
+
+  useEffect(() => {
     if (!isLoading && couplesInfoResponse) {
       console.log("커플정보 얻기", couplesInfoResponse.success);
       if (couplesInfoResponse.success) {
