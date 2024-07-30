@@ -7,7 +7,7 @@ import { usePostDateComment } from "home/hooks/usePostDateComment";
 import { useUpdateDateComment } from "home/hooks/useUpdateDateComment";
 
 export default function MyCommentModal(props: CommentModalProps) {
-  const { handleCloseBtn, profileIconSrc, commentText, setCommentText, finalServerDate } = props;
+  const { handleCloseBtn, profileIconSrc, commentText, setCommentText, finalServerDate, isDateDetailModal } = props;
   const [text, setText] = useState("");
   const [textLength, setTextLength] = useState(0);
   const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?" || commentText === "이날의 데이트는 어떠셨나요?";
@@ -74,7 +74,7 @@ export default function MyCommentModal(props: CommentModalProps) {
 
   return (
     <Background>
-      <Container>
+      <Container $isDateDetailModal={isDateDetailModal}>
         <HeaderContainer>
           <ProfileIcon as={profileIconSrc} />
           {isEditing ? (
@@ -120,11 +120,13 @@ const Background = styled.div`
   ${({ theme }) => theme.effects.dimmed_40};
 `;
 
-const Container = styled.section`
+// 월간 DateDetailModal에서 띄웠을 때 position: fixed로 바꾸면 됨
+const Container = styled.section<{ $isDateDetailModal: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   position: absolute;
+  position: ${({ $isDateDetailModal }) => ($isDateDetailModal ? "fixed" : "absolute")};
   top: 24rem;
   left: 5.6rem;
   width: 27.8rem;
