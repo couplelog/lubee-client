@@ -36,7 +36,7 @@ const TextContainer = styled.section`
 
 const TitleText = styled.h3`
   display: flex;
-  ${({ theme }) => theme.fonts.Ginto_16};
+  ${({ theme }) => theme.fonts.Body_0};
 
   color: ${({ theme }) => theme.colors.white};
 `;
