@@ -4,7 +4,9 @@ import { usePostReaction } from "@common/hooks/usePostReaction";
 import { BtnWrapper } from "@styles/btnStyle";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { emojiNumbersArrayState } from "@common/recoil/atom";
 
 interface FullpicHeaderProps {
   handleTrashBtn: (open: boolean) => void;
@@ -23,11 +25,10 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
 
   console.log("myEmoji", reaction_first);
 
-  // 로컬 스토리지에서 배열 가져오기
-  const [numbersArray, setNumbersArray] = useState<number[]>(
-    JSON.parse(sessionStorage.getItem("numbersArray") || "[]"),
-  );
+  //recoil로 기존 array를 sessionstorage에서 가져오기
+  const [numbersArray, setNumbersArray] = useRecoilState(emojiNumbersArrayState);
   console.log("기존 배열", numbersArray);
+
   // 배열에 특정 숫자가 있는지 확인하는 함수
   function isNumberInArray(number: number): boolean {
     return numbersArray.includes(number);
@@ -36,7 +37,7 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
   const prevPage = localStorage.getItem("currentPage");
 
   useEffect(() => {
-    // 배열을 다시 로컬 스토리지에 저장
+    // 배열을 다시 세션 스토리지에 저장
     sessionStorage.setItem("numbersArray", JSON.stringify(numbersArray));
     console.log("업데이트 배열:", numbersArray);
   }, [numbersArray]);
