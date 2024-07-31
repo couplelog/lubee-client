@@ -12,7 +12,7 @@ export default function index() {
   const { refetch: refetchHoney } = useGetTodayHoney(getServerDate()); // refetch: refetchHoney: 데이터를 다시 가져오는 함수로, useEffect 훅 내에서 사용
   const [previousHoney, setPreviousHoney] = useState<number | null>(() => {
     const savedHoney = localStorage.getItem("previousHoney");
-    return savedHoney !== null ? JSON.parse(savedHoney) : null;
+    return savedHoney !== null ? JSON.parse(savedHoney) : 0;
   });
 
   useEffect(() => {
