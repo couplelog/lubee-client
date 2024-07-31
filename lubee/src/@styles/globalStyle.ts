@@ -18,9 +18,6 @@ input, textarea,button {
 
 html, #root{
   height: 100dvh;
-
-  --toastify-toast-height: 490px;
-  --toastify-toast-width: 268px;
 }
 
 a{

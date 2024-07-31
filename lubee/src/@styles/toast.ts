@@ -7,10 +7,10 @@ export const StyledToastContainer = styled(ToastContainer)`
   align-items: center;
   margin-bottom: 8.2rem;
 
-  /* .Toastify__toast-container {
-    width: 26.8rem;
-    height: 4.9rem;
-  } */
+  .Toastify__toast-container {
+    width: 268px;
+    height: 49px;
+  }
 
   .Toastify__toast {
     padding: 0;
@@ -22,5 +22,9 @@ export const StyledToastContainer = styled(ToastContainer)`
     color: ${({ theme }) => theme.colors.gray_50};
     text-align: center;
     ${({ theme }) => theme.fonts.Caption_2};
+  }
+
+  .Toastify__toast-container--bottom-center {
+    bottom: 25rem;
   }
 `;
