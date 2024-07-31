@@ -1,6 +1,6 @@
 import { ShortBorderIc } from "assets/index";
 import styled from "styled-components";
-import { forwardRef, useEffect } from "react";
+import { forwardRef } from "react";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
@@ -48,12 +48,6 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const myComment = response?.comment_first || "";
   const partnerComment = response?.comment_second || "";
 
-  console.log("commentData", commentData);
-  useEffect(() => {
-    console.log("모달에서 내 코멘트", myComment, serverDate);
-    console.log("모달에서 partner코멘트", partnerComment, serverDate);
-  }, [response, commentData]);
-
   return (
     <Background>
       <Container ref={ref} $showCalendar={showCalendar}>
@@ -66,7 +60,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <CommentBox
               profileIconSrc={myProfile}
               isMyComment={true}
-              isToday={true}
+              isToday={false}
               comment={myComment}
               finalServerDate={finalServerDate}
               isDateDetailModal={true}
@@ -74,7 +68,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <CommentBox
               profileIconSrc={partnerProfile}
               isMyComment={false}
-              isToday={true}
+              isToday={false}
               comment={partnerComment}
               isDateDetailModal={true}
             />
