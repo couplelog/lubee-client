@@ -34,24 +34,36 @@ const usePostLogin = () => {
   }, [KAKAO_CODE, navigate]);
 
   // useGetCouplesInfo를 호출하는 로직을 useEffect 외부로 이동
+  // isLoading이 false일 때만 get 실행
   const couplesInfo = useGetCouplesInfo(isLoggedIn);
   console.log("couplesInfo", couplesInfo);
   console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
 
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     if (couplesInfo.data?.success_or_error_code !== undefined) {
+  //       if (couplesInfo.data.success_or_error_code.message === "요청 성공") {
+  //         navigate("/loading");
+  //       } else {
+  //         navigate("/onboarding");
+  //       }
+  //     }
+  //   }
+  // }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
+  // Fetch couples info only when logged in
+  const { data, error } = useGetCouplesInfo(isLoggedIn);
+
   useEffect(() => {
     if (isLoggedIn) {
-      // isLoading이 false일 때만 실행
-      if (couplesInfo.error) {
-        navigate("/onboarding");
-      } else if (couplesInfo.data?.success_or_error_code !== undefined) {
-        if (couplesInfo.data.success_or_error_code.message === "요청 성공") {
+      if (data?.success_or_error_code !== undefined) {
+        if (data.success_or_error_code.message === "요청 성공") {
           navigate("/loading");
         } else {
           navigate("/onboarding");
         }
       }
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, data, navigate, error]);
 };
 
 export default usePostLogin;
