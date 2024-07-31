@@ -21,6 +21,9 @@ export default function CommentBox(props: CommentBoxProps) {
   const myDefaultText = isWhite ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
   const partnerDefaultText = "연인은 아직 작성하지 않았어요";
 
+  console.log("partnerComment", partnerComment === "");
+  console.log("myComment", myComment === "");
+  console.log("isMyComment", isMyComment);
   // comment값이 업데이트될 때마다 commentText 업데이트
   useEffect(() => {
     if (isMyComment) {
@@ -38,7 +41,7 @@ export default function CommentBox(props: CommentBoxProps) {
         }
         // 파트너 코멘트가 없을 때
       } else {
-        setCommentText(partnerDefaultText);
+        setCommentText("연인은 아직 작성하지 않았어요");
       }
     }
   }, [myComment, isMyComment, partnerComment]);
