@@ -39,13 +39,16 @@ const usePostLogin = () => {
   console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
 
   useEffect(() => {
-    if (isLoggedIn && couplesInfo.data?.success_or_error_code !== undefined) {
-      if (couplesInfo.data.success_or_error_code.status === 200) {
-        navigate("/loading");
-      } else {
+    if (isLoggedIn)
+      if (couplesInfo.error) {
         navigate("/onboarding");
+      } else if (couplesInfo.data?.success_or_error_code !== undefined) {
+        if (couplesInfo.data.success_or_error_code.status === 200) {
+          navigate("/loading");
+        } else {
+          navigate("/onboarding");
+        }
       }
-    }
   }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
 };
 
