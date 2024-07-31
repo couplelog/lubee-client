@@ -34,9 +34,10 @@ export default function CommentBox(props: CommentBoxProps) {
     } else {
       // 내 코멘트가 없고 상대방 코멘트가 있는 경우에도 partnerDefaultText를 설정
       if (myComment === "" && partnerComment !== "") {
-        setCommentText(partnerDefaultText);
+        // setCommentText(partnerDefaultText);
+        setCommentText("나의 한마디를 입력하면 볼 수 있어요!");
       } else {
-        setCommentText(partnerComment || partnerDefaultText);
+        setCommentText(partnerComment || "연인은 아직 작성하지 않았어요");
       }
     }
   }, [myComment, partnerComment]);
