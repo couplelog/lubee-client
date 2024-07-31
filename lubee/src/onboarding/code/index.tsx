@@ -5,6 +5,7 @@ import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import YellowBox from "../components/YellowBox";
 import OnboardingBtn from "../components/OnboardingBtn";
 import { usePostLubeeCode } from "../hooks/usePostLubeeCode";
+import { infoToast } from "@common/utils/toast";
 
 interface CodeProps {
   moveToOnboardingConnect: () => void;
@@ -31,7 +32,14 @@ export default function index(props: CodeProps) {
   }
 
   function handleOnboardingBtn() {
-    postLubeeCodeMutate({ inputCode: code });
+    postLubeeCodeMutate(
+      { inputCode: code },
+      {
+        onError: () => {
+          infoToast("코드를 다시 확인해주세요");
+        },
+      },
+    );
   }
 
   return (
