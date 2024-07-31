@@ -20,7 +20,7 @@ export default function index() {
     if (
       couplesInfoResponse !== undefined &&
       couplesInfoResponse.success_or_error_code !== undefined &&
-      couplesInfoResponse?.success_or_error_code.status === 200
+      couplesInfoResponse?.success_or_error_code.message === "요청 성공"
     ) {
       // navigate("/loading");
       console.log("로딩으로 갈수 있다");
@@ -31,7 +31,7 @@ export default function index() {
 
   function handleOnboardingBtn() {
     if (couplesInfoResponse !== undefined && couplesInfoResponse.success_or_error_code !== undefined) {
-      if (couplesInfoResponse?.success_or_error_code.status === 200) {
+      if (couplesInfoResponse?.success_or_error_code.message === "요청 성공") {
         // navigate("/loading");
         console.log("로딩으로 갈 수 있다");
       } else {
