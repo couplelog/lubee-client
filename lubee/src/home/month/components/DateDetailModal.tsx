@@ -42,7 +42,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   /*코멘트 부분*/
   const { data: commentData } = useGetTodayDateComment(serverDate);
   const [myComment, setMyComment] = useState<string>("");
-  const [partnerComment, setMyPartnerComment] = useState<string>("");
+  const [partnerComment, setPartnerComment] = useState<string>("");
 
   // const { response } = commentData || {};
   // const myComment = response?.comment_first || "";
@@ -51,9 +51,12 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   useEffect(() => {
     if (commentData) {
       setMyComment(commentData?.response.comment_first);
-      setMyPartnerComment(commentData?.response.comment_second);
+      setPartnerComment(commentData?.response.comment_second);
     }
   }, [commentData]);
+
+  console.log(myComment);
+  console.log(partnerComment);
 
   return (
     <Background>
