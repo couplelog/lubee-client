@@ -24,8 +24,6 @@ export default function index() {
     ) {
       navigate("/loading");
       console.log("로딩으로 갈수 있다");
-    } else {
-      infoToast("연인이 커플정보를 입력하지 않았어요!");
     }
   }, [couplesInfoResponse, navigate]);
 

@@ -4,6 +4,7 @@ import api from "@common/api/api";
 import { loginErrorProps, loginResProps } from "login/types/loginProps";
 import { setToken } from "login/utils/token";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
+import { infoToast } from "@common/utils/toast";
 
 const usePostLogin = () => {
   const KAKAO_CODE = new URL(window.location.href).searchParams.get("code");
@@ -52,18 +53,17 @@ const usePostLogin = () => {
   // }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
   // Fetch couples info only when logged in
   const couplesInfo = useGetCouplesInfo(isLoggedIn);
-
   useEffect(() => {
     if (isLoggedIn && couplesInfo) {
+      if (!couplesInfo.data) {
+        infoToast("잠시만 기다려주세요");
+      }
       if (couplesInfo.data?.success_or_error_code !== undefined) {
         if (couplesInfo.data.success_or_error_code.message === "요청 성공") {
           navigate("/loading");
+        } else {
+          navigate("/onboarding");
         }
-      }
-      if (!couplesInfo.data) {
-        navigate("/onboarding");
-      } else {
-        navigate("/loading");
       }
     }
   }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
