@@ -9,7 +9,7 @@ export const StyledToastContainer = styled(ToastContainer)`
 
   .Toastify__toast {
     width: 268px;
-    height: 49px;
+    height: 40px;
     padding: 0;
     border-radius: 8.121px;
     background-color: ${({ theme }) => theme.colors.gray_700};
