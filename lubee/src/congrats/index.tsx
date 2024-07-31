@@ -18,7 +18,7 @@ export default function index() {
 
   // couplesInfoResponse가 변경될 때마다 조건 체크
   useEffect(() => {
-    if (couplesInfoResponse?.response.birthday_second !== null) {
+    if (couplesInfoResponse?.success !== undefined) {
       navigate("/home/today");
     } else if (couplesInfoResponse) {
       infoToast("연인이 커플정보를 입력하지 않았어요!");
@@ -26,7 +26,7 @@ export default function index() {
   }, [couplesInfoResponse, navigate]);
 
   function handleOnboardingBtn() {
-    if (couplesInfoResponse?.response.birthday_second !== null) {
+    if (couplesInfoResponse?.success !== undefined) {
       navigate("/home/today");
     } else {
       infoToast("연인이 커플정보를 입력하지 않았어요!");
