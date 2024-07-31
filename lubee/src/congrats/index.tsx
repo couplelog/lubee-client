@@ -22,7 +22,7 @@ export default function index() {
       couplesInfoResponse.success_or_error_code !== undefined &&
       couplesInfoResponse?.success_or_error_code.message === "요청 성공"
     ) {
-      // navigate("/loading");
+      navigate("/loading");
       console.log("로딩으로 갈수 있다");
     } else {
       infoToast("연인이 커플정보를 입력하지 않았어요!");
@@ -32,7 +32,7 @@ export default function index() {
   function handleOnboardingBtn() {
     if (couplesInfoResponse !== undefined && couplesInfoResponse.success_or_error_code !== undefined) {
       if (couplesInfoResponse?.success_or_error_code.message === "요청 성공") {
-        // navigate("/loading");
+        navigate("/loading");
         console.log("로딩으로 갈 수 있다");
       } else {
         infoToast("연인이 커플정보를 입력하지 않았어요!");
