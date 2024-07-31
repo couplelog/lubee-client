@@ -183,7 +183,7 @@ const TextBox = styled.textarea`
   padding: 0 1.2rem;
   border: none;
   resize: none;
-  color: ${({ theme }) => theme.colors.gray_700};
+  color: black;
   outline: none;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
