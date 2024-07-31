@@ -28,7 +28,7 @@ export const errorToast = (text: string, time = 1000) => {
   });
 };
 
-export const infoToast = (text: string, time = 1000) => {
+export const infoToast = (text: string, time = 10000) => {
   toast.info(text, {
     position: "bottom-center",
     autoClose: time,
