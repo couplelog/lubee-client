@@ -22,7 +22,7 @@ export default function index(props: ConnectProps) {
   const [openCopyCodeModal, setOpenCopyCodeModal] = useState<boolean>(false);
   const [lubeeCode, setLubeeCode] = useState<any>(null);
 
-  const { data: fetchedLubeeCode, refetch } = useGetLubeeCode();
+  const { data: fetchedLubeeCode } = useGetLubeeCode();
 
   // useGetLubeeCode 훅이 비동기적으로 데이터를 가져오고, 상태 업데이트
   useEffect(() => {
@@ -39,13 +39,6 @@ export default function index(props: ConnectProps) {
       }, 2000);
     }
   }, [lubeeCode, moveToOnboardingCustom]);
-
-  useEffect(() => {
-    // lubeeCode가 변경될 때마다 refetch를 호출하여 최신 데이터를 가져옵니다
-    if (lubeeCode?.response?.code === "ALREADY_COUPLE") {
-      refetch();
-    }
-  }, [lubeeCode, refetch]);
 
   if (!lubeeCode) return <></>;
 
