@@ -6,49 +6,33 @@ import PartnerCommentModal from "./PartnerCommentModal";
 interface CommentBoxProps {
   profileIconSrc: string;
   isMyComment: boolean;
+  myComment: string;
+  partnerComment: string;
   isWhite: boolean;
   finalServerDate?: string;
   isDateDetailModal: boolean;
-  myComment: string;
-  partnerComment: string;
 }
 
 export default function CommentBox(props: CommentBoxProps) {
-  const { profileIconSrc, isMyComment, isWhite, finalServerDate, isDateDetailModal, myComment, partnerComment } = props;
+  const { profileIconSrc, isMyComment, myComment, partnerComment, isWhite, finalServerDate, isDateDetailModal } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>("");
 
   const myDefaultText = isWhite ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
-  const partnerDefaultText = "연인은 아직 작성하지 않았어요";
-
-  console.log("partnerComment", partnerComment === "");
-  console.log("myComment", myComment === "");
-  console.log("isMyComment", isMyComment);
+  const partnerDefaultText =
+    myComment !== "" ? "연인은 아직 작성하지 않았어요" : "나의 한마디를 입력하면 볼 수 있어요!";
 
   // comment값이 업데이트될 때마다 commentText 업데이트
   useEffect(() => {
     if (isMyComment) {
       setCommentText(myComment || myDefaultText);
     } else {
-      // 파트너 코멘트가 있을 때
-      if (partnerComment !== "") {
-        // 파트너 코멘트가 있는데 나는 없을 때
-        if (myComment === "") {
-          setCommentText("나의 한마디를 입력하면 볼 수 있어요");
-        }
-        //파트너 코멘트가 있는데 나도 코멘트가 있을 때
-        else {
-          setCommentText(partnerComment);
-        }
-        // 파트너 코멘트가 없을 때
-      } else {
-        setCommentText("연인은 아직 작성하지 않았어요");
-      }
+      setCommentText(partnerComment || partnerDefaultText);
     }
-  }, [myComment, isMyComment, partnerComment]);
+  }, [myComment, partnerComment]);
 
   function handleCommentInputModal() {
-    const isDefaultText = commentText === partnerDefaultText || commentText === "나의 한마디를 입력하면 볼 수 있어요!";
+    const isDefaultText = commentText === partnerDefaultText;
 
     if (!isDefaultText) {
       setOpenCommentInputModal(true);
