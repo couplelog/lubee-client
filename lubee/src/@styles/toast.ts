@@ -7,9 +7,12 @@ export const StyledToastContainer = styled(ToastContainer)`
   align-items: center;
   margin-bottom: 8.2rem;
 
-  & .Toastify__toast {
+  .Toastify__toast-container {
     width: 26.8rem;
     height: 4.9rem;
+  }
+
+  .Toastify__toast {
     padding: 0;
     border-radius: 8.121px;
     background-color: ${({ theme }) => theme.colors.gray_700};
