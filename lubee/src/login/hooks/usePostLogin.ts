@@ -37,10 +37,12 @@ const usePostLogin = () => {
 
   // couplesInfoResponse가 변경될 때마다 조건 체크
   useEffect(() => {
-    if (couplesInfo?.data?.success_or_error_code.status === 200) {
-      navigate("/loading");
-    } else {
-      navigate("/onboarding");
+    if (couplesInfo.data !== undefined) {
+      if (couplesInfo?.data?.success_or_error_code.status === 200) {
+        navigate("/loading");
+      } else {
+        navigate("/onboarding");
+      }
     }
   }, [couplesInfo.data, navigate]);
 
