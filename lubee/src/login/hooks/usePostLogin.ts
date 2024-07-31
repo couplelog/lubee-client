@@ -37,7 +37,7 @@ const usePostLogin = () => {
 
   // couplesInfoResponse가 변경될 때마다 조건 체크
   useEffect(() => {
-    if (couplesInfo?.data !== undefined) {
+    if (couplesInfo?.data === undefined) {
       navigate("/onboarding");
     } else {
       navigate("/loading");
@@ -49,7 +49,7 @@ const usePostLogin = () => {
   console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
   useEffect(() => {
     if (isLoggedIn && couplesInfo) {
-      if (!couplesInfo.data) {
+      if (couplesInfo.data === undefined) {
         navigate("/onboarding");
       } else {
         navigate("/loading");
