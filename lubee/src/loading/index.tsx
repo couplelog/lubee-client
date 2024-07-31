@@ -33,9 +33,9 @@ export default function index() {
           // 꿀 개수가 이전보다 증가한 경우
           if (response > previousHoney) {
             if (response === 1) {
-              navigate("/congrats/first");
+              navigate("/honey/first");
             } else if (response === 5) {
-              navigate("/congrats/fifth");
+              navigate("/honey/fifth");
             } else {
               const prevPage = localStorage.getItem("currentPage");
               if (prevPage === "today") {
