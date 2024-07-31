@@ -13,21 +13,19 @@ export default function index() {
   // 한명만 날려도 couplesInfo response는 success가 뜸
   console.log("커플정보를 얻을 수 있는지 확인 ", couplesInfoResponse?.success);
   console.log(couplesInfoResponse);
-  console.log("확인", couplesInfoResponse?.success_or_error_code === null);
-  console.log("생일확인", couplesInfoResponse?.response.birthday_second !== null);
 
   // couplesInfoResponse가 변경될 때마다 조건 체크
   useEffect(() => {
-    if (couplesInfoResponse?.success !== undefined) {
-      navigate("/home/today");
+    if (couplesInfoResponse?.success_or_error_code.status === 200) {
+      navigate("/loading");
     } else if (couplesInfoResponse) {
       infoToast("연인이 커플정보를 입력하지 않았어요!");
     }
   }, [couplesInfoResponse, navigate]);
 
   function handleOnboardingBtn() {
-    if (couplesInfoResponse?.success !== undefined) {
-      navigate("/home/today");
+    if (couplesInfoResponse?.success_or_error_code.status === 200) {
+      navigate("/loading");
     } else {
       infoToast("연인이 커플정보를 입력하지 않았어요!");
     }

@@ -37,10 +37,10 @@ const usePostLogin = () => {
 
   // couplesInfoResponse가 변경될 때마다 조건 체크
   useEffect(() => {
-    if (couplesInfo?.data === undefined) {
-      navigate("/onboarding");
-    } else {
+    if (couplesInfo?.data?.success_or_error_code.status === 200) {
       navigate("/loading");
+    } else {
+      navigate("/onboarding");
     }
   }, [couplesInfo.data, navigate]);
 
@@ -49,10 +49,10 @@ const usePostLogin = () => {
   console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
   useEffect(() => {
     if (isLoggedIn && couplesInfo) {
-      if (couplesInfo.data === undefined) {
-        navigate("/onboarding");
-      } else {
+      if (couplesInfo?.data?.success_or_error_code.status === 200) {
         navigate("/loading");
+      } else {
+        navigate("/onboarding");
       }
     }
   }, [isLoggedIn, couplesInfo.data, navigate, couplesInfo.error]);
