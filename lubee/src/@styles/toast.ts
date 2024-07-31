@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import { styled } from "styled-components";
+import styled from "styled-components"; // styled-components import 수정
 
 export const StyledToastContainer = styled(ToastContainer)`
   display: flex;
@@ -7,7 +7,7 @@ export const StyledToastContainer = styled(ToastContainer)`
   align-items: center;
   margin-bottom: 8.2rem;
 
-  .Toastify__toast {
+  & .Toastify__toast {
     width: 26.8rem;
     height: 4.9rem;
     padding: 0;
