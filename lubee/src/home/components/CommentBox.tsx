@@ -18,7 +18,7 @@ export default function CommentBox(props: CommentBoxProps) {
   const [commentText, setCommentText] = useState<string>("");
 
   const myDefaultText = isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
-  const partnerDefaultText = "연인은 아직 작성하지 않았어요";
+  const partnerDefaultText = comment ? "나의 한마디를 입력하면 볼 수 있어요!" : "연인은 아직 작성하지 않았어요";
 
   // comment값이 업데이트될 때마다 commentText 업데이트
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function CommentBox(props: CommentBoxProps) {
   }, [comment]);
 
   function handleCommentInputModal() {
-    const isDefaultText = commentText === partnerDefaultText || commentText === "나의 한마디를 입력하면 볼 수 있어요!";
+    const isDefaultText = commentText === partnerDefaultText;
 
     if (!isDefaultText) {
       setOpenCommentInputModal(true);
