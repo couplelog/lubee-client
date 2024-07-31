@@ -48,6 +48,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const myComment = response?.comment_first || "";
   const partnerComment = response?.comment_second || "";
 
+  console.log("commentData", commentData);
   useEffect(() => {
     console.log("모달에서 내 코멘트", myComment, serverDate);
     console.log("모달에서 partner코멘트", partnerComment, serverDate);
