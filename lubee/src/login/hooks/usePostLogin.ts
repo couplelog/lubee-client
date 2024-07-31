@@ -34,39 +34,29 @@ const usePostLogin = () => {
     }
   }, [KAKAO_CODE, navigate]);
 
-  // useGetCouplesInfo를 호출하는 로직을 useEffect 외부로 이동
-  // isLoading이 false일 때만 get 실행
-  // const couplesInfo = useGetCouplesInfo(isLoggedIn);
-  // console.log("couplesInfo", couplesInfo);
-  // console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     if (couplesInfo.data?.success_or_error_code !== undefined) {
-  //       if (couplesInfo.data.success_or_error_code.message === "요청 성공") {
-  //         navigate("/loading");
-  //       } else {
-  //         navigate("/onboarding");
-  //       }
-  //     }
-  //   }
-  // }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
-  // Fetch couples info only when logged in
-  const couplesInfo = useGetCouplesInfo(isLoggedIn);
   useEffect(() => {
-    if (isLoggedIn && couplesInfo) {
-      if (!couplesInfo.data) {
-        infoToast("잠시만 기다려주세요");
-      }
-      if (couplesInfo.data?.success_or_error_code !== undefined) {
-        if (couplesInfo.data.success_or_error_code.message === "요청 성공") {
-          navigate("/loading");
-        } else {
-          navigate("/onboarding");
-        }
-      }
+    if (isLoggedIn) {
+      api
+        .get(`api/couples/couple_info`)
+        .then((res) => {
+          const data = res.data as loginResProps; // AxiosResponse의 data를 loginResProps로 단언
+          if (data) {
+            if (data.success_or_error_code !== undefined) {
+              if (data.success_or_error_code.message === "요청 성공") {
+                navigate("/loading");
+              }
+            }
+          }
+        })
+        .catch((err) => {
+          const errorData = err.response.data as loginErrorProps; // 에러 응답 데이터 단언
+          if (errorData.success_or_error_code.status === 404) {
+            console.log("404에러");
+            navigate("/onboarding");
+          }
+        });
     }
-  }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
+  }, [isLoggedIn, navigate]);
 };
 
 export default usePostLogin;
