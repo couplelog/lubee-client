@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import api from "@common/api/api";
 import { loginErrorProps, loginResProps } from "login/types/loginProps";
 import { setToken } from "login/utils/token";
-import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
-import { infoToast } from "@common/utils/toast";
 
 const usePostLogin = () => {
   const KAKAO_CODE = new URL(window.location.href).searchParams.get("code");
