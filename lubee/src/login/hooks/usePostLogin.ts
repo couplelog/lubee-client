@@ -35,9 +35,9 @@ const usePostLogin = () => {
 
   // useGetCouplesInfo를 호출하는 로직을 useEffect 외부로 이동
   // isLoading이 false일 때만 get 실행
-  const couplesInfo = useGetCouplesInfo(isLoggedIn);
-  console.log("couplesInfo", couplesInfo);
-  console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
+  // const couplesInfo = useGetCouplesInfo(isLoggedIn);
+  // console.log("couplesInfo", couplesInfo);
+  // console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
 
   // useEffect(() => {
   //   if (isLoggedIn) {
@@ -61,6 +61,8 @@ const usePostLogin = () => {
         } else {
           navigate("/onboarding");
         }
+      } else if (error) {
+        navigate("/onboarding");
       }
     }
   }, [isLoggedIn, data, navigate, error]);
