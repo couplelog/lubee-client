@@ -1,6 +1,6 @@
 import { ShortBorderIc } from "assets/index";
 import styled from "styled-components";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
@@ -41,15 +41,19 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
 
   /*코멘트 부분*/
   const { data: commentData } = useGetTodayDateComment(serverDate);
-  const { response } = commentData || {};
-  const myComment = response?.comment_first || "";
-  const partnerComment = response?.comment_second || "";
+  const [myComment, setMyComment] = useState<string>("");
+  const [partnerComment, setMyPartnerComment] = useState<string>("");
 
-  console.log("조건 확인", myComment === "" && partnerComment !== "");
-  console.log(myComment === "");
-  console.log(partnerComment);
-  console.log(partnerComment === undefined);
-  console.log(partnerComment === "");
+  // const { response } = commentData || {};
+  // const myComment = response?.comment_first || "";
+  // const partnerComment = response?.comment_second || "";
+
+  useEffect(() => {
+    if (commentData) {
+      setMyComment(commentData?.response.comment_first);
+      setMyPartnerComment(commentData?.response.comment_second);
+    }
+  }, [commentData]);
 
   return (
     <Background>
