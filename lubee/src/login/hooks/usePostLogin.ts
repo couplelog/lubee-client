@@ -37,15 +37,18 @@ const usePostLogin = () => {
   const couplesInfo = useGetCouplesInfo(isLoggedIn);
   console.log("couplesInfo", couplesInfo);
   console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
-  useEffect(() => {
-    if (isLoggedIn && couplesInfo) {
-      if (!couplesInfo.data) {
-        navigate("/onboarding");
-      } else {
-        navigate("/loading");
-      }
-    }
-  }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
+
+  isLoggedIn
+    ? useEffect(() => {
+        if (isLoggedIn && couplesInfo.data?.success_or_error_code !== undefined) {
+          if (couplesInfo.data.success_or_error_code.status === 200) {
+            navigate("/loading");
+          } else {
+            navigate("/onboarding");
+          }
+        }
+      }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error])
+    : "none";
 };
 
 export default usePostLogin;
