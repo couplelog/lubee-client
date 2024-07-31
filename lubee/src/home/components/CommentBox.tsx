@@ -24,6 +24,7 @@ export default function CommentBox(props: CommentBoxProps) {
   console.log("partnerComment", partnerComment === "");
   console.log("myComment", myComment === "");
   console.log("isMyComment", isMyComment);
+
   // comment값이 업데이트될 때마다 commentText 업데이트
   useEffect(() => {
     if (isMyComment) {
@@ -37,7 +38,7 @@ export default function CommentBox(props: CommentBoxProps) {
         }
         //파트너 코멘트가 있는데 나도 코멘트가 있을 때
         else {
-          setCommentText(myComment);
+          setCommentText(partnerComment);
         }
         // 파트너 코멘트가 없을 때
       } else {
