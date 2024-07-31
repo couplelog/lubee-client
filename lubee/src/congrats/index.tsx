@@ -11,22 +11,29 @@ export default function index() {
   const { data: couplesInfoResponse } = useGetCouplesInfo();
 
   // 한명만 날려도 couplesInfo response는 success가 뜸
-  console.log("커플정보를 얻을 수 있는지 확인 ", couplesInfoResponse?.success);
   console.log(couplesInfoResponse);
+  console.log("success_or_error_code", couplesInfoResponse?.success_or_error_code);
+  console.log("status", couplesInfoResponse?.success_or_error_code.status);
 
   // couplesInfoResponse가 변경될 때마다 조건 체크
   useEffect(() => {
-    if (couplesInfoResponse?.success_or_error_code.status === 200) {
-      navigate("/loading");
-    } else if (couplesInfoResponse) {
+    if (
+      couplesInfoResponse !== undefined &&
+      couplesInfoResponse.success_or_error_code !== undefined &&
+      couplesInfoResponse?.success_or_error_code.status === 200
+    ) {
+      // navigate("/loading");
+      console.log("로딩으로 갈수 있다");
+    } else {
       infoToast("연인이 커플정보를 입력하지 않았어요!");
     }
   }, [couplesInfoResponse, navigate]);
 
   function handleOnboardingBtn() {
-    if (couplesInfoResponse !== undefined) {
+    if (couplesInfoResponse !== undefined && couplesInfoResponse.success_or_error_code !== undefined) {
       if (couplesInfoResponse?.success_or_error_code.status === 200) {
-        navigate("/loading");
+        // navigate("/loading");
+        console.log("로딩으로 갈 수 있다");
       } else {
         infoToast("연인이 커플정보를 입력하지 않았어요!");
       }
