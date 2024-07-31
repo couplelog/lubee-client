@@ -7,30 +7,34 @@ interface CommentBoxProps {
   profileIconSrc: string;
   isMyComment: boolean;
   comment: string;
-  isToday: boolean;
+  isWhite: boolean;
   finalServerDate?: string;
   isDateDetailModal: boolean;
 }
 
 export default function CommentBox(props: CommentBoxProps) {
-  const { profileIconSrc, isMyComment, comment, isToday, finalServerDate, isDateDetailModal } = props;
+  const { profileIconSrc, isMyComment, comment, isWhite, finalServerDate, isDateDetailModal } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>("");
 
-  const myDefaultText = isToday ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
-  const partnerDefaultText = comment ? "나의 한마디를 입력하면 볼 수 있어요!" : "연인은 아직 작성하지 않았어요";
+  const myDefaultText = isWhite ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
+  const partnerDefaultText = "연인은 아직 작성하지 않았어요";
 
   // comment값이 업데이트될 때마다 commentText 업데이트
   useEffect(() => {
     if (isMyComment) {
       setCommentText(comment || myDefaultText);
     } else {
-      setCommentText(comment || partnerDefaultText);
+      if (comment) {
+        setCommentText("나의 한마디를 입력하면 볼 수 있어요");
+      } else {
+        setCommentText(partnerDefaultText);
+      }
     }
-  }, [comment]);
+  }, [comment, isMyComment]);
 
   function handleCommentInputModal() {
-    const isDefaultText = commentText === partnerDefaultText;
+    const isDefaultText = commentText === partnerDefaultText || commentText === "나의 한마디를 입력하면 볼 수 있어요!";
 
     if (!isDefaultText) {
       setOpenCommentInputModal(true);
@@ -43,7 +47,7 @@ export default function CommentBox(props: CommentBoxProps) {
 
   return (
     <>
-      <Container onClick={handleCommentInputModal} $isToday={isToday}>
+      <Container onClick={handleCommentInputModal} $isWhite={isWhite}>
         <ProfileIcon as={profileIconSrc} />
         <Text
           $isDefault={
@@ -76,12 +80,12 @@ export default function CommentBox(props: CommentBoxProps) {
   );
 }
 
-const Container = styled.div<{ $isToday: boolean }>`
+const Container = styled.div<{ $isWhite: boolean }>`
   display: flex;
   gap: 0.4rem;
   padding: 1.2rem;
   border-radius: 8px;
-  background-color: ${({ theme, $isToday }) => ($isToday ? theme.colors.white : theme.colors.gray_50)};
+  background-color: ${({ theme, $isWhite }) => ($isWhite ? theme.colors.white : theme.colors.gray_50)};
   cursor: pointer;
 `;
 

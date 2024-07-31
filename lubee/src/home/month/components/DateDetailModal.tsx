@@ -6,7 +6,6 @@ import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import MonthPicBox from "./MonthPicBox";
 import CommentBox from "home/components/CommentBox";
-import { getServerDate } from "@common/utils/dateFormat";
 import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
@@ -41,9 +40,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const partnerProfile = getProfileIconSrc("partner", profile_second);
 
   /*코멘트 부분*/
-  const isToday = false;
-  const finalServerDate = isToday ? getServerDate() : serverDate; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
-  const { data: commentData } = useGetTodayDateComment(finalServerDate);
+  const { data: commentData } = useGetTodayDateComment(serverDate);
   const { response } = commentData || {};
   const myComment = response?.comment_first || "";
   const partnerComment = response?.comment_second || "";
@@ -60,15 +57,15 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <CommentBox
               profileIconSrc={myProfile}
               isMyComment={true}
-              isToday={false}
+              isWhite={false}
               comment={myComment}
-              finalServerDate={finalServerDate}
+              finalServerDate={serverDate}
               isDateDetailModal={true}
             />
             <CommentBox
               profileIconSrc={partnerProfile}
               isMyComment={false}
-              isToday={false}
+              isWhite={false}
               comment={partnerComment}
               isDateDetailModal={true}
             />
