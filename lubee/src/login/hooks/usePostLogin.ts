@@ -37,8 +37,9 @@ const usePostLogin = () => {
 
   // couplesInfoResponse가 변경될 때마다 조건 체크
   useEffect(() => {
-    if (couplesInfo.data !== undefined) {
-      if (couplesInfo?.data?.success_or_error_code.status === 200) {
+    if (couplesInfo.data) {
+      const status = couplesInfo.data.success_or_error_code?.status; // 안전하게 status 가져오기
+      if (status === 200) {
         navigate("/loading");
       } else {
         navigate("/onboarding");
@@ -46,18 +47,20 @@ const usePostLogin = () => {
     }
   }, [couplesInfo.data, navigate]);
 
-  // useGetCouplesInfo를 호출하는 로직을 useEffect 외부로 이동
-  console.log("couplesInfo", couplesInfo);
-  console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
+  // 로그인 상태와 couplesInfo.data가 존재할 때 체크
   useEffect(() => {
-    if (isLoggedIn && couplesInfo.data !== undefined) {
-      if (couplesInfo?.data?.success_or_error_code.status === 200) {
+    if (isLoggedIn && couplesInfo.data) {
+      const status = couplesInfo.data.success_or_error_code?.status; // 안전하게 status 가져오기
+      if (status === 200) {
         navigate("/loading");
       } else {
         navigate("/onboarding");
       }
     }
   }, [isLoggedIn, couplesInfo.data, navigate, couplesInfo.error]);
+
+  console.log("couplesInfo", couplesInfo);
+  console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
 };
 
 export default usePostLogin;
