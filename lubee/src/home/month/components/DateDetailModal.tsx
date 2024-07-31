@@ -26,8 +26,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
 
   if (selectedDate !== undefined) {
-    const response = useGetSpecificCalendar({ year: year, month: month, day: selectedDate });
-    specificDto = response?.response.memoryBaseListDto;
+    const { data } = useGetSpecificCalendar({ year: year, month: month, day: selectedDate });
+    specificDto = data?.response.memoryBaseListDto;
   }
   console.log("specificDto", specificDto);
 

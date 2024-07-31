@@ -28,7 +28,7 @@ export default function ContentContainer(props: ContentContainerProps) {
 
   const urlDate = `${formatMonth(getTodayMonth)}${getTodayDate}`;
   const [specificDto, setSpecificDto] = useState<MemoryBaseDtoDataTypes[]>();
-  const data = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
+  const { data } = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
 
   useEffect(() => {
     // data바뀔때마다 상태 업데이트
