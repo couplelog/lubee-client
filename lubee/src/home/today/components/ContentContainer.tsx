@@ -54,7 +54,8 @@ export default function ContentContainer(props: ContentContainerProps) {
           profileIconSrc={myProfile}
           isMyComment={true}
           isWhite={true}
-          comment={myComment}
+          myComment={myComment}
+          partnerComment={partnerComment}
           finalServerDate={finalServerDate}
           isDateDetailModal={false}
         />
@@ -62,7 +63,8 @@ export default function ContentContainer(props: ContentContainerProps) {
           profileIconSrc={partnerProfile}
           isMyComment={false}
           isWhite={true}
-          comment={partnerComment}
+          myComment={myComment}
+          partnerComment={partnerComment}
           isDateDetailModal={false}
         />
       </CommentsContainer>

@@ -58,7 +58,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
               profileIconSrc={myProfile}
               isMyComment={true}
               isWhite={false}
-              comment={myComment}
+              myComment={myComment}
+              partnerComment={partnerComment}
               finalServerDate={serverDate}
               isDateDetailModal={true}
             />
@@ -66,7 +67,8 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
               profileIconSrc={partnerProfile}
               isMyComment={false}
               isWhite={false}
-              comment={partnerComment}
+              myComment={myComment}
+              partnerComment={partnerComment}
               isDateDetailModal={true}
             />
           </CommentsContainer>

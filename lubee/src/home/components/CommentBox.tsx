@@ -6,14 +6,15 @@ import PartnerCommentModal from "./PartnerCommentModal";
 interface CommentBoxProps {
   profileIconSrc: string;
   isMyComment: boolean;
-  comment: string;
   isWhite: boolean;
   finalServerDate?: string;
   isDateDetailModal: boolean;
+  myComment: string;
+  partnerComment: string;
 }
 
 export default function CommentBox(props: CommentBoxProps) {
-  const { profileIconSrc, isMyComment, comment, isWhite, finalServerDate, isDateDetailModal } = props;
+  const { profileIconSrc, isMyComment, isWhite, finalServerDate, isDateDetailModal, myComment, partnerComment } = props;
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>("");
 
@@ -23,15 +24,24 @@ export default function CommentBox(props: CommentBoxProps) {
   // comment값이 업데이트될 때마다 commentText 업데이트
   useEffect(() => {
     if (isMyComment) {
-      setCommentText(comment || myDefaultText);
+      setCommentText(myComment || myDefaultText);
     } else {
-      if (comment) {
-        setCommentText("나의 한마디를 입력하면 볼 수 있어요");
+      // 파트너 코멘트가 있을 때
+      if (partnerComment !== "") {
+        // 파트너 코멘트가 있는데 나는 없을 때
+        if (myComment === "") {
+          setCommentText("나의 한마디를 입력하면 볼 수 있어요");
+        }
+        //파트너 코멘트가 있는데 나도 코멘트가 있을 때
+        else {
+          setCommentText(myComment);
+        }
+        // 파트너 코멘트가 없을 때
       } else {
         setCommentText(partnerDefaultText);
       }
     }
-  }, [comment, isMyComment]);
+  }, [myComment, isMyComment, partnerComment]);
 
   function handleCommentInputModal() {
     const isDefaultText = commentText === partnerDefaultText || commentText === "나의 한마디를 입력하면 볼 수 있어요!";
