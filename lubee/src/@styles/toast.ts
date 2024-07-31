@@ -7,10 +7,10 @@ export const StyledToastContainer = styled(ToastContainer)`
   align-items: center;
   margin-bottom: 8.2rem;
 
-  .Toastify__toast-container {
+  /* .Toastify__toast-container {
     width: 26.8rem;
     height: 4.9rem;
-  }
+  } */
 
   .Toastify__toast {
     padding: 0;

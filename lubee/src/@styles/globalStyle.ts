@@ -16,12 +16,11 @@ input, textarea,button {
   appearance: none;
 }
 
-:root{
-  --toastify-toast-height: 490px;
-}
-
 html, #root{
   height: 100dvh;
+
+  --toastify-toast-height: 490px;
+  --toastify-toast-width: 268px;
 }
 
 a{
