@@ -11,8 +11,11 @@ export default function MyCommentModal(props: CommentModalProps) {
   const { handleCloseBtn, profileIconSrc, commentText, setCommentText, finalServerDate, isDateDetailModal } = props;
   const [text, setText] = useState("");
   const [textLength, setTextLength] = useState(0);
-  const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?" || commentText === "이날의 데이트는 어떠셨나요?";
+
+  const myDefaultTexts = ["오늘의 데이트는 어떠셨나요?", "이날 데이트는 어떠셨나요?"];
+  const isDefaultText = myDefaultTexts.includes(commentText);
   const [isEditing, setIsEditing] = useState(isDefaultText);
+
   const { mutate: postDateCommentMutate } = usePostDateComment();
   const { mutate: updateDateCommentMutate } = useUpdateDateComment();
 
@@ -183,7 +186,7 @@ const TextBox = styled.textarea`
   padding: 0 1.2rem;
   border: none;
   resize: none;
-  color: black;
+  color: ${({ theme }) => theme.colors.gray_700};
   outline: none;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
