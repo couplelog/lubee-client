@@ -39,7 +39,8 @@ const usePostLogin = () => {
   console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
 
   useEffect(() => {
-    if (isLoggedIn)
+    if (isLoggedIn && !couplesInfo.isLoading) {
+      // isLoading이 false일 때만 실행
       if (couplesInfo.error) {
         navigate("/onboarding");
       } else if (couplesInfo.data?.success_or_error_code !== undefined) {
@@ -49,7 +50,8 @@ const usePostLogin = () => {
           navigate("/onboarding");
         }
       }
-  }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
+    }
+  }, [isLoggedIn, couplesInfo, navigate]);
 };
 
 export default usePostLogin;
