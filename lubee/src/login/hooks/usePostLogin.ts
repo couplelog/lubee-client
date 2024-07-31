@@ -51,21 +51,22 @@ const usePostLogin = () => {
   //   }
   // }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
   // Fetch couples info only when logged in
-  const { data, error } = useGetCouplesInfo(isLoggedIn);
+  const couplesInfo = useGetCouplesInfo(isLoggedIn);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      if (data?.success_or_error_code !== undefined) {
-        if (data.success_or_error_code.message === "요청 성공") {
+    if (isLoggedIn && couplesInfo) {
+      if (couplesInfo.data?.success_or_error_code !== undefined) {
+        if (couplesInfo.data.success_or_error_code.message === "요청 성공") {
           navigate("/loading");
-        } else {
-          navigate("/onboarding");
         }
-      } else if (error) {
+      }
+      if (!couplesInfo.data) {
         navigate("/onboarding");
+      } else {
+        navigate("/loading");
       }
     }
-  }, [isLoggedIn, data, navigate, error]);
+  }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
 };
 
 export default usePostLogin;
