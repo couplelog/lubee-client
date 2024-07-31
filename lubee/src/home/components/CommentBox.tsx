@@ -18,16 +18,26 @@ export default function CommentBox(props: CommentBoxProps) {
   const [openCommentInputModal, setOpenCommentInputModal] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>("");
 
+  //내 코멘트 O 상대 O
+  //내 코멘트 O 상대 X: 연인은 아직 작성하지 않았어요
+  //내 코멘트 X 상대 X: 연인은 아직 작성하지 않았어요
+  //내 코멘트 X 상대 O: 나의 한마디를 입력하면 볼 수 있어요!
+
   const myDefaultText = isWhite ? "오늘의 데이트는 어떠셨나요?" : "이날 데이트는 어떠셨나요?";
   const partnerDefaultText =
-    myComment !== "" ? "연인은 아직 작성하지 않았어요" : "나의 한마디를 입력하면 볼 수 있어요!";
+    partnerComment !== "" ? "나의 한마디를 입력하면 볼 수 있어요!" : "연인은 아직 작성하지 않았어요";
 
   // comment값이 업데이트될 때마다 commentText 업데이트
   useEffect(() => {
     if (isMyComment) {
       setCommentText(myComment || myDefaultText);
     } else {
-      setCommentText(partnerComment || partnerDefaultText);
+      // 내 코멘트가 없고 상대방 코멘트가 있는 경우에도 partnerDefaultText를 설정
+      if (myComment === "" && partnerComment !== "") {
+        setCommentText(partnerDefaultText);
+      } else {
+        setCommentText(partnerComment || partnerDefaultText);
+      }
     }
   }, [myComment, partnerComment]);
 
@@ -47,14 +57,7 @@ export default function CommentBox(props: CommentBoxProps) {
     <>
       <Container onClick={handleCommentInputModal} $isWhite={isWhite}>
         <ProfileIcon as={profileIconSrc} />
-        <Text
-          $isDefault={
-            commentText === myDefaultText ||
-            commentText === "나의 한마디를 입력하면 볼 수 있어요!" ||
-            commentText === partnerDefaultText
-          }>
-          {commentText}
-        </Text>
+        <Text $isDefault={commentText === myDefaultText || commentText === partnerDefaultText}>{commentText}</Text>
       </Container>
       {openCommentInputModal &&
         (isMyComment ? (
