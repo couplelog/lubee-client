@@ -12,9 +12,10 @@ interface CalContainerProps {
   info: CalInfoTypes;
   showCalendar?: boolean;
   setOpenDateDetailModal?: (open: boolean) => void;
+  isTodayCalendar: boolean;
 }
 
-const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
+const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal, isTodayCalendar }: CalContainerProps) => {
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<number | undefined>();
   const modalRef = useRef<HTMLDivElement>(null);
@@ -138,6 +139,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
           month={month}
           year={year}
           serverDate={selectedDate ? formatSelectedDate(year, month, selectedDate) : ""}
+          isTodayCalendar={isTodayCalendar}
         />
       )}
     </Container>

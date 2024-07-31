@@ -17,10 +17,11 @@ interface DateDetailModalProps {
   year: number;
   month: number;
   serverDate: string;
+  isTodayCalendar: boolean;
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { dateText, showCalendar, urlDate, selectedDate, year, month, serverDate } = props;
+  const { dateText, showCalendar, urlDate, selectedDate, year, month, serverDate, isTodayCalendar } = props;
 
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
 
@@ -92,6 +93,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
               year={year}
               month={month}
               selectedDate={selectedDate}
+              isTodayCalendar={isTodayCalendar}
             />
           </HomePicBoxWrapper>
         </Contents>
