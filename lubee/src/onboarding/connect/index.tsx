@@ -9,7 +9,7 @@ import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import YellowBox from "../components/YellowBox";
 import CopyCodeModal from "../components/CopyCodeModal";
 import { useGetLubeeCode } from "onboarding/hooks/useGetLubeeCode";
-import { infoToast } from "@common/utils/toast";
+import { errorToast } from "@common/utils/toast";
 
 interface ConnectProps {
   moveToOnboardingCode: () => void;
@@ -33,7 +33,7 @@ export default function index(props: ConnectProps) {
 
   useEffect(() => {
     if (lubeeCode?.response?.code === "ALREADY_COUPLE") {
-      infoToast("이미 커플로 등록된 상태입니다.");
+      errorToast("이미 커플로 등록된 상태입니다.");
       setTimeout(() => {
         moveToOnboardingCustom();
       }, 2000);
