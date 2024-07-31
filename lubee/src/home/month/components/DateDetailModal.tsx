@@ -45,6 +45,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const myComment = response?.comment_first || "";
   const partnerComment = response?.comment_second || "";
 
+  console.log("조건 확인", myComment === "" && partnerComment !== "");
   return (
     <Background>
       <Container ref={ref} $showCalendar={showCalendar}>
