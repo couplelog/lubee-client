@@ -24,10 +24,12 @@ export default function index() {
   }, [couplesInfoResponse, navigate]);
 
   function handleOnboardingBtn() {
-    if (couplesInfoResponse?.success_or_error_code.status === 200) {
-      navigate("/loading");
-    } else {
-      infoToast("연인이 커플정보를 입력하지 않았어요!");
+    if (couplesInfoResponse !== undefined) {
+      if (couplesInfoResponse?.success_or_error_code.status === 200) {
+        navigate("/loading");
+      } else {
+        infoToast("연인이 커플정보를 입력하지 않았어요!");
+      }
     }
   }
 

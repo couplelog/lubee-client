@@ -48,7 +48,7 @@ const usePostLogin = () => {
   console.log("couplesInfo", couplesInfo);
   console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
   useEffect(() => {
-    if (isLoggedIn && couplesInfo) {
+    if (isLoggedIn && couplesInfo.data !== undefined) {
       if (couplesInfo?.data?.success_or_error_code.status === 200) {
         navigate("/loading");
       } else {
