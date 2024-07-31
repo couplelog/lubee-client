@@ -49,9 +49,9 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   // const partnerComment = response?.comment_second || "";
 
   useEffect(() => {
-    if (commentData) {
-      setMyComment(commentData?.response.comment_first);
-      setPartnerComment(commentData?.response.comment_second);
+    if (commentData && commentData.response) {
+      setMyComment(commentData.response.comment_first || "");
+      setPartnerComment(commentData.response.comment_second || "");
     }
   }, [commentData]);
 
