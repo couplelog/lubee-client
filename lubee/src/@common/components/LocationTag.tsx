@@ -9,7 +9,6 @@ interface LocationProps {
 
 interface StyleProps {
   $font: string;
-  $isExpanded: boolean;
 }
 
 export default function LocationTag(props: LocationProps) {
@@ -24,9 +23,7 @@ export default function LocationTag(props: LocationProps) {
   return (
     <Container $font={font} onClick={toggleExpand}>
       {font === "fullPic" ? <LocationPointIcon /> : <LocationPointSmallIcon />}
-      <LocationText $font={font} $isExpanded={isExpanded}>
-        {location}
-      </LocationText>
+      <LocationText $font={font}>{location}</LocationText>
     </Container>
   );
 }
@@ -53,27 +50,27 @@ const LocationPointSmallIcon = styled(LocationPointSmallIc)`
 `;
 
 // Helper function to apply conditional styles
-const applyConditionalStyles = ({ $font, $isExpanded }: StyleProps) => {
+const applyConditionalStyles = ({ $font }: StyleProps) => {
   if ($font !== "fullPic") {
     return `
       display: -webkit-box;
       overflow: hidden;
       max-width: 9.7rem;
-      white-space: pre-wrap; /* 줄바꿈을 허용 */
       word-wrap: break-word;
-      -webkit-line-clamp: ${$isExpanded ? "unset" : "2"};
+      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
+      text-overflow: ellipsis; /* Ellipsis when overflowing */
     `;
   }
   return "";
 };
 
-const LocationText = styled.p<{ $font: string; $isExpanded: boolean }>`
+const LocationText = styled.p<{ $font: string }>`
   ${({ theme, $font }) => ($font === "fullPic" ? theme.fonts.SubTitle : theme.fonts.Caption_1)};
 
   color: ${({ theme, $font }) => ($font === "fullPic" ? theme.colors.gray_800 : theme.colors.gray_500)};
   text-align: left;
   vertical-align: middle;
 
-  ${({ $font, $isExpanded }) => applyConditionalStyles({ $font, $isExpanded })}
+  ${({ $font }) => applyConditionalStyles({ $font })}
 `;
