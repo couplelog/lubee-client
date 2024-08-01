@@ -45,6 +45,8 @@ const usePostLogin = () => {
               console.log("data.success_or_error_code.message", data.success_or_error_code.message);
               if (data.success_or_error_code.message === "요청 성공") {
                 navigate("/loading");
+              } else if (data.success_or_error_code.message === "파트너 정보 없음") {
+                navigate("/onboarding");
               }
             }
           }
