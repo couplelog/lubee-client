@@ -48,8 +48,10 @@ const usePostLogin = () => {
               } else if (data.success_or_error_code.message === "파트너 정보 없음") {
                 //나는 입력 o 파트너 x -> 축하
                 navigate("/congrats/join");
-              } else {
+              } else if (data.success_or_error_code.message === "커플 정보 없음") {
                 //둘다 입력 X -> 온보딩
+                ("/onboarding");
+              } else if (data.success_or_error_code.message === "내 정보 없음") {
                 //나는 입력 x 파트너 o -> 온보딩
                 ("/onboarding");
               }
