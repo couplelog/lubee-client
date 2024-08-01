@@ -4,7 +4,7 @@ import { HoneyMonthIc } from "assets/index";
 import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear, isFutureDate } from "@common/utils/dateFormat";
-import { infoToast } from "@common/utils/toast";
+import { errorToast } from "@common/utils/toast";
 import { useGetCalendar } from "home/hooks/useGetCalendar";
 import { useGetMonthHoney } from "home/hooks/useGetMonthHoney";
 
@@ -12,9 +12,10 @@ interface CalContainerProps {
   info: CalInfoTypes;
   showCalendar?: boolean;
   setOpenDateDetailModal?: (open: boolean) => void;
+  isTodayCalendar: boolean;
 }
 
-const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
+const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal, isTodayCalendar }: CalContainerProps) => {
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<number | undefined>();
   const modalRef = useRef<HTMLDivElement>(null);
@@ -68,7 +69,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 
   function handleDateDetailModal(date: number) {
     if (isFutureDate(year, month, date)) {
-      infoToast("오늘 이전의 날짜를 선택해주세요");
+      errorToast("오늘 이전의 날짜를 선택해주세요");
       setSelectedDate(date);
       return;
     }
@@ -138,6 +139,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
           month={month}
           year={year}
           serverDate={selectedDate ? formatSelectedDate(year, month, selectedDate) : ""}
+          isTodayCalendar={isTodayCalendar}
         />
       )}
     </Container>

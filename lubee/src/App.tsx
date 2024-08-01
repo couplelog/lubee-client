@@ -22,11 +22,12 @@ import Error from "error";
 import Fullpic from "fullpic";
 import Date from "fullpic/date";
 import One from "fullpic/one";
-import First from "congrats/first";
-import Fifth from "congrats/fifth";
+import First from "honey/first";
+import Fifth from "honey/fifth";
 import Join from "congrats/join";
 import LoginCallback from "login/components/LoginCallback";
 import Loading from "loading";
+import Honey from "honey";
 
 const Router = createBrowserRouter([
   {
@@ -62,10 +63,14 @@ const Router = createBrowserRouter([
       {
         path: "/congrats",
         element: <Congrats />,
+        children: [{ path: "/congrats/join", element: <Join /> }],
+      },
+      {
+        path: "/honey",
+        element: <Honey />,
         children: [
-          { path: "/congrats/first", element: <First /> },
-          { path: "/congrats/fifth", element: <Fifth /> },
-          { path: "/congrats/join", element: <Join /> },
+          { path: "/honey/first", element: <First /> },
+          { path: "/honey/fifth", element: <Fifth /> },
         ],
       },
     ],

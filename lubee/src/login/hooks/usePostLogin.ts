@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import api from "@common/api/api";
 import { loginErrorProps, loginResProps } from "login/types/loginProps";
 import { setToken } from "login/utils/token";
-import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
 const usePostLogin = () => {
   const KAKAO_CODE = new URL(window.location.href).searchParams.get("code");
@@ -33,19 +32,38 @@ const usePostLogin = () => {
     }
   }, [KAKAO_CODE, navigate]);
 
-  // useGetCouplesInfo를 호출하는 로직을 useEffect 외부로 이동
-  const couplesInfo = useGetCouplesInfo(isLoggedIn);
-  console.log("couplesInfo", couplesInfo);
-  console.log("couplesInfo.data===undefined", couplesInfo.data === undefined);
   useEffect(() => {
-    if (isLoggedIn && couplesInfo) {
-      if (!couplesInfo.data) {
-        navigate("/onboarding");
-      } else {
-        navigate("/loading");
-      }
+    if (isLoggedIn) {
+      api
+        .get(`api/couples/couple_info`)
+        .then((res) => {
+          const data = res.data as loginResProps; // AxiosResponse의 data를 loginResProps로 단언
+          console.log("data", data);
+          if (data) {
+            console.log("data.success_or_error_code !== undefined", data.success_or_error_code !== undefined);
+            if (data.success_or_error_code !== undefined) {
+              console.log("data.success_or_error_code.message", data.success_or_error_code.message);
+              if (data.success_or_error_code.message === "요청 성공") {
+                navigate("/loading");
+              } else if (data.success_or_error_code.message === "파트너 정보 없음") {
+                navigate("/congrats/join");
+              } else if (data.success_or_error_code.message === "커플 정보 없음") {
+                navigate("/onboarding");
+              } else if (data.success_or_error_code.message === "내 정보 없음") {
+                navigate("/onboarding");
+              }
+            }
+          }
+        })
+        .catch((err) => {
+          const errorData = err.response.data as loginErrorProps; // 에러 응답 데이터 단언
+          if (errorData.success_or_error_code.status === 404) {
+            console.log("404에러");
+            navigate("/onboarding");
+          }
+        });
     }
-  }, [isLoggedIn, couplesInfo, navigate, couplesInfo.error]);
+  }, [isLoggedIn, navigate]);
 };
 
 export default usePostLogin;

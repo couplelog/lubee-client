@@ -32,8 +32,8 @@ const Wrapper = styled.section`
 const TextContainer = styled.section`
   display: flex;
   flex-direction: column;
+  flex: 1;
   align-items: center;
-  width: fit-content;
   margin: 1.4rem 0.9rem 2.7rem;
 `;
 
@@ -42,6 +42,7 @@ const TitleText = styled.h3`
   ${({ theme }) => theme.fonts.Rewind};
 
   color: ${({ theme }) => theme.colors.white};
+  text-align: center;
 `;
 
 const RewindIcon = styled(RewindIc)`

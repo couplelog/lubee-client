@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import { styled } from "styled-components";
+import styled from "styled-components"; // styled-components import 수정
 
 export const StyledToastContainer = styled(ToastContainer)`
   display: flex;
@@ -8,8 +8,8 @@ export const StyledToastContainer = styled(ToastContainer)`
   margin-bottom: 8.2rem;
 
   .Toastify__toast {
-    width: 26.8rem;
-    height: 4.9rem;
+    width: 268px;
+    height: 40px;
     padding: 0;
     border-radius: 8.121px;
     background-color: ${({ theme }) => theme.colors.gray_700};
@@ -19,5 +19,9 @@ export const StyledToastContainer = styled(ToastContainer)`
     color: ${({ theme }) => theme.colors.gray_50};
     text-align: center;
     ${({ theme }) => theme.fonts.Caption_2};
+  }
+
+  .Toastify__toast-container--bottom-center {
+    bottom: 25rem;
   }
 `;

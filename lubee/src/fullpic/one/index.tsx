@@ -38,7 +38,7 @@ export default function index() {
   const location = useLocation();
   const { memory_id } = location.state as { memory_id: number };
 
-  const data = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
+  const { data } = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
   const memoryBaseDto = specificDto?.find((memory) => memory.memory_id === memory_id);
 
   useEffect(() => {

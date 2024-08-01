@@ -3,12 +3,6 @@ import { CalInfoTypes } from "home/month/types/CalInfoTypes";
 const CAL: CalInfoTypes[] = [
   {
     year: 2024,
-    month: 7,
-    start: 1,
-    length: 31,
-  },
-  {
-    year: 2024,
     month: 8,
     start: 4,
     length: 31,
