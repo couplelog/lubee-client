@@ -120,9 +120,26 @@ const Wrapper = styled.div`
 `;
 
 const LubeeCodeIcon = styled(LubeeCodeIc)`
-  min-width: 20.5rem;
-  min-height: 12.7rem;
+  width: 20.5rem;
+  min-width: 15.375rem;
+  height: 12.7rem;
+  min-height: 9.525rem;
   margin-top: 6rem;
+
+  @media (height <= 800px) {
+    min-width: 20.5rem;
+    min-height: 12.7rem;
+  }
+
+  @media (height <= 600px) {
+    min-width: 15.375rem;
+    min-height: 9.525rem;
+  }
+
+  @media (height <= 400px) {
+    min-width: 10.25rem;
+    min-height: 6.35rem;
+  }
 `;
 
 const MyCodeText = styled.p`
