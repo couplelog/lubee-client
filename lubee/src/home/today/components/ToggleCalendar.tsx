@@ -33,6 +33,7 @@ export default function ToggleCalendar({ showCalendar, handleCalendar }: ToggleC
               info={CAL[currentCalendarIndex]}
               showCalendar={showCalendar}
               setOpenDateDetailModal={setOpenDateDetailModal}
+              isTodayCalendar={true}
             />
           </Calendar>
           <CancelBtn type="button" onClick={handleCalendar}>

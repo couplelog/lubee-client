@@ -27,7 +27,7 @@ export default function index() {
       <CalWrapper ref={containerRef}>
         {CAL.map((cal, idx) => (
           <div key={idx} ref={(el) => (calendarRefs.current[idx] = el)}>
-            <CalContainer info={cal} />
+            <CalContainer info={cal} isTodayCalendar={false} />
           </div>
         ))}
       </CalWrapper>

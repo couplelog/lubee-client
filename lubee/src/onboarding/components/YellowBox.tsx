@@ -17,6 +17,7 @@ const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
 
   const MIN_WIDTH = 2.7; // 텍스트 입력 시 박스 최소 너비 (rem)
   const MAX_WIDTH = 17.3; // 텍스트 입력 시 박스 최대 너비 (rem)
+  const PADDING = 1; // 추가적인 여유 너비 (rem)
 
   // placeholder의 길이에 따라 input의 너비를 설정하는 useEffect
   useEffect(() => {
@@ -27,7 +28,7 @@ const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
         context.font = getComputedStyle(inputRef.current).font;
         const textWidth = context.measureText(placeholder).width;
         const remWidth = textWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
-        setInputwidth(`${remWidth}rem`);
+        setInputwidth(`${Math.max(MIN_WIDTH, remWidth + PADDING)}rem`);
       }
     }
   }, [placeholder]);
@@ -52,7 +53,7 @@ const YellowBox = forwardRef((props: YellowBoxProps, ref) => {
         context.font = getComputedStyle(inputRef.current).font;
         const textWidth = context.measureText(value || placeholder || "").width;
         const remWidth = textWidth / parseFloat(getComputedStyle(document.documentElement).fontSize);
-        setInputwidth(`${Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, remWidth))}rem`);
+        setInputwidth(`${Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, remWidth + PADDING))}rem`);
       }
     }
   }
