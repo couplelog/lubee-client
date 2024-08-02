@@ -49,6 +49,7 @@ const HoneyContainer = styled.section`
   width: 26.5rem;
   height: 7.6rem;
   padding: 1.1rem 1.2rem 0.6rem;
+  border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0 0 4.412px 0 rgb(171 176 188 / 30%);
 `;
