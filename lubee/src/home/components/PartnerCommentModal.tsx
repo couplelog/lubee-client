@@ -37,6 +37,7 @@ const Container = styled.section<{ $isDateDetailModal: boolean }>`
   top: 24rem;
   left: 5.6rem;
   width: 27.8rem;
+  padding-bottom: 1.2rem;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
