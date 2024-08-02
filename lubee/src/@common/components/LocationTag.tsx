@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { LocationPointIc, LocationPointSmallIc } from "assets/index";
-import { useState } from "react";
 
 interface LocationProps {
   location: string;
@@ -14,14 +13,8 @@ interface StyleProps {
 export default function LocationTag(props: LocationProps) {
   const { location, font } = props;
 
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   return (
-    <Container $font={font} onClick={toggleExpand}>
+    <Container $font={font}>
       {font === "fullPic" ? <LocationPointIcon /> : <LocationPointSmallIcon />}
       <LocationText $font={font}>{location}</LocationText>
     </Container>
@@ -33,7 +26,6 @@ const Container = styled.div<{ $font: string }>`
   gap: ${(props) => (props.$font === "fullPic" ? "0.8rem" : "0.4rem")};
   align-items: center;
   width: ${(props) => (props.$font === "fullPic" ? "auto" : "auto")};
-  max-width: ${(props) => (props.$font === "fullPic" ? "none" : "9.7rem")};
   padding: ${(props) => (props.$font === "fullPic" ? "0.6rem 1.2rem" : "0.2rem 0.5rem")};
   border-radius: 32px;
   background-color: ${({ theme, $font }) => ($font === "fullPic" ? theme.colors.gray_100 : theme.colors.gray_50)};
@@ -49,13 +41,12 @@ const LocationPointSmallIcon = styled(LocationPointSmallIc)`
   height: 0.98rem;
 `;
 
-// Helper function to apply conditional styles
 const applyConditionalStyles = ({ $font }: StyleProps) => {
   if ($font !== "fullPic") {
     return `
       display: -webkit-box;
       overflow: hidden;
-      max-width: 9.7rem;
+      max-width: 7.4rem;
       word-wrap: break-word;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
