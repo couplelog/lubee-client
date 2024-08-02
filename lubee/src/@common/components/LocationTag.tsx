@@ -16,7 +16,9 @@ export default function LocationTag(props: LocationProps) {
   return (
     <Container $font={font}>
       {font === "fullPic" ? <LocationPointIcon /> : <LocationPointSmallIcon />}
-      <LocationText $font={font}>{location}</LocationText>
+      <TextBox>
+        <LocationText $font={font}>{location}</LocationText>
+      </TextBox>
     </Container>
   );
 }
@@ -64,4 +66,9 @@ const LocationText = styled.p<{ $font: string }>`
   vertical-align: middle;
 
   ${({ $font }) => applyConditionalStyles({ $font })}
+`;
+
+const TextBox = styled.div`
+  display: flex;
+  align-items: center;
 `;
