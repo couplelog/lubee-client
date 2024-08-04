@@ -12,8 +12,6 @@ export default function DeletePicModal(props: DeletePicModalProps) {
   const { mutate: deltePic } = useDeletePic();
   const navigate = useNavigate();
 
-  console.log("memory_id", memory_id);
-
   function handleDeleteBtn() {
     deltePic(memory_id, {
       onSuccess: () => {

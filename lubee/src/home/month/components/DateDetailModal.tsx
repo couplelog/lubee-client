@@ -29,7 +29,6 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
     const { data } = useGetSpecificCalendar({ year: year, month: month, day: selectedDate });
     specificDto = data?.response.memoryBaseListDto;
   }
-  console.log("specificDto", specificDto);
 
   /*커플정보에서 프로필 가져와서 출력*/
   const { data: CoupleInfo } = useGetCouplesInfo();
@@ -55,9 +54,6 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
       setPartnerComment(commentData.response.comment_second || "");
     }
   }, [commentData]);
-
-  console.log(myComment);
-  console.log(partnerComment);
 
   return (
     <Background>

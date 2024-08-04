@@ -44,8 +44,6 @@ export default function ContentContainer(props: ContentContainerProps) {
   const myComment = response?.comment_first || "";
   const partnerComment = response?.comment_second || "";
 
-  console.log("조건 확인", myComment === "" && partnerComment !== "");
-
   // 데이터가 없을 경우 빈 화면을 반환
   if (!CoupleInfo) return <></>;
 

@@ -53,7 +53,6 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal, isTo
         if (y === year && m === month) {
           calendarMemoryDayDtoList.forEach(({ day }) => {
             updatedList[day + start - 1] = 1; // 사진을 업로드한 day는 1로찍기
-            console.log("day", day);
           });
         }
       });
