@@ -125,6 +125,7 @@ export default function MyCommentModal(props: CommentModalProps) {
           value={isDefaultText && !isEditing ? "" : text}
           onChange={handleTextChange}
           disabled={!isEditing}
+          $textLength={textLength}
         />
         <LengthText>{textLength}/100</LengthText>
       </Container>
@@ -177,7 +178,7 @@ const CheckYellowIcon = styled(CheckYellowIc)`
   height: 2.4rem;
 `;
 
-const TextBox = styled.textarea`
+const TextBox = styled.textarea<{ $textLength: number }>`
   ${({ theme }) => theme.fonts.SubTitle};
 
   overflow: hidden;
@@ -186,7 +187,7 @@ const TextBox = styled.textarea`
   padding: 0 1.2rem;
   border: none;
   resize: none;
-  color: ${({ theme }) => theme.colors.gray_700};
+  color: ${({ theme, $textLength }) => ($textLength >= 10 ? theme.colors.gray_700 : theme.colors.gray_200)};
   outline: none;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
