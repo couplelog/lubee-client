@@ -23,11 +23,8 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
   const { mutate: postReactionMutate } = usePostReaction();
   const { mutate: updateReactionMutate } = useUpdateReaction();
 
-  console.log("myEmoji", reaction_first);
-
   //recoil로 기존 array를 sessionstorage에서 가져오기
   const [numbersArray, setNumbersArray] = useRecoilState(emojiNumbersArrayState);
-  console.log("기존 배열", numbersArray);
 
   // 배열에 특정 숫자가 있는지 확인하는 함수
   function isNumberInArray(number: number): boolean {
@@ -39,7 +36,6 @@ export default function FullpicHeader(props: FullpicHeaderProps) {
   useEffect(() => {
     // 배열을 다시 세션 스토리지에 저장
     sessionStorage.setItem("numbersArray", JSON.stringify(numbersArray));
-    console.log("업데이트 배열:", numbersArray);
   }, [numbersArray]);
 
   function moveToHome() {

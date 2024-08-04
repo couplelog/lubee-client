@@ -67,7 +67,6 @@ export default function index() {
   const { data: emojiData } = useGetOnePic(memory_id);
   if (!emojiData) return <></>;
   const { reaction_first } = emojiData.response;
-  console.log(emojiData);
 
   // account를 프로필이 null이 아닌 것으로 설정
   const account = memoryBaseDto?.writer_profile_first !== null ? "me" : "partner";

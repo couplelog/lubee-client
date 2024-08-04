@@ -38,11 +38,8 @@ const usePostLogin = () => {
         .get(`api/couples/couple_info`)
         .then((res) => {
           const data = res.data as loginResProps; // AxiosResponse의 data를 loginResProps로 단언
-          console.log("data", data);
           if (data) {
-            console.log("data.success_or_error_code !== undefined", data.success_or_error_code !== undefined);
             if (data.success_or_error_code !== undefined) {
-              console.log("data.success_or_error_code.message", data.success_or_error_code.message);
               if (data.success_or_error_code.message === "요청 성공") {
                 navigate("/loading");
               } else if (data.success_or_error_code.message === "파트너 정보 없음") {

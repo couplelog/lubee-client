@@ -11,7 +11,6 @@ interface OneContainerProps {
 
 export default function OneContainer(props: OneContainerProps) {
   const { account, memoryBaseDto } = props;
-  console.log(memoryBaseDto);
 
   const { data: coupleInfo } = useGetCouplesInfo();
   if (!coupleInfo) return <></>;
