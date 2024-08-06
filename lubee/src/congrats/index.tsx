@@ -4,19 +4,30 @@ import { Outlet } from "react-router-dom";
 import OnboardingBtn from "onboarding/components/OnboardingBtn";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 import { infoToast } from "@common/utils/toast";
+import { useEffect } from "react";
 
 export default function index() {
   const navigate = useNavigate();
   const { data: couplesInfoResponse } = useGetCouplesInfo();
-  console.log("커플정보를 얻을 수 있는지 확인 ", couplesInfoResponse?.success);
-  console.log(couplesInfoResponse);
+
+  // couplesInfoResponse가 변경될 때마다 조건 체크
+  useEffect(() => {
+    if (
+      couplesInfoResponse !== undefined &&
+      couplesInfoResponse.success_or_error_code !== undefined &&
+      couplesInfoResponse?.success_or_error_code.message === "요청 성공"
+    ) {
+      navigate("/loading");
+    }
+  }, [couplesInfoResponse, navigate]);
 
   function handleOnboardingBtn() {
-    if (couplesInfoResponse?.success) {
-      // 둘다 온보딩 post를 날려서 커플정보를 얻을 수 있는 경우
-      navigate("/home/today");
-    } else {
-      infoToast("연인이 커플정보를 입력하지 않았어요!");
+    if (couplesInfoResponse !== undefined && couplesInfoResponse.success_or_error_code !== undefined) {
+      if (couplesInfoResponse?.success_or_error_code.message === "요청 성공") {
+        navigate("/loading");
+      } else {
+        infoToast("연인이 커플정보를 입력하지 않았어요!");
+      }
     }
   }
 

@@ -38,7 +38,7 @@ export default function index() {
   const location = useLocation();
   const { memory_id } = location.state as { memory_id: number };
 
-  const data = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
+  const { data } = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
   const memoryBaseDto = specificDto?.find((memory) => memory.memory_id === memory_id);
 
   useEffect(() => {
@@ -67,7 +67,6 @@ export default function index() {
   const { data: emojiData } = useGetOnePic(memory_id);
   if (!emojiData) return <></>;
   const { reaction_first } = emojiData.response;
-  console.log(emojiData);
 
   // account를 프로필이 null이 아닌 것으로 설정
   const account = memoryBaseDto?.writer_profile_first !== null ? "me" : "partner";
@@ -123,7 +122,7 @@ const Wrapper = styled.section`
 
 const EmojiTagContainer = styled.button`
   position: absolute;
-  top: 45rem;
+  top: 43.5rem;
   left: 4rem;
   padding: 0;
   border: none;

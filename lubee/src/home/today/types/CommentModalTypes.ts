@@ -4,4 +4,5 @@ export interface CommentModalProps {
   commentText: string;
   setCommentText?: (text: string) => void;
   finalServerDate?: string;
+  isDateDetailModal: boolean;
 }

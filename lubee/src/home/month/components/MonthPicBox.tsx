@@ -15,11 +15,12 @@ interface MonthPicBoxProps {
   year: number;
   month: number;
   selectedDate?: number;
+  isTodayCalendar: boolean;
 }
 
 export default function MonthPicBox(props: MonthPicBoxProps) {
   const navigate = useNavigate();
-  const { url, specificDto = [], year, month, selectedDate } = props;
+  const { url, specificDto = [], year, month, selectedDate, isTodayCalendar } = props;
 
   localStorage.setItem("currentPage", "month"); // 컴포넌트가 렌더링될 때 "month"를 로컬 스토리지에 저장
 
@@ -55,7 +56,7 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   const monthHeader = monthHeaderDateFormat(year, month, selectedDate);
 
   return (
-    <Container>
+    <Container $isTodayCalendar={isTodayCalendar}>
       {displayPics.map((img, index) => {
         const memory = specificDto.find((memory) => memory.memory_id === img.id);
         const account = memory?.writer_profile_first !== null ? "me" : "partner"; // 작성자가 첫 번째 프로필이면 "me", 아니면 "partner"
@@ -93,12 +94,13 @@ export default function MonthPicBox(props: MonthPicBoxProps) {
   );
 }
 
-const Container = styled.section`
+const Container = styled.section<{ $isTodayCalendar: boolean }>`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
   width: 100%;
   height: 100%;
+  margin-bottom: ${({ $isTodayCalendar }) => ($isTodayCalendar ? "10rem" : "none")};
 `;
 
 const ImgContainer = styled.button`
@@ -114,6 +116,8 @@ const Image = styled.img`
   padding: 0;
   border-radius: 12px;
   background: none;
+  object-fit: cover;
+  object-position: center;
 `;
 
 const ProfileIcon = styled.svg`

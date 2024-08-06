@@ -4,11 +4,11 @@ import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
 
 export default function PartnerCommentModal(props: CommentModalProps) {
-  const { handleCloseBtn, profileIconSrc, commentText } = props;
+  const { handleCloseBtn, profileIconSrc, commentText, isDateDetailModal } = props;
 
   return (
     <Background>
-      <Container>
+      <Container $isDateDetailModal={isDateDetailModal}>
         <HeaderContainer>
           <ProfileIcon as={profileIconSrc} />
           <BtnWrapper type="button" onClick={handleCloseBtn}>
@@ -29,14 +29,15 @@ const Background = styled.div`
   ${({ theme }) => theme.effects.dimmed_40};
 `;
 
-const Container = styled.section`
+const Container = styled.section<{ $isDateDetailModal: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  position: absolute;
+  position: ${({ $isDateDetailModal }) => ($isDateDetailModal ? "fixed" : "absolute")};
   top: 24rem;
   left: 5.6rem;
   width: 27.8rem;
+  padding-bottom: 1.2rem;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
@@ -62,7 +63,7 @@ const TextBox = styled.textarea`
   padding: 0 1.2rem;
   border: none;
   resize: none;
-  color: ${({ theme }) => theme.colors.gray_700};
+  color: black;
   outline: none;
 
   &::placeholder {

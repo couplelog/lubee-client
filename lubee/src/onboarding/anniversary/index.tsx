@@ -9,6 +9,7 @@ import DateInput from "../components/DateInput";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { profileState, nicknameState, birthdayState, startDateState } from "@common/recoil/atom";
 import { usePostLoginUser } from "../hooks/usePostLoginUser";
+import { infoToast } from "@common/utils/toast";
 
 interface AnnivProps {
   moveToOnboardingBirth: () => void;
@@ -37,6 +38,12 @@ export default function index(props: AnnivProps) {
   }
 
   function handleOnboardingBtn() {
+    // 년도가 네 자리 숫자가 아닌 경우 토스트 메시지 띄우기
+    if (year.length !== 4) {
+      infoToast("네 자릿수의 년도를 입력해주세요");
+      return;
+    }
+
     // 기념일을 지정된 형식으로 저장
     const formattedAnniv = `${year}.${month}.${day}`;
     setStartDate(formattedAnniv);

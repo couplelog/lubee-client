@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CompanyText from "@common/components/CompanyText";
-import { SymbolIc } from "assets";
+import { LoadingIc } from "assets";
 /* 오늘의 꿀 조회로 1개, 5개일 때 congrats로 navigate*/
 import { useGetTodayHoney } from "home/hooks/useGetTodayHoney";
 import { getServerDate } from "@common/utils/dateFormat";
@@ -12,7 +12,7 @@ export default function index() {
   const { refetch: refetchHoney } = useGetTodayHoney(getServerDate()); // refetch: refetchHoney: 데이터를 다시 가져오는 함수로, useEffect 훅 내에서 사용
   const [previousHoney, setPreviousHoney] = useState<number | null>(() => {
     const savedHoney = localStorage.getItem("previousHoney");
-    return savedHoney !== null ? JSON.parse(savedHoney) : null;
+    return savedHoney !== null ? JSON.parse(savedHoney) : 0;
   });
 
   useEffect(() => {
@@ -33,9 +33,9 @@ export default function index() {
           // 꿀 개수가 이전보다 증가한 경우
           if (response > previousHoney) {
             if (response === 1) {
-              navigate("/congrats/first");
+              navigate("/honey/first");
             } else if (response === 5) {
-              navigate("/congrats/fifth");
+              navigate("/honey/fifth");
             } else {
               const prevPage = localStorage.getItem("currentPage");
               if (prevPage === "today") {
@@ -73,7 +73,7 @@ export default function index() {
     <Wrapper>
       <LogoContainer>
         <SymbolIcon />
-        <Text>loading...</Text>
+        <Text>잠시만 기다려주세요..</Text>
       </LogoContainer>
       <CompanyText />
     </Wrapper>
@@ -93,18 +93,18 @@ const Wrapper = styled.div`
 const LogoContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 4.4rem;
   align-items: center;
-  margin-top: 27.8rem;
+  margin-top: 18.2rem;
 `;
 
 const Text = styled.p`
-  ${({ theme }) => theme.fonts.Body_0};
+  ${({ theme }) => theme.fonts.Title_2};
 
-  color: ${({ theme }) => theme.colors.gray_700};
+  color: ${({ theme }) => theme.colors.gray_800};
 `;
 
-const SymbolIcon = styled(SymbolIc)`
-  width: 4.6rem;
-  height: 4.6rem;
+const SymbolIcon = styled(LoadingIc)`
+  width: 15rem;
+  height: 9.8rem;
 `;

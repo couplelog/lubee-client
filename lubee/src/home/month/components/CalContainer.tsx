@@ -4,7 +4,7 @@ import { HoneyMonthIc } from "assets/index";
 import DateDetailModal from "./DateDetailModal";
 import { useEffect, useRef, useState } from "react";
 import { formatMonth, getTodayDate, getTodayMonth, getTodayYear, isFutureDate } from "@common/utils/dateFormat";
-import { infoToast } from "@common/utils/toast";
+import { errorToast } from "@common/utils/toast";
 import { useGetCalendar } from "home/hooks/useGetCalendar";
 import { useGetMonthHoney } from "home/hooks/useGetMonthHoney";
 
@@ -12,9 +12,10 @@ interface CalContainerProps {
   info: CalInfoTypes;
   showCalendar?: boolean;
   setOpenDateDetailModal?: (open: boolean) => void;
+  isTodayCalendar: boolean;
 }
 
-const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: CalContainerProps) => {
+const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal, isTodayCalendar }: CalContainerProps) => {
   const [openDateDetailModalLocal, setOpenDateDetailModalLocal] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<number | undefined>();
   const modalRef = useRef<HTMLDivElement>(null);
@@ -52,7 +53,6 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
         if (y === year && m === month) {
           calendarMemoryDayDtoList.forEach(({ day }) => {
             updatedList[day + start - 1] = 1; // 사진을 업로드한 day는 1로찍기
-            console.log("day", day);
           });
         }
       });
@@ -68,7 +68,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
 
   function handleDateDetailModal(date: number) {
     if (isFutureDate(year, month, date)) {
-      infoToast("오늘 이전만 선택가능합니다");
+      errorToast("오늘 이전의 날짜를 선택해주세요");
       setSelectedDate(date);
       return;
     }
@@ -138,6 +138,7 @@ const CalContainer = ({ info, showCalendar = false, setOpenDateDetailModal }: Ca
           month={month}
           year={year}
           serverDate={selectedDate ? formatSelectedDate(year, month, selectedDate) : ""}
+          isTodayCalendar={isTodayCalendar}
         />
       )}
     </Container>
@@ -152,20 +153,20 @@ const Container = styled.div`
   gap: 1.6rem;
   width: 100%;
   height: fit-content;
-  padding: 1.6rem 1.2rem;
+  padding: 2rem 2.8rem;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const Header = styled.header`
   display: flex;
-  gap: 0.8rem;
+  gap: 1.1rem;
   align-items: center;
   padding: 0 0 0 1rem;
 `;
 
 const HeaderDate = styled.p`
-  ${({ theme }) => theme.fonts.Ginto_16};
+  ${({ theme }) => theme.fonts.Calendar_Honey};
 
   color: ${({ theme }) => theme.colors.gray_800};
 `;
@@ -181,8 +182,9 @@ const HoneyMonthIcon = styled(HoneyMonthIc)`
 `;
 
 const HoneyCount = styled.p`
+  ${({ theme }) => theme.fonts.Calendar_Honey};
+
   color: ${({ theme }) => theme.colors.gray_800};
-  ${({ theme }) => theme.fonts.Ginto_16};
 `;
 
 const Grid = styled.ul`
@@ -219,5 +221,5 @@ const Item = styled.button<{ $isUploaded: boolean; $isToday: boolean; $isEmpty: 
 `;
 
 const Date = styled.p`
-  ${({ theme }) => theme.fonts.Ginto_18};
+  ${({ theme }) => theme.fonts.Calendar_Number_Body};
 `;

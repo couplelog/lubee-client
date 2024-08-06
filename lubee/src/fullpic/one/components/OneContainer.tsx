@@ -11,7 +11,6 @@ interface OneContainerProps {
 
 export default function OneContainer(props: OneContainerProps) {
   const { account, memoryBaseDto } = props;
-  console.log(memoryBaseDto);
 
   const { data: coupleInfo } = useGetCouplesInfo();
   if (!coupleInfo) return <></>;
@@ -25,7 +24,6 @@ export default function OneContainer(props: OneContainerProps) {
 
   return (
     <Wrapper>
-      <Time>{memoryBaseDto.upload_time}</Time>
       <Profile>
         <ProfileIcon as={writerProfile} />
         <Name>{writerNickname}</Name>
@@ -40,12 +38,6 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   width: 100%;
-`;
-
-const Time = styled.p`
-  ${({ theme }) => theme.fonts.Body_3}
-
-  color: ${({ theme }) => theme.colors.gray_500};
 `;
 
 const Profile = styled.div`

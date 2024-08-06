@@ -60,7 +60,7 @@ import CongratsIc from "./icon/congratsIc.svg?react";
 import FirstHoneyIc from "./icon/firstHoneyIc.svg?react";
 import FifthHoneyIc from "./icon/fifthHoneyIc.svg?react";
 import TogglePastIc from "./icon/togglePastIc.svg?react";
-import ToggleHoneyIc from "./icon/toggleHoneyIc.svg?react";
+import ToggleTodayIc from "./icon/toggleTodayIc.svg?react";
 import BackSmallIc from "./icon/backSmallIc.svg?react";
 import ForwardIc from "./icon/forwardIc.svg?react";
 import SettingIc from "./icon/settingIc.svg?react";
@@ -86,6 +86,7 @@ import TodayHoney4Ic from "./icon/todayHoney4Ic.svg?react";
 import TodayHoney5Ic from "./icon/todayHoney5Ic.svg?react";
 import RightArrowIc from "./icon/rightArrowIc.svg?react";
 import LeftArrowIc from "./icon/leftArrowIc.svg?react";
+import LoadingIc from "./icon/loadingIc.svg?react";
 
 export {
   LogoIc,
@@ -149,7 +150,7 @@ export {
   CongratsIc,
   FirstHoneyIc,
   FifthHoneyIc,
-  ToggleHoneyIc,
+  ToggleTodayIc,
   TogglePastIc,
   BackSmallIc,
   ForwardIc,
@@ -176,4 +177,5 @@ export {
   TodayHoney5Ic,
   RightArrowIc,
   LeftArrowIc,
+  LoadingIc,
 };

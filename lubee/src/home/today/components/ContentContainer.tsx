@@ -28,7 +28,7 @@ export default function ContentContainer(props: ContentContainerProps) {
 
   const urlDate = `${formatMonth(getTodayMonth)}${getTodayDate}`;
   const [specificDto, setSpecificDto] = useState<MemoryBaseDtoDataTypes[]>();
-  const data = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
+  const { data } = useGetSpecificCalendar({ year: getTodayYear, month: getTodayMonth, day: getTodayDate });
 
   useEffect(() => {
     // data바뀔때마다 상태 업데이트
@@ -39,7 +39,7 @@ export default function ContentContainer(props: ContentContainerProps) {
 
   /*코멘트 부분*/
   const finalServerDate = isToday ? getServerDate() : date; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
-  const commentData = useGetTodayDateComment(finalServerDate);
+  const { data: commentData } = useGetTodayDateComment(finalServerDate);
   const { response } = commentData || {};
   const myComment = response?.comment_first || "";
   const partnerComment = response?.comment_second || "";
@@ -53,11 +53,20 @@ export default function ContentContainer(props: ContentContainerProps) {
         <CommentBox
           profileIconSrc={myProfile}
           isMyComment={true}
-          isToday={true}
-          comment={myComment}
+          isWhite={true}
+          myComment={myComment}
+          partnerComment={partnerComment}
           finalServerDate={finalServerDate}
+          isDateDetailModal={false}
         />
-        <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={true} comment={partnerComment} />
+        <CommentBox
+          profileIconSrc={partnerProfile}
+          isMyComment={false}
+          isWhite={true}
+          myComment={myComment}
+          partnerComment={partnerComment}
+          isDateDetailModal={false}
+        />
       </CommentsContainer>
       <TodayPicBox url={`/${urlDate}`} specificDto={specificDto} />
     </Container>

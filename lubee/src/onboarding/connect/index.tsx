@@ -9,7 +9,7 @@ import OnboardingTitleBox from "../components/OnboardingTitleBox";
 import YellowBox from "../components/YellowBox";
 import CopyCodeModal from "../components/CopyCodeModal";
 import { useGetLubeeCode } from "onboarding/hooks/useGetLubeeCode";
-import { infoToast } from "@common/utils/toast";
+import { errorToast } from "@common/utils/toast";
 
 interface ConnectProps {
   moveToOnboardingCode: () => void;
@@ -22,11 +22,10 @@ export default function index(props: ConnectProps) {
   const [openCopyCodeModal, setOpenCopyCodeModal] = useState<boolean>(false);
   const [lubeeCode, setLubeeCode] = useState<any>(null);
 
-  // useGetLubeeCode 훅을 사용한 상태 업데이트
-  const fetchedLubeeCode = useGetLubeeCode();
+  const { data: fetchedLubeeCode } = useGetLubeeCode();
 
+  // useGetLubeeCode 훅이 비동기적으로 데이터를 가져오고, 상태 업데이트
   useEffect(() => {
-    // lubeeCode 값이 변경될 때마다 상태 업데이트
     if (fetchedLubeeCode) {
       setLubeeCode(fetchedLubeeCode);
     }
@@ -34,7 +33,7 @@ export default function index(props: ConnectProps) {
 
   useEffect(() => {
     if (lubeeCode?.response?.code === "ALREADY_COUPLE") {
-      infoToast("이미 커플로 등록된 상태입니다.");
+      errorToast("이미 커플로 등록된 상태입니다.");
       setTimeout(() => {
         moveToOnboardingCustom();
       }, 2000);
@@ -72,7 +71,7 @@ export default function index(props: ConnectProps) {
         await navigator.share({
           title: "연인으로부터 러비 초대장이 도착했어요! 링크를 눌러 초대장을 받아주세요.",
           text: `연인으로부터 러비 초대장이 도착했어요!\n링크를 눌러 초대장을 받아주세요.\n연인의 러비코드: ${code}`,
-          url: "https://example.com", // 실제 공유할 URL로 변경
+          url: "https://www.lubee.site/",
         });
         console.log("공유 성공");
       } catch (error) {
@@ -124,21 +123,6 @@ const LubeeCodeIcon = styled(LubeeCodeIc)`
   width: 20.5rem;
   height: 12.7rem;
   margin-top: 6rem;
-
-  @media (height <= 800px) {
-    width: 20.5rem;
-    height: 12.7rem;
-  }
-
-  @media (height <= 600px) {
-    width: 15.375rem;
-    height: 9.525rem;
-  }
-
-  @media (height <= 400px) {
-    width: 10.25rem;
-    height: 6.35rem;
-  }
 `;
 
 const MyCodeText = styled.p`
@@ -165,7 +149,8 @@ const BtnBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 14.5rem 0 1.4rem;
+  position: absolute;
+  bottom: 1.4rem;
 `;
 
 const InviteBtn = styled.button`

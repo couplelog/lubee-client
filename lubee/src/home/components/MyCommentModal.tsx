@@ -5,15 +5,21 @@ import { BtnWrapper } from "@styles/btnStyle";
 import { CommentModalProps } from "home/today/types/CommentModalTypes";
 import { usePostDateComment } from "home/hooks/usePostDateComment";
 import { useUpdateDateComment } from "home/hooks/useUpdateDateComment";
+import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
 
 export default function MyCommentModal(props: CommentModalProps) {
-  const { handleCloseBtn, profileIconSrc, commentText, setCommentText, finalServerDate } = props;
+  const { handleCloseBtn, profileIconSrc, commentText, setCommentText, finalServerDate, isDateDetailModal } = props;
   const [text, setText] = useState("");
   const [textLength, setTextLength] = useState(0);
-  const isDefaultText = commentText === "오늘의 데이트는 어떠셨나요?" || commentText === "이날의 데이트는 어떠셨나요?";
+
+  const myDefaultTexts = ["오늘의 데이트는 어떠셨나요?", "이날 데이트는 어떠셨나요?"];
+  const isDefaultText = myDefaultTexts.includes(commentText);
   const [isEditing, setIsEditing] = useState(isDefaultText);
+
   const { mutate: postDateCommentMutate } = usePostDateComment();
   const { mutate: updateDateCommentMutate } = useUpdateDateComment();
+
+  const { refetch } = useGetTodayDateComment(finalServerDate || "");
 
   // isDefaultText일 때는 placeholder를 출력하기 위함
   useEffect(() => {
@@ -53,14 +59,28 @@ export default function MyCommentModal(props: CommentModalProps) {
       if (isDefaultText) {
         // 서버에 코멘트 POST 요청으로
         if (finalServerDate) {
-          postDateCommentMutate({ content: text, date: finalServerDate });
+          postDateCommentMutate(
+            { content: text, date: finalServerDate },
+            {
+              onSuccess: () => {
+                refetch(); // 코멘트 저장 후 데이터 다시 불러오기
+              },
+            },
+          );
         } else {
           console.error("finalServerDate is undefined");
         }
       } else {
         // 서버에 코멘트 UPDATE 요청으로
         if (finalServerDate) {
-          updateDateCommentMutate({ content: text, date: finalServerDate });
+          updateDateCommentMutate(
+            { content: text, date: finalServerDate },
+            {
+              onSuccess: () => {
+                refetch(); // 코멘트 업데이트 후 데이터 다시 불러오기
+              },
+            },
+          );
         } else {
           console.error("finalServerDate is undefined");
         }
@@ -74,7 +94,7 @@ export default function MyCommentModal(props: CommentModalProps) {
 
   return (
     <Background>
-      <Container>
+      <Container $isDateDetailModal={isDateDetailModal}>
         <HeaderContainer>
           <ProfileIcon as={profileIconSrc} />
           {isEditing ? (
@@ -105,6 +125,7 @@ export default function MyCommentModal(props: CommentModalProps) {
           value={isDefaultText && !isEditing ? "" : text}
           onChange={handleTextChange}
           disabled={!isEditing}
+          $textLength={textLength}
         />
         <LengthText>{textLength}/100</LengthText>
       </Container>
@@ -120,11 +141,13 @@ const Background = styled.div`
   ${({ theme }) => theme.effects.dimmed_40};
 `;
 
-const Container = styled.section`
+// 월간 DateDetailModal에서 띄웠을 때 position: fixed로 바꾸면 됨
+const Container = styled.section<{ $isDateDetailModal: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   position: absolute;
+  position: ${({ $isDateDetailModal }) => ($isDateDetailModal ? "fixed" : "absolute")};
   top: 24rem;
   left: 5.6rem;
   width: 27.8rem;
@@ -155,7 +178,7 @@ const CheckYellowIcon = styled(CheckYellowIc)`
   height: 2.4rem;
 `;
 
-const TextBox = styled.textarea`
+const TextBox = styled.textarea<{ $textLength: number }>`
   ${({ theme }) => theme.fonts.SubTitle};
 
   overflow: hidden;
@@ -164,7 +187,7 @@ const TextBox = styled.textarea`
   padding: 0 1.2rem;
   border: none;
   resize: none;
-  color: ${({ theme }) => theme.colors.gray_700};
+  color: ${({ theme, $textLength }) => ($textLength >= 10 ? theme.colors.gray_700 : theme.colors.gray_200)};
   outline: none;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */

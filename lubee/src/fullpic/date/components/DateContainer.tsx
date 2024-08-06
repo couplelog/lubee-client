@@ -64,7 +64,6 @@ export default function DateContainer(props: DateContainerProps) {
           writer_profile_first,
           reaction_first,
           reaction_second,
-          upload_time,
         } = data;
 
         useEffect(() => {
@@ -91,7 +90,6 @@ export default function DateContainer(props: DateContainerProps) {
 
         return (
           <ContentsBox key={picMemoryId} ref={(el) => (itemRefs.current[index] = el)}>
-            <Time>{upload_time}</Time>
             <Profile>
               <ProfileIcon as={writerProfile} />
               <Name>{writerNickname}</Name>
@@ -134,12 +132,6 @@ const ContentsBox = styled.div`
   align-items: center;
 `;
 
-const Time = styled.p`
-  ${({ theme }) => theme.fonts.Body_3}
-
-  color: ${({ theme }) => theme.colors.gray_500};
-`;
-
 const Profile = styled.div`
   display: flex;
   gap: 0.4rem;
@@ -162,7 +154,7 @@ const ProfileIcon = styled.svg`
 
 const EmojiTagContainer = styled.button`
   position: absolute;
-  top: 45rem;
+  top: 43.5rem;
   left: 4rem;
   padding: 0;
   border: none;

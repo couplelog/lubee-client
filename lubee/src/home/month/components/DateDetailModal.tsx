@@ -1,12 +1,11 @@
 import { ShortBorderIc } from "assets/index";
 import styled from "styled-components";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import getProfileIconSrc from "@common/utils/getProfileIconSrc";
 import { useGetSpecificCalendar } from "home/hooks/useGetSpecificCalendar";
 import { MemoryBaseDtoDataTypes } from "fullpic/api/getOnePic";
 import MonthPicBox from "./MonthPicBox";
 import CommentBox from "home/components/CommentBox";
-import { getServerDate } from "@common/utils/dateFormat";
 import { useGetTodayDateComment } from "home/hooks/useGetTodayDateComment";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
 
@@ -18,18 +17,18 @@ interface DateDetailModalProps {
   year: number;
   month: number;
   serverDate: string;
+  isTodayCalendar: boolean;
 }
 
 const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props, ref) => {
-  const { dateText, showCalendar, urlDate, selectedDate, year, month, serverDate } = props;
+  const { dateText, showCalendar, urlDate, selectedDate, year, month, serverDate, isTodayCalendar } = props;
 
   let specificDto: MemoryBaseDtoDataTypes[] | undefined;
 
   if (selectedDate !== undefined) {
-    const response = useGetSpecificCalendar({ year: year, month: month, day: selectedDate });
-    specificDto = response?.response.memoryBaseListDto;
+    const { data } = useGetSpecificCalendar({ year: year, month: month, day: selectedDate });
+    specificDto = data?.response.memoryBaseListDto;
   }
-  console.log("specificDto", specificDto);
 
   /*커플정보에서 프로필 가져와서 출력*/
   const { data: CoupleInfo } = useGetCouplesInfo();
@@ -41,12 +40,20 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
   const partnerProfile = getProfileIconSrc("partner", profile_second);
 
   /*코멘트 부분*/
-  const isToday = false;
-  const finalServerDate = isToday ? getServerDate() : serverDate; //오늘 홈에서 코멘트 조회 요청은 오늘날짜, 과거에서 코멘트 조회 요청은 선택한 날짜로
-  const commentData = useGetTodayDateComment(finalServerDate);
-  const { response } = commentData || {};
-  const myComment = response?.comment_first || "";
-  const partnerComment = response?.comment_second || "";
+  const { data: commentData } = useGetTodayDateComment(serverDate);
+  const [myComment, setMyComment] = useState<string>("");
+  const [partnerComment, setPartnerComment] = useState<string>("");
+
+  // const { response } = commentData || {};
+  // const myComment = response?.comment_first || "";
+  // const partnerComment = response?.comment_second || "";
+
+  useEffect(() => {
+    if (commentData && commentData.response) {
+      setMyComment(commentData.response.comment_first || "");
+      setPartnerComment(commentData.response.comment_second || "");
+    }
+  }, [commentData]);
 
   return (
     <Background>
@@ -60,11 +67,20 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
             <CommentBox
               profileIconSrc={myProfile}
               isMyComment={true}
-              isToday={true}
-              comment={myComment}
-              finalServerDate={finalServerDate}
+              isWhite={false}
+              myComment={myComment}
+              partnerComment={partnerComment}
+              finalServerDate={serverDate}
+              isDateDetailModal={true}
             />
-            <CommentBox profileIconSrc={partnerProfile} isMyComment={false} isToday={true} comment={partnerComment} />
+            <CommentBox
+              profileIconSrc={partnerProfile}
+              isMyComment={false}
+              isWhite={false}
+              myComment={myComment}
+              partnerComment={partnerComment}
+              isDateDetailModal={true}
+            />
           </CommentsContainer>
           <HomePicBoxWrapper>
             <MonthPicBox
@@ -73,6 +89,7 @@ const DateDetailModal = forwardRef<HTMLDivElement, DateDetailModalProps>((props,
               year={year}
               month={month}
               selectedDate={selectedDate}
+              isTodayCalendar={isTodayCalendar}
             />
           </HomePicBoxWrapper>
         </Contents>
