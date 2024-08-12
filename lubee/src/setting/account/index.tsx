@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import SettingHeader from "../components/SettingHeader";
 import ConfirmModal from "../components/ConfirmModal";
+import { SettingRightArrowIc } from "assets/index";
 
 export default function index() {
   const navigate = useNavigate();
@@ -21,6 +22,9 @@ export default function index() {
   return (
     <Wrapper>
       <SettingHeader handleBackBtn={handleBackBtn} title="환경 설정" />
+      <TextContainer>
+        <TitleText>개인 설정</TitleText>
+      </TextContainer>
       <ConfirmModal
         handleConfirmBtn={handleConfirmBtn}
         handleCloseBtn={handleCloseBtn}
@@ -39,4 +43,28 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+`;
+
+const TextContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  align-items: center;
+`;
+
+const TitleText = styled.h2`
+  ${({ theme }) => theme.fonts.Body_4};
+
+  color: ${({ theme }) => theme.colors.gray_800};
+`;
+
+const SubtitleText = styled.h2`
+  ${({ theme }) => theme.fonts.Body_3};
+
+  color: ${({ theme }) => theme.colors.gray_800};
+`;
+
+const RightArrowIcon = styled(SettingRightArrowIc)`
+  width: 1.6rem;
+  height: 1.6rem;
 `;
