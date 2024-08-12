@@ -18,7 +18,7 @@ export default function index() {
   }
 
   function handleCloseBtn() {
-    setModalOpen(false); // 모달 닫기
+    setModalOpen(false);
     navigate("/setting/account");
   }
 
