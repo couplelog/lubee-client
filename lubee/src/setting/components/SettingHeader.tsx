@@ -1,12 +1,12 @@
 import { BackIc } from "assets/index";
 import styled from "styled-components";
 
-interface OnboardingHeaderProps {
+interface SettingHeaderProps {
   handleBackBtn?: () => void;
   title: string;
 }
 
-export default function OnboardingHeader(props: OnboardingHeaderProps) {
+export default function SettingHeader(props: SettingHeaderProps) {
   const { handleBackBtn, title } = props;
 
   return (
