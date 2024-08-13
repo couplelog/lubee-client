@@ -6,11 +6,10 @@ interface OnboardingHeaderProps {
   handleXBtn?: () => void;
   showBackIcon?: boolean;
   showXIcon?: boolean;
-  showTitle?: boolean;
 }
 
 export default function OnboardingHeader(props: OnboardingHeaderProps) {
-  const { handleBackBtn, handleXBtn, showBackIcon, showXIcon, showTitle } = props;
+  const { handleBackBtn, handleXBtn, showBackIcon, showXIcon } = props;
 
   return (
     <Wrapper>
@@ -26,7 +25,6 @@ export default function OnboardingHeader(props: OnboardingHeaderProps) {
           <BackIcon />
         </BtnWrapper>
       )}
-      {showTitle && <Title>프로필 커스텀</Title>}
       {showXIcon && (
         <BtnWrapper
           type="button"
@@ -62,12 +60,6 @@ const BtnWrapper = styled.button<{ $position: "left" | "right" }>`
 const BackIcon = styled(BackIc)`
   width: 2.4rem;
   height: 2.4rem;
-`;
-
-const Title = styled.p`
-  ${({ theme }) => theme.fonts.Body_4}
-
-  color: ${({ theme }) => theme.colors.gray_800};
 `;
 
 const XIcon = styled(XIc)`

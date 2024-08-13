@@ -125,18 +125,18 @@ const LubeeCodeIcon = styled(LubeeCodeIc)`
   margin-top: 6rem;
 `;
 
-const MyCodeText = styled.p`
-  color: ${({ theme }) => theme.colors.yellow_600};
-  text-align: center;
-  ${({ theme }) => theme.fonts.Title_1};
-`;
-
 const MyCodeContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   align-items: center;
   margin-top: 6.8rem;
+`;
+
+const MyCodeText = styled.p`
+  color: ${({ theme }) => theme.colors.yellow_600};
+  text-align: center;
+  ${({ theme }) => theme.fonts.Title_1};
 `;
 
 const CopyIcon = styled(CopyIc)`

@@ -28,6 +28,9 @@ import Join from "congrats/join";
 import LoginCallback from "login/components/LoginCallback";
 import Loading from "loading";
 import Honey from "honey";
+import Setting from "setting";
+import Account from "setting/account";
+import Couple from "setting/couple";
 
 const Router = createBrowserRouter([
   {
@@ -71,6 +74,14 @@ const Router = createBrowserRouter([
         children: [
           { path: "/honey/first", element: <First /> },
           { path: "/honey/fifth", element: <Fifth /> },
+        ],
+      },
+      {
+        path: "/setting",
+        element: <Setting />,
+        children: [
+          { path: "/setting/account", element: <Account /> },
+          { path: "/setting/couple", element: <Couple /> },
         ],
       },
     ],
