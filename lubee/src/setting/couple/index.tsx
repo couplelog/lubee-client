@@ -6,8 +6,14 @@ import YellowBox from "onboarding/components/YellowBox";
 import ConfirmModal from "../components/ConfirmModal";
 import { CopyIc } from "assets/index";
 import { BtnWrapper } from "@styles/btnStyle";
+import { useGetCouplesBreak } from "setting/hooks/useGetCouplesBreak";
 
-export default function index() {
+interface CoupleProps {
+  moveToOnboardingConnect: () => void;
+}
+
+export default function index(props: CoupleProps) {
+  const { moveToOnboardingConnect } = props;
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -16,7 +22,12 @@ export default function index() {
   }
 
   function handleConfirmBtn() {
-    navigate("/setting/account");
+    const couplesBreakData = useGetCouplesBreak();
+    if (!couplesBreakData) return <></>;
+
+    if (couplesBreakData?.success === true) {
+      moveToOnboardingConnect(); // 성공 시 러비코드 복사 페이지로 이동
+    }
   }
 
   function handleCloseBtn() {

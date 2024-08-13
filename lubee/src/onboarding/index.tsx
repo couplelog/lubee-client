@@ -13,6 +13,7 @@ import Custom from "onboarding/custom";
 import Profile from "onboarding/profile";
 import Birth from "onboarding/birth";
 import Anniv from "onboarding/anniversary";
+import Couple from "setting/couple";
 
 export default function index() {
   const [onboardingConnect, setOnboardingConnect] = useRecoilState(onboardingConnectState);
@@ -94,6 +95,7 @@ export default function index() {
         <Birth moveToOnboardingProfile={moveToOnboardingProfile} moveToOnboardingAnniv={moveToOnboardingAnniv} />
       )}
       {onboardingAnniv && <Anniv moveToOnboardingBirth={moveToOnboardingBirth} />}
+      <Couple moveToOnboardingConnect={moveToOnboardingConnect} />
     </>
   );
 }
