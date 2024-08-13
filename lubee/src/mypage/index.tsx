@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import MypageFooter from "./components/MypageFooter";
 import { SettingIc } from "assets/index";
 import MypageProfileBox from "./components/MypageProfileBox";
@@ -8,8 +9,10 @@ import TabBar from "./components/TabBar";
 import { useGetTotalHoney } from "./hooks/useGetTotalHoney";
 import getHoverProfileIconSrc from "@common/utils/getHoverProfileIconSrc";
 import { useGetCouplesInfo } from "@common/hooks/useGetCouplesInfo";
+import { BtnWrapper } from "@styles/btnStyle";
 
 export default function index() {
+  const navigate = useNavigate();
   // 훅을 조건문 밖에서 호출
   const totalHoney = useGetTotalHoney();
   const { data: coupleInfo } = useGetCouplesInfo();
@@ -26,7 +29,13 @@ export default function index() {
   return (
     <Wrapper>
       <MypageContainer>
-        <SettingIcon />
+        <BtnWrapper
+          type="button"
+          onClick={() => {
+            navigate("/setting/account");
+          }}>
+          <SettingIcon />
+        </BtnWrapper>
         <TopContainer>
           <MypageProfileBox
             myName={nickname_first}

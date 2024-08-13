@@ -87,6 +87,7 @@ import TodayHoney5Ic from "./icon/todayHoney5Ic.svg?react";
 import RightArrowIc from "./icon/rightArrowIc.svg?react";
 import LeftArrowIc from "./icon/leftArrowIc.svg?react";
 import LoadingIc from "./icon/loadingIc.svg?react";
+import SettingRightArrowIc from "./icon/settingRightArrowIc.svg?react";
 
 export {
   LogoIc,
@@ -178,4 +179,5 @@ export {
   RightArrowIc,
   LeftArrowIc,
   LoadingIc,
+  SettingRightArrowIc,
 };
