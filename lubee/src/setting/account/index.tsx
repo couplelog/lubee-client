@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SettingHeader from "../components/SettingHeader";
 import ConfirmModal from "../components/ConfirmModal";
 import { SettingRightArrowIc } from "assets/index";
+import { useGetSignOut } from "setting/hooks/useGetSignOut";
 
 export default function index() {
   const navigate = useNavigate();
@@ -14,7 +15,12 @@ export default function index() {
   }
 
   function handleConfirmBtn() {
-    navigate("/setting/account");
+    const signOutData = useGetSignOut();
+    if (!signOutData) return <></>;
+
+    if (signOutData?.success === true) {
+      navigate("/splash"); // 성공 시 splash 페이지로 이동
+    }
   }
 
   function handleCloseBtn() {
