@@ -35,6 +35,11 @@ export const onboardingAnnivState = atom<boolean>({
   default: false,
 });
 
+export const settingCoupleState = atom<boolean>({
+  key: "settingCoupleState",
+  default: false,
+});
+
 /*온보딩 정보 post를 위한*/
 export const profileState = atom<string>({
   key: "profileState",

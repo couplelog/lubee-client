@@ -6,6 +6,7 @@ import {
   onboardingProfileState,
   onboardingBirthState,
   onboardingAnnivState,
+  settingCoupleState,
 } from "@common/recoil/atom";
 import Connect from "onboarding/connect";
 import Code from "onboarding/code";
@@ -22,6 +23,7 @@ export default function index() {
   const [onboardingProfile, setOnboardingProfile] = useRecoilState(onboardingProfileState);
   const [onboardingBirth, setOnboardingBirth] = useRecoilState(onboardingBirthState);
   const [onboardingAnniv, setOnboardingAnniv] = useRecoilState(onboardingAnnivState);
+  const [settingCouple, setSettingCouple] = useRecoilState(settingCoupleState);
 
   function moveToOnboardingConnect() {
     setOnboardingConnect(true);
@@ -30,6 +32,7 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(false);
     setOnboardingAnniv(false);
+    setSettingCouple(false);
   }
 
   function moveToOnboardingCode() {
@@ -39,6 +42,7 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(false);
     setOnboardingAnniv(false);
+    setSettingCouple(false);
   }
 
   function moveToOnboardingCustom() {
@@ -48,6 +52,7 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(false);
     setOnboardingAnniv(false);
+    setSettingCouple(false);
   }
 
   function moveToOnboardingProfile() {
@@ -57,6 +62,7 @@ export default function index() {
     setOnboardingProfile(true);
     setOnboardingBirth(false);
     setOnboardingAnniv(false);
+    setSettingCouple(false);
   }
 
   function moveToOnboardingBirth() {
@@ -66,6 +72,7 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(true);
     setOnboardingAnniv(false);
+    setSettingCouple(false);
   }
 
   function moveToOnboardingAnniv() {
@@ -75,6 +82,7 @@ export default function index() {
     setOnboardingProfile(false);
     setOnboardingBirth(false);
     setOnboardingAnniv(true);
+    setSettingCouple(false);
   }
 
   return (
@@ -95,7 +103,7 @@ export default function index() {
         <Birth moveToOnboardingProfile={moveToOnboardingProfile} moveToOnboardingAnniv={moveToOnboardingAnniv} />
       )}
       {onboardingAnniv && <Anniv moveToOnboardingBirth={moveToOnboardingBirth} />}
-      <Couple moveToOnboardingConnect={moveToOnboardingConnect} />
+      {settingCouple && <Couple moveToOnboardingConnect={moveToOnboardingConnect} />}
     </>
   );
 }
