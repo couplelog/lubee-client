@@ -26,7 +26,7 @@ export default function index(props: CoupleProps) {
   function handleConfirmBtn() {
     if (!couplesBreakData) return <></>;
 
-    if (couplesBreakData?.success === true) {
+    if (couplesBreakData) {
       if (moveToOnboardingConnect) {
         moveToOnboardingConnect(); // 성공 시 러비코드 복사 페이지로 이동
       }
@@ -74,6 +74,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const ContentContainer = styled.section`

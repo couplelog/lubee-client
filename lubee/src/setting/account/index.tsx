@@ -18,7 +18,7 @@ export default function index() {
     const signOutData = useGetSignOut();
     if (!signOutData) return <></>;
 
-    if (signOutData?.success === true) {
+    if (signOutData) {
       navigate("/splash"); // 성공 시 splash 페이지로 이동
     }
   }
