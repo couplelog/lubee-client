@@ -9,7 +9,7 @@ import { BtnWrapper } from "@styles/btnStyle";
 import { useGetCouplesBreak } from "setting/hooks/useGetCouplesBreak";
 
 interface CoupleProps {
-  moveToOnboardingConnect: () => void;
+  moveToOnboardingConnect?: () => void;
 }
 
 export default function index(props: CoupleProps) {
@@ -17,16 +17,19 @@ export default function index(props: CoupleProps) {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const couplesBreakData = useGetCouplesBreak();
+
   function handleBackBtn() {
     navigate("/setting/account");
   }
 
   function handleConfirmBtn() {
-    const couplesBreakData = useGetCouplesBreak();
     if (!couplesBreakData) return <></>;
 
     if (couplesBreakData?.success === true) {
-      moveToOnboardingConnect(); // 성공 시 러비코드 복사 페이지로 이동
+      if (moveToOnboardingConnect) {
+        moveToOnboardingConnect(); // 성공 시 러비코드 복사 페이지로 이동
+      }
     }
   }
 
